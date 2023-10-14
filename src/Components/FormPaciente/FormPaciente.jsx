@@ -15,27 +15,21 @@ export const FormPaciente = () => {
   const genders = [
     {
       id: 1,
-      value: "f",
-      label: "Feminino",
+      value: "MACULINO",
+      label: "MASCULINO",
     },
 
     {
       id: 2,
-      value: "m",
-      label: "Masculino",
+      value: "FEMININO",
+      label: "FEMININO",
     },
 
     {
       id: 3,
-      value: "o",
-      label: "Outros",
-    },
-
-    {
-      id: 4,
-      value: "n",
-      label: "Prefiro não responder",
-    },
+      value: "NAO_INFORMADO",
+      label: "NÃO INFORMADO",
+    }
   ];
 
   const estadoCivil = [
@@ -186,8 +180,8 @@ export const FormPaciente = () => {
             register={{
               ...register("nome", {
                 required: true,
-                minLenght: 5,
-                maxLenght: 50,
+                minLenght: 8,
+                maxLenght: 64,
               }),
             }}
             error={errors.nome}
@@ -234,7 +228,7 @@ export const FormPaciente = () => {
             register={{
               ...register("cpf", {
                 required: true,
-                /*  required: false, */
+               
               }),
             }}
             error={errors.cpf}
@@ -282,7 +276,7 @@ export const FormPaciente = () => {
             register={{
               ...register("tel", {
                 required: true,
-                /* required: false, */
+                
               }),
             }}
             error={errors.tel}
@@ -298,7 +292,7 @@ export const FormPaciente = () => {
             register={{
               ...register("email", {
                 required: true,
-                /* required: false, */
+                
               }),
             }}
             error={errors.email}
@@ -314,8 +308,8 @@ export const FormPaciente = () => {
             register={{
               ...register("natural", {
                 required: true,
-                minLenght: 5,
-                maxLenght: 50,
+                minLenght: 8,
+                maxLenght: 64,
               }),
             }}
             error={errors.natural}
@@ -332,7 +326,7 @@ export const FormPaciente = () => {
             register={{
               ...register("emergencia", {
                 required: true,
-                /* required: false, */
+              
               }),
             }}
             error={errors.tel}
@@ -395,7 +389,7 @@ export const FormPaciente = () => {
             type="number"
             placeholder="Digite o número da carteira"
             name="NCart"
-            label="Número da Carteira"
+            label="Número do Convênio"
             register={{
               ...register("NCart", {
                 required: false,

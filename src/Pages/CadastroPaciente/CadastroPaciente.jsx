@@ -8,7 +8,7 @@ export const PacientePage = () => {
   const render = () => {
     return (
       <>
-        <h1>Formulário paciente aqui</h1>
+        <h1>CADASTRO DE PACIENTES</h1>
         <FormPaciente/>
       </>
     );
