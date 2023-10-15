@@ -11,7 +11,7 @@ import { Switch, Spin } from "antd";
 import { CEPService } from "../../Service/User.CEP";
 
 export const FormPaciente = () => {
-  //revisar - conforme o cadastro de usuários
+  
   const genders = [
     {
       id: 1,
