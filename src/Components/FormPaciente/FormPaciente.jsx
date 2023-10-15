@@ -80,6 +80,7 @@ export const FormPaciente = () => {
   } = useForm();
 
   const createPaciente = (pacienteData) => {
+    console.log('Dados do paciente:', pacienteData);
     // PacienteService.CreatePaciente(pacienteData)
     //   .then(response => {
     //     console.log('Paciente cadastrado com sucesso:', response);
@@ -92,6 +93,7 @@ export const FormPaciente = () => {
   };
 
   const deletePaciente = (pacienteData) => {
+    console.log('Dados do paciente:', pacienteData);
     // PacienteService.DeletePaciente(pacienteData.nome)
     //   .then(response => {
     //     console.log('Paciente deletado com sucesso:', response);
@@ -114,6 +116,35 @@ export const FormPaciente = () => {
   };
 
   const submitForm = async (pacienteData) => {
+    console.log('Dados recebidos:', pacienteData);
+    //Lógica de envio dos dados para cadstro do usuário
+    // Se sucesso obter id de usuário
+
+    //criação de varável para serviço do paciente
+    const postPacientDb = {
+      birth: pacienteData.birth,
+      /*userid: user.id*/
+      maritalStatus: pacienteData.maritalStatus,
+      rg: pacienteData.rg,
+      birthplace: pacienteData.birthplace,
+      emergencyContact: pacienteData.emergencyContact,
+      alergiesList: pacienteData.alergiesList,
+      specificCares: pacienteData.specificCares,
+      healthInsurance: pacienteData.healthInsurance,
+      insuranceNumber: pacienteData.insuranceNumber,
+      insuranceVality: pacienteData.insuranceVality,
+      adress: {
+        cep: pacienteData.cep,
+        city: pacienteData.city,
+        state: pacienteData.state,
+        street: pacienteData.street,
+        number: pacienteData.number,
+        complement: pacienteData.complement,
+        neighborhood: pacienteData.neighborhood,
+        reference: pacienteData.reference,
+      },
+    };
+    console.log('Dados do paciente:', postPacientDb);
     // const paciente = await PacienteService.CreatePaciente(pacienteData);
 
     // if (!paciente) {
@@ -132,7 +163,7 @@ export const FormPaciente = () => {
     }
   }, [watch("cep")]);
 
-  const [isLoading, setIsLoading] = useState();
+  //const [isLoading, setIsLoading] = useState();
 
   return (
     <Styled.Form onSubmit={handleSubmit(submitForm)}>
@@ -156,14 +187,14 @@ export const FormPaciente = () => {
         </Styled.ButtonDel>
 
         <Styled.Button
-          onClick={() => setIsLoading(true)}
+          onClick={() => {/*setIsLoading(true)}*/}}
           $width={"10%"}
           onSubmit={createPaciente}
           $active={!errors.email && !errors.password}
           type="submit"
           disabled={errors.email || errors.password}
         >
-          {isLoading ? <Spin /> : "Salvar"}
+         {/*isLoading ? <Spin /> : "Salvar"*/}
         </Styled.Button>
       </Styled.Header>
 
@@ -203,17 +234,17 @@ export const FormPaciente = () => {
 
           <InputComponent
             $width={"10 %"}
-            id="nasc"
+            id="birth"
             type="date"
-            name="nasc"
+            name="birth"
             placeholder="Data Nascimento"
             label="Data Nascimento"
             register={{
-              ...register("nasc", {
+              ...register("birth", {
                 required: true,
               }),
             }}
-            error={errors.nasc}
+            error={errors.birth}
           />
         </Styled.InputGroup>
 
@@ -257,7 +288,7 @@ export const FormPaciente = () => {
             label={"Estado Civil"}
             options={estadoCivil}
             register={{
-              ...register("estadoCivil", {
+              ...register("maritalStatus", {
                 required: true,
               }),
             }}
@@ -306,7 +337,7 @@ export const FormPaciente = () => {
             name="natural"
             label="Naturalidade"
             register={{
-              ...register("natural", {
+              ...register("birthplace", {
                 required: true,
                 minLenght: 8,
                 maxLenght: 64,
@@ -324,7 +355,7 @@ export const FormPaciente = () => {
             name="emergencia"
             label="Contato de Emergência"
             register={{
-              ...register("emergencia", {
+              ...register("emergencyContact", {
                 required: true,
               
               }),
@@ -340,7 +371,7 @@ export const FormPaciente = () => {
             name="alergias"
             label="Alergias"
             register={{
-              ...register("alergias", {
+              ...register("alergiesList", {
                 required: false,
               }),
             }}
@@ -355,7 +386,7 @@ export const FormPaciente = () => {
             name="cuidados"
             label="Cuidados Específicos"
             register={{
-              ...register("natural", {
+              ...register("specificCares", {
                 required: false,
               }),
             }}
@@ -376,7 +407,7 @@ export const FormPaciente = () => {
             label="Convênio"
             name="convenio"
             register={{
-              ...register("convenio", {
+              ...register("healthInsurance", {
                 required: false,
               }),
             }}
@@ -391,7 +422,7 @@ export const FormPaciente = () => {
             name="NCart"
             label="Número do Convênio"
             register={{
-              ...register("NCart", {
+              ...register("insuranceNumber", {
                 required: false,
               }),
             }}
@@ -406,7 +437,7 @@ export const FormPaciente = () => {
             name="validade"
             label="Validade"
             register={{
-              ...register("validade", {
+              ...register("insuranceVality", {
                 required: false,
               }),
             }}
@@ -440,7 +471,7 @@ export const FormPaciente = () => {
             name="cidade"
             label="Cidade"
             register={{
-              ...register("cidade", {
+              ...register("city", {
                 required: false,
               }),
             }}
@@ -455,7 +486,7 @@ export const FormPaciente = () => {
             name="uf"
             label="Estado"
             register={{
-              ...register("uf", {
+              ...register("state", {
                 required: false,
               }),
             }}
@@ -472,7 +503,7 @@ export const FormPaciente = () => {
             name="rua"
             label="Endereço"
             register={{
-              ...register("logradouro", {
+              ...register("street", {
                 required: false,
               }),
             }}
@@ -487,7 +518,7 @@ export const FormPaciente = () => {
             label="Número"
             name="numRua"
             register={{
-              ...register("numRua", {
+              ...register("number", {
                 required: false,
               }),
             }}
@@ -504,7 +535,7 @@ export const FormPaciente = () => {
             name="compl"
             label="Complemento"
             register={{
-              ...register("compl", {
+              ...register("complement", {
                 required: false,
               }),
             }}
@@ -520,7 +551,7 @@ export const FormPaciente = () => {
             label="Bairro"
             /* defaultValue={endereco.bairro || ''} */
             register={{
-              ...register("bairro", {
+              ...register("neighborhood", {
                 required: false,
               }),
             }}
@@ -535,7 +566,7 @@ export const FormPaciente = () => {
             name="refEnd"
             label="Ponto de Referência"
             register={{
-              ...register("refEnd", {
+              ...register("reference", {
                 required: false,
               }),
             }}
