@@ -29,7 +29,7 @@ export const FormPaciente = () => {
       id: 3,
       value: "NAO_INFORMADO",
       label: "NÃO INFORMADO",
-    }
+    },
   ];
 
   const estadoCivil = [
@@ -80,7 +80,7 @@ export const FormPaciente = () => {
   } = useForm();
 
   const createPaciente = (pacienteData) => {
-    console.log('Dados do paciente:', pacienteData);
+    console.log("Dados do paciente:", pacienteData);
     // PacienteService.CreatePaciente(pacienteData)
     //   .then(response => {
     //     console.log('Paciente cadastrado com sucesso:', response);
@@ -93,7 +93,7 @@ export const FormPaciente = () => {
   };
 
   const deletePaciente = (pacienteData) => {
-    console.log('Dados do paciente:', pacienteData);
+    console.log("Dados do paciente:", pacienteData);
     // PacienteService.DeletePaciente(pacienteData.nome)
     //   .then(response => {
     //     console.log('Paciente deletado com sucesso:', response);
@@ -107,16 +107,13 @@ export const FormPaciente = () => {
 
   const buscaCEP = async () => {
     CEPService.Get(watch("cep")).then((response) => {
-      console.log(response);
-      setValue("cidade", response.localidade);
-      setValue("uf", response.uf);
-      setValue("numRua", response.numRua);
-      setValue("bairro", response.bairro);
+      setValue("city", response.localidade);
+      setValue("state", response.uf);
+      setValue("neighborhood", response.bairro);
     });
   };
 
   const submitForm = async (pacienteData) => {
-    console.log('Dados recebidos:', pacienteData);
     //Lógica de envio dos dados para cadstro do usuário
     // Se sucesso obter id de usuário
 
@@ -144,16 +141,35 @@ export const FormPaciente = () => {
         reference: pacienteData.reference,
       },
     };
-    console.log('Dados do paciente:', postPacientDb);
-    // const paciente = await PacienteService.CreatePaciente(pacienteData);
+    console.log("Dados do paciente:", postPacientDb);
 
-    // if (!paciente) {
-    //   alert("Novo Paciente Cadastrado");
-    //   reset();
-    // } else {
-    //   alert("Paciente não cadastrado");
-    // }
-    alert("lógica para envio de form");
+    const enviarDadosPacienteBack = async (postPacientDb) => {
+      try {
+        const response = await fetch("http://localhost:3000/api/pacientes", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(postPacientDb),
+        });
+
+        if (response.status === 201) {
+          const result = await response.json();
+          console.log("Resposta do servidor:", result);
+          alert("Cadastro efetuado com sucesso");
+        } else {
+          const errorData = await response.json();
+          console.error("Erro ao cadastrar paciente. Status:", response.status);
+          console.error("Detalhes do erro:", errorData.message);
+          alert("Erro ao cadastrar paciente: " + errorData.message);
+        }
+      } catch (error) {
+        console.error("Erro ao buscar dados:", error);
+        alert("Erro ao cadastrar paciente");
+      }
+    };
+
+    enviarDadosPacienteBack(postPacientDb);
   };
 
   useEffect(() => {
@@ -187,19 +203,20 @@ export const FormPaciente = () => {
         </Styled.ButtonDel>
 
         <Styled.Button
-          onClick={() => {/*setIsLoading(true)}*/}}
+          onClick={() => {
+            /*setIsLoading(true)}*/
+          }}
           $width={"10%"}
           onSubmit={createPaciente}
           $active={!errors.email && !errors.password}
           type="submit"
           disabled={errors.email || errors.password}
         >
-         {/*isLoading ? <Spin /> : "Salvar"*/}
+          {/*isLoading ? <Spin /> : "Salvar"*/}
         </Styled.Button>
       </Styled.Header>
 
       <Styled.MainForm $width={"100%"}>
-        
         <Styled.InputGroup>
           <InputComponent
             $width={"100%"}
@@ -259,7 +276,6 @@ export const FormPaciente = () => {
             register={{
               ...register("cpf", {
                 required: true,
-               
               }),
             }}
             error={errors.cpf}
@@ -306,8 +322,7 @@ export const FormPaciente = () => {
             label="Telefone"
             register={{
               ...register("tel", {
-                required: true,
-                
+                required: false,
               }),
             }}
             error={errors.tel}
@@ -323,7 +338,6 @@ export const FormPaciente = () => {
             register={{
               ...register("email", {
                 required: true,
-                
               }),
             }}
             error={errors.email}
@@ -357,7 +371,6 @@ export const FormPaciente = () => {
             register={{
               ...register("emergencyContact", {
                 required: true,
-              
               }),
             }}
             error={errors.tel}
