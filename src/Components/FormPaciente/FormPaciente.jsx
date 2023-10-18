@@ -9,9 +9,10 @@ import { SelectComponent } from "../Form/SelectComponent/SelectComponent";
 import { Switch, Spin } from "antd";
 
 import { CEPService } from "../../Service/User.CEP";
+import { PacienteService } from "../../Service/Paciente.service";
+import { UsuarioService } from "../../Service/User.service";
 
 export const FormPaciente = () => {
-  
   const genders = [
     {
       id: 1,
@@ -114,62 +115,50 @@ export const FormPaciente = () => {
   };
 
   const submitForm = async (pacienteData) => {
-    //Lógica de envio dos dados para cadstro do usuário
-    // Se sucesso obter id de usuário
+    try {
+      console.log(pacienteData);
+      const postUsuarioDb = {
+        name: pacienteData.name,
+        gender: pacienteData.gender,
+        cpf: pacienteData.cpf,
+        email: pacienteData.email,
+        password: pacienteData.cpf,
+        id_type: "3",
+      };
+      console.log(postUsuarioDb);
+      const usuarioId = await UsuarioService.CadastrarUsuarioPaciente(postUsuarioDb);
 
-    //criação de varável para serviço do paciente
-    const postPacientDb = {
-      birth: pacienteData.birth,
-      /*userid: user.id*/
-      maritalStatus: pacienteData.maritalStatus,
-      rg: pacienteData.rg,
-      birthplace: pacienteData.birthplace,
-      emergencyContact: pacienteData.emergencyContact,
-      alergiesList: pacienteData.alergiesList,
-      specificCares: pacienteData.specificCares,
-      healthInsurance: pacienteData.healthInsurance,
-      insuranceNumber: pacienteData.insuranceNumber,
-      insuranceVality: pacienteData.insuranceVality,
-      adress: {
-        cep: pacienteData.cep,
-        city: pacienteData.city,
-        state: pacienteData.state,
-        street: pacienteData.street,
-        number: pacienteData.number,
-        complement: pacienteData.complement,
-        neighborhood: pacienteData.neighborhood,
-        reference: pacienteData.reference,
-      },
-    };
-    console.log("Dados do paciente:", postPacientDb);
-
-    const enviarDadosPacienteBack = async (postPacientDb) => {
-      try {
-        const response = await fetch("http://localhost:3000/api/pacientes", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
+      if (usuarioId !== null) {
+        
+        const postPacientDb = {
+          birth: pacienteData.birth,
+          userId: usuarioId,
+          maritalStatus: pacienteData.maritalStatus,
+          rg: pacienteData.rg,
+          birthplace: pacienteData.birthplace,
+          emergencyContact: pacienteData.emergencyContact,
+          alergiesList: pacienteData.alergiesList,
+          specificCares: pacienteData.specificCares,
+          healthInsurance: pacienteData.healthInsurance,
+          insuranceNumber: pacienteData.insuranceNumber,
+          insuranceVality: pacienteData.insuranceVality,
+          adress: {
+            cep: pacienteData.cep,
+            city: pacienteData.city,
+            state: pacienteData.state,
+            street: pacienteData.street,
+            number: pacienteData.number,
+            complement: pacienteData.complement,
+            neighborhood: pacienteData.neighborhood,
+            reference: pacienteData.reference,
           },
-          body: JSON.stringify(postPacientDb),
-        });
-
-        if (response.status === 201) {
-          const result = await response.json();
-          console.log("Resposta do servidor:", result);
-          alert("Cadastro efetuado com sucesso");
-        } else {
-          const errorData = await response.json();
-          console.error("Erro ao cadastrar paciente. Status:", response.status);
-          console.error("Detalhes do erro:", errorData.message);
-          alert("Erro ao cadastrar paciente: " + errorData.message);
-        }
-      } catch (error) {
-        console.error("Erro ao buscar dados:", error);
-        alert("Erro ao cadastrar paciente");
+        };
+        PacienteService.CadastrarPaciente(postPacientDb);
       }
-    };
-
-    enviarDadosPacienteBack(postPacientDb);
+    } catch (error) {
+      console.error("Erro ao cadastrar usuário e paciente:", error);
+      alert("Erro ao cadastrar usuário e paciente");
+    }
   };
 
   useEffect(() => {
@@ -226,7 +215,7 @@ export const FormPaciente = () => {
             label="Nome Completo"
             name="nome"
             register={{
-              ...register("nome", {
+              ...register("name", {
                 required: true,
                 minLenght: 8,
                 maxLenght: 64,
@@ -242,7 +231,7 @@ export const FormPaciente = () => {
             label={"Gênero"}
             options={genders}
             register={{
-              ...register("genero", {
+              ...register("gender", {
                 required: true,
               }),
             }}
