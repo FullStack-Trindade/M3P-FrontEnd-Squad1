@@ -1,7 +1,7 @@
-import * as Styled from './HeaderComponent.style';
+import * as Styled from './TollBarComponent.style';
 import React, { useContext } from 'react';
 import { HeaderContext } from '../../Context/Header.context';
-import { AuthContext } from '../../Context/Auth/auth.context';
+import { AuthContext } from '../../Context/auth.context';
 
 
 function NavBarHeader() {
