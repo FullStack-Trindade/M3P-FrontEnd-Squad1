@@ -116,7 +116,6 @@ export const FormPaciente = () => {
 
   const submitForm = async (pacienteData) => {
     try {
-      console.log(pacienteData);
       const postUsuarioDb = {
         name: pacienteData.name,
         gender: pacienteData.gender,
@@ -125,14 +124,14 @@ export const FormPaciente = () => {
         password: pacienteData.cpf,
         id_type: "3",
       };
-      console.log(postUsuarioDb);
-      const usuarioId = await UsuarioService.CadastrarUsuarioPaciente(postUsuarioDb);
+            const usuarioId = await UsuarioService.CadastrarUsuarioPaciente(
+        postUsuarioDb
+      );
 
       if (usuarioId !== null) {
-        
         const postPacientDb = {
           birth: pacienteData.birth,
-          userId: usuarioId,
+          idUser: usuarioId,
           maritalStatus: pacienteData.maritalStatus,
           rg: pacienteData.rg,
           birthplace: pacienteData.birthplace,
@@ -153,12 +152,11 @@ export const FormPaciente = () => {
             reference: pacienteData.reference,
           },
         };
-        PacienteService.CadastrarPaciente(postPacientDb);
+           PacienteService.CadastrarPaciente(postPacientDb);
       }
     } catch (error) {
       console.error("Erro ao cadastrar usuário e paciente:", error);
-      alert("Erro ao cadastrar usuário e paciente");
-    }
+       }
   };
 
   useEffect(() => {
