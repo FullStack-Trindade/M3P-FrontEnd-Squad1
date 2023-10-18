@@ -116,6 +116,8 @@ export const FormPaciente = () => {
 
   const submitForm = async (pacienteData) => {
     try {
+
+      //implantar lógica de que se o usuário já existe no bd fazer update
       const postUsuarioDb = {
         name: pacienteData.name,
         gender: pacienteData.gender,
