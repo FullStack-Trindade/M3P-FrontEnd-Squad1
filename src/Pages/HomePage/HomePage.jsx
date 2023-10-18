@@ -1,7 +1,7 @@
 import * as Styled from './HomePage.style'
 import { useContext, useEffect } from 'react';
 import { HeaderContext } from '../../Context/Header.context';
-/* import EstatisticasSistema from '../../Components/EstatisticasSistema/EstatisticasSistema'; */
+import AreaEstatistica from '../../Components/AreaEstatísticas/AreaEstatisticas';
 /* import {InputSearch}  from '../../Components/InputSearch/InputSearch'; */
 import { AuthContext } from '../../Context/auth.context';
 import { Navigate } from 'react-router-dom';
@@ -26,7 +26,7 @@ export const HomePage = () => {
         return (
           <>
           <Styled.MainHome>
-           {/*  <EstatisticasSistema/> */}
+           { <AreaEstatistica/>}
            {/*  <InputSearch/> */}
 
           </Styled.MainHome>
