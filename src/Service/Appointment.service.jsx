@@ -48,9 +48,22 @@ const Update = (id, data) => {
     return fetchAppointment()
 }
 
+const Delete = (id) => {
+    const fetchAppointment = async() => {
+        const response = await fetch(`${API_URL}/${ id }`, {
+            method: 'DELETE',
+        })
+
+        return response
+    }
+
+    return fetchAppointment()
+}
+
 export const AppointmentService = {
     Get,
     Create,
     Show,
-    Update
+    Update,
+    Delete
 }
