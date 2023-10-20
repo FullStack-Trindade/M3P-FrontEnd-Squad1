@@ -1,4 +1,6 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
+import { MdVisibility, MdVisibilityOff } from 'react-icons/md';
 
 import * as Styled from './Input.style';
 
@@ -7,13 +9,32 @@ export const InputComponent = ({
   $height,
   error,
   id,
-  label
+  label,
+  type
 }) => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  }
 
   return(
     <Styled.InputGroup $width={ $width } $height={ $height }>
 
       <Styled.Label $color={ error && 'danger' } htmlFor={ id }>{ label }</Styled.Label>
+
+      { type === 'password' && 
+        <Styled.Icon 
+          $color={ error && 'danger' } 
+          type='button' 
+          onClick={ handleShowPassword }
+        >
+          { !showPassword 
+            ? <MdVisibility/>
+            : <MdVisibilityOff/>
+          }
+        </Styled.Icon>
+      }
 
     </Styled.InputGroup>
   )
@@ -24,5 +45,6 @@ InputComponent.propTypes = {
   $height: PropTypes.string,
   error: PropTypes.any,
   id: PropTypes.string.isRequired,
-  label: PropTypes.string
+  label: PropTypes.string,
+  type: PropTypes.string
 }
