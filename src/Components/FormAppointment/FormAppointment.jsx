@@ -77,6 +77,9 @@ export const FormAppointment = () => {
     }
   }
 
+  const inputDoctorId = watch('idDoctor');
+  useEffect(() => { onChangeDoctor(inputDoctorId) }, [inputDoctorId]);
+  
   const onChangeDoctor = (value) => {
     const idDoctor = value;
 
