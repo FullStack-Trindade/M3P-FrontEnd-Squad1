@@ -66,3 +66,29 @@ export const Button = styled.button`
 Button.propTypes = {
   $outlined: PropTypes.bool
 }
+
+export const ButtonDel = styled.button`
+  display: flex;
+  padding: 0.5rem 1rem;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  width: ${({$width}) => $width ? $width : '95%'};
+  border-radius: 0.3125rem;
+  background: ${({ $outlined }) => { return $outlined ? 'transparent' : '#fff'}};
+  border:  ${({ $outlined }) => { return !$outlined ? '1px solid #FF0000' : '1px solid #FF0001'}};
+  color: ${({ $outlined }) => { return !$outlined ? '#FF0000' : 'rgba(82, 129, 220, 1)'}};
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  opacity: ${({$active}) => { return $active ? 1 : .5 }};
+  cursor: pointer;
+  &:disabled {
+    cursor: not-allowed;
+  }
+`;
+
+ButtonDel.propTypes = {
+  $outlined: PropTypes.bool
+}
