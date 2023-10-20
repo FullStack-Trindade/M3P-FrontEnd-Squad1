@@ -150,6 +150,22 @@ export const FormAppointment = () => {
       });
   };
 
+  const onDelete = async() => {
+    const response = await AppointmentService.Delete(appointmentId);
+
+    switch (response.status) {
+      case 202:
+        reset();
+        return messageApi.open({ type: 'success', content: 'Sucesso! Consulta excluída.' });
+      case 400:
+        reset();
+        return messageApi.open({ type: 'error', content: `Erro na exclusão! Consulta não existe.` });
+      case 500:
+        reset();
+        return messageApi.open({ type: 'error', content: `Erro na exclusão! Por favor, tente novamente.` });
+    }
+  };
+
   return (
     <>
 
@@ -180,7 +196,7 @@ export const FormAppointment = () => {
             // $active={  } 
             type='button' 
             // disabled={  } 
-            // onClick={  }
+            onClick={ onDelete }
           >
             Deletar
           </Styled.ButtonDel>
