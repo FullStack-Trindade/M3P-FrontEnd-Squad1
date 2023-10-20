@@ -10,7 +10,12 @@ export const InputComponent = ({
   error,
   id,
   label,
-  type
+  type,
+  minLength,
+  placeholder,
+  min,
+  disabled,
+  register
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -22,6 +27,19 @@ export const InputComponent = ({
     <Styled.InputGroup $width={ $width } $height={ $height }>
 
       <Styled.Label $color={ error && 'danger' } htmlFor={ id }>{ label }</Styled.Label>
+
+      <Styled.Input 
+        $height={ $height }
+        $width={ $width }
+        $color={ error && 'danger' } 
+        type={ showPassword ? 'text' : type } 
+        minLength={ minLength }
+        id={ id } 
+        placeholder={ placeholder } 
+        min={ min }
+        disabled={ disabled }
+        { ...register }
+      />
 
       { type === 'password' && 
         <Styled.Icon 
@@ -46,5 +64,10 @@ InputComponent.propTypes = {
   error: PropTypes.any,
   id: PropTypes.string.isRequired,
   label: PropTypes.string,
-  type: PropTypes.string
+  type: PropTypes.string,
+  minLength: PropTypes.any,
+  placeholder: PropTypes.string,
+  min: PropTypes.number,
+  disabled: PropTypes.bool,
+  register: PropTypes.any
 }
