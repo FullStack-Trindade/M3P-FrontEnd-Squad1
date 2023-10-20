@@ -28,30 +28,36 @@ export const InputComponent = ({
 
       <Styled.Label $color={ error && 'danger' } htmlFor={ id }>{ label }</Styled.Label>
 
-      <Styled.Input 
-        $height={ $height }
-        $width={ $width }
-        $color={ error && 'danger' } 
-        type={ showPassword ? 'text' : type } 
-        minLength={ minLength }
-        id={ id } 
-        placeholder={ placeholder } 
-        min={ min }
-        disabled={ disabled }
-        { ...register }
-      />
+      { type !== 'textarea' && 
+        <Styled.InputContainer>
+          
+          <Styled.Input 
+            $height={ $height }
+            $width={ $width }
+            $color={ error && 'danger' } 
+            type={ showPassword ? 'text' : type } 
+            minLength={ minLength }
+            id={ id } 
+            placeholder={ placeholder } 
+            min={ min }
+            disabled={ disabled }
+            { ...register }
+          />
 
-      { type === 'password' && 
-        <Styled.Icon 
-          $color={ error && 'danger' } 
-          type='button' 
-          onClick={ handleShowPassword }
-        >
-          { !showPassword 
-            ? <MdVisibility/>
-            : <MdVisibilityOff/>
+          { type === 'password' && 
+            <Styled.Icon 
+              $color={ error && 'danger' } 
+              type='button' 
+              onClick={ handleShowPassword }
+            >
+              { !showPassword 
+                ? <MdVisibility/>
+                : <MdVisibilityOff/>
+              }
+            </Styled.Icon>
           }
-        </Styled.Icon>
+
+        </Styled.InputContainer>
       }
 
     </Styled.InputGroup>
