@@ -28,3 +28,18 @@ export const InputContainer = styled.div`
   gap: 2vw;
   width: 100%;
 `;
+
+export const Input = styled.input`
+  display: flex;
+  padding: 0.3rem;
+  align-items: flex-start;
+  align-self: stretch;
+  border-radius: 0.2rem;
+  border: 1px solid ${({ $color }) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};
+  width: ${({ $width }) => ($width ? $width : '100%')};
+  height: ${({ $height }) => ($height ? $height : '100%')};
+  cursor: text;
+  &:disabled {
+    cursor: not-allowed;
+  }
+`;
