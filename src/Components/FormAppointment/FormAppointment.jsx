@@ -38,6 +38,16 @@ export const FormAppointment = () => {
     UserService.Get().then(result => setUsersList(result));
   }
 
+  useEffect(() => {
+    if (appointmentId !== null) { filterAppointment() }
+  }, [appointmentsList]);
+
+  const [appointment, setAppointment] = useState([]);
+  const filterAppointment = () => {
+    const filteredAppointment = appointmentsList.filter(appointment => String(appointment.id).includes(appointmentId));
+    setAppointment(filteredAppointment);
+  }
+
   const onSubmitForm = async(dataForm) => {
     const data = {
       id_patient: dataForm.idPatient,
