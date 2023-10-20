@@ -102,8 +102,30 @@ export const FormAppointment = () => {
       status: true
     }
 
-    onSave(data);
+    appointmentId ? onUpdate(data) : onSave(data);
   }
+
+  const onUpdate = async(submitData) => {
+    await AppointmentService.Update(appointmentId, submitData)
+        .then((response) => {
+          switch (response.status) {
+            case 200:
+              reset();
+              return messageApi.open({ type: 'success', content: 'Sucesso! Consulta editada.' });
+            case 400:
+              reset();
+              return messageApi.open({ type: 'error', content: `Erro no cadastro! Por favor, tente novamente.` });
+            case 500:
+              reset();
+              return messageApi.open({ type: 'error', content: `Erro no cadastro! Por favor, tente novamente.` });
+          }
+        })
+        .catch((error) => {
+            messageApi.open({ type: 'error', content: 'Erro no cadastro. Por favor, tente novamente.' })
+            console.error('Erro ao cadastrar consulta:', error);
+            reset();
+        });
+  };
 
   const onSave = async(submitData) => {
 
