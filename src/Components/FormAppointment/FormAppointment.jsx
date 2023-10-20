@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { Switch } from "antd";
 
 import { AppointmentService } from '../../Service/Appointment.service';
+import { UserService } from '../../Service/User.service';
 
 import { InputComponent } from '../Form/InputComponent/InputComponent';
 
@@ -17,11 +18,17 @@ export const FormAppointment = () => {
 
   useEffect(() => { 
     fetchAppointmentsList();
+    fetchUsersList();
   }, [])
 
   const [appointmentsList, setAppointmentsList] = useState([]);
   const fetchAppointmentsList = async() => {
     AppointmentService.Get().then(result => setAppointmentsList(result));
+  }
+
+  const [usersList, setUsersList] = useState([]);
+  const fetchUsersList = async() => {
+    UserService.Get().then(result => setUsersList(result));
   }
 
   return (
