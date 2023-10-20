@@ -57,19 +57,19 @@ export const InputComponent = ({
             </Styled.Icon>
           }
 
-          { type === 'textarea' &&
-            <Styled.TextArea 
-              $height={ $height }
-              $color={ error && 'danger' } 
-              id={ id } 
-              minLength={''}
-              placeholder={ placeholder } 
-              disabled={ disabled }
-              { ...register }
-            />
-          }
-
         </Styled.InputContainer>
+      }
+
+      { type === 'textarea' &&
+        <Styled.TextArea 
+          $height={ $height }
+          $color={ error && 'danger' } 
+          id={ id } 
+          minLength={''}
+          placeholder={ placeholder } 
+          disabled={ disabled }
+          { ...register }
+        />
       }
 
     </Styled.InputGroup>
