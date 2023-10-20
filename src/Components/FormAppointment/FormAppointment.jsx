@@ -1,7 +1,10 @@
 import * as Styled from './FormAppointmet.style';
 
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Switch } from "antd";
+
+import { AppointmentService } from '../../Service/Appointment.service';
 
 import { InputComponent } from '../Form/InputComponent/InputComponent';
 
@@ -11,6 +14,15 @@ export const FormAppointment = () => {
     register,
     formState: { errors },
   } = useForm()
+
+  useEffect(() => { 
+    fetchAppointmentsList();
+  }, [])
+
+  const [appointmentsList, setAppointmentsList] = useState([]);
+  const fetchAppointmentsList = async() => {
+    AppointmentService.Get().then(result => setAppointmentsList(result));
+  }
 
   return (
     <>
