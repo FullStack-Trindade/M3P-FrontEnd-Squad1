@@ -2,7 +2,7 @@ import * as Styled from './FormAppointmet.style';
 
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Switch } from "antd";
+import { message, Switch } from 'antd';
 
 import { AppointmentService } from '../../Service/Appointment.service';
 import { UserService } from '../../Service/User.service';
@@ -13,10 +13,14 @@ export const FormAppointment = () => {
   const {
     handleSubmit,
     register,
+    reset,
     formState: { errors },
   } = useForm()
 
+  const [messageApi, contextHolder] = message.useMessage()
+
   useEffect(() => { 
+    reset();
     fetchAppointmentsList();
     fetchUsersList();
   }, [])
@@ -31,8 +35,34 @@ export const FormAppointment = () => {
     UserService.Get().then(result => setUsersList(result));
   }
 
+  const onSave = async(submitData) => {
+
+    await AppointmentService.Create(submitData)
+      .then((response) => { 
+        switch (response.status) {
+          case 201:
+            reset();
+            return messageApi.open({ type: 'success', content: 'Sucesso! Consulta cadastrada.' });
+          case 400:
+            reset();
+            return messageApi.open({ type: 'error', content: `Erro no cadastro! Por favor, tente novamente.` });
+          case 500:
+            reset();
+            return messageApi.open({ type: 'error', content: `Erro no cadastro! Por favor, tente novamente.` });
+        }
+      })
+      .catch((error) => {
+        messageApi.open({ type: 'error', content: 'Erro no cadastro. Por favor, tente novamente.' });
+        console.error('Erro ao cadastrar consulta:', error);
+        reset();
+      });
+  };
+
   return (
     <>
+
+      { contextHolder }
+
       <Styled.Form onSubmit={ handleSubmit() }>
 
         <Styled.Header>
