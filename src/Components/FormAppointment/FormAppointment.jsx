@@ -219,9 +219,9 @@ export const FormAppointment = () => {
 
           <Styled.ButtonDel 
             $width={'10%'} 
-            // $active={  } 
+            $active={ appointmentId } 
             type='button' 
-            // disabled={  } 
+            disabled={ !appointmentId } 
             onClick={ onDelete }
           >
             Deletar
