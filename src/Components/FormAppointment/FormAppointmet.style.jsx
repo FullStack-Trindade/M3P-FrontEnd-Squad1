@@ -113,3 +113,13 @@ export const LabelSwitch = styled.div`
   margin: auto;
   align-items: center;
 `;
+
+export const SwitchBtn = styled.div`
+  display: flex;
+  width: 5%;
+  height: auto;
+  align-items: center;
+  justify-content: center;
+  background-color: none;
+  margin: auto;
+`;
