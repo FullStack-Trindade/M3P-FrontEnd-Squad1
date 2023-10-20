@@ -1,13 +1,20 @@
 import * as Styled from './FormAppointmet.style';
 
+import { useForm } from 'react-hook-form';
 import { Switch } from "antd";
 
 import { InputComponent } from '../Form/InputComponent/InputComponent';
 
 export const FormAppointment = () => {
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm()
+
   return (
     <>
-      <Styled.Form>
+      <Styled.Form onSubmit={ handleSubmit() }>
 
         <Styled.Header>
 
@@ -54,8 +61,12 @@ export const FormAppointment = () => {
               name='idPatient'
               min={ 1 }
               // disabled={  }
-              // register={}
-              // error={  }
+              register={{
+                ...register('idPatient', {
+                  required: true,
+                })
+              }}
+              error={ errors.idPatient }
             />
 
             <InputComponent $width={'350%'}
@@ -65,8 +76,12 @@ export const FormAppointment = () => {
               label='Nome do Paciente'
               name='patientName'
               disabled={ true }
-              // register={}
-              // error={  }
+              register={{
+                ...register('patientName', {
+                  required: false
+                })
+              }}
+              error={ errors.patientName }
             />
           </Styled.InputGroup>
           
@@ -79,8 +94,12 @@ export const FormAppointment = () => {
               name='idDoctor'
               min={ 1 }
               // disabled={  }
-              // register={}
-              // error={  }
+              register={{
+                ...register('idDoctor', {
+                  required: true,
+                })
+              }}
+              error={ errors.idDoctor }
             />
             
             <InputComponent $width={'350%'}
@@ -90,8 +109,12 @@ export const FormAppointment = () => {
               label='Nome do médico(a)'
               name='doctorName'
               disabled={ true }
-              // register={}
-              // error={  }
+              register={{
+                ...register('doctorName', {
+                  required: false
+                })
+              }}
+              error={ errors.doctorName }
             />
           </Styled.InputGroup>
 
@@ -103,8 +126,14 @@ export const FormAppointment = () => {
               label='Motivo da Consulta*'
               name='appointmentReason'
               // disabled={  }
-              // register={}
-              // error={  }
+              register={{
+                ...register('appointmentReason', {
+                  required: true,
+                  minLength: 8 ,
+                  maxLength: 64 ,
+                })
+              }}
+              error={ errors.appointmentReason }
             />
 
             <InputComponent $width={'100%'}
@@ -114,8 +143,12 @@ export const FormAppointment = () => {
               label='Data da Consulta*'
               name='appointmentDate'
               // disabled={  }
-              // register={}
-              // error={  }
+              register={{
+                ...register('appointmentDate', {
+                  required: true,
+                })
+              }}
+              error={ errors.appointmentDate }
             />
 
             <InputComponent $width={'100%'}
@@ -125,8 +158,12 @@ export const FormAppointment = () => {
               label='Hora da Consulta*'
               name='appointmentHour'
               // disabled={  }
-              // register={}
-              // error={  }
+              register={{
+                ...register('appointmentHour', {
+                  required: true,
+                })
+              }}
+              error={ errors.appointmentHour }
             />
           </Styled.InputGroup>
 
@@ -138,8 +175,14 @@ export const FormAppointment = () => {
               name='problemDescription'
               label='Descrição do Problema*'
               // disabled={  }
-              // register={}
-              // error={  }
+              register={{
+                ...register('problemDescription', {
+                  required: true,
+                  minLength: 16 ,
+                  maxLength: 1024 ,
+                })
+              }}
+              error={ errors.problemDescription }
             />
           </Styled.InputGroup>
 
@@ -151,8 +194,12 @@ export const FormAppointment = () => {
               name='medicationPrescribed'
               label='Medicação Receitada'
               // disabled={  }
-              // register={}
-              // error={  }
+              register={{
+                ...register('medicationPrescribed', {
+                  required: false,
+                })
+              }}
+              error={ errors.medicationPrescribed }
             />
           </Styled.InputGroup>
 
@@ -164,8 +211,14 @@ export const FormAppointment = () => {
               name='dosagePrecautions'
               label='Dosagem e Precauções*'
               // disabled={  }
-              // register={}
-              // error={  }
+              register={{
+                ...register('dosagePrecautions', {
+                  required: true,
+                  minLength: 16 ,
+                  maxLength: 256 ,
+                })
+              }}
+              error={ errors.dosagePrecautions }
             />
           </Styled.InputGroup>
         </Styled.MainForm>
