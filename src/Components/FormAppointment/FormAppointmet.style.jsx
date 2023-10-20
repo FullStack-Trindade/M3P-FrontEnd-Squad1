@@ -102,3 +102,14 @@ export const Title = styled.legend`
   justify-content: left;
   width: 100%;
 `;
+
+export const LabelSwitch = styled.div`
+  display: flex;
+  width: 100%;
+  height: auto;
+  font-size: 0.8rem;
+  color: #4682B4;
+  justify-content: right;
+  margin: auto;
+  align-items: center;
+`;
