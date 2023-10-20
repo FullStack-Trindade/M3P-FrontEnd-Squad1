@@ -57,3 +57,15 @@ export const TextArea = styled.textarea`
     cursor: not-allowed;
   }
 `;
+
+export const Icon = styled.button`
+  position: absolute;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: .5rem 13.3rem;
+  color: ${({ $color }) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};;
+`;
