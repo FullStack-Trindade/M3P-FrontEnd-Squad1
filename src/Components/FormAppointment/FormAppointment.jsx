@@ -17,7 +17,10 @@ export const FormAppointment = () => {
     formState: { errors },
   } = useForm()
 
-  const [messageApi, contextHolder] = message.useMessage()
+  const [messageApi, contextHolder] = message.useMessage();
+
+  let params = new URL(document.location).searchParams;
+  const appointmentId = params.get('id');
 
   useEffect(() => { 
     reset();
