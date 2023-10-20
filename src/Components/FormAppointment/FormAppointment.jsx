@@ -89,6 +89,12 @@ export const FormAppointment = () => {
     }
   }
 
+  const [isMedication, setIsMedication] = useState(false);
+  const inputMedication = watch('medicationPrescribed');
+  useEffect(() => { 
+    inputMedication === "" ? setIsMedication(true) : setIsMedication(false);
+  }, [inputMedication]);
+
   const isAppointmentRegistered = (dataForm) => {
     let filteredPatientAppointments = appointmentsList.filter(appointment => String(appointment.id_patient).includes(dataForm.id_patient))
     let filteredDate = filteredPatientAppointments.filter(appointment => appointment.appointment_date.includes(dataForm.appointment_date))
@@ -184,6 +190,8 @@ export const FormAppointment = () => {
     }
   };
 
+  const [isEditActive, setIsEditActive] = useState(false);
+
   return (
     <>
 
@@ -202,10 +210,10 @@ export const FormAppointment = () => {
 
           <Styled.SwitchBtn>
             <Switch 
-              // defaultChecked={  }
-              // disabled={  }
-              // onClick={  } 
-              // onChange={  }
+              defaultChecked={ isEditActive }
+              disabled={ !appointmentId }
+              onClick={ () => setIsEditActive(!isEditActive) } 
+              onChange={ () => setIsEditActive(!isEditActive) }
             />
           </Styled.SwitchBtn>
 
@@ -240,7 +248,7 @@ export const FormAppointment = () => {
               label='Código do Paciente*'
               name='idPatient'
               min={ 1 }
-              // disabled={  }
+              disabled={ appointmentId && isEditActive === false }
               register={{
                 ...register('idPatient', {
                   required: true,
@@ -273,7 +281,7 @@ export const FormAppointment = () => {
               label='Código do Médico(a)*'
               name='idDoctor'
               min={ 1 }
-              // disabled={  }
+              disabled={ appointmentId && isEditActive === false }
               register={{
                 ...register('idDoctor', {
                   required: true,
@@ -305,7 +313,7 @@ export const FormAppointment = () => {
               placeholder='Digite o motivo da consulta'
               label='Motivo da Consulta*'
               name='appointmentReason'
-              // disabled={  }
+              disabled={ appointmentId && isEditActive === false }
               register={{
                 ...register('appointmentReason', {
                   required: true,
@@ -322,7 +330,7 @@ export const FormAppointment = () => {
               placeholder='Digite a data da consulta'
               label='Data da Consulta*'
               name='appointmentDate'
-              // disabled={  }
+              disabled={ appointmentId && isEditActive === false }
               register={{
                 ...register('appointmentDate', {
                   required: true,
@@ -337,7 +345,7 @@ export const FormAppointment = () => {
               placeholder='Digite o hora da consulta'
               label='Hora da Consulta*'
               name='appointmentHour'
-              // disabled={  }
+              disabled={ appointmentId && isEditActive === false }
               register={{
                 ...register('appointmentHour', {
                   required: true,
@@ -354,7 +362,7 @@ export const FormAppointment = () => {
               placeholder='Descreva o problema'
               name='problemDescription'
               label='Descrição do Problema*'
-              // disabled={  }
+              disabled={ appointmentId && isEditActive === false }
               register={{
                 ...register('problemDescription', {
                   required: true,
@@ -373,7 +381,7 @@ export const FormAppointment = () => {
               placeholder='Medicação Receitada'
               name='medicationPrescribed'
               label='Medicação Receitada'
-              // disabled={  }
+              disabled={ appointmentId && isEditActive === false }
               register={{
                 ...register('medicationPrescribed', {
                   required: false,
@@ -390,7 +398,7 @@ export const FormAppointment = () => {
               placeholder='Dosagem e Precauções'
               name='dosagePrecautions'
               label='Dosagem e Precauções*'
-              // disabled={  }
+              disabled={ isMedication || (appointmentId && isEditActive === false)  }
               register={{
                 ...register('dosagePrecautions', {
                   required: true,
