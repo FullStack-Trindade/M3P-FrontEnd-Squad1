@@ -35,6 +35,22 @@ export const FormAppointment = () => {
     UserService.Get().then(result => setUsersList(result));
   }
 
+  const onSubmitForm = async(dataForm) => {
+    const data = {
+      id_patient: dataForm.idPatient,
+      id_doctor: dataForm.idDoctor,
+      appointment_date: dataForm.appointmentDate,
+      appointment_hour: dataForm.appointmentHour,
+      problem_description: dataForm.problemDescription,
+      appointment_reason: dataForm.appointmentReason,
+      medication_prescribed: dataForm.medicationPrescribed,
+      dosage_precautions: dataForm.dosagePrecautions,
+      status: true
+    }
+
+    onSave(data);
+  }
+
   const onSave = async(submitData) => {
 
     await AppointmentService.Create(submitData)
@@ -63,7 +79,7 @@ export const FormAppointment = () => {
 
       { contextHolder }
 
-      <Styled.Form onSubmit={ handleSubmit() }>
+      <Styled.Form onSubmit={ handleSubmit(onSubmitForm) }>
 
         <Styled.Header>
 
