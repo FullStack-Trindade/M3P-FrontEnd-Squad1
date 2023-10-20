@@ -77,6 +77,15 @@ export const FormAppointment = () => {
     }
   }
 
+  const onChangeDoctor = (value) => {
+    const idDoctor = value;
+
+    if (idDoctor > 0) {
+      const dataDoctor = usersList.filter(user => String(user.id).includes(idDoctor));
+      setValue('doctorName', dataDoctor[0]?.name);
+    }
+  }
+
   const onSubmitForm = async(dataForm) => {
     const data = {
       id_patient: dataForm.idPatient,
