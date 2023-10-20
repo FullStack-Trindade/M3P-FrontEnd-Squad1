@@ -15,6 +15,7 @@ export const FormAppointment = () => {
     register,
     reset,
     setValue,
+    watch,
     formState: { errors },
   } = useForm()
 
@@ -62,6 +63,9 @@ export const FormAppointment = () => {
     }
   }, [appointment])
   
+  const inputPatientId = watch('idPatient');
+  useEffect(() => { onChangePatient(inputPatientId) }, [inputPatientId]);
+
   const [patientName, setPatientName] = useState();
   const onChangePatient = (value) => {
     const idPatient = value;
