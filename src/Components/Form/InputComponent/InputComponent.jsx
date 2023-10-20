@@ -30,7 +30,7 @@ export const InputComponent = ({
 
       { type !== 'textarea' && 
         <Styled.InputContainer>
-          
+
           <Styled.Input 
             $height={ $height }
             $width={ $width }
@@ -57,6 +57,18 @@ export const InputComponent = ({
             </Styled.Icon>
           }
 
+          { type === 'textarea' &&
+            <Styled.TextArea 
+              $height={ $height }
+              $color={ error && 'danger' } 
+              id={ id } 
+              minLength={''}
+              placeholder={ placeholder } 
+              disabled={ disabled }
+              { ...register }
+            />
+          }
+
         </Styled.InputContainer>
       }
 
@@ -67,6 +79,7 @@ export const InputComponent = ({
 InputComponent.propTypes = {
   $width: PropTypes.string,
   $height: PropTypes.string,
+  $color: PropTypes.string,
   error: PropTypes.any,
   id: PropTypes.string.isRequired,
   label: PropTypes.string,
