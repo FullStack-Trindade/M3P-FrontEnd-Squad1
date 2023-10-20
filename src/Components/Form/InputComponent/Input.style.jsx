@@ -43,3 +43,17 @@ export const Input = styled.input`
     cursor: not-allowed;
   }
 `;
+
+export const TextArea = styled.textarea`
+  display: flex;
+  padding: 0.5rem;
+  align-items: flex-start;
+  align-self: stretch;
+  border-radius: 0.3125rem;
+  border: 1px solid ${({ $color }) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};;
+  height: ${({ $height }) => ($height ? $height : '100%')};
+  cursor: text;
+  &:disabled {
+    cursor: not-allowed;
+  }
+`;
