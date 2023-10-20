@@ -19,3 +19,12 @@ export const Label = styled.label`
   line-height: normal;
   width: 80%;
 `;
+
+export const InputContainer = styled.div`
+  display: flex;
+  justify-content: baseline;
+  justify-items: baseline;
+  flex-wrap: wrap;
+  gap: 2vw;
+  width: 100%;
+`;
