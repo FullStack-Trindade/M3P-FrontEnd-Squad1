@@ -89,6 +89,22 @@ export const FormAppointment = () => {
     }
   }
 
+  const isAppointmentRegistered = (dataForm) => {
+    let filteredPatientAppointments = appointmentsList.filter(appointment => String(appointment.id_patient).includes(dataForm.id_patient))
+    let filteredDate = filteredPatientAppointments.filter(appointment => appointment.appointment_date.includes(dataForm.appointment_date))
+    let filteredHour = filteredDate.filter(appointment => appointment.appointment_hour.includes(dataForm.appointment_hour))
+
+    if (filteredHour.length > 0) {
+        messageApi.open({ type: 'error', content: 'Esse paciente já possui consulta cadastrada nesse dia e horário.' })
+        filteredPatientAppointments = []
+        filteredDate = []
+        filteredHour = []
+        return true
+    }
+
+    return false
+  }
+
   const onSubmitForm = async(dataForm) => {
     const data = {
       id_patient: dataForm.idPatient,
@@ -106,6 +122,8 @@ export const FormAppointment = () => {
   }
 
   const onUpdate = async(submitData) => {
+    if (isAppointmentRegistered(submitData)) { return }
+
     await AppointmentService.Update(appointmentId, submitData)
         .then((response) => {
           switch (response.status) {
