@@ -61,7 +61,7 @@ export const FormAppointment = () => {
       setValue('dosagePrecautions', appointment[0].dosage_precautions);
     }
   }, [appointment])
-
+  
   const [patientName, setPatientName] = useState();
   const onChangePatient = (value) => {
     const idPatient = value;
@@ -120,6 +120,11 @@ export const FormAppointment = () => {
       <Styled.Form onSubmit={ handleSubmit(onSubmitForm) }>
 
         <Styled.Header>
+
+          { appointmentId && patientName
+            ? <Styled.Title>Consulta de { patientName }</Styled.Title> 
+            : <Styled.Title>Formulário de Consulta</Styled.Title> 
+          }
 
           <Styled.LabelSwitch>Editar</Styled.LabelSwitch>
 
