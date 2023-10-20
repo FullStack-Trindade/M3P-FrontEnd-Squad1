@@ -62,6 +62,17 @@ export const FormAppointment = () => {
     }
   }, [appointment])
 
+  const [patientName, setPatientName] = useState();
+  const onChangePatient = (value) => {
+    const idPatient = value;
+
+    if (idPatient > 0) {
+      const dataPatient = usersList.filter(user => String(user.id).includes(idPatient));
+      setPatientName(dataPatient[0]?.name);
+      setValue('patientName', dataPatient[0]?.name);
+    }
+  }
+
   const onSubmitForm = async(dataForm) => {
     const data = {
       id_patient: dataForm.idPatient,
