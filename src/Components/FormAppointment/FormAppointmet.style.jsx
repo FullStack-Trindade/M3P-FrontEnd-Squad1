@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 export const Form = styled.form`
   display: inline-flex;
@@ -21,4 +22,11 @@ export const Header = styled.div`
   align-items: flex-start;
   gap: 0.5rem;
   align-self: stretch;
+`;
+
+export const Paragraph = styled.p`
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #ff5555;
+  margin-bottom: 0;
 `;
