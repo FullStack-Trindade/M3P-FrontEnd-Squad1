@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/api/consultas'
+const API_URL = `http://localhost:${import.meta.env.VITE_SERVER_PORT}/api/consultas`
 
 const Get = () => {
     const fetchAppointment = async() => {
