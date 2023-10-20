@@ -14,6 +14,7 @@ export const FormAppointment = () => {
     handleSubmit,
     register,
     reset,
+    setValue,
     formState: { errors },
   } = useForm()
 
@@ -47,6 +48,19 @@ export const FormAppointment = () => {
     const filteredAppointment = appointmentsList.filter(appointment => String(appointment.id).includes(appointmentId));
     setAppointment(filteredAppointment);
   }
+
+  useEffect(() => {
+    if(appointment.length > 0) {
+      setValue('idPatient', appointment[0].id_patient);
+      setValue('idDoctor', appointment[0].id_doctor);
+      setValue('appointmentDate', appointment[0].appointment_date);
+      setValue('appointmentHour', appointment[0].appointment_hour);
+      setValue('problemDescription', appointment[0].problem_description);
+      setValue('appointmentReason', appointment[0].appointment_reason);
+      setValue('medicationPrescribed', appointment[0].medication_prescribed);
+      setValue('dosagePrecautions', appointment[0].dosage_precautions);
+    }
+  }, [appointment])
 
   const onSubmitForm = async(dataForm) => {
     const data = {
