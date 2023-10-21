@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import * as Styled from './InputSearchPaciente.style';
-import { PacienteService } from '../../Service/Paciente.service';
-import CardPaciente from '../CardPaciente/CardPaciente';
+import * as Styled from './InputSearchUser.style';
+import { UserService } from '../../Service/User.service';
+import CardUser from '../CardUser/CardUser';
 
-export const InputSearch = () => {
+export const InputSearchUser = () => {
  
     const {
     register,
@@ -12,20 +12,20 @@ export const InputSearch = () => {
     reset,
   } = useForm();
 
-  const [pacienteEncontrado, setPacienteEncontrado] = useState(null);
+  const [userEncontrado, setUserEncontrado] = useState(null);
 
   const submitInputForm = async (dataInput) => {
     const { nome } = dataInput;
     
-    const paciente = await PacienteService.ShowByNome(nome);
-    console.log(paciente)
+    const User = await UserService.ShowByNome(nome);
+    console.log(user)
     
-      if (!paciente) {
+      if (!User) {
         alert('Usuário não cadastrado');
-        setPacienteEncontrado(null);
+        setUserEncontrado(null);
         reset();
       } else {
-        setPacienteEncontrado(paciente);
+        setUserEncontrado(User);
         reset()
       }
   
@@ -34,22 +34,24 @@ export const InputSearch = () => {
   return (
     <>
       <Styled.InputContainer>
-        <h2>Informações Rápidas de Pacientes</h2>
+        <h2>Informações Rápidas de Usuários</h2>
         <Styled.FormInput onSubmit={handleSubmit(submitInputForm)}>
           <input
             className="input2 inputFaq"
-            placeholder="Digite o nome do paciente"
+            placeholder="Digite o nome do usuário"
             {...register('nome')}
           />
           <button className="botao" type="submit">
             <span className="material-symbols-outlined">Buscar</span>
           </button>
-
+          <button className="botao" type="submit" >
+            <span className="material-symbols-outlined">Gerenciar Usuário</span>
+          </button>
         </Styled.FormInput>
       </Styled.InputContainer>
 
         <Styled.CardRender>
-            {pacienteEncontrado && pacienteEncontrado.map(paciente => <CardPaciente paciente={paciente} key={paciente.id} />)}
+            {userEncontrado && userEncontrado.map(user => <CardUser user={user} key={user.id} />)}
         </Styled.CardRender>
     </>
   );

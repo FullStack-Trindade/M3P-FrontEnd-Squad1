@@ -6,6 +6,7 @@ import { ImUsers, ImDroplet } from 'react-icons/im';
 import { FaLaptopMedical } from 'react-icons/fa';
 
 function EstatisticasSistema() {
+  const [users, setUsers] = useState([]);
   const [pacientes, setPacientes] = useState([]);
   const [consultas, setConsultas] = useState([]);
   const [exames, setExames] = useState([]);
@@ -22,6 +23,11 @@ function EstatisticasSistema() {
   };
 
   useEffect(() => {
+    const GetUsers = async () => {
+      const usersDoDB = await fetchData('users');
+      setUsers(usersDoDB)
+    }
+
     const getPacientes = async () => {
       const pacientesDoDB = await fetchData('pacientes');
       setPacientes(pacientesDoDB);
@@ -37,10 +43,15 @@ function EstatisticasSistema() {
       setExames(examesDoDB);
     };
 
+    GetUsers();
     getPacientes();
     getConsultas();
     getExames();
   }, []);
+
+  const totalUsers = () => {
+    return users.length;
+  }
 
   const totalPacientes = () => {
     return pacientes.length;
@@ -55,6 +66,12 @@ function EstatisticasSistema() {
   };
 
   const dataCard = [
+    {
+      id: '4',
+      icone: <ImUsers/>,
+      resultado: totalUsers(),
+      legenda: 'Usuários',
+    },
     {
       id: '1',
       icone: <ImUsers/>,

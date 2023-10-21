@@ -2,8 +2,13 @@
   "users": [
     {
       "id": 1,
+      "nome": "Daniel",
+      "genero": "",
+      "cpf": "",
+      "tel": "48-984037505",
       "email": "adm@labmedical.com",
-      "password": "12345678"
+      "password": "12345678",
+      "tipo": ""
     },
     {
       "id": 2,
