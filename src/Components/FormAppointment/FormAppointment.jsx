@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { message, Switch } from 'antd';
 
 import { AppointmentService } from '../../Service/Appointment.service';
+import { PatientService } from '../../Service/Patient.service';
 import { UserService } from '../../Service/User.service';
 
 import { InputComponent } from '../Form/InputComponent/InputComponent';
@@ -27,12 +28,18 @@ export const FormAppointment = () => {
   useEffect(() => { 
     reset();
     fetchAppointmentsList();
+    fetchPatientsList();
     fetchUsersList();
   }, [])
 
   const [appointmentsList, setAppointmentsList] = useState([]);
   const fetchAppointmentsList = async() => {
     AppointmentService.Get().then(result => setAppointmentsList(result));
+  }
+
+  const [patientsList, setPatientsList] = useState([]);
+  const fetchPatientsList = async() => {
+    PatientService.Get().then(result => setPatientsList(result));
   }
 
   const [usersList, setUsersList] = useState([]);
@@ -71,9 +78,10 @@ export const FormAppointment = () => {
     const idPatient = value;
 
     if (idPatient > 0) {
-      const dataPatient = usersList.filter(user => String(user.id).includes(idPatient));
-      setPatientName(dataPatient[0]?.name);
-      setValue('patientName', dataPatient[0]?.name);
+      const dataPatient = patientsList.filter(patient => String(patient.id).includes(idPatient));
+      const dataUser = usersList.filter(user => String(user.id).includes(dataPatient[0]?.id_user));
+      setPatientName(dataUser[0]?.name);
+      setValue('patientName', dataUser[0]?.name);
     }
   }
 
