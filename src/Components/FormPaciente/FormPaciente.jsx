@@ -10,7 +10,7 @@ import { Switch, Spin } from "antd";
 
 import { CEPService } from "../../Service/User.CEP";
 import { PacienteService } from "../../Service/Paciente.service";
-import { UsuarioService } from "../../Service/User.service";
+import { UsuarioService } from "../../Service/UserPatient.service";
 
 export const FormPaciente = () => {
   const genders = [
