@@ -1,4 +1,5 @@
 import CardEstatistica from '../CardEstatistica/CardEstatistica';
+import CardEstatisticaADM from '../CardEstatisticaADM/CardEstatisticaADM';
 import * as Styled from './AreaEstatisticas.style';
 import React, { useState, useEffect } from "react";
 import { ImUsers, ImDroplet } from 'react-icons/im';
@@ -92,6 +93,15 @@ function EstatisticasSistema() {
     },
   ];
 
+  const dataCardADM = [
+    {
+      id: '4',
+      icone: <ImUsers/>,
+      resultado: totalUsers(),
+      legenda: 'Usuários',
+    },
+  ];
+
   return (
     <>
       <Styled.ContainerEstatisticas>
@@ -102,7 +112,19 @@ function EstatisticasSistema() {
           ))}
         </Styled.ContainerCardEstatisticas>
       </Styled.ContainerEstatisticas>
+
+    
+      <Styled.ContainerEstatisticas>
+        <h2>Estatísticas do Sistema do Administrador</h2>
+        <Styled.ContainerCardEstatisticas>
+          {dataCardADM.map(estatistica => (
+            <CardEstatisticaADM key={estatistica.id} dataCardADM={estatistica}/>
+          ))}
+        </Styled.ContainerCardEstatisticas>
+      </Styled.ContainerEstatisticas>
     </>
+
+
   );
 }
 
