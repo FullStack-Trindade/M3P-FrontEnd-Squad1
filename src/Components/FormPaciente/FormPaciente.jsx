@@ -5,7 +5,6 @@ import { useForm } from "react-hook-form";
 import { InputComponent } from "../Form/InputComponent/InputComponent";
 import { SelectComponent } from "../Form/SelectComponent/SelectComponent";
 
-// integração com o backend
 import { Switch, Spin } from "antd";
 
 import { CEPService } from "../../Service/User.CEP";
@@ -126,16 +125,18 @@ export const FormPaciente = () => {
         password: pacienteData.cpf,
         id_type: "3",
       };
-            const usuarioId = await UsuarioService.CadastrarUsuarioPaciente(
+    
+                  const usuarioId = await UsuarioService.CadastrarUsuarioPaciente(
         postUsuarioDb
       );
-
+     
       if (usuarioId !== null) {
         const postPacientDb = {
           birth: pacienteData.birth,
           idUser: usuarioId,
           maritalStatus: pacienteData.maritalStatus,
           rg: pacienteData.rg,
+          orgaoExpedidor: pacienteData.orgaoExpedidor,
           birthplace: pacienteData.birthplace,
           emergencyContact: pacienteData.emergencyContact,
           alergiesList: pacienteData.alergiesList,
@@ -154,7 +155,7 @@ export const FormPaciente = () => {
             reference: pacienteData.reference,
           },
         };
-           PacienteService.CadastrarPaciente(postPacientDb);
+                  PacienteService.CadastrarPaciente(postPacientDb);
       }
     } catch (error) {
       console.error("Erro ao cadastrar usuário e paciente:", error);
@@ -284,6 +285,22 @@ export const FormPaciente = () => {
               }),
             }}
             error={errors.rg}
+          />
+
+<InputComponent
+            $width={"100%"}
+            id="orgaoExpedidor"
+            type="text"
+            name="orgaoExpedidor"
+            placeholder="Órgão Expedidor"
+            label="Órgão Expedidor"
+            register={{
+              ...register("orgaoExpedidor", {
+                required: true,
+                maxLenght: 20,
+              }),
+            }}
+            error={errors.orgaoExpedidor}
           />
 
           <SelectComponent
