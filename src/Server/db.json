@@ -1,0 +1,24 @@
+{
+    "users": [
+      {
+        "id": 1,
+        "email": "adm@labmedical.com",
+        "password": "12345678"
+      },
+      {
+        "id": 2,
+        "email": "comercial@labmedical.com",
+        "password": "98765432"
+      },
+      {
+        "id": 3,
+        "email": "recepcao@labmedical.com",
+        "password": "12457896"
+      },
+      {
+        "id": 4,
+        "email": "rh@labmedical.com",
+        "password": "12345678"
+      }
+    ]
+}
