@@ -11,20 +11,25 @@
       "tipo": ""
     },
     {
-      "id": 2,
-      "email": "comercial@labmedical.com",
-      "password": "98765432"
+      "id": 1,
+      "nome": "Tomas",
+      "genero": "",
+      "cpf": "",
+      "tel": "48-984037505",
+      "email": "teste@labmedical.com",
+      "password": "12345678",
+      "tipo": ""
     },
     {
-      "id": 3,
-      "email": "recepcao@labmedical.com",
-      "password": "12457896"
-    },
-    {
-      "id": 4,
-      "email": "rh@labmedical.com",
-      "password": "12345678"
-    }
+      "id": 1,
+      "nome": "Teodoro",
+      "genero": "",
+      "cpf": "",
+      "tel": "48-984037505",
+      "email": "medico@labmedical.com",
+      "password": "12345678",
+      "tipo": ""
+    }    
   ],
   "pacientes": [
     {

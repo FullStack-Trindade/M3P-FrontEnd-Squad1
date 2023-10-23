@@ -68,12 +68,6 @@ function EstatisticasSistema() {
 
   const dataCard = [
     {
-      id: '4',
-      icone: <ImUsers/>,
-      resultado: totalUsers(),
-      legenda: 'Usuários',
-    },
-    {
       id: '1',
       icone: <ImUsers/>,
       resultado: totalPacientes(),
@@ -95,7 +89,7 @@ function EstatisticasSistema() {
 
   const dataCardADM = [
     {
-      id: '4',
+      id: '1',
       icone: <ImUsers/>,
       resultado: totalUsers(),
       legenda: 'Usuários',
@@ -105,20 +99,20 @@ function EstatisticasSistema() {
   return (
     <>
       <Styled.ContainerEstatisticas>
-        <h2>Estatísticas do Sistema</h2>
+        <h2>Estatísticas do Sistema do Administrador</h2>
         <Styled.ContainerCardEstatisticas>
-          {dataCard.map(estatistica => (
-            <CardEstatistica key={estatistica.id} dataCard={estatistica}/>
+          {dataCardADM.map(estatistica => (
+            <CardEstatisticaADM key={estatistica.id} dataCardADM={estatistica}/>
           ))}
         </Styled.ContainerCardEstatisticas>
       </Styled.ContainerEstatisticas>
 
     
       <Styled.ContainerEstatisticas>
-        <h2>Estatísticas do Sistema do Administrador</h2>
+        <h2>Estatísticas do Sistema</h2>
         <Styled.ContainerCardEstatisticas>
-          {dataCardADM.map(estatistica => (
-            <CardEstatisticaADM key={estatistica.id} dataCardADM={estatistica}/>
+          {dataCard.map(estatistica => (
+            <CardEstatistica key={estatistica.id} dataCard={estatistica}/>
           ))}
         </Styled.ContainerCardEstatisticas>
       </Styled.ContainerEstatisticas>

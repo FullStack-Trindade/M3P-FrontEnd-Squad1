@@ -11,12 +11,12 @@ console.log(user)
             <ImUser/>
           </Styled.IconCardUser>
 
-          <Styled.DadosPaciente>
+          <Styled.DadosUsuario>
             <Styled.DadosNome>{user.nome}</Styled.DadosNome>
-            <Styled.Dados>{user.nasc}</Styled.Dados>
+            <Styled.Dados>{user.cpf}</Styled.Dados>
             <Styled.Dados>{user.tel}</Styled.Dados>
-            <Styled.Dados>{user.convenio}</Styled.Dados>
-          </Styled.DadosPaciente>
+            <Styled.Dados>{user.tipo}</Styled.Dados>
+          </Styled.DadosUsuario>
           
         </Styled.RenderCardUser>
       </Styled.CardUserContainer>

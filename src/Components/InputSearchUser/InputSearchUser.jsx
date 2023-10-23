@@ -14,18 +14,18 @@ export const InputSearchUser = () => {
 
   const [userEncontrado, setUserEncontrado] = useState(null);
 
-  const submitInputForm = async (dataInput) => {
-    const { nome } = dataInput;
+  const submitInputFormADM = async (dataInputUser) => {
+    const { nome } = dataInputUser;
     
-    const User = await UserService.ShowByNome(nome);
+    const user = await UserService.ShowByName(nome);
     console.log(user)
     
-      if (!User) {
+      if (!user) {
         alert('Usuário não cadastrado');
         setUserEncontrado(null);
         reset();
       } else {
-        setUserEncontrado(User);
+        setUserEncontrado(user);
         reset()
       }
   
@@ -35,7 +35,7 @@ export const InputSearchUser = () => {
     <>
       <Styled.InputContainer>
         <h2>Informações Rápidas de Usuários</h2>
-        <Styled.FormInput onSubmit={handleSubmit(submitInputForm)}>
+        <Styled.FormInput onSubmit={handleSubmit(submitInputFormADM)}>
           <input
             className="input2 inputFaq"
             placeholder="Digite o nome do usuário"
@@ -44,9 +44,9 @@ export const InputSearchUser = () => {
           <button className="botao" type="submit">
             <span className="material-symbols-outlined">Buscar</span>
           </button>
-          <button className="botao" type="submit" >
+{/*           <button className="botao" type="submit" >
             <span className="material-symbols-outlined">Gerenciar Usuário</span>
-          </button>
+          </button> */}
         </Styled.FormInput>
       </Styled.InputContainer>
 

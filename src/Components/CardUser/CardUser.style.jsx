@@ -34,7 +34,7 @@ export const IconCardUser = styled.div`
   
 `
 
-export const DadosPaciente = styled.div`
+export const DadosUsuario= styled.div`
 
 `
 

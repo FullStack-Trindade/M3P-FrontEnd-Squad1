@@ -52,6 +52,15 @@ const data = await response.json();
 return data;
 }
 
+const ShowByName = async (nome) => {
+
+  const filter = `?nome=${nome}`;
+  const response = await fetch(`${API_URL}/${filter}`);
+  const data = await response.json();
+  
+  return data[0];
+  }
+
 const ShowByEmail = async (email) => {
     const filter = `?email=${email}`;
     const response = await fetch(`${API_URL}/${filter}`);
@@ -65,9 +74,6 @@ const Delete = (id) => {
     LocalStorageService.set('users', Get().filter( user => user.id !== id));
 }
 
-const DeletePaciente = (id) => {
-    LocalStorageService.set('users', Get().filter( user => user.id !== id));
-}
 
 
 const Update = (id, newUser) => {
@@ -83,6 +89,7 @@ export const UserService = {
     Create,
     CreateUser,
     Show,
+    ShowByName,
     ShowByEmail,
     Delete,
     Update
