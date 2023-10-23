@@ -51,7 +51,7 @@ export const InputSearchUser = () => {
       </Styled.InputContainer>
 
         <Styled.CardRender>
-            {userEncontrado && userEncontrado.map(user => <CardUser user={user} key={user.id} />)}
+            {userEncontrado && Object.keys(userEncontrado).map(user => <CardUser user={user} key={user.nome} />)}
         </Styled.CardRender>
     </>
   );

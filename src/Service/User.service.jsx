@@ -58,7 +58,7 @@ const ShowByName = async (nome) => {
   const response = await fetch(`${API_URL}/${filter}`);
   const data = await response.json();
   
-  return data[0];
+  return data;
   }
 
 const ShowByEmail = async (email) => {

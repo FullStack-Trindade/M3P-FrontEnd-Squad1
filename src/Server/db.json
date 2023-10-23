@@ -2,16 +2,16 @@
   "users": [
     {
       "id": 1,
-      "nome": "Daniel",
+      "nome": "Pablo",
       "genero": "",
-      "cpf": "",
+      "cpf": "12365478012",
       "tel": "48-984037505",
       "email": "adm@labmedical.com",
       "password": "12345678",
-      "tipo": ""
+      "tipo": "ADMINISTRADOR"
     },
-    {
-      "id": 1,
+    { 
+      "id": 2,
       "nome": "Tomas",
       "genero": "",
       "cpf": "",
@@ -19,17 +19,7 @@
       "email": "teste@labmedical.com",
       "password": "12345678",
       "tipo": ""
-    },
-    {
-      "id": 1,
-      "nome": "Teodoro",
-      "genero": "",
-      "cpf": "",
-      "tel": "48-984037505",
-      "email": "medico@labmedical.com",
-      "password": "12345678",
-      "tipo": ""
-    }    
+    }  
   ],
   "pacientes": [
     {
