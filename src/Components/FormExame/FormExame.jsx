@@ -1,14 +1,14 @@
 import * as Styled from './FormExame.style';
 import { useState } from 'react'
-
-/* import { VacinaService } from '../../../Service/User/Vacina.service'; */
-
 import { useForm } from 'react-hook-form';
+
+
 import { InputComponent } from '../Form/InputComponent/InputComponent';
 import { Switch, Spin } from 'antd';
 
+import { ExameService } from '../../Service/Exame.service';
 
-export const FormExame = ({paciente}) => {
+export const FormExame = () => {
 
   const {
     register,
@@ -17,12 +17,12 @@ export const FormExame = ({paciente}) => {
     formState: { errors },
   } = useForm()
 
-  const submitForm = async (vacinaData) => {
+  const submitForm = async (exameData) => {
   
-    const data = {...exameData, pacienteId: paciente.id}
+    const data = {...exameData, id_paciente: paciente.id}
     const exame = await Exame.CreateExame(data);
 
-    if (!vacina) {
+    if (!exame) {
       alert('Exame Cadastrada');
       reset();
 
@@ -38,7 +38,7 @@ export const FormExame = ({paciente}) => {
     <Styled.Form onSubmit={handleSubmit(submitForm)}>
 
       <Styled.Header>
-        <Styled.Title>Vacina de {paciente.nome}</Styled.Title>
+        <Styled.Title>Exame de {paciente.nome}</Styled.Title>
 
 
         <Styled.LabelSwitch>
