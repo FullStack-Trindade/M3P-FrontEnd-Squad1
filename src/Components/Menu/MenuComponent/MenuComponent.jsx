@@ -39,4 +39,4 @@ export const MenuComponent = () => {
   )
 }
 
-/*   export default MenuComponent */
+ export default MenuComponent
