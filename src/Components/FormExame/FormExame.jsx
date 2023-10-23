@@ -1,12 +1,13 @@
 import * as Styled from './FormExame.style';
 import { useState } from 'react'
 import { useForm } from 'react-hook-form';
+import Exame from '../../Service/Exame.service'
 
 
-import { InputComponent } from '../Form/InputComponent/InputComponent';
+import { InputSearchExame } from '../InputSearchExame/InputSearchExame.jsx';
 import { Switch, Spin } from 'antd';
 
-import { ExameService } from '../../Service/Exame.service';
+/* import { ExameService } from '../../Service/Exame.service'; */
 
 export const FormExame = () => {
 
@@ -57,7 +58,7 @@ export const FormExame = () => {
       <Styled.MainForm $width={'100%'}>
         <Styled.InputGroup>
 
-          <InputComponent $width={'350%'}
+          <InputSearchExame $width={'350%'}
             id='nomeExame'
             type='string'
             placeholder='Informe o nome do exame'
@@ -72,7 +73,7 @@ export const FormExame = () => {
             }}
             error={errors.motivo}
           />
-          <InputComponent $width={'350%'}
+          <InputSearchExame $width={'350%'}
             id='nomeLaboratorio'
             type='string'
             placeholder='Nome do laboratório'
@@ -88,7 +89,7 @@ export const FormExame = () => {
             error={errors.nomeLaboratorio}
           />
 
-          <InputComponent $width={'100%'}
+          <InputSearchExame $width={'100%'}
             id='dataExame'
             type='date'
             placeholder='Digite a data'
@@ -102,7 +103,7 @@ export const FormExame = () => {
             error={errors.dataExame}
           />
 
-          <InputComponent $width={'100%'}
+          <InputSearchExame $width={'100%'}
             id='horaExame'
             type='hour'
             placeholder='Digite o hora do exame'
@@ -118,7 +119,7 @@ export const FormExame = () => {
 
         </Styled.InputGroup>
         <Styled.InputGroup  >
-        <InputComponent $width={'350%'}
+        <InputSearchExame $width={'350%'}
             id='tipoExame'
             type='string'
             placeholder='Tipo do exame.'
@@ -136,7 +137,7 @@ export const FormExame = () => {
 
         </Styled.InputGroup>
         <Styled.InputGroup  >
-          <InputComponent $height={'100px'}
+          <InputSearchExame $height={'100px'}
             id='resultadoExame'
             type='textarea'
             placeholder='Detalhe aqui o resultado do exame.'
