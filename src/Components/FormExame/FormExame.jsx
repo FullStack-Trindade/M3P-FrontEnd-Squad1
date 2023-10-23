@@ -1,13 +1,11 @@
 import * as Styled from './FormExame.style';
 import { useState } from 'react'
 import { useForm } from 'react-hook-form';
-import Exame from '../../Service/Exame.service'
+import {ExameService} from '../../Service/Exame.service'
 
 
 import { InputSearchExame } from '../InputSearchExame/InputSearchExame.jsx';
 import { Switch, Spin } from 'antd';
-
-/* import { ExameService } from '../../Service/Exame.service'; */
 
 export const FormExame = () => {
 
@@ -21,7 +19,7 @@ export const FormExame = () => {
   const submitForm = async (exameData) => {
   
     const data = {...exameData, id_paciente: paciente.id}
-    const exame = await Exame.CreateExame(data);
+    const exame = await ExameService.CreateExame(data);
 
     if (!exame) {
       alert('Exame Cadastrada');

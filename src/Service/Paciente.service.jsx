@@ -23,6 +23,17 @@ const CadastrarPaciente = async (postPacientDb) => {
   }
 };
 
+ const Get = () => {
+  const fetchPatient = async() => {
+      const response = await fetch(`http://localhost:3000/api/pacientes/${id}`);
+      const data = await response.json();
+      return data;
+  }
+
+  return fetchPatient();
+}
+
 export const PacienteService = {
   CadastrarPaciente,
+  Get
 };

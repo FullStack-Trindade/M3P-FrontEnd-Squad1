@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Styled from './InputSearchExame.style';
-import { PacienteService } from '../../Service/Paciente.service';
+import { PacienteService } from '../../Service/Paciente.service.jsx';
+import {UsersService} from '../../Service/User.service'
 import  {FormExame}  from '../FormExame/FormExame.jsx'; 
 
 
@@ -20,7 +21,8 @@ export const InputSearchExame = () => {
    
     const submitInputForm = async (dataInput) => {
         const {nome} = dataInput;
-
+        const medico = await UsersService.Get()
+        console.log(medico);
         const paciente = await PacienteService.ShowByNome(nome);
         console.log(paciente.nome)
         
