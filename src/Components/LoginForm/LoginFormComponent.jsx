@@ -12,7 +12,6 @@ import { Spin } from 'antd';
 
 export const FormLoginComponent = () => {
 
-
   const {
     register,
     handleSubmit,
@@ -28,11 +27,45 @@ export const FormLoginComponent = () => {
 /*   const [userLogado, setUserLogado] = useState(null); */
 
   const submitForm = async (data) => {
+    const login = {
+      email: data.email,
+      password: data.password
+    }
+
+    
     const { email, password } = data;
-
-    const user = await UserService.ShowByEmail(email);  
-
-
+    //verifica se é ==! de vazio, se existir algum dado envia uma requisição para o backend
+    if(email && password){
+      const login = {
+        email: email,
+        password: password
+      }
+      
+      const response = await fetch("http://localhost:3000/api/usuario/login", {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(login)
+      });
+      // se a resposta for positiva, irá armazenar os dados no localStorage e redirecionar para Home
+      const data = await response.json();
+      const {id, name, token, id_type} = data
+      
+      if(response.status === 200 ){
+        localStorage.setItem('id', JSON.stringify(id))
+        localStorage.setItem('name', JSON.stringify(name))
+        localStorage.setItem('token', JSON.stringify(token))
+        localStorage.setItem('id_type', JSON.stringify(id_type))
+        redirectToHome(name)
+      }else{
+        alert('Ops! Usuário e/ou Senha Invalidos.');
+        reset();
+        return;
+      }
+    }
+/*
     if(!user) {
       alert('Usuário não cadastrado');
       reset();
@@ -40,10 +73,11 @@ export const FormLoginComponent = () => {
     }/* else {
       setUserLogado(user.email)
     } */
-
+/*
     password === user.password
       ? redirectToHome(user)
       : alert('Ops! Usuário e/ou Senha Invalidos.');
+      */
   }
 
   const redirectToHome = (user) => {

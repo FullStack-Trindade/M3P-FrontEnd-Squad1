@@ -25,6 +25,7 @@ function App() {
               <Route path='/prontuarios/:id' element={<ProntuarioPage/>}/>
           </Route> */}
           <Route path='*' element={<><p>Essa página não existe</p></>}/>
+          
        </Routes>
     </Router>
   )
