@@ -4,8 +4,8 @@ import { FormLoginComponent } from "../../Components/LoginForm/LoginFormComponen
 
 import * as Styled from './LoginPage.style';
 
-import imagemLogin from '../../../public/images/LogoGenerica.jpg';
 
+import imagemLogin from '../../Assets/LogoGenerica.jpg';
 
 
 export const LoginPage = () => {
@@ -21,6 +21,7 @@ export const LoginPage = () => {
           <Styled.DivCriarConta>
             <Styled.LabelCriarConta>Não possui uma conta?</Styled.LabelCriarConta>
             <Styled.ButtonHeaderLogin onClick={() => alert('Entre em contato com o Administrador do Serviço e solicite o seu cadastro')}>Criar Conta</Styled.ButtonHeaderLogin>
+            
           </Styled.DivCriarConta>
 
           <Styled.Login>
