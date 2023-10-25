@@ -8,7 +8,7 @@ import { UserService } from '../../Service/User.service';
 import { Switch, Spin } from 'antd';
 
 import { SelectComponent } from '../SelectComponent/SelectComponent';
-import { CEPService } from '../../Service/User.CEP'
+
 
 
 export const FormUsuario = () => {
@@ -39,23 +39,24 @@ export const FormUsuario = () => {
     }
   ];
 
-  const estadoCivil = [
+ 
+  const tipo = [
     {
       id: 1,
-      value: 'S',
-      label: 'Solteiro(a)'
+      value: 'A',
+      label: 'Administrador(a)'
     },
 
     {
       id: 2,
-      value: 'c',
-      label: 'Casado(a)'
+      value: 'M',
+      label: 'Médico(a)'
     },
 
     {
       id: 3,
-      value: 'd',
-      label: 'Divorciado(a)'
+      value: 'E',
+      label: 'Enfermeiro(a)'
     },
 
     {
@@ -64,6 +65,7 @@ export const FormUsuario = () => {
       label: 'Outro'
     }
   ];
+
 
   const {
     register,
@@ -99,19 +101,7 @@ export const FormUsuario = () => {
       });
   };
 
-  
-  const buscaCEP = async () => {
-    CEPService.Get(watch("cep"))
-      .then(response => {
-        console.log(response)
-        setValue('cidade', response.localidade)
-        setValue('uf', response.uf)
-        setValue('numRua', response.numRua)
-        setValue('bairro', response.bairro)
-      })
 
-   
-  };
 
   const submitForm = async (userData) => {
 
@@ -128,14 +118,6 @@ export const FormUsuario = () => {
 
   }
 
-  useEffect(() => {
-    const cepUsuario = watch("cep") || ""
-    if(cepUsuario.length > 7) {
-         buscaCEP(cepUsuario)
-    }
-
-  
-  },[watch("cep")])
 
   const [isLoading, setIsLoading] = useState()
 
@@ -174,8 +156,8 @@ export const FormUsuario = () => {
               register={{
            ...register('nome', {
               required: true,
-              minLenght: 5 ,
-              maxLenght: 50 ,
+              minLenght: 8 ,
+              maxLenght: 64 ,
           })
             }}
             error={errors.nome}
@@ -194,21 +176,7 @@ export const FormUsuario = () => {
             error={errors.genero}
           />
 
-          <InputComponent $width={'10 %'}
-            id='nasc'
-            type='date'
-            name='nasc'
-            placeholder='Data Nascimento'
-            label='Data Nascimento'
-              register={{
-           ...register('nasc', {
-              required: true,
-
-          })
-            }}
-            error={errors.nasc}
-          />
-
+         
         </Styled.InputGroup>
 
         <Styled.InputGroup>
@@ -222,46 +190,13 @@ export const FormUsuario = () => {
               register={{
            ...register('cpf', {
               required: true,
-             /*  required: false, */
+
           })
             }}
             error={errors.cpf}
           />
 
-          <InputComponent $width={'100%'}
-            id='rg'
-            type='text'
-            name='rg'
-            placeholder='Digite seu RG'
-            label='RG'
-              register={{
-           ...register('rg', {
-              required: true,
-              maxLenght: 20 ,
-          })
-            }}
-            error={errors.rg}
-          />
-
-          <SelectComponent $width={'30%'}
-            id='estadoCivil'
-            name='estadoCivil'
-            label={'Estado Civil'}
-            options={estadoCivil}
-            register={{
-              ...register('estadoCivil', {
-                required: true,
-                
-              })
-            }}
-            error={errors.estadoCivil}
-          />
-
-        </Styled.InputGroup>
-
-        <Styled.InputGroup>
-
-          <InputComponent $width={'100%'}
+<InputComponent $width={'100%'}
             id='tel'
             type='number'
             placeholder='Telefone'
@@ -285,264 +220,49 @@ export const FormUsuario = () => {
               register={{
            ...register('email', {
               required: true,
-            /* required: false, */
+    
           })
             }}
             error={errors.email}
           />
+        
 
-          <InputComponent $width={'100%'}
-            id='natural'
-            type='string'
-            placeholder='Naturalidade'
-            name='natural'
-            label='Naturalidade'
+        </Styled.InputGroup>
+
+
+
+
+
+        <Styled.InputGroup>
+
+  
+        <InputComponent $width={'100%'}
+            id='password'
+            type='password'
+            placeholder='Digite a sua senha'
+            name='password'
+            label='Senha'
               register={{
-           ...register('natural', {
+           ...register('senha', {
               required: true,
-              minLenght: 5 ,
-              maxLenght: 50 ,
           })
             }}
-            error={errors.natural}
+            error={errors.password}
           />
 
-        </Styled.InputGroup>
-        <Styled.InputGroup>
-
-<InputComponent $width={'100%'}
-  id='emergencia'
-  type='text'
-  placeholder='Digite telefone'
-  name='emergencia'
-  label='Contato de Emergência'
-    register={{
- ...register('emergencia', {
-    required: true,
-   /* required: false, */
-})
-  }}
-  error={errors.tel}
-/>
-
-<InputComponent $width={'100%'}
-  id='alergias'
-  type='text'
-  placeholder='Possui alergias? Cite quais.'
-  name='alergias'
-  label='Alergias'
-    register={{
- ...register('alergias', {
-  required: false,
-})
-  }}
-  error={errors.email}
-/>
-
-<InputComponent $width={'100%'}
-  id='cuidados'
-  type='string'
-  placeholder='Digite os cuidados específicos'
-  name='cuidados'
-  label='Cuidados Específicos'
-    register={{
- ...register('natural', {
-    required: false,
-})
-
-  }}
-  error={errors.natural}
-/>
-
-</Styled.InputGroup>
-
-
-        <Styled.Header>
-        <Styled.Title>
-          Convênio
-        </Styled.Title>
-        </Styled.Header>
-
-        
-        <Styled.InputGroup>
-
-          <InputComponent $width={'100%'}
-            id='convenio'
-            type='string'
-            placeholder='Informe seu convênio'
-            label='Convênio'
-            name='convenio'
-              register={{
-           ...register('convenio', {
-              required: false,
-          })
+        <SelectComponent $width={'20%'}
+            id='tipo'
+            name='tipo'
+            label={'Tipo'}
+            options={tipo}
+            register={{
+              ...register('tipo', {
+                   required: true,
+              })
             }}
-            error={errors.convenio}
+            error={errors.tipo}
           />
-
-          <InputComponent $width={'100%'}
-            id='NCart'
-            type='number'
-            placeholder='Digite o número da carteira'
-            name='NCart'
-            label='Número da Carteira'
-              register={{
-           ...register('NCart', {
-              required: false,
-          })
-            }}
-            error={errors.NCart}
-          />
-
-          <InputComponent $width={'100%'}
-            id='validade'
-            type='date'
-            placeholder='Validade'
-            name='validade'
-            label='Validade'
-              register={{
-           ...register('validade', {
-              required: false,
-          })
-            }}
-            error={errors.validade}
-          />
-
-        </Styled.InputGroup>
-
-        <Styled.Header>
-        <Styled.Title>
-          Dados do Endereço
-        </Styled.Title>
-        </Styled.Header>
-
-        
-        <Styled.InputGroup>
-
-          <InputComponent $width={'100%'}
-            id='cep'
-            type='text'
-            placeholder='Informe o CEP'
-            name='cep'
-            label='CEP'
-                register={{
-           ...register('cep')
-            }}
-            error={errors.cep}
-          />
-
-          <InputComponent $width={'100%'}
-            id='cidade'
-            type='string'
-            placeholder='Digite a Cidade'
-            name='cidade'
-            label='Cidade'
-                       register={{
-           ...register('cidade', {
-              required: false,
-          })
-            }}
-            error={errors.cidade}
-          />
-
-          <InputComponent $width={'100%'}
-            id='uf'
-            type='string'
-            placeholder='Estado'
-            name='uf'
-            label='Estado'
-    
-              register={{
-           ...register('uf', {
-              required: false,
-          })
-            }}
-            error={errors.uf}
-          />
-
-        </Styled.InputGroup>
-
-            
-        <Styled.InputGroup>
-
-          <InputComponent $width={'500%'}
-            id='logradouro'
-            type='string'
-            placeholder='Informe seu endereço'
-            name='rua'
-            label='Endereço'
-    
-              register={{
-           ...register('logradouro', {
-              required: false,
-          })
-            }}
-            error={errors.rua}
-          />
-
-          <InputComponent $width={'100%'}
-            id='numRua'
-            type='number'
-            placeholder='Número'
-            label='Número'
-            name='numRua'
-      
-              register={{
-           ...register('numRua', {
-              required: false,
-          })
-            }}
-            error={errors.numRua}
-          />
-
-
-        </Styled.InputGroup>
-
-
-        <Styled.InputGroup>
-
-          <InputComponent $width={'100%'}
-            id='compl'
-            type='string'
-            placeholder='Complemento'
-            name='compl'
-            label='Complemento'
-              register={{
-           ...register('compl', {
-              required: false,
-          })
-            }}
-            error={errors.compl}
-          />
-
-          <InputComponent $width={'100%'}
-            id='bairro'
-            type='string'
-            placeholder='Digite o seu bairro'
-            name='bairro'
-            label='Bairro'
-            /* defaultValue={endereco.bairro || ''} */
-              register={{
-           ...register('bairro', {
-              required: false,
-          })
-            }}
-            error={errors.bairro}
-          />
-
-          <InputComponent $width={'100%'}
-            id='refEnd'
-            type='string'
-            placeholder='Referência'
-            name='refEnd'
-            label='Ponto de Referência'
-              register={{
-           ...register('refEnd', {
-              required: false,
-          })
-            }}
-            error={errors.refEnd}
-          />
+         
 
 </Styled.InputGroup>
       </Styled.MainForm>
