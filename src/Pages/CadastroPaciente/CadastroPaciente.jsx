@@ -1,8 +1,7 @@
-//import * as Styled from "./CadastroPaciente.style";
+import * as Styled from "./CadastroPaciente.style";
 
 import { FormPaciente } from "../../Components/FormPaciente/FormPaciente";
 
-//Importar form de paciente
 
 export const PacientePage = () => {
   const render = () => {
