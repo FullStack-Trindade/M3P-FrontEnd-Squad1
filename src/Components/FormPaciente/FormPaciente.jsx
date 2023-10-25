@@ -123,6 +123,7 @@ export const FormPaciente = () => {
         cpf: pacienteData.cpf,
         email: pacienteData.email,
         password: pacienteData.cpf,
+        phone: pacienteData.phone,
         id_type: "3",
       };
     
@@ -322,12 +323,12 @@ export const FormPaciente = () => {
           <InputComponent
             $width={"100%"}
             id="tel"
-            type="number"
-            placeholder="Telefone"
+            type="text"
+            placeholder="Telefone no formato (99) 9 9999-99999"
             name="tel"
             label="Telefone"
             register={{
-              ...register("tel", {
+              ...register("phone", {
                 required: false,
               }),
             }}
@@ -371,7 +372,7 @@ export const FormPaciente = () => {
             $width={"100%"}
             id="emergencia"
             type="text"
-            placeholder="Digite telefone"
+            placeholder="Digite o telefone no formato (99) 9 9999-99999"
             name="emergencia"
             label="Contato de Emergência"
             register={{
@@ -458,7 +459,7 @@ export const FormPaciente = () => {
             register={{
               ...register("insuranceVality", {
                 required: false,
-              }),
+              })
             }}
             error={errors.validade}
           />
