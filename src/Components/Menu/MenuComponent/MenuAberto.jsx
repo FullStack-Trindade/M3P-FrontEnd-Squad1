@@ -21,7 +21,7 @@ const MenuAberto = () => {
         
         <Styled.MenuContainer >
               <Styled.MenuArea>
-            <Styled.MenuLogo src={'../../../../public/images/LABMedical_Logo.png'} alt='Logo LAB Medical'/>
+            <Styled.MenuLogo src={'../../../../public/LogoGenerica.jpg'} alt='Logo LAB Medical'/>
           
             <Styled.MenuSetor>Geral</Styled.MenuSetor>
             <MenuItem Icon={FaHome} Text="INICIO" To='/' />

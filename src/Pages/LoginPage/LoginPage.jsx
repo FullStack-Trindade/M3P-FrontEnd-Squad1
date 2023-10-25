@@ -4,8 +4,8 @@ import { FormLoginComponent } from "../../Components/LoginForm/LoginFormComponen
 
 import * as Styled from './LoginPage.style';
 
-import imagemLogin from '../../Assets/LogoGenerica.jpg';
 
+import imagemLogin from '../../Assets/LogoGenerica.jpg';
 
 
 export const LoginPage = () => {
