@@ -7,7 +7,7 @@ import {ExameService} from '../../Service/Exame.service'
 import { InputSearchExame } from '../InputSearchExame/InputSearchExame.jsx';
 import { Switch, Spin } from 'antd';
 
-export const FormExame = () => {
+export const FormExame = ({paciente}) => {
 
   const {
     register,
@@ -18,7 +18,7 @@ export const FormExame = () => {
 
   const submitForm = async (exameData) => {
   
-    const data = {...exameData, id_paciente: paciente.id}
+    const data = {...exameData, paciente: paciente.id}
     const exame = await ExameService.CreateExame(data);
 
     if (!exame) {

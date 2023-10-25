@@ -1,6 +1,6 @@
 const CadastrarExame = async (postExameDb) => {
     try {
-        const response = await fetch("http://localhost:3000/api/exames", {
+        const response = await fetch("http://localhost:3333/api/exames", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

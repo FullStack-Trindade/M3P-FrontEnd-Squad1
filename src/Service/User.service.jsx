@@ -1,6 +1,6 @@
 /*import { LocalStorageService } from "./LocalStorage.service";
 
-const API_URL = 'http://localhost:3000/users'
+const API_URL = 'http://localhost:3333/users'
 
 
 
@@ -81,14 +81,14 @@ export const UserService = {
   Update
 }*/
 const Get = async () => {
-    const response = await fetch("http://localhost:3000/api/usuario");
+    const response = await fetch("http://localhost:3333/api/usuario");
     const data = await response.json();
 
     return data;
    }
 const CadastrarUser = async (postUserDb) => {
   try {
-      const response = await fetch("http://localhost:3000/api/usuario", {
+      const response = await fetch("http://localhost:3333/api/usuario", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

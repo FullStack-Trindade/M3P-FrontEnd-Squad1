@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Styled from './InputSearchExame.style';
-import { PacienteService } from '../../Service/Paciente.service.jsx';
-import {UsersService} from '../../Service/User.service'
+/* import { PacienteService } from '../../Service/Paciente.service.jsx'; */
+import {UserService} from '../../Service/User.service'
 import  {FormExame}  from '../FormExame/FormExame.jsx'; 
 
 
@@ -16,28 +16,31 @@ export const InputSearchExame = () => {
       } = useForm()
     
 
-    const [pacienteEncontrado, setPacienteEncontrado] = useState(null);
+    const [pacienteEncontrado, setPacienteEncontrado] = useState([]);
 
    
     const submitInputForm = async (dataInput) => {
         const {nome} = dataInput;
-        const medico = await UsersService.Get()
-        console.log(medico);
-        const paciente = await PacienteService.ShowByNome(nome);
-        console.log(paciente.nome)
+        console.log(nome);
+        const listaUsuarios = await UserService.Get()
+        console.log(listaUsuarios);
+      const paciente = listaUsuarios.filter(usuario => usuario.name.includes(nome))
+      console.log(paciente);
+
         
-          if (!paciente) {
+        
+          if (!listaUsuarios) {
             alert('Usuário não cadastrado');
             setPacienteEncontrado(null);
             reset();
           } else {
-            setPacienteEncontrado(paciente);
             reset()
-          }
+          } 
+          setPacienteEncontrado(paciente[0]);
+          console.log(pacienteEncontrado);
       
       };
   
-    
     return (
         <>
             <Styled.InputContainer>
@@ -53,7 +56,8 @@ export const InputSearchExame = () => {
                 </Styled.FormInput>
            
             <Styled.AreaPaciente>
-            {pacienteEncontrado && pacienteEncontrado.map(paciente => <FormExame paciente={paciente} key={paciente.id} />)}
+            
+          {/*   {pacienteEncontrado && Object.keys(pacienteEncontrado).map(paciente => <FormExame paciente={paciente} key={paciente.id} />)} */}
             </Styled.AreaPaciente>
               </Styled.InputContainer>
         </>
