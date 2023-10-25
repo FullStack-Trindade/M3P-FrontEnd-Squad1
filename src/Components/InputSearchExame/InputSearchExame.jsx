@@ -4,6 +4,7 @@ import * as Styled from './InputSearchExame.style';
 /* import { PacienteService } from '../../Service/Paciente.service.jsx'; */
 import {UserService} from '../../Service/User.service'
 import  {FormExame}  from '../FormExame/FormExame.jsx'; 
+import {PacienteService} from '../../Service/Paciente.service';
 
 
 export const InputSearchExame = () => {
@@ -22,44 +23,43 @@ export const InputSearchExame = () => {
     const submitInputForm = async (dataInput) => {
         const {nome} = dataInput;
         console.log(nome);
-        const listaUsuarios = await UserService.Get()
-        console.log(listaUsuarios);
-      const paciente = listaUsuarios.filter(usuario => usuario.name.includes(nome))
-      console.log(paciente);
 
-        
-        
-          if (!listaUsuarios) {
+        const paciente = await PacienteService.ShowByEmail(nome);
+        console.log(paciente)
+
+           if(!paciente) {
             alert('Usuário não cadastrado');
             setPacienteEncontrado(null);
             reset();
-          } else {
+          } else {  
+            setPacienteEncontrado(paciente);
             reset()
-          } 
-          setPacienteEncontrado(paciente[0]);
-          console.log(pacienteEncontrado);
-      
-      };
+          }
+    }
   
     return (
-        <>
-            <Styled.InputContainer>
+      <>
+          <Styled.InputContainer>
 
-            <h4>Encontre o paciente</h4>
-                <Styled.FormInput 
-                onSubmit={ handleSubmit(submitInputForm)}>
-                
-                <input className="input2  inputFaq" placeholder="Digite o nome do paciente" {...register('nome')}/>
+          <h4>Encontre o paciente</h4>
+              <Styled.FormInput 
+              onSubmit={ handleSubmit(submitInputForm)}>
+              
+              <input className="input2  inputFaq" placeholder="Digite o E-mail do paciente" {...register('nome')}/>
 
-                <button className="botao" type='submit'><span className="material-symbols-outlined">
-                    Buscar</span></button>
-                </Styled.FormInput>
-           
-            <Styled.AreaPaciente>
-            
-          {/*   {pacienteEncontrado && Object.keys(pacienteEncontrado).map(paciente => <FormExame paciente={paciente} key={paciente.id} />)} */}
-            </Styled.AreaPaciente>
-              </Styled.InputContainer>
-        </>
-    )
-}
+              <button className="botao" type='submit'><span className="material-symbols-outlined">
+                  Buscar</span></button>
+              </Styled.FormInput>
+
+                <Styled.AreaPaciente>
+                  
+          {pacienteEncontrado && (
+            <FormExame paciente={pacienteEncontrado} />
+            )}
+                </Styled.AreaPaciente>
+            </Styled.InputContainer>
+   
+         
+      </>
+  )
+};
