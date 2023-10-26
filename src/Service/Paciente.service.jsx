@@ -1,7 +1,6 @@
 const CadastrarPaciente = async (postPacientDb) => {
   try {
-    console.log(postPacientDb);
-      const response = await fetch("http://localhost:3000/api/pacientes", {
+          const response = await fetch("http://localhost:3000/api/pacientes", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,6 +23,7 @@ const CadastrarPaciente = async (postPacientDb) => {
   }
 };
 
+//Get paciente por usuário ID
 export const PacienteService = {
   CadastrarPaciente,
 };

@@ -115,7 +115,6 @@ export const FormPaciente = () => {
 
   const submitForm = async (pacienteData) => {
     try {
-
       //implantar lógica de que se o usuário já existe no bd fazer update
       const postUsuarioDb = {
         name: pacienteData.name,
@@ -126,11 +125,14 @@ export const FormPaciente = () => {
         phone: pacienteData.phone,
         id_type: "3",
       };
-    
-                  const usuarioId = await UsuarioService.CadastrarUsuarioPaciente(
+//lógica se paciente existe
+     
+      const usuarioId = await UsuarioService.CadastrarUsuarioPaciente(
         postUsuarioDb
       );
-     
+
+      
+
       if (usuarioId !== null) {
         const postPacientDb = {
           birth: pacienteData.birth,
@@ -156,11 +158,13 @@ export const FormPaciente = () => {
             reference: pacienteData.reference,
           },
         };
-                  PacienteService.CadastrarPaciente(postPacientDb);
-      }
+        PacienteService.CadastrarPaciente(postPacientDb);
+        return;
+              }
+      
     } catch (error) {
       console.error("Erro ao cadastrar usuário e paciente:", error);
-       }
+    }
   };
 
   useEffect(() => {
@@ -288,7 +292,7 @@ export const FormPaciente = () => {
             error={errors.rg}
           />
 
-<InputComponent
+          <InputComponent
             $width={"100%"}
             id="orgaoExpedidor"
             type="text"
@@ -459,7 +463,7 @@ export const FormPaciente = () => {
             register={{
               ...register("insuranceVality", {
                 required: false,
-              })
+              }),
             }}
             error={errors.validade}
           />
