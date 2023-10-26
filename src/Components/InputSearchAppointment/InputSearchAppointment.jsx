@@ -27,12 +27,13 @@ export const InputSearchAppointment = () => {
 
     const searchPatient = () => {
         const filteredUser = usersList.filter(user => user.name.includes(inputName));
-
-        if (filteredUser.length === 0) {
+        
+        const filteredPatient = patientsList.filter(patient => String(patient.idUser).includes(String(filteredUser[0]?.id)));
+        
+        if (filteredPatient.length === 0) {
             return alert('Paciente não consta no cadastro');
         }
 
-        const filteredPatient = patientsList.filter(patient => String(patient.idUser).includes(String(filteredUser[0].id)));
         setPatient(filteredPatient);
     }
 
@@ -62,7 +63,7 @@ export const InputSearchAppointment = () => {
                 </Styled.SearchInput>
 
                 <Styled.PatientArea>
-                    <FormAppointment patient={ patient } />
+                    <FormAppointment patientId={ patient[0]?.id } />
                 </Styled.PatientArea>
 
             </Styled.InputContainer>
