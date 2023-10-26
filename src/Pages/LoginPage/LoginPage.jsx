@@ -4,7 +4,7 @@ import { FormLoginComponent } from "../../Components/LoginForm/LoginFormComponen
 
 import * as Styled from './LoginPage.style';
 
-import imagemLogin from '../../../public/LogoGenerica.jpg';
+import imagemLogin from '../../../public/images/LogoGenerica.jpg';
 
 
 

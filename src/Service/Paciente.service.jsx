@@ -1,6 +1,6 @@
-import { LocalStorageService } from "./LocalStorage.service";
+import { LocalStorageService } from "../Service/LocalStorage.service";
 
-const API_URL = 'http://localhost:3000/users'
+const API_URL = 'http://localhost:3000/pacientes'
 
 
 
@@ -12,31 +12,20 @@ const Get = async () => {
     return data;
    }
 
-const Create = async(data) => {
-      const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: {
-            'Accept': 'aplication/json',
-            'Content-Type': 'aplication/json',
-        },
-        body: JSON.stringify(data),
-    });
-    const res = await response.json();
-    console.log(res && `Usuario ${data.email} criado com sucesso`);
-}
 
-const CreateUser = async(UserData) => {
+const CreatePaciente = async(pacienteData) => {
     await fetch(API_URL, {
         method: "POST",
-        body: JSON.stringify(UserData),
+        body: JSON.stringify(pacienteData),
         headers: {
+
           "Content-type": "application/json",
         },
       })
         .then(async (data) => {
          const res = await data.json();
           console.log(res);
-          console.log("cadastrado com sucesso");
+          console.log("Paciente cadastrado com sucesso");
         })
         .catch((err) => {
           console.log(err);
@@ -52,15 +41,6 @@ const data = await response.json();
 return data;
 }
 
-const ShowByName = async (nome) => {
-
-  const filter = `?nome=${nome}`;
-  const response = await fetch(`${API_URL}/${filter}`);
-  const data = await response.json();
-  
-  return data;
-  }
-
 const ShowByEmail = async (email) => {
     const filter = `?email=${email}`;
     const response = await fetch(`${API_URL}/${filter}`);
@@ -69,11 +49,21 @@ const ShowByEmail = async (email) => {
     return data[0];
 }
 
+const ShowByNome = async (nome) => {
+    const filter = `?nome=${nome}`;
+    const response = await fetch(`${API_URL}/${filter}`);
+    const data = await response.json();
+    
+    return data;
+}
 
 const Delete = (id) => {
     LocalStorageService.set('users', Get().filter( user => user.id !== id));
 }
 
+const DeletePaciente = (id) => {
+    LocalStorageService.set('users', Get().filter( user => user.name !== name));
+}
 
 
 const Update = (id, newUser) => {
@@ -84,13 +74,13 @@ const Update = (id, newUser) => {
 
 
 
-export const UserService = {
+export const PacienteService = {
     Get,
-    Create,
-    CreateUser,
+    CreatePaciente,
     Show,
-    ShowByName,
     ShowByEmail,
+    ShowByNome,
     Delete,
+    DeletePaciente,
     Update
 }
