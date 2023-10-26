@@ -30,3 +30,8 @@ export const SearchInput = styled.div`
     display: flex;
     margin-top: 1vw;
 `;
+
+export const PatientArea = styled.div`
+    display: flex;
+    margin: 0;
+`;
