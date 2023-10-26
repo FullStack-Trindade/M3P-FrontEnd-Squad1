@@ -13,9 +13,9 @@ export const InputContainer = styled.div`
     }
 
     .button {
-        display: flex;
-        height: 2.5rem;
-        margin: 0 auto 0 2vw !important;    
+        display: table-cell;
+        margin: 0 auto 0 2vw !important;  
+        padding: 0 1em;  
         background: transparent ;
         border-radius: 4px;
         box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
