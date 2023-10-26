@@ -23,7 +23,19 @@ export const InputSearchAppointment = () => {
     }
 
     const [inputName, setInputName] = useState();
-    
+    const [patient, setPatient] = useState([]);
+
+    const searchPatient = () => {
+        const filteredUser = usersList.filter(user => user.name.includes(inputName));
+
+        if (filteredUser.length === 0) {
+            return alert('Paciente não consta no cadastro');
+        }
+
+        const filteredPatient = patientsList.filter(patient => String(patient.idUser).includes(String(filteredUser[0].id)));
+        setPatient(filteredPatient);
+    }
+
     return (
         <>
             <Styled.InputContainer>
@@ -43,13 +55,14 @@ export const InputSearchAppointment = () => {
                     <button 
                         className="button" 
                         type='submit'
+                        onClick={ searchPatient }
                     >
                         Buscar
                     </button>
                 </Styled.SearchInput>
 
                 <Styled.PatientArea>
-                    <FormAppointment patient={ 'patient' } />
+                    <FormAppointment patient={ patient } />
                 </Styled.PatientArea>
 
             </Styled.InputContainer>
