@@ -1,8 +1,8 @@
 import { Outlet } from "react-router-dom"
 
 import * as Styled from './Layout.style'
-import { MenuComponent}  from '../assets/Components/Menu/MenuComponent/MenuComponent.jsx';
-import HeaderComponent from './../assets/Components/Header/HeaderComponent';
+import { MenuComponent}  from '../Components/Menu/MenuComponent/MenuComponent';
+import HeaderComponent from '../Components/ToolBar/ToolBarComponent';
 
 
 export const Layout = () => {
