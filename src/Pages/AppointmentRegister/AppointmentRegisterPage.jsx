@@ -3,7 +3,7 @@ import * as Styled from './AppointmentRegisterPage.style';
 // import { Navigate } from 'react-router-dom';
 
 // import { HeaderContext } from '../../Context/Header.context';
-import { FormAppointment } from '../../Components/FormAppointment/FormAppointment';
+import { InputSearchAppointment } from '../../Components/InputSearchAppointment/InputSearchAppointment';
 
 export const AppointmentRegisterPage = () => {
   // const isLogged = JSON.parse(localStorage.getItem('isLogged'));
@@ -19,7 +19,7 @@ export const AppointmentRegisterPage = () => {
         <>
           <Styled.RegisterArea>
             {/* <Styled.Title>{ data.titulo }</Styled.Title> */}
-            <FormAppointment />
+            <InputSearchAppointment/>
           </Styled.RegisterArea>
         </>
       )
