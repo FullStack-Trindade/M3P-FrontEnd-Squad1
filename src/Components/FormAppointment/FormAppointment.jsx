@@ -10,7 +10,7 @@ import { UserService } from '../../Service/User.service';
 
 import { InputComponent } from '../Form/InputComponent/InputComponent';
 
-export const FormAppointment = () => {
+export const FormAppointment = ({ patient }) => {
   const {
     handleSubmit,
     register,
