@@ -50,9 +50,4 @@ export const PacienteService = {
   Get,
   GetAll
 };
-=======
-//Get paciente por usuário ID
-export const PacienteService = {
-  CadastrarPaciente,
-};
 
