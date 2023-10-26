@@ -15,7 +15,8 @@ export const InputComponent = ({
   placeholder,
   min,
   disabled,
-  register
+  register,
+  onChange
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -41,6 +42,7 @@ export const InputComponent = ({
             placeholder={ placeholder } 
             min={ min }
             disabled={ disabled }
+            onChange={ onChange }
             { ...register }
           />
 
@@ -88,5 +90,6 @@ InputComponent.propTypes = {
   placeholder: PropTypes.string,
   min: PropTypes.number,
   disabled: PropTypes.bool,
-  register: PropTypes.any
+  register: PropTypes.any,
+  onChange: PropTypes.func
 }
