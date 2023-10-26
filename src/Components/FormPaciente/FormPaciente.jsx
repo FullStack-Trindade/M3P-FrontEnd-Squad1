@@ -10,6 +10,7 @@ import { Switch, Spin } from "antd";
 import { CEPService } from "../../Service/User.CEP";
 import { PacienteService } from "../../Service/Paciente.service";
 import { UsuarioService } from "../../Service/UserPatient.service";
+import { InputSearch } from "../InputSearchPaciente/InputSearchPaciente";
 
 export const FormPaciente = () => {
   const genders = [
@@ -68,8 +69,6 @@ export const FormPaciente = () => {
     },
   ];
 
-  // visto até aqui
-
   const {
     register,
     handleSubmit,
@@ -125,13 +124,11 @@ export const FormPaciente = () => {
         phone: pacienteData.phone,
         id_type: "3",
       };
-//lógica se paciente existe
-     
+      //lógica se paciente existe
+
       const usuarioId = await UsuarioService.CadastrarUsuarioPaciente(
         postUsuarioDb
       );
-
-      
 
       if (usuarioId !== null) {
         const postPacientDb = {
@@ -160,8 +157,7 @@ export const FormPaciente = () => {
         };
         PacienteService.CadastrarPaciente(postPacientDb);
         return;
-              }
-      
+      }
     } catch (error) {
       console.error("Erro ao cadastrar usuário e paciente:", error);
     }
@@ -174,17 +170,17 @@ export const FormPaciente = () => {
     }
   }, [watch("cep")]);
 
-  //const [isLoading, setIsLoading] = useState();
+  const [isLoading, setIsLoading] = useState();
 
   return (
     <Styled.Form onSubmit={handleSubmit(submitForm)}>
-      <Styled.Header>
+           <Styled.Header>
         <Styled.Title>Identificação</Styled.Title>
 
         <Styled.LabelSwitch>Editar</Styled.LabelSwitch>
 
         <Styled.SwitchBtn>
-          <Switch />
+          <Switch disabled={true}/>
         </Styled.SwitchBtn>
 
         <Styled.ButtonDel
@@ -192,14 +188,14 @@ export const FormPaciente = () => {
           onClick={deletePaciente}
           $active={!errors.email && !errors.password}
           type="button"
-          disabled={errors.email || errors.password}
+          disabled={true}
         >
           Deletar
         </Styled.ButtonDel>
 
         <Styled.Button
           onClick={() => {
-            /*setIsLoading(true)}*/
+            setIsLoading(true);
           }}
           $width={"10%"}
           onSubmit={createPaciente}
@@ -207,7 +203,7 @@ export const FormPaciente = () => {
           type="submit"
           disabled={errors.email || errors.password}
         >
-          {/*isLoading ? <Spin /> : "Salvar"*/}
+          {isLoading ? <Spin /> : "Salvar"}
         </Styled.Button>
       </Styled.Header>
 

@@ -145,6 +145,9 @@ export const SwitchBtn = styled.div`
   background-color: none;
   margin: auto;
 `
+SwitchBtn.propTypes = {
+   $cursor: PropTypes.any,
+}
 
 
 
