@@ -1,6 +1,7 @@
 import * as Styled from './InputSearchAppointment.style';
 
 import { InputComponent } from '../Form/InputComponent/InputComponent';
+import { FormAppointment } from '../FormAppointment/FormAppointment';
 
 export const InputSearchAppointment = () => {
     
@@ -26,6 +27,10 @@ export const InputSearchAppointment = () => {
                         Buscar
                     </button>
                 </Styled.SearchInput>
+
+                <Styled.PatientArea>
+                    <FormAppointment patient={ 'patient' } />
+                </Styled.PatientArea>
 
             </Styled.InputContainer>
         </>
