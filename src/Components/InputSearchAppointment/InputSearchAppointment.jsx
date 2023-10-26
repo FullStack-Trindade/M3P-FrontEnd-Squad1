@@ -1,10 +1,27 @@
 import * as Styled from './InputSearchAppointment.style';
+import { useEffect, useState } from 'react';
 
 import { InputComponent } from '../Form/InputComponent/InputComponent';
 import { FormAppointment } from '../FormAppointment/FormAppointment';
+import { PatientService } from '../../Service/Patient.service';
+import { UserService } from '../../Service/User.service';
 
 export const InputSearchAppointment = () => {
+    useEffect(() => { 
+        fetchPatientsList();
+        fetchUsersList();
+    }, [])
+
+    const [patientsList, setPatientsList] = useState([]);
+    const fetchPatientsList = async() => {
+        PatientService.Get().then(result => setPatientsList(result));
+    }
     
+    const [usersList, setUsersList] = useState([]);
+    const fetchUsersList = async() => {
+        UserService.Get().then(result => setUsersList(result));
+    }
+
     return (
         <>
             <Styled.InputContainer>
