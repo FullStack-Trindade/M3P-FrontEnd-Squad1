@@ -2,7 +2,7 @@ import * as Styled from './FormAppointmet.style';
 
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { message, Switch } from 'antd';
+import { Switch } from 'antd';
 
 import { AppointmentService } from '../../Service/Appointment.service';
 import { PatientService } from '../../Service/Patient.service';
@@ -10,7 +10,7 @@ import { UserService } from '../../Service/User.service';
 
 import { InputComponent } from '../Form/InputComponent/InputComponent';
 
-export const FormAppointment = ({ patient }) => {
+export const FormAppointment = ({ patientId }) => {
   const {
     handleSubmit,
     register,
@@ -19,8 +19,6 @@ export const FormAppointment = ({ patient }) => {
     watch,
     formState: { errors },
   } = useForm()
-
-  const [messageApi, contextHolder] = message.useMessage();
 
   let params = new URL(document.location).searchParams;
   const appointmentId = params.get('id');
@@ -46,6 +44,8 @@ export const FormAppointment = ({ patient }) => {
   const fetchUsersList = async() => {
     UserService.Get().then(result => setUsersList(result));
   }
+  
+  useEffect(() => { setValue('idPatient', patientId) }, [patientId])
 
   useEffect(() => {
     if (appointmentId !== null) { filterAppointment() }
@@ -73,14 +73,12 @@ export const FormAppointment = ({ patient }) => {
   const inputPatientId = watch('idPatient');
   useEffect(() => { onChangePatient(inputPatientId) }, [inputPatientId]);
 
-  const [patientName, setPatientName] = useState();
   const onChangePatient = (value) => {
     const idPatient = value;
 
     if (idPatient > 0) {
       const dataPatient = patientsList.filter(patient => String(patient.id).includes(idPatient));
-      const dataUser = usersList.filter(user => String(user.id).includes(dataPatient[0]?.id_user));
-      setPatientName(dataUser[0]?.name);
+      const dataUser = usersList.filter(user => String(user.id).includes(String(dataPatient[0]?.idUser)));
       setValue('patientName', dataUser[0]?.name);
     }
   }
@@ -136,47 +134,46 @@ export const FormAppointment = ({ patient }) => {
   }
 
   const onUpdate = async(submitData) => {
-    if (isAppointmentRegistered(submitData)) { return }
-
     await AppointmentService.Update(appointmentId, submitData)
         .then((response) => {
           switch (response.status) {
             case 200:
               reset();
-              return messageApi.open({ type: 'success', content: 'Sucesso! Consulta editada.' });
+              return alert('Sucesso! Consulta editada.');
             case 400:
               reset();
-              return messageApi.open({ type: 'error', content: `Erro no cadastro! Por favor, tente novamente.` });
+              return alert(`Erro no cadastro! Por favor, tente novamente.` );
             case 500:
               reset();
-              return messageApi.open({ type: 'error', content: `Erro no cadastro! Por favor, tente novamente.` });
+              return alert(`Erro no cadastro! Por favor, tente novamente.` );
           }
         })
         .catch((error) => {
-            messageApi.open({ type: 'error', content: 'Erro no cadastro. Por favor, tente novamente.' })
+            alert('Erro no cadastro. Por favor, tente novamente.' )
             console.error('Erro ao cadastrar consulta:', error);
             reset();
         });
   };
 
   const onSave = async(submitData) => {
+    if (isAppointmentRegistered(submitData)) { return }
 
     await AppointmentService.Create(submitData)
       .then((response) => { 
         switch (response.status) {
           case 201:
             reset();
-            return messageApi.open({ type: 'success', content: 'Sucesso! Consulta cadastrada.' });
+            return alert('Sucesso! Consulta cadastrada.' );
           case 400:
             reset();
-            return messageApi.open({ type: 'error', content: `Erro no cadastro! Por favor, tente novamente.` });
+            return alert(`Erro no cadastro! Por favor, tente novamente.` );
           case 500:
             reset();
-            return messageApi.open({ type: 'error', content: `Erro no cadastro! Por favor, tente novamente.` });
+            return alert(`Erro no cadastro! Por favor, tente novamente.` );
         }
       })
       .catch((error) => {
-        messageApi.open({ type: 'error', content: 'Erro no cadastro. Por favor, tente novamente.' });
+        alert('Erro no cadastro. Por favor, tente novamente.' );
         console.error('Erro ao cadastrar consulta:', error);
         reset();
       });
@@ -188,13 +185,13 @@ export const FormAppointment = ({ patient }) => {
     switch (response.status) {
       case 202:
         reset();
-        return messageApi.open({ type: 'success', content: 'Sucesso! Consulta excluída.' });
+        return alert('Sucesso! Consulta excluída.' );
       case 400:
         reset();
-        return messageApi.open({ type: 'error', content: `Erro na exclusão! Consulta não existe.` });
+        return alert(`Erro na exclusão! Consulta não existe.` );
       case 500:
         reset();
-        return messageApi.open({ type: 'error', content: `Erro na exclusão! Por favor, tente novamente.` });
+        return alert(`Erro na exclusão! Por favor, tente novamente.` );
     }
   };
 
@@ -203,16 +200,11 @@ export const FormAppointment = ({ patient }) => {
   return (
     <>
 
-      { contextHolder }
-
       <Styled.Form onSubmit={ handleSubmit(onSubmitForm) }>
 
         <Styled.Header>
 
-          { appointmentId && patientName
-            ? <Styled.Title>Consulta de { patientName }</Styled.Title> 
-            : <Styled.Title>Formulário de Consulta</Styled.Title> 
-          }
+          <Styled.Title>Formulário de Consulta</Styled.Title>
 
           <Styled.LabelSwitch>Editar</Styled.LabelSwitch>
 
@@ -253,10 +245,10 @@ export const FormAppointment = ({ patient }) => {
               id='idPatient'
               type='number'
               placeholder='Digite o código'
-              label='Código do Paciente*'
+              label='Código do Paciente *'
               name='idPatient'
               min={ 1 }
-              disabled={ appointmentId && isEditActive === false }
+              disabled={ true }
               register={{
                 ...register('idPatient', {
                   required: true,
@@ -286,7 +278,7 @@ export const FormAppointment = ({ patient }) => {
               id='idDoctor'
               type='number'
               placeholder='Digite o código'
-              label='Código do Médico(a)*'
+              label='Código do Médico(a) *'
               name='idDoctor'
               min={ 1 }
               disabled={ appointmentId && isEditActive === false }
@@ -319,7 +311,7 @@ export const FormAppointment = ({ patient }) => {
               id='appointmentReason'
               type='string'
               placeholder='Digite o motivo da consulta'
-              label='Motivo da Consulta*'
+              label='Motivo da Consulta *'
               name='appointmentReason'
               disabled={ appointmentId && isEditActive === false }
               register={{
@@ -336,7 +328,7 @@ export const FormAppointment = ({ patient }) => {
               id='appointmentDate'
               type='date'
               placeholder='Digite a data da consulta'
-              label='Data da Consulta*'
+              label='Data da Consulta *'
               name='appointmentDate'
               disabled={ appointmentId && isEditActive === false }
               register={{
@@ -351,7 +343,7 @@ export const FormAppointment = ({ patient }) => {
               id='appointmentHour'
               type='time'
               placeholder='Digite o hora da consulta'
-              label='Hora da Consulta*'
+              label='Hora da Consulta *'
               name='appointmentHour'
               disabled={ appointmentId && isEditActive === false }
               register={{
@@ -369,7 +361,7 @@ export const FormAppointment = ({ patient }) => {
               type='textarea'
               placeholder='Descreva o problema'
               name='problemDescription'
-              label='Descrição do Problema*'
+              label='Descrição do Problema  *'
               disabled={ appointmentId && isEditActive === false }
               register={{
                 ...register('problemDescription', {
@@ -405,7 +397,7 @@ export const FormAppointment = ({ patient }) => {
               type='textarea'
               placeholder='Dosagem e Precauções'
               name='dosagePrecautions'
-              label='Dosagem e Precauções*'
+              label='Dosagem e Precauções *'
               disabled={ isMedication || (appointmentId && isEditActive === false)  }
               register={{
                 ...register('dosagePrecautions', {
