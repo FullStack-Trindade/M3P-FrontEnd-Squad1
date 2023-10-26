@@ -27,6 +27,10 @@ export const InputSearchAppointment = () => {
 
     const searchPatient = () => {
         const filteredUser = usersList.filter(user => user.name.includes(inputName));
+
+        if (filteredUser.length > 1) {
+            return alert('Digite o nome completo do paciente');
+        }
         
         const filteredPatient = patientsList.filter(patient => String(patient.idUser).includes(String(filteredUser[0]?.id)));
         
