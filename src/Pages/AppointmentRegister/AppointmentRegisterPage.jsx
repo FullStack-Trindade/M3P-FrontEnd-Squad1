@@ -18,7 +18,9 @@ export const AppointmentRegisterPage = () => {
       return (
         <>
           <Styled.RegisterArea>
-            <InputSearchAppointment/>
+            <Styled.Title>
+              <InputSearchAppointment/>
+            </Styled.Title>
           </Styled.RegisterArea>
         </>
       )
