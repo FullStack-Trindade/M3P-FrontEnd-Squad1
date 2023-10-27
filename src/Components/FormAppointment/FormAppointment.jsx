@@ -204,7 +204,7 @@ export const FormAppointment = ({ patientId }) => {
 
         <Styled.Header>
 
-          <Styled.Title>Formulário de Consulta</Styled.Title>
+          <Styled.Title>Consulta de { watch('patientName') }</Styled.Title>
 
           <Styled.LabelSwitch>Editar</Styled.LabelSwitch>
 
