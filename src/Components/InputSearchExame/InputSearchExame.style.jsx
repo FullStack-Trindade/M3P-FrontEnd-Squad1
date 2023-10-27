@@ -48,7 +48,7 @@ h4 {
 }
 `
 
-export const FormInput = styled.form`
+export const FormInput = styled.div`
     display: flex;
     margin-top: 1vw;
 

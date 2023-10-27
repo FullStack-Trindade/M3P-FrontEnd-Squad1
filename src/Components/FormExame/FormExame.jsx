@@ -1,24 +1,54 @@
 import * as Styled from './FormExame.style';
-import { useState } from 'react';
-/* import { ExameService } from '../../../../src/Service/User/Exame.service'; */
-import { ExameService } from '../../Service/Exame.service';
+
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-/* import { InputComponent } from '../Form/InputComponent/InputComponent'; */
-import { InputComponent } from '../FormPaciente/InputComponent/InputComponent';
 import { Switch, Spin } from 'antd';
 
+import { ExameService } from '../../Service/Exame.service';
+import {PatientService} from '../../Service/Patient.service';
+import { UserService } from '../../Service/User.service';
 
-export const FormExame = ({paciente}) => {
+import { InputComponent } from '../FormPaciente/InputComponent/InputComponent';
+
+
+export const FormExame = ({patientId}) => {
 
   const {
     register,
     handleSubmit,
     reset,
+    setValue,
+    watch
     formState: { errors },
   } = useForm()
 
+  useEffect(() => {
+    reset();
+    fetchExamList();
+    fetchPatientList();
+  },[])
 
+  const [examList, setExamList] = useState([]);
+  const fetchExamsList = async () => {
+    ExameService.Get().then(result => setExamList(result));
+  }
 
+  const [patientList, setPatientsList] = useState([]);
+  const fetchPatientsList = async () => {
+    PatientService.Get().then(result => setPatientsList(result));
+  }
+   useEffect(() => {
+    setValue('idPatient', patientId) } , [patientId])
+
+    useEffect(() => {
+      if (examId !== null) {filterExam()}
+    }, [examsList]);
+    
+  const [userList, setUserList] = useState([]);
+  const fetchUsersList = async () => {
+    UserService.Get().then(result => setUserList(result));
+  }
+  
   const createExame = (exameData) => {
     ExameService.CreateExame(exameData)
       .then(response => {
@@ -43,8 +73,9 @@ export const FormExame = ({paciente}) => {
   };
 
   const submitForm = async (exameData) => {
-    const data = {...exameData, pacienteId: paciente.id}
-    const exame = await ExameService.CreateExame(data);
+    const data = {...exameData, pacienteId: paciente[0].id}
+    console.log(data);
+    const exame = await ExameService.RegisterExam(data);
 
     if (!exame) {
       alert('Exame Cadastrado');
@@ -75,7 +106,7 @@ export const FormExame = ({paciente}) => {
 
 
         <Styled.ButtonDel $width={'10%'} $active={!errors.email && !errors.password} type='button' disabled={errors.email || errors.password}>Deletar</Styled.ButtonDel>
-        <Styled.Button onClick={() => setIsLoading(true)} $width={'10%'}  $active={!errors.email && !errors.password} type='submit' disabled={errors.email || errors.password}>{isLoading ? <Spin/> : 'Salvar'}</Styled.Button>
+        <Styled.Button onClick={() => setIsLoading(true)} $width={'10%'}  $active={!errors.email && !errors.password} type='submit' disabled={errors.email || errors.password}>{'Salvar'}</Styled.Button>
       </Styled.Header>
 
 

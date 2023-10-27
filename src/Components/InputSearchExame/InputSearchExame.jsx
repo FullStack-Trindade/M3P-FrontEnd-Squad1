@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Styled from './InputSearchExame.style';
 /* import { PacienteService } from '../../Service/Paciente.service.jsx'; */
@@ -9,18 +9,41 @@ import {PacienteService} from '../../Service/Paciente.service';
 
 export const InputSearchExame = () => {
 
-    const {
+   /*  const {
         register,
         handleSubmit,
         reset,
         formState: { error },
-      } = useForm()
+      } = useForm() */
     
+      const [listPatients, setListPatients] = useState([]);
+      const [inputName, setInputName] = useState();
+      const [listUsers, setListUsers] = useState([]);
 
-    const [pacienteEncontrado, setPacienteEncontrado] = useState([]);
+      const fetchListPatients = async () => {
+          PacienteService.GetAll().then(result => setListPatients(result))
+      } 
+      const fetchListUsers = async () => {
+        UserService.Get().then(result => setListUsers(result))
+      }
+
+      useEffect(()=>{
+        fetchListPatients(),
+        fetchListUsers()
+      },[])
+
+      const [pacienteEncontrado, setPacienteEncontrado] = useState([]);
+      const searchPatients = () => {
+        const filterUser = listUsers.filter(user=>user.name.includes(inputName))
+        const filterPatients = listPatients.filter(patients=>String(patients.idUser).includes(String(filterUser[0]?.id)))
+        setPacienteEncontrado(filterPatients)
+      }
+  /*    console.log(pacienteEncontrado); */
+
+
 
    
-    const submitInputForm = async (dataInput) => {
+/*     const submitInputForm = async (dataInput) => {
         const {nome} = dataInput;
         console.log(nome);
 
@@ -35,7 +58,7 @@ export const InputSearchExame = () => {
             setPacienteEncontrado(paciente);
             reset()
           }
-    }
+    } */
   
     return (
       <>
@@ -43,17 +66,17 @@ export const InputSearchExame = () => {
 
           <h4>Encontre o paciente</h4>
               <Styled.FormInput 
-              onSubmit={ handleSubmit(submitInputForm)}>
+              /* onSubmit={ handleSubmit(submitInputForm)} */>
               
-              <input className="input2  inputFaq" placeholder="Digite o E-mail do paciente" {...register('nome')}/>
+              <input className="input2  inputFaq" placeholder="Digite o E-mail do paciente" onChange={e=>setInputName(e.target.value)}/>
 
-              <button className="botao" type='submit'><span className="material-symbols-outlined">
+              <button onClick={searchPatients} className="botao" type='submit'><span className="material-symbols-outlined">
                   Buscar</span></button>
               </Styled.FormInput>
 
                 <Styled.AreaPaciente>
                   
-          {pacienteEncontrado && (
+          {pacienteEncontrado.length>0 && (
             <FormExame paciente={pacienteEncontrado} />
             )}
                 </Styled.AreaPaciente>
