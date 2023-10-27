@@ -1,6 +1,8 @@
 const CadastrarPaciente = async (postPacientDb) => {
   try {
-      const response = await fetch("http://localhost:3333/api/pacientes", {
+
+          const response = await fetch("http://localhost:3000/api/pacientes", {
+
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -22,6 +24,7 @@ const CadastrarPaciente = async (postPacientDb) => {
     alert("Erro ao cadastrar paciente");
   }
 };
+
 
  const Get = (id) => {
   const fetchPatient = async() => {
@@ -47,3 +50,9 @@ export const PacienteService = {
   Get,
   GetAll
 };
+=======
+//Get paciente por usuário ID
+export const PacienteService = {
+  CadastrarPaciente,
+};
+
