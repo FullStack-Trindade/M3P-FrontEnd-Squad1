@@ -1,12 +1,14 @@
 import * as Styled from './InputSearchAppointment.style';
 import { useEffect, useState } from 'react';
 
-import { InputComponent } from '../Form/InputComponent/InputComponent';
 import { FormAppointment } from '../FormAppointment/FormAppointment';
 import { PatientService } from '../../Service/Patient.service';
 import { UserService } from '../../Service/User.service';
 
 export const InputSearchAppointment = () => {
+    let params = new URL(document.location).searchParams;
+    const appointmentId = params.get('id');
+
     useEffect(() => { 
         fetchPatientsList();
         fetchUsersList();
@@ -48,8 +50,8 @@ export const InputSearchAppointment = () => {
                 <h4>Encontre o paciente:</h4>
 
                 <Styled.SearchInput>
-                    <InputComponent 
-                        $width={'100%'}
+                    <input
+                        className='input2 inputFaq'
                         id='namePatient'
                         type='text'
                         placeholder='Digite o nome do paciente'
@@ -67,7 +69,7 @@ export const InputSearchAppointment = () => {
                 </Styled.SearchInput>
 
                 <Styled.PatientArea>
-                    <FormAppointment patientId={ patient[0]?.id } />
+                    { (patient.length > 0 || appointmentId) && <FormAppointment patientId={ patient[0]?.id } /> }
                 </Styled.PatientArea>
 
             </Styled.InputContainer>
