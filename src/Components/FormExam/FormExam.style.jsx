@@ -69,7 +69,7 @@ Button.propTypes = {
 
 export const ButtonDel = styled.button`
   display: flex;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1em;
   justify-content: center;
   align-items: center;
   align-self: center;
