@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types'
 
-export const InputGroup = styled.div`
+/* export const InputGroup = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: ${({ $width }) => ($width ? $width : '100%')};
-`;
+`; */
 
 export const Label = styled.label`
   display: flex;
@@ -65,9 +65,8 @@ export const Icon = styled.button`
   align-items: center;
   justify-content: center;
   margin: .5rem 13.3rem;
-  color: ${({$color}) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};;
-=======
-import PropTypes from 'prop-types';
+  color: ${({$color}) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};
+`
 
 export const Form = styled.form`
   display: inline-flex;
