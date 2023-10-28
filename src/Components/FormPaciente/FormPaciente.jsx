@@ -10,7 +10,6 @@ import { Switch, Spin } from "antd";
 import { CEPService } from "../../Service/User.CEP";
 import { PacienteService } from "../../Service/Paciente.service";
 import { UsuarioService } from "../../Service/UserPatient.service";
-import { InputSearch } from "../InputSearchPaciente/InputSearchPaciente";
 
 export const FormPaciente = () => {
   const genders = [
@@ -114,22 +113,28 @@ export const FormPaciente = () => {
 
   const submitForm = async (pacienteData) => {
     try {
-      //implantar lógica de que se o usuário já existe no bd fazer update
-      const postUsuarioDb = {
-        name: pacienteData.name,
-        gender: pacienteData.gender,
+      const searchedUser = {
         cpf: pacienteData.cpf,
         email: pacienteData.email,
-        password: pacienteData.cpf,
-        phone: pacienteData.phone,
-        id_type: "3",
       };
-      //lógica se paciente existe
 
-      const usuarioId = await UsuarioService.CadastrarUsuarioPaciente(
-        postUsuarioDb
-      );
+      const userExist = await UsuarioService.findUserByCpfEmail(searchedUser);
 
+      if (!userExist) {
+        const postUsuarioDb = {
+          name: pacienteData.name,
+          gender: pacienteData.gender,
+          cpf: pacienteData.cpf,
+          email: pacienteData.email,
+          password: pacienteData.cpf,
+          phone: pacienteData.phone,
+          id_type: "3",
+        };
+
+        const usuarioId = await UsuarioService.CadastrarUsuarioPaciente(
+          postUsuarioDb
+        );
+      }
       if (usuarioId !== null) {
         const postPacientDb = {
           birth: pacienteData.birth,
@@ -157,6 +162,10 @@ export const FormPaciente = () => {
         };
         PacienteService.CadastrarPaciente(postPacientDb);
         return;
+      } else {
+        alert(
+          "Não é possível cadastrar esse usuário/ paciente. Verifique com o administrador"
+        );
       }
     } catch (error) {
       console.error("Erro ao cadastrar usuário e paciente:", error);
@@ -172,15 +181,17 @@ export const FormPaciente = () => {
 
   const [isLoading, setIsLoading] = useState();
 
+  // Formatação de telefone
+
   return (
     <Styled.Form onSubmit={handleSubmit(submitForm)}>
-           <Styled.Header>
+      <Styled.Header>
         <Styled.Title>Identificação</Styled.Title>
 
         <Styled.LabelSwitch>Editar</Styled.LabelSwitch>
 
         <Styled.SwitchBtn>
-          <Switch disabled={true}/>
+          <Switch disabled={true} />
         </Styled.SwitchBtn>
 
         <Styled.ButtonDel

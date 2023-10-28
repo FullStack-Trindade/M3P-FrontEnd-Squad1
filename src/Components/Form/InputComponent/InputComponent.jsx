@@ -4,7 +4,7 @@ import { MdVisibility, MdVisibilityOff } from 'react-icons/md';
 
 import * as Styled from './Input.style';
 
-export const InputComponent = ({ label, type, id, placeholder, register, error, $width, $height, minLength }) => {
+export const InputComponent = ({ label, type, id, placeholder, register, error, $width, $height, minLength,value, onChange }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = () => {
@@ -24,6 +24,8 @@ export const InputComponent = ({ label, type, id, placeholder, register, error, 
             type={ showPassword ? 'text' : type } 
             minLength={''}
             id={ id } 
+            value={value}
+            onChange={ onChange } 
             placeholder={ placeholder } 
             {...register}/>
           
@@ -66,4 +68,6 @@ InputComponent.propTypes = {
   $height: PropTypes.string,
   $width: PropTypes.string,
   $color: PropTypes.string,
+  value:PropTypes.string,
+  onChange:PropTypes.string,
 }
