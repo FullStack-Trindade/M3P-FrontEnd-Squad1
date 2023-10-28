@@ -9,7 +9,7 @@ import { Switch, Spin } from "antd";
 
 import { CEPService } from "../../Service/User.CEP";
 import { PacienteService } from "../../Service/Paciente.service";
-import { UsuarioService } from "../../Service/UserPatient.service";
+import { UserService } from "../../Service/User.service";
 
 export const FormPaciente = () => {
   const genders = [
@@ -77,30 +77,12 @@ export const FormPaciente = () => {
     formState: { errors },
   } = useForm();
 
-  const createPaciente = (pacienteData) => {
-    console.log("Dados do paciente:", pacienteData);
-    // PacienteService.CreatePaciente(pacienteData)
-    //   .then(response => {
-    //     console.log('Paciente cadastrado com sucesso:', response);
-    //     reset();
-    //   })
-    //   .catch(error => {
-    //     console.error('Erro ao cadastrar paciente:', error);
-    //   });
-    alert("lógica para criação de paciente");
+  const createPaciente = () => {
+    console.log("ainda não será implantada");
   };
 
-  const deletePaciente = (pacienteData) => {
-    console.log("Dados do paciente:", pacienteData);
-    // PacienteService.DeletePaciente(pacienteData.nome)
-    //   .then(response => {
-    //     console.log('Paciente deletado com sucesso:', response);
-    //     reset();
-    //   })
-    //   .catch(error => {
-    //     console.error('Erro ao deletar paciente:', error);
-    //   });
-    alert("lógica para deletar paciente");
+  const deletePaciente = () => {
+    console.log("ainda não será implantada");
   };
 
   const buscaCEP = async () => {
@@ -112,16 +94,18 @@ export const FormPaciente = () => {
   };
 
   const submitForm = async (pacienteData) => {
+    let newUser = null;
+    let newPatient = null;
+
     try {
       const searchedUser = {
         cpf: pacienteData.cpf,
         email: pacienteData.email,
       };
+      const userExist = await UserService.SearchByCpfEmail(searchedUser);
 
-      const userExist = await UsuarioService.findUserByCpfEmail(searchedUser);
-
-      if (!userExist) {
-        const postUsuarioDb = {
+      if (userExist === null) {
+          const postUsuarioDb = {
           name: pacienteData.name,
           gender: pacienteData.gender,
           cpf: pacienteData.cpf,
@@ -131,14 +115,11 @@ export const FormPaciente = () => {
           id_type: "3",
         };
 
-        const usuarioId = await UsuarioService.CadastrarUsuarioPaciente(
-          postUsuarioDb
-        );
-      }
-      if (usuarioId !== null) {
+        newUser = await UserService.Create(postUsuarioDb);
+      
         const postPacientDb = {
           birth: pacienteData.birth,
-          idUser: usuarioId,
+          idUser: newUser.id,
           maritalStatus: pacienteData.maritalStatus,
           rg: pacienteData.rg,
           orgaoExpedidor: pacienteData.orgaoExpedidor,
@@ -160,15 +141,27 @@ export const FormPaciente = () => {
             reference: pacienteData.reference,
           },
         };
-        PacienteService.CadastrarPaciente(postPacientDb);
+        
+        newPatient = await PacienteService.Create(postPacientDb);
+        
+        alert("Usuário e Paciente cadastrado com sucesso");
+        reset();
         return;
-      } else {
+      }if(userExist.id_type === 3){
+
+      }else {
+        
+        console.log(
+          "foi encontrado usuario pelo email ou cpf, por isso não pode ser cadastrado"
+        );
         alert(
           "Não é possível cadastrar esse usuário/ paciente. Verifique com o administrador"
         );
       }
     } catch (error) {
       console.error("Erro ao cadastrar usuário e paciente:", error);
+      console.error("Detalhes do erro:", error.message);
+      console.error("Stack trace:", error.stack);
     }
   };
 
@@ -180,8 +173,6 @@ export const FormPaciente = () => {
   }, [watch("cep")]);
 
   const [isLoading, setIsLoading] = useState();
-
-  // Formatação de telefone
 
   return (
     <Styled.Form onSubmit={handleSubmit(submitForm)}>
