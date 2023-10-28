@@ -77,6 +77,9 @@ export const FormPaciente = () => {
     formState: { errors },
   } = useForm();
 
+  const [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const createPaciente = () => {
     console.log("ainda não será implantada");
   };
@@ -94,8 +97,19 @@ export const FormPaciente = () => {
   };
 
   const submitForm = async (pacienteData) => {
+    setIsLoading(true);
+
     let newUser = null;
     let newPatient = null;
+    let newInsuranceVality = null;
+
+    //Gambiarra para arrumar o problema do valitynumber
+
+    if (pacienteData.insuranceVality === "") {
+      newInsuranceVality = "12-12-9999";
+    } else {
+      newInsuranceVality = pacienteData.insuranceVality;
+    }
 
     try {
       const searchedUser = {
@@ -103,6 +117,8 @@ export const FormPaciente = () => {
         email: pacienteData.email,
       };
       const userExist = await UserService.SearchByCpfEmail(searchedUser);
+
+      console.log(userExist);
 
       if (userExist === null) {
         const postUsuarioDb = {
@@ -129,7 +145,7 @@ export const FormPaciente = () => {
           specificCares: pacienteData.specificCares,
           healthInsurance: pacienteData.healthInsurance,
           insuranceNumber: pacienteData.insuranceNumber,
-          insuranceVality: pacienteData.insuranceVality,
+          insuranceVality: newInsuranceVality,
           adress: {
             cep: pacienteData.cep,
             city: pacienteData.city,
@@ -143,14 +159,14 @@ export const FormPaciente = () => {
         };
 
         newPatient = await PacienteService.Create(postPacientDb);
-
         alert("Usuário/ Paciente cadastrado com sucesso");
+        setIsSubmitSuccessful(true);
         reset();
         return;
       }
       if (userExist.id_type !== 3) {
         const patientExist = await PacienteService.SearchByUserId(userExist.id);
-
+        console.log(patientExist);
         if (patientExist === null) {
           const postPacientDb = {
             birth: pacienteData.birth,
@@ -164,7 +180,7 @@ export const FormPaciente = () => {
             specificCares: pacienteData.specificCares,
             healthInsurance: pacienteData.healthInsurance,
             insuranceNumber: pacienteData.insuranceNumber,
-            insuranceVality: pacienteData.insuranceVality,
+            insuranceVality: newInsuranceVality,
             adress: {
               cep: pacienteData.cep,
               city: pacienteData.city,
@@ -179,12 +195,13 @@ export const FormPaciente = () => {
 
           newPatient = await PacienteService.Create(postPacientDb);
 
+          setIsSubmitSuccessful(true);
           alert(
             `Cadastro de Paciente para o usuário ${userExist.id} realizado com sucesso.`
           );
           reset();
           return;
-        }else{
+        } else {
           console.log(
             "foi encontrado um cadastro de paciente vinculado ao cpf ou email informado, por isso não pode ser cadastrado"
           );
@@ -201,6 +218,7 @@ export const FormPaciente = () => {
         );
       }
     } catch (error) {
+      setIsLoading(false);
       console.error("Erro ao cadastrar usuário e paciente:", error);
       console.error("Detalhes do erro:", error.message);
       console.error("Stack trace:", error.stack);
@@ -213,8 +231,6 @@ export const FormPaciente = () => {
       buscaCEP(cepPaciente);
     }
   }, [watch("cep")]);
-
-  const [isLoading, setIsLoading] = useState();
 
   return (
     <Styled.Form onSubmit={handleSubmit(submitForm)}>
@@ -239,7 +255,7 @@ export const FormPaciente = () => {
 
         <Styled.Button
           onClick={() => {
-            setIsLoading(true);
+            handleSubmit(submitForm)();
           }}
           $width={"10%"}
           onSubmit={createPaciente}
@@ -247,7 +263,7 @@ export const FormPaciente = () => {
           type="submit"
           disabled={errors.email || errors.password}
         >
-          {isLoading ? <Spin /> : "Salvar"}
+          {isSubmitSuccessful ? "Salvo!" : isLoading ? <Spin /> : "Salvar"}
         </Styled.Button>
       </Styled.Header>
 
