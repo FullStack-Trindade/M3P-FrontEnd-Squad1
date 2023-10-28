@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import * as Styled from './InputSearchExame.style';
 /* import { PacienteService } from '../../Service/Paciente.service.jsx'; */
 import {UserService} from '../../Service/User.service'
-import  {FormExame}  from '../FormExame/FormExame.jsx'; 
+import  {FormExam}  from '../FormExam/FormExam'; 
 import {PacienteService} from '../../Service/Paciente.service';
 
 
@@ -21,7 +21,7 @@ export const InputSearchExame = () => {
       const [listUsers, setListUsers] = useState([]);
 
       const fetchListPatients = async () => {
-          PacienteService.GetAll().then(result => setListPatients(result))
+        PacienteService.GetAll().then(result => setListPatients(result))
       } 
       const fetchListUsers = async () => {
         UserService.Get().then(result => setListUsers(result))
@@ -32,11 +32,11 @@ export const InputSearchExame = () => {
         fetchListUsers()
       },[])
 
-      const [pacienteEncontrado, setPacienteEncontrado] = useState([]);
+      const [patientEncontrado, setPatientEncontrado] = useState([]);
       const searchPatients = () => {
         const filterUser = listUsers.filter(user=>user.name.includes(inputName))
         const filterPatients = listPatients.filter(patients=>String(patients.idUser).includes(String(filterUser[0]?.id)))
-        setPacienteEncontrado(filterPatients)
+        setPatientEncontrado(filterPatients)
       }
   /*    console.log(pacienteEncontrado); */
 
@@ -76,8 +76,8 @@ export const InputSearchExame = () => {
 
                 <Styled.AreaPaciente>
                   
-          {pacienteEncontrado.length>0 && (
-            <FormExame paciente={pacienteEncontrado} />
+          {patientEncontrado.length>0 && (
+            <FormExam patient={patientEncontrado} />
             )}
                 </Styled.AreaPaciente>
             </Styled.InputContainer>
