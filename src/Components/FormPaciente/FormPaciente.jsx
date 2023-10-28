@@ -105,7 +105,7 @@ export const FormPaciente = () => {
       const userExist = await UserService.SearchByCpfEmail(searchedUser);
 
       if (userExist === null) {
-          const postUsuarioDb = {
+        const postUsuarioDb = {
           name: pacienteData.name,
           gender: pacienteData.gender,
           cpf: pacienteData.cpf,
@@ -116,7 +116,7 @@ export const FormPaciente = () => {
         };
 
         newUser = await UserService.Create(postUsuarioDb);
-      
+
         const postPacientDb = {
           birth: pacienteData.birth,
           idUser: newUser.id,
@@ -141,16 +141,58 @@ export const FormPaciente = () => {
             reference: pacienteData.reference,
           },
         };
-        
+
         newPatient = await PacienteService.Create(postPacientDb);
-        
-        alert("Usuário e Paciente cadastrado com sucesso");
+
+        alert("Usuário/ Paciente cadastrado com sucesso");
         reset();
         return;
-      }if(userExist.id_type === 3){
+      }
+      if (userExist.id_type !== 3) {
+        const patientExist = await PacienteService.SearchByUserId(userExist.id);
 
-      }else {
-        
+        if (patientExist === null) {
+          const postPacientDb = {
+            birth: pacienteData.birth,
+            idUser: userExist.id,
+            maritalStatus: pacienteData.maritalStatus,
+            rg: pacienteData.rg,
+            orgaoExpedidor: pacienteData.orgaoExpedidor,
+            birthplace: pacienteData.birthplace,
+            emergencyContact: pacienteData.emergencyContact,
+            alergiesList: pacienteData.alergiesList,
+            specificCares: pacienteData.specificCares,
+            healthInsurance: pacienteData.healthInsurance,
+            insuranceNumber: pacienteData.insuranceNumber,
+            insuranceVality: pacienteData.insuranceVality,
+            adress: {
+              cep: pacienteData.cep,
+              city: pacienteData.city,
+              state: pacienteData.state,
+              street: pacienteData.street,
+              number: pacienteData.number,
+              complement: pacienteData.complement,
+              neighborhood: pacienteData.neighborhood,
+              reference: pacienteData.reference,
+            },
+          };
+
+          newPatient = await PacienteService.Create(postPacientDb);
+
+          alert(
+            `Cadastro de Paciente para o usuário ${userExist.id} realizado com sucesso.`
+          );
+          reset();
+          return;
+        }else{
+          console.log(
+            "foi encontrado um cadastro de paciente vinculado ao cpf ou email informado, por isso não pode ser cadastrado"
+          );
+          alert(
+            "Esse usuário já possui um cadastro de paciente. Cadastro não realizado."
+          );
+        }
+      } else {
         console.log(
           "foi encontrado usuario pelo email ou cpf, por isso não pode ser cadastrado"
         );
