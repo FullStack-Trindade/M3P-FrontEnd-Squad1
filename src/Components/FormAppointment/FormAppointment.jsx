@@ -71,6 +71,7 @@ export const FormAppointment = ({ patientId }) => {
   }, [appointment])
   
   const inputPatientId = watch('idPatient');
+  const patientName = watch('patientName');
   useEffect(() => { onChangePatient(inputPatientId) }, [inputPatientId]);
 
   const onChangePatient = (value) => {
@@ -204,7 +205,13 @@ export const FormAppointment = ({ patientId }) => {
 
         <Styled.Header>
 
-          <Styled.Title>Consulta de { watch('patientName') }</Styled.Title>
+          <Styled.Title>
+            {
+              patientName
+              ? `Consulta de ${ patientName }`
+              : 'Formulário de Consulta' 
+            }
+          </Styled.Title>
 
           <Styled.LabelSwitch>Editar</Styled.LabelSwitch>
 
@@ -248,7 +255,7 @@ export const FormAppointment = ({ patientId }) => {
               label='Código do Paciente *'
               name='idPatient'
               min={ 1 }
-              disabled={ true }
+              disabled={ false }
               register={{
                 ...register('idPatient', {
                   required: true,
