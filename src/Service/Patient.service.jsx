@@ -1,15 +1,15 @@
-const API_URL = `http://localhost:3000/api/usuarios`
+const API_URL = `http://localhost:3000/api/pacientes`
 
 const Get = () => {
-    const fetchUser = async() => {
+    const fetchPatient = async() => {
         const response = await fetch(API_URL);
         const data = await response.json();
         return data;
     }
 
-    return fetchUser();
+    return fetchPatient();
 }
 
-export const UserService = {
+export const PatientService = {
     Get
 }

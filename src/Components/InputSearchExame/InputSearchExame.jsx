@@ -1,7 +1,6 @@
+import * as Styled from './InputSearchExame.style';
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import * as Styled from './InputSearchExame.style';
-/* import { PacienteService } from '../../Service/Paciente.service.jsx'; */
 import {UserService} from '../../Service/User.service'
 import  {FormExam}  from '../FormExam/FormExam'; 
 import {PacienteService} from '../../Service/Paciente.service';
