@@ -146,6 +146,7 @@ export const FormPaciente = () => {
           healthInsurance: pacienteData.healthInsurance,
           insuranceNumber: pacienteData.insuranceNumber,
           insuranceVality: newInsuranceVality,
+          //gambi
           adress: {
             cep: pacienteData.cep,
             city: pacienteData.city,
@@ -181,6 +182,7 @@ export const FormPaciente = () => {
             healthInsurance: pacienteData.healthInsurance,
             insuranceNumber: pacienteData.insuranceNumber,
             insuranceVality: newInsuranceVality,
+            //gambi
             adress: {
               cep: pacienteData.cep,
               city: pacienteData.city,
@@ -283,7 +285,7 @@ export const FormPaciente = () => {
                 maxLenght: 64,
               }),
             }}
-            error={errors.nome}
+            error={errors.name}
           />
 
           <SelectComponent
@@ -297,7 +299,7 @@ export const FormPaciente = () => {
                 required: true,
               }),
             }}
-            error={errors.genero}
+            error={errors.gender}
           />
 
           <InputComponent
@@ -366,8 +368,8 @@ export const FormPaciente = () => {
 
           <SelectComponent
             $width={"30%"}
-            id="estadoCivil"
-            name="estadoCivil"
+            id="maritalStatus"
+            name="maritalStatus"
             label={"Estado Civil"}
             options={estadoCivil}
             register={{
@@ -375,24 +377,24 @@ export const FormPaciente = () => {
                 required: true,
               }),
             }}
-            error={errors.estadoCivil}
+            error={errors.maritalStatus}
           />
         </Styled.InputGroup>
 
         <Styled.InputGroup>
           <InputComponent
             $width={"100%"}
-            id="tel"
+            id="phone"
             type="text"
             placeholder="Telefone no formato (99) 9 9999-99999"
-            name="tel"
+            name="phone"
             label="Telefone"
             register={{
               ...register("phone", {
-                required: false,
+                required: true,
               }),
             }}
-            error={errors.tel}
+            error={errors.phone}
           />
 
           <InputComponent
@@ -412,10 +414,10 @@ export const FormPaciente = () => {
 
           <InputComponent
             $width={"100%"}
-            id="natural"
+            id="birthplace"
             type="string"
             placeholder="Naturalidade"
-            name="natural"
+            name="birthplace"
             label="Naturalidade"
             register={{
               ...register("birthplace", {
@@ -424,46 +426,46 @@ export const FormPaciente = () => {
                 maxLenght: 64,
               }),
             }}
-            error={errors.natural}
+            error={errors.birthplace}
           />
         </Styled.InputGroup>
         <Styled.InputGroup>
           <InputComponent
             $width={"100%"}
-            id="emergencia"
+            id="emergencyContact"
             type="text"
             placeholder="Digite o telefone no formato (99) 9 9999-99999"
-            name="emergencia"
+            name="emergencyContact"
             label="Contato de Emergência"
             register={{
               ...register("emergencyContact", {
                 required: true,
               }),
             }}
-            error={errors.tel}
+            error={errors.emergencyContact}
           />
 
           <InputComponent
             $width={"100%"}
-            id="alergias"
+            id="alergiesList"
             type="text"
             placeholder="Possui alergias? Cite quais."
-            name="alergias"
+            name="alergiesList"
             label="Alergias"
             register={{
               ...register("alergiesList", {
                 required: false,
               }),
             }}
-            error={errors.email}
+            error={errors.alergiesList}
           />
 
           <InputComponent
             $width={"100%"}
-            id="cuidados"
+            id="specificCares"
             type="string"
             placeholder="Digite os cuidados específicos"
-            name="cuidados"
+            name="specificCares"
             label="Cuidados Específicos"
             register={{
               ...register("specificCares", {
@@ -481,47 +483,47 @@ export const FormPaciente = () => {
         <Styled.InputGroup>
           <InputComponent
             $width={"100%"}
-            id="convenio"
+            id="healthInsurance"
             type="string"
             placeholder="Informe seu convênio"
             label="Convênio"
-            name="convenio"
+            name="healthInsurance"
             register={{
               ...register("healthInsurance", {
                 required: false,
               }),
             }}
-            error={errors.convenio}
+            error={errors.healthInsurance}
           />
 
           <InputComponent
             $width={"100%"}
-            id="NCart"
+            id="insuranceNumber"
             type="number"
             placeholder="Digite o número da carteira"
-            name="NCart"
+            name="insuranceNumber"
             label="Número do Convênio"
             register={{
               ...register("insuranceNumber", {
                 required: false,
               }),
             }}
-            error={errors.NCart}
+            error={errors.insuranceNumber}
           />
 
           <InputComponent
             $width={"100%"}
-            id="validade"
+            id="insuranceVality"
             type="date"
             placeholder="Validade"
-            name="validade"
+            name="insuranceVality"
             label="Validade"
             register={{
               ...register("insuranceVality", {
                 required: false,
               }),
             }}
-            error={errors.validade}
+            error={errors.insuranceVality}
           />
         </Styled.InputGroup>
 
@@ -533,76 +535,77 @@ export const FormPaciente = () => {
           <InputComponent
             $width={"100%"}
             id="cep"
-            type="text"
+            type="string"
             placeholder="Informe o CEP"
             name="cep"
             label="CEP"
             register={{
-              ...register("cep"),
+              ...register("cep",{required: true,}),
+              
             }}
             error={errors.cep}
           />
 
           <InputComponent
             $width={"100%"}
-            id="cidade"
+            id="city"
             type="string"
             placeholder="Digite a Cidade"
-            name="cidade"
+            name="city"
             label="Cidade"
             register={{
               ...register("city", {
-                required: false,
+                required: true,
               }),
             }}
-            error={errors.cidade}
+            error={errors.city}
           />
 
           <InputComponent
             $width={"100%"}
-            id="uf"
+            id="state"
             type="string"
             placeholder="Estado"
-            name="uf"
+            name="state"
             label="Estado"
             register={{
               ...register("state", {
-                required: false,
+                required: true,
               }),
             }}
-            error={errors.uf}
+            error={errors.state}
           />
         </Styled.InputGroup>
 
         <Styled.InputGroup>
           <InputComponent
             $width={"500%"}
-            id="logradouro"
+            id="street"
             type="string"
             placeholder="Informe seu endereço"
-            name="rua"
+            name="street"
             label="Endereço"
             register={{
               ...register("street", {
-                required: false,
+                required: true,
               }),
             }}
-            error={errors.rua}
+            error={errors.street}
           />
 
           <InputComponent
             $width={"100%"}
-            id="numRua"
+            id="number"
             type="number"
             placeholder="Número"
             label="Número"
-            name="numRua"
+            name="number"
             register={{
               ...register("number", {
-                required: false,
+                required: true,
               }),
             }}
-            error={errors.numRua}
+            error={errors.number}
           />
         </Styled.InputGroup>
 
@@ -624,33 +627,32 @@ export const FormPaciente = () => {
 
           <InputComponent
             $width={"100%"}
-            id="bairro"
+            id="neighborhood"
             type="string"
             placeholder="Digite o seu bairro"
-            name="bairro"
+            name="neighborhood"
             label="Bairro"
-            /* defaultValue={endereco.bairro || ''} */
             register={{
               ...register("neighborhood", {
-                required: false,
+                required: true,
               }),
             }}
-            error={errors.bairro}
+            error={errors.neighborhood}
           />
 
           <InputComponent
             $width={"100%"}
-            id="refEnd"
+            id="reference"
             type="string"
             placeholder="Referência"
-            name="refEnd"
+            name="reference"
             label="Ponto de Referência"
             register={{
               ...register("reference", {
                 required: false,
               }),
             }}
-            error={errors.refEnd}
+            error={errors.reference}
           />
         </Styled.InputGroup>
       </Styled.MainForm>
