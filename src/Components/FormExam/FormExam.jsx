@@ -242,20 +242,21 @@ const [isEditActive, setIsEditActive] = useState(false);
         <Styled.MainForm $width={'100%'}>
 
           <Styled.InputGroup>
-         <InputComponent $width={'100%'}
-              id='id_patient'
+         <InputComponent 
+         $width={'100%'}
+              id='idPatient'
               type='number'
               placeholder='Digite o código'
               label='Código do Paciente *'
-              name='id_patient'
+              name='idPatient'
               min={ 1 }
               disabled={ true }
               register={{
-                ...register('id_patient', {
+                ...register('idPatient', {
                   required: true,
                 })
               }}
-              error={ errors.id_patient }
+              error={ errors.idPatient }
             />
          <InputComponent $width={'100%'}
               id='id_doctor'
