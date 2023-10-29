@@ -7,7 +7,7 @@ import { PatientService } from "../../Service/Patient.service";
 export const InputSearchExame = () => {
   
   let params = new URL(document.location).searchParams;
-  const appointmentId = params.get("id");
+  const examId = params.get("id");
   
   useEffect(() => { 
     fetchPatientsList();
@@ -71,7 +71,7 @@ export const InputSearchExame = () => {
         </Styled.SearchInput>
 
         <Styled.PatientArea>
-          {(patient.length > 0 || appointmentId) && (
+          {(patient.length > 0 || examId) && (
             <FormExam patientId={patient[0]?.id} />
           )}
         </Styled.PatientArea>

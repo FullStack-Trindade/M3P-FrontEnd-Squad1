@@ -3,15 +3,16 @@ import * as Styled from './FormExam.style';
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { Switch } from 'antd';
-
 import { ExamService } from '../../Service/Exam.service';
-import {PacienteService} from '../../Service/Paciente.service';
+
+import { PatientService } from '../../Service/Patient.service';
+
 import { UserService } from '../../Service/User.service';
 
-import { InputComponent } from '../FormPaciente/InputComponent/InputComponent';
+import { InputComponent } from '../Form/InputComponent/InputComponent';
 
 
-export const FormExam = ({patient}) => {
+export const FormExam = ({patientId}) => {
 
   const {
     register,
@@ -25,21 +26,22 @@ export const FormExam = ({patient}) => {
   let params = new URL(document.location).searchParams;
   const examId = params.get('id');
 
-  useEffect(() => {
+  useEffect(() => { 
     reset();
-    fetchExamsList();
+    fetchExamList();
     fetchPatientsList();
     fetchUsersList();
-  },[])
+  }, [])
 
   const [examsList, setExamsList] = useState([]);
-  const fetchExamsList = async () => {
+  
+  const fetchExamList = async () => {
     ExamService.Get().then(result => setExamsList(result));
   }
 
   const [patientsList, setPatientsList] = useState([]);
-  const fetchPatientsList = async () => {
-    PacienteService.GetAll().then(result => setPatientsList(result));
+  const fetchPatientsList = async() => {
+    PatientService.Get().then(result => setPatientsList(result));
   }
 
   const [usersList, setUsersList] = useState([]);
@@ -47,12 +49,13 @@ export const FormExam = ({patient}) => {
     UserService.Get().then(result => setUsersList(result));
   }
 
-   useEffect(() => {
-    setValue('idPatient', patient[0].id) } , [patient[0].id])
+  useEffect(() => { setValue('idPatient', patientId) }, [patientId])
 
-    /* useEffect(() => {
-      if (!examId) {filterExam()}
-    }, [examsList]); */
+  useEffect(() => {
+    if (examId !== null) { filterExam() }
+  }, [examsList]);
+
+
     const [exam, setExam] = useState([]);
     const filterExam = () => {
       const filtereExam = examsList?.filter(exam => String(exam.id).includes(examId));
@@ -153,16 +156,14 @@ export const FormExam = ({patient}) => {
 };
 
 const onSave = async(submitData) => {
-  /* if (examsList.length>0) {
-    isExamRegistered(submitData) 
-    return } */
+  if (isExamRegistered(submitData)) { return }
 
   await ExamService.Create(submitData)
     .then((response) => { 
       switch (response.status) {
         case 201:
           reset();
-          return alert('Sucesso! Exame cadastrado.' );
+          return alert('Sucesso! Consulta cadastrada.' );
         case 400:
           reset();
           return alert(`Erro no cadastro! Por favor, tente novamente.` );
@@ -177,6 +178,8 @@ const onSave = async(submitData) => {
       reset();
     });
 };
+
+  
 const onDelete = async() => {
   const response = await ExamService.Delete(examId);
 
