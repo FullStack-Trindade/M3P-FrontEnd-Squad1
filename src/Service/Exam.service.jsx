@@ -1,69 +1,43 @@
-const API_URL = `http://localhost:${import.meta.env.VITE_SERVER_PORT}/api/exames`
-
-const Get = () => {
-    const fetchExam = async() => {
-        const response = await fetch(API_URL);
-        const data = await response.json();
-        return data;
+const fetchExam = async (url, options) => {
+    try {
+      const response = await fetch(url, options);
+  
+      if (!response.ok) {
+        throw new Error(`Erro na requisição: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Erro na chamada da API:", error);
+      throw error;
     }
-
-    return fetchExam();
-}
-
-const Create = (data) => {
-    const fetchExam = async() => {
-        const response = await fetch(API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify( data )
-        })
-        
-        return response
-    }
-
-    return fetchExam();
-}
-
-const Show = (id) => {
-    const fetchExam = async() => {
-        const response = await fetch(`${API_URL}?id=${id}`);
-        const data = await response.json();
-        return data;
-    } 
-
-    return fetchExam();
-}
-
-const Update = (id, data) => {
-    const fetchExam = async() => {
-        const response = await fetch(`${API_URL}/${ id }`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify( data )
-        })
-
-        return response
-    }
-
-    return fetchExam()
-}
-
-const Delete = (id) => {
-    const fetchExam = async() => {
-        const response = await fetch(`${API_URL}/${ id }`, {
-            method: 'DELETE',
-        })
-
-        return response
-    }
-
-    return fetchExam()
-}
-
-export const ExamService = {
-    Get,
-    Create,
-    Show,
-    Update,
-    Delete
-}
+  };
+  
+  export const ExamService = {
+    Create: (data) => {
+      return fetchExam("http://localhost:3000/api/exames", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+    },
+    Get: () => {
+      return fetchExam("http://localhost:3000/api/exames");
+    },
+    
+      Update: (id, data) => {
+      return fetchExam(`http://localhost:3000/api/exames/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+    },
+    Delete: (id) => {
+      return fetchExam(`http://localhost:3000/api/exames/${id}`, {
+        method: "DELETE",
+      });
+    },
+  };
