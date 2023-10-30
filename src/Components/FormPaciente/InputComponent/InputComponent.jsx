@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md';
 
-import * as Styled from './FormPaciente.style';
+import * as Styled from './InputComponent.style';
 
 export const InputComponent = ({ label, type, id, placeholder, register, error, $width, $height, minLength }) => {
   const [showPassword, setShowPassword] = useState(false);
