@@ -1,7 +1,7 @@
 const fetchExam = async (url, options) => {
     try {
       const response = await fetch(url, options);
-  
+     
       if (!response.ok) {
         throw new Error(`Erro na requisição: ${response.status}`);
       }
@@ -16,7 +16,7 @@ const fetchExam = async (url, options) => {
   
   export const ExamService = {
     Create: (data) => {
-      return fetchExam("http://localhost:3000/api/exames", {
+       return fetchExam("http://localhost:3000/api/exames", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
