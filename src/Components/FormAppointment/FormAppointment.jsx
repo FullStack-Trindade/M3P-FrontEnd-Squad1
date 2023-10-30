@@ -11,6 +11,7 @@ import { UserService } from '../../Service/User.service';
 import { InputComponent } from '../Form/InputComponent/InputComponent';
 
 export const FormAppointment = ({ patientId }) => {
+  
   const {
     handleSubmit,
     register,
@@ -36,6 +37,7 @@ export const FormAppointment = ({ patientId }) => {
   }
 
   const [patientsList, setPatientsList] = useState([]);
+  
   const fetchPatientsList = async() => {
     PatientService.Get().then(result => setPatientsList(result));
   }
@@ -258,7 +260,7 @@ export const FormAppointment = ({ patientId }) => {
               label='Código do Paciente *'
               name='idPatient'
               min={ 1 }
-              disabled={ appointmentId && isEditActive === false }
+              disabled={ true}
               register={{
                 ...register('idPatient', {
                   required: true,
