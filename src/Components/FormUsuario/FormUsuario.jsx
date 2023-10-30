@@ -1,71 +1,53 @@
-import * as Styled from './FormUsuario.style';
-import { useEffect, useState } from 'react';
+import * as Styled from "./FormUsuario.style";
+import { useEffect, useState } from "react";
 
+import { useForm } from "react-hook-form";
+import { InputComponent } from "../FormUsuario/InputComponent/InputComponent";
+import { UserService } from "../../Service/User.service";
+import { Switch, Spin } from "antd";
 
-import { useForm } from 'react-hook-form';
-import { InputComponent } from '../FormUsuario/InputComponent/InputComponent';
-import { UserService } from '../../Service/User.service';
-import { Switch, Spin } from 'antd';
-
-import { SelectComponent } from '../SelectComponent/SelectComponent';
-
-
+import { SelectComponent } from "../SelectComponent/SelectComponent";
 
 export const FormUsuario = () => {
-
   const genders = [
     {
       id: 1,
-      value: 'f',
-      label: 'Feminino'
+      value: "1",
+      label: "MASCULINO",
     },
 
     {
       id: 2,
-      value: 'm',
-      label: 'Masculino'
+      value: "2",
+      label: "FEMININO",
     },
 
     {
       id: 3,
-      value: 'o',
-      label: 'Outros'
+      value: "3",
+      label: "NAO_INFORMADO",
     },
-
-    {
-      id: 4,
-      value: 'n',
-      label: 'Prefiro não responder'
-    }
   ];
 
- 
   const tipo = [
     {
       id: 1,
-      value: 'A',
-      label: 'Administrador(a)'
+      value: "1",
+      label: "Médico",
     },
 
     {
       id: 2,
-      value: 'M',
-      label: 'Médico(a)'
+      value: "2",
+      label: "Administrador",
     },
 
     {
       id: 3,
-      value: 'E',
-      label: 'Enfermeiro(a)'
+      value: "3",
+      label: "Enfermeiro",
     },
-
-    {
-      id: 4,
-      value: 'ou',
-      label: 'Outro'
-    }
   ];
-
 
   const {
     register,
@@ -74,202 +56,193 @@ export const FormUsuario = () => {
     watch,
     setValue,
     formState: { errors },
-  } = useForm()
+  } = useForm();
 
-
-
-   const createUser = (userData) => {
+  const createUser = (userData) => {
     UserService.CreateUser(userData)
-      .then(response => {
-        console.log('Usuário cadastrado com sucesso:', response);
+      .then((response) => {
+        console.log("Usuário cadastrado com sucesso:", response);
         reset();
       })
-      .catch(error => {
-        console.error('Erro ao cadastrar usuário:', error);
+      .catch((error) => {
+        console.error("Erro ao cadastrar usuário:", error);
       });
   };
-  
 
- const deleteUser = (userData) => {
+  const deleteUser = (userData) => {
     UserService.DeleteUser(userData.nome)
-      .then(response => {
-        console.log('Usuário deletado com sucesso:', response);
+      .then((response) => {
+        console.log("Usuário deletado com sucesso:", response);
         reset();
       })
-      .catch(error => {
-        console.error('Erro ao deletar usuário:', error);
+      .catch((error) => {
+        console.error("Erro ao deletar usuário:", error);
       });
   };
-
-
 
   const submitForm = async (userData) => {
-
-
-   const usuario = await UserService.CreateUser(userData);
+    const usuario = await UserService.CreateUser(userData);
 
     if (!usuario) {
-      alert('Novo Usuário Cadastrado');
+      alert("Novo Usuário Cadastrado");
       reset();
-    
     } else {
-      alert('Usuário não cadastrado');
+      alert("Usuário não cadastrado");
     }
+  };
 
-  }
-
-
-  const [isLoading, setIsLoading] = useState()
+  const [isLoading, setIsLoading] = useState();
 
   return (
     <Styled.Form onSubmit={handleSubmit(submitForm)}>
-
       <Styled.Header>
         <Styled.Title>Identificação</Styled.Title>
 
-
-        <Styled.LabelSwitch>
-          Editar
-        </Styled.LabelSwitch>
+        <Styled.LabelSwitch>Editar</Styled.LabelSwitch>
 
         <Styled.SwitchBtn>
-          <Switch/>
+          <Switch />
         </Styled.SwitchBtn>
 
+        <Styled.ButtonDel
+          $width={"10%"}
+          onClick={deleteUser}
+          $active={!errors.email && !errors.password}
+          type="button"
+          disabled={errors.email || errors.password}
+        >
+          Deletar
+        </Styled.ButtonDel>
 
-        <Styled.ButtonDel $width={'10%'} onClick={deleteUser} $active={!errors.email && !errors.password} type='button' disabled={errors.email || errors.password}>Deletar</Styled.ButtonDel>
-       
-        <Styled.Button onClick={() => setIsLoading(true)} $width={'10%'} onSubmit={createUser} $active={!errors.email && !errors.password} type='submit' disabled={errors.email || errors.password}>{isLoading ? <Spin/> : 'Salvar'}</Styled.Button>
+        <Styled.Button
+          onClick={() => setIsLoading(true)}
+          $width={"10%"}
+          onSubmit={createUser}
+          $active={!errors.email && !errors.password}
+          type="submit"
+          disabled={errors.email || errors.password}
+        >
+          {isLoading ? <Spin /> : "Salvar"}
+        </Styled.Button>
       </Styled.Header>
 
-
-      <Styled.MainForm $width={'100%'}>
+      <Styled.MainForm $width={"100%"}>
         <Styled.InputGroup>
-
-          <InputComponent $width={'100%'}
-            id='nome'
-            type='string'
-            placeholder='Digite seu Nome'
-            label='Nome Completo'
-            name='nome'
-            
-              register={{
-           ...register('nome', {
-              required: true,
-              minLenght: 8 ,
-              maxLenght: 64 ,
-          })
+          <InputComponent
+            $width={"100%"}
+            id="nome"
+            type="string"
+            placeholder="Digite seu Nome"
+            label="Nome Completo"
+            name="nome"
+            register={{
+              ...register("nome", {
+                required: true,
+                minLenght: 8,
+                maxLenght: 64,
+              }),
             }}
             error={errors.nome}
           />
 
-          <SelectComponent $width={'20%'}
-            id='genero'
-            name='genero'
-            label={'Gênero'}
+          <SelectComponent
+            $width={"20%"}
+            id="genero"
+            name="genero"
+            label={"Gênero"}
             options={genders}
             register={{
-              ...register('genero', {
-                   required: true,
-              })
+              ...register("genero", {
+                required: true,
+              }),
             }}
             error={errors.genero}
           />
-
-         
         </Styled.InputGroup>
 
         <Styled.InputGroup>
-
-          <InputComponent $width={'100%'}
-            id='cpf'
-            type='text'
-            name='cpf'
-            placeholder='Digite seu CPF'
-            label='CPF'
-              register={{
-           ...register('cpf', {
-              required: true,
-
-          })
+          <InputComponent
+            $width={"100%"}
+            id="cpf"
+            type="text"
+            name="cpf"
+            placeholder="Digite seu CPF"
+            label="CPF"
+            register={{
+              ...register("cpf", {
+                required: true,
+                minLenght: 11,
+                maxLenght: 14,
+              }),
             }}
             error={errors.cpf}
           />
 
-<InputComponent $width={'100%'}
-            id='tel'
-            type='number'
-            placeholder='Telefone'
-            name='tel'
-            label='Telefone'
-              register={{
-           ...register('tel', {
-              required: true,
-             /* required: false, */
-          })
+          <InputComponent
+            $width={"100%"}
+            id="tel"
+            type="number"
+            placeholder="Telefone"
+            name="tel"
+            label="Telefone"
+            register={{
+              ...register("tel", {
+                required: true,
+                /* required: false, */
+              }),
             }}
             error={errors.tel}
           />
 
-          <InputComponent $width={'100%'}
-            id='email'
-            type='email'
-            placeholder='Digite o seu email'
-            name='email'
-            label='E-mail'
-              register={{
-           ...register('email', {
-              required: true,
-    
-          })
+          <InputComponent
+            $width={"100%"}
+            id="email"
+            type="email"
+            placeholder="Digite o seu email"
+            name="email"
+            label="E-mail"
+            register={{
+              ...register("email", {
+                required: true,
+              }),
             }}
             error={errors.email}
           />
-        
-
         </Styled.InputGroup>
 
-
-
-
-
         <Styled.InputGroup>
-
-  
-        <InputComponent $width={'100%'}
-            id='password'
-            type='password'
-            placeholder='Digite a sua senha'
-            name='password'
-            label='Senha'
-              register={{
-           ...register('senha', {
-              required: true,
-          })
+          <InputComponent
+            $width={"60%"}
+            id="password"
+            type="password"
+            placeholder="Digite a sua senha"
+            name="password"
+            label="Senha"
+            register={{
+              ...register("senha", {
+                required: true,
+              }),
             }}
             error={errors.password}
           />
 
-        <SelectComponent $width={'20%'}
-            id='tipo'
-            name='tipo'
-            label={'Tipo'}
+          <SelectComponent
+            $width={"20%"}
+            id="tipo"
+            name="tipo"
+            label={"Tipo"}
             options={tipo}
             register={{
-              ...register('tipo', {
-                   required: true,
-              })
+              ...register("tipo", {
+                required: true,
+              }),
             }}
             error={errors.tipo}
           />
-         
+        </Styled.InputGroup>
 
-</Styled.InputGroup>
+        
       </Styled.MainForm>
-
-
-
-
     </Styled.Form>
-  )
-}
+  );
+};
