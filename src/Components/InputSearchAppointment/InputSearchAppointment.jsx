@@ -47,7 +47,7 @@ export const InputSearchAppointment = () => {
         <>
             <Styled.InputContainer>
 
-                <h4>Encontre o paciente:</h4>
+                <h4>Encontre o paciente</h4>
 
                 <Styled.SearchInput>
                     <input
