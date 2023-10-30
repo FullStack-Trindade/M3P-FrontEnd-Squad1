@@ -9,6 +9,55 @@ import { Switch, Spin } from "antd";
 import { SelectComponent } from "../SelectComponent/SelectComponent";
 
 export const FormUsuario = () => {
+
+  const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm();
+
+  function validarCPF(cpf) {
+    cpf = cpf.replace(/[^\d]+/g, ''); // Remove caracteres não numéricos do CPF
+  
+    if (cpf.length !== 11 ||
+        cpf === "00000000000" ||
+        cpf === "11111111111" ||
+        cpf === "22222222222" ||
+        cpf === "33333333333" ||
+        cpf === "44444444444" ||
+        cpf === "55555555555" ||
+        cpf === "66666666666" ||
+        cpf === "77777777777" ||
+        cpf === "88888888888" ||
+        cpf === "99999999999") {
+      return false;
+    }
+  
+    // Validação do primeiro dígito verificador
+    let soma = 0;
+    for (let i = 0; i < 9; i++) {
+      soma += parseInt(cpf.charAt(i)) * (10 - i);
+    }
+    let resto = 11 - (soma % 11);
+    if (resto === 10 || resto === 11) {
+      resto = 0;
+    }
+    if (resto !== parseInt(cpf.charAt(9))) {
+      return false;
+    }
+  
+    // Validação do segundo dígito verificador
+    soma = 0;
+    for (let i = 0; i < 10; i++) {
+      soma += parseInt(cpf.charAt(i)) * (11 - i);
+    }
+    resto = 11 - (soma % 11);
+    if (resto === 10 || resto === 11) {
+      resto = 0;
+    }
+    if (resto !== parseInt(cpf.charAt(10))) {
+      return false;
+    }
+  
+    return true; // CPF válido
+  }
+  
   const genders = [
     {
       id: 1,
@@ -49,14 +98,7 @@ export const FormUsuario = () => {
     },
   ];
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    watch,
-    setValue,
-    formState: { errors },
-  } = useForm();
+ 
 
   const createUser = (userData) => {
     UserService.CreateUser(userData)
@@ -91,10 +133,22 @@ export const FormUsuario = () => {
     }
   };
 
+
+  const onSubmitForm = (data) => {
+    const cpfValue = data.cpf;
+  
+    if (validarCPF(cpfValue)) {
+      createUser(data); // CPF válido, continua com o envio do formulário
+    } else {
+      setValue("cpf", "", { shouldValidate: true }); // Limpa e seta um erro no campo CPF
+      alert("CPF inválido. Por favor, insira um CPF válido.");
+    }
+  };
+  
   const [isLoading, setIsLoading] = useState();
 
   return (
-    <Styled.Form onSubmit={handleSubmit(submitForm)}>
+    <Styled.Form onSubmit={handleSubmit(onSubmitForm)}>
       <Styled.Header>
         <Styled.Title>Identificação</Styled.Title>
 
@@ -130,38 +184,38 @@ export const FormUsuario = () => {
         <Styled.InputGroup>
           <InputComponent
             $width={"100%"}
-            id="nome"
+            id="name"
             type="string"
             placeholder="Digite seu Nome"
             label="Nome Completo"
-            name="nome"
+            name="name"
             register={{
-              ...register("nome", {
+              ...register("name", {
                 required: true,
-                minLenght: 8,
-                maxLenght: 64,
+                minLength: 8,
+                maxLength: 64,
               }),
             }}
-            error={errors.nome}
+            error={errors.name}
           />
 
           <SelectComponent
             $width={"20%"}
-            id="genero"
-            name="genero"
+            id="gender"
+            name="gender"
             label={"Gênero"}
             options={genders}
             register={{
-              ...register("genero", {
+              ...register("gender", {
                 required: true,
               }),
             }}
-            error={errors.genero}
+            error={errors.gender}
           />
         </Styled.InputGroup>
 
-        <Styled.InputGroup>
-          <InputComponent
+          <Styled.InputGroup>
+            <InputComponent
             $width={"100%"}
             id="cpf"
             type="text"
@@ -171,8 +225,8 @@ export const FormUsuario = () => {
             register={{
               ...register("cpf", {
                 required: true,
-                minLenght: 11,
-                maxLenght: 14,
+                minLength: 11,
+                maxLength: 11, // CPF tem exatamente 11 dígitos
               }),
             }}
             error={errors.cpf}
@@ -180,18 +234,18 @@ export const FormUsuario = () => {
 
           <InputComponent
             $width={"100%"}
-            id="tel"
+            id="phone"
             type="number"
             placeholder="Telefone"
-            name="tel"
+            name="phone"
             label="Telefone"
             register={{
-              ...register("tel", {
+              ...register("phone", {
                 required: true,
                 /* required: false, */
               }),
             }}
-            error={errors.tel}
+            error={errors.phone}
           />
 
           <InputComponent
@@ -228,16 +282,16 @@ export const FormUsuario = () => {
 
           <SelectComponent
             $width={"20%"}
-            id="tipo"
-            name="tipo"
+            id="id_type"
+            name="id_type"
             label={"Tipo"}
             options={tipo}
             register={{
-              ...register("tipo", {
+              ...register("id_type", {
                 required: true,
               }),
             }}
-            error={errors.tipo}
+            error={errors.id_type}
           />
         </Styled.InputGroup>
 
