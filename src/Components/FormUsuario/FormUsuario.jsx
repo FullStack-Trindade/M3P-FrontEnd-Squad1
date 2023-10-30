@@ -100,8 +100,8 @@ export const FormUsuario = () => {
 
  
 
-  const createUser = (userData) => {
-    UserService.CreateUser(userData)
+  const createUser = (UserData) => {
+    UserService.CreateUser(UserData)
       .then((response) => {
         console.log("Usuário cadastrado com sucesso:", response);
         reset();

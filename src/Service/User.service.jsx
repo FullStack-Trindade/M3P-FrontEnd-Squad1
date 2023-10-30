@@ -1,18 +1,20 @@
 import { LocalStorageService } from "./LocalStorage.service";
 
-const API_URL = 'http://localhost:3000/users'
+const API_URL = `http://localhost:${import.meta.env.VITE_SERVER_PORT}/api/usuarios`
+
+const Get = () => {
+    const fetchUser = async() => {
+        const response = await fetch(API_URL);
+        const data = await response.json();
+        return data;
+    }
+
+    return fetchUser();
+}
 
 
 
-const Get = async () => {
-   /*  return localStorage.getItem('users')  ? JSON.parse(localStorage.getItem('users')) : null */
-    const response = await fetch(API_URL);
-    const data = await response.json();
-
-    return data;
-   }
-
-const Create = async(data) => {
+/* const Create = async(data) => {
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: {
@@ -23,7 +25,7 @@ const Create = async(data) => {
     });
     const res = await response.json();
     console.log(res && `Usuario ${data.email} criado com sucesso`);
-}
+} */
 
 const CreateUser = async(UserData) => {
     await fetch(API_URL, {
@@ -86,7 +88,7 @@ const Update = (id, newUser) => {
 
 export const UserService = {
     Get,
-    Create,
+ /*    Create, */
     CreateUser,
     Show,
     ShowByName,
