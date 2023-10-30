@@ -101,26 +101,26 @@ export const FormExam = ({patientId}) => {
     }
   }
 
-  const isExamRegistered = (dataForm) => {
-    let filteredPatientExams = examsList?.filter(exam => String(exam.id_patient).includes(dataForm.id_patient))
-    let filteredDate = filteredPatientExams.filter(exam => exam.exam_date.includes(dataForm.exam_date))
-    let filteredHour = filteredDate.filter(exam => exam.exam_hour.includes(dataForm.exam_hour))
+  // const isExamRegistered = (dataForm) => {
+  //   let filteredPatientExams = examsList?.filter(exam => String(exam.id_patient).includes(dataForm.id_patient))
+  //   let filteredDate = filteredPatientExams.filter(exam => exam.exam_date.includes(dataForm.exam_date))
+  //   let filteredHour = filteredDate.filter(exam => exam.exam_hour.includes(dataForm.exam_hour))
 
-    if (filteredHour.length > 0) {
-        messageApi.open({ type: 'error', content: 'Esse paciente já possui exame cadastrado nesse dia e horário.' })
-        filteredPatientExams = []
-        filteredDate = []
-        filteredHour = []
-        return true
-    }
+  //   if (filteredHour.length > 0) {
+  //       messageApi.open({ type: 'error', content: 'Esse paciente já possui exame cadastrado nesse dia e horário.' })
+  //       filteredPatientExams = []
+  //       filteredDate = []
+  //       filteredHour = []
+  //       return true
+  //   }
 
-    return false
-  }
+  //   return false
+  // }
 
   const onSubmitForm = async(dataForm) => {
     const data = {
-      id_patient: dataForm.id_patient,
-      id_doctor: dataForm.id_doctor,
+      id_patient: dataForm.idPatient,
+      id_doctor: dataForm.idDoctor,
       nameExam: dataForm.nameExam,
       dateExam: dataForm.dateExam,
       hourExam: dataForm.hourExam,
@@ -156,7 +156,7 @@ export const FormExam = ({patientId}) => {
 };
 
 const onSave = async(submitData) => {
-  if (isExamRegistered(submitData)) { return }
+ // if (isExamRegistered(submitData)) { return }
 
   await ExamService.Create(submitData)
     .then((response) => { 
@@ -258,29 +258,54 @@ const [isEditActive, setIsEditActive] = useState(false);
               }}
               error={ errors.idPatient }
             />
+               <InputComponent $width={'350%'}
+              id='patientName'
+              type='string'
+              placeholder='Nome do paciente'
+              label='Nome do Paciente'
+              name='patientName'
+              disabled={ true }
+              register={{
+                ...register('patientName', {
+                  required: false
+                })
+              }}
+              error={ errors.patientName }
+            />
          <InputComponent $width={'100%'}
-              id='id_doctor'
+              id='idDoctor'
               type='number'
               placeholder='Digite o código'
               label='Código do medico *'
-              name='id_doctor'
+              name='idDoctor'
               min={ 1 }
-              disabled={ true }
               register={{
-                ...register('id_doctor', {
+                ...register('idDoctor', {
                   required: true,
                 })
               }}
               error={ errors.id_doctor }
             />
-
+ <InputComponent $width={'350%'}
+              id='doctorName'
+              type='string'
+              placeholder='Nome do médico(a)'
+              label='Nome do médico(a)'
+              name='doctorName'
+              disabled={ true }
+              register={{
+                ...register('doctorName', {
+                  required: false
+                })
+              }}
+              error={ errors.doctorName }
+            />
             <InputComponent $width={'350%'}
               id='nameExam'
               type='string'
               placeholder='Nome do exame'
               label='Nome do Exame'
               name='nameExam'
-              disabled={ true }
               register={{
                 ...register('nameExam', {
                   required: true,
@@ -315,7 +340,6 @@ const [isEditActive, setIsEditActive] = useState(false);
               placeholder='Nome do laboratorio'
               label='Nome do laboratorio'
               name='labExam'
-              disabled={ true }
               register={{
                 ...register('labExam', {
                   required: true,
