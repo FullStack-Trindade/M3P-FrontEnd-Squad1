@@ -140,17 +140,18 @@ export const FormAppointment = ({ patientId }) => {
           switch (response.status) {
             case 200:
               reset();
+              window.location.reload(true);
               return alert('Sucesso! Consulta editada.');
             case 400:
               reset();
-              return alert(`Erro no cadastro! Por favor, tente novamente.` );
+              return alert(`Erro no cadastro! Por favor, tente novamente.`);
             case 500:
               reset();
-              return alert(`Erro no cadastro! Por favor, tente novamente.` );
+              return alert(`Erro no cadastro! Por favor, tente novamente.`);
           }
         })
         .catch((error) => {
-            alert('Erro no cadastro. Por favor, tente novamente.' )
+            alert('Erro no cadastro. Por favor, tente novamente.')
             console.error('Erro ao cadastrar consulta:', error);
             reset();
         });
@@ -164,17 +165,18 @@ export const FormAppointment = ({ patientId }) => {
         switch (response.status) {
           case 201:
             reset();
-            return alert('Sucesso! Consulta cadastrada.' );
+            window.location.reload(true);
+            return alert('Sucesso! Consulta cadastrada.');
           case 400:
             reset();
-            return alert(`Erro no cadastro! Por favor, tente novamente.` );
+            return alert(`Erro no cadastro! Por favor, tente novamente.`);
           case 500:
             reset();
-            return alert(`Erro no cadastro! Por favor, tente novamente.` );
+            return alert(`Erro no cadastro! Por favor, tente novamente.`);
         }
       })
       .catch((error) => {
-        alert('Erro no cadastro. Por favor, tente novamente.' );
+        alert('Erro no cadastro. Por favor, tente novamente.');
         console.error('Erro ao cadastrar consulta:', error);
         reset();
       });
@@ -186,13 +188,14 @@ export const FormAppointment = ({ patientId }) => {
     switch (response.status) {
       case 202:
         reset();
-        return alert('Sucesso! Consulta excluída.' );
+        window.location.reload(true);
+        return alert('Sucesso! Consulta excluída.');
       case 400:
         reset();
-        return alert(`Erro na exclusão! Consulta não existe.` );
+        return alert(`Erro na exclusão! Consulta não existe.`);
       case 500:
         reset();
-        return alert(`Erro na exclusão! Por favor, tente novamente.` );
+        return alert(`Erro na exclusão! Por favor, tente novamente.`);
     }
   };
 
@@ -255,7 +258,7 @@ export const FormAppointment = ({ patientId }) => {
               label='Código do Paciente *'
               name='idPatient'
               min={ 1 }
-              disabled={ false }
+              disabled={ appointmentId && isEditActive === false }
               register={{
                 ...register('idPatient', {
                   required: true,
