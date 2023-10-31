@@ -1,5 +1,6 @@
 import * as Styled from './InputSearchMedicalRecord.style';
 
+import { CardMedicalRecord } from './../CardMedicalRecord/CardMedicalRecord';
 import { MedicalRecordService } from '../../Service/MedicalRecord.service';
 
 export const InputSearchMedicalRecord = () => {
@@ -56,6 +57,18 @@ export const InputSearchMedicalRecord = () => {
                         Buscar
                     </button>
                 </Styled.SearchInput>
+
+                <Styled.CardsArea>
+                    { medicalRecordList
+                        .filter(searchTerm)
+                        .map(value => {
+                            return <CardMedicalRecord 
+                                patient={ value } 
+                                user={ value.user } 
+                                key={ value.id } 
+                            />
+                    }) }
+                </Styled.CardsArea>
 
             </Styled.InputContainer>
         </>
