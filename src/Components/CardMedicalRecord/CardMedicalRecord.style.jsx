@@ -20,3 +20,10 @@ export const PatientData = styled.ul`
     align-items: center;
     width: 100%;
 `
+
+export const Data = styled.li`
+    display: flex;
+    margin: 1vw;
+    justify-content: center;
+    font-size: 1rem;
+`
