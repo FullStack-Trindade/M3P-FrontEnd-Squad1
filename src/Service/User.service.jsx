@@ -1,11 +1,12 @@
 const API_URL = `http://localhost:${import.meta.env.VITE_SERVER_PORT}/api/usuarios`
 
-const Get = () => {
+/* const Get = () => {
     const fetchUser = async() => {
         const response = await fetch(API_URL);
         const data = await response.json();
     return fetchUser();
     }
+  } */
 
 const Get = async () => {
    /*  return localStorage.getItem('users')  ? JSON.parse(localStorage.getItem('users')) : null */

@@ -1,26 +1,38 @@
-import { createContext, useState } from "react";
 import PropTypes from 'prop-types';
+import { createContext, useState } from "react";
 
 export const AuthContext = createContext({
-    auth: {
-        user: {},
-        isLogged: false,
-    },
-    setAuth: () => {},
+    idDatabase: null,
+    setIdDatabase: () => {},
+    idUser: null,
+    setIdUser: () => {},
+    tokenUser: '',
+    setTokenUser: () => {},
+    idType: null,
+    setIdType: () => {}
 });
 
-export const AuthProvider = ({children}) => {
-    const [auth, setAuth] = useState({
-        user: {},
-        isLogged: false,
-    })
+export const AuthProvider = ({ children }) => {
+    const [idDatabase, setIdDatabase] = useState();
+    const [idUser, setIdUser] = useState();
+    const [tokenUser, setTokenUser] = useState();
+    const [idType, setIdType] = useState();
     
     return (
-        <AuthContext.Provider value={{auth, setAuth}}>
-            {children}
+        <AuthContext.Provider 
+            value={{ 
+                idDatabase, 
+                setIdDatabase, 
+                idUser, 
+                setIdUser, 
+                tokenUser, 
+                setTokenUser, 
+                idType, 
+                setIdType 
+            }}
+        >
+            { children }
         </AuthContext.Provider>
-
-
     )
 }
 
