@@ -25,12 +25,10 @@ export const FormLoginComponent = () => {
 
     const { email, password } = data;
 
-    if(email && password){
-      const login = {
-        email: email,
-        password: password
-      }
-      
+    if(!email || !password) {
+        return alert('Campos e-mail e senha são obrigatórios.');
+    }
+
         const response =  await LoginService.Authenticate(login);
         const dataLogin = await response.json();
 
@@ -53,19 +51,7 @@ export const FormLoginComponent = () => {
         }
     }
 
-  }
-
-  const redirectToHome = (user) => {
-
-    setAuth({
-      user,
-      isLogged: true,
-    })
-    navigate('/')
-  }
-
-
-  const [isLoading, setIsLoading] = useState()
+    const [isLoading, setIsLoading] = useState()
 
   return(
     <Styled.Form onSubmit={ handleSubmit(submitForm) }>
