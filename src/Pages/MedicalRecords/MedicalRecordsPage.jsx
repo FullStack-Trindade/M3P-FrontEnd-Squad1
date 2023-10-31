@@ -1,3 +1,5 @@
+import * as Styled from './MedicalRecordsPage.style'
+import { useContext, useEffect } from 'react';
 import { HeaderContext } from '../../Context/Header.context';
 
 export const MedicalRecordsPage = () => {
@@ -12,7 +14,10 @@ export const MedicalRecordsPage = () => {
 
         return (
             <>
-                
+                <Styled.ContainerArea>
+                    <Styled.Title>
+                    </Styled.Title>
+                </Styled.ContainerArea>
             </>
         )
     }
