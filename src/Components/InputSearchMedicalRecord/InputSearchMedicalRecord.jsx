@@ -2,6 +2,8 @@ import * as Styled from './InputSearchMedicalRecord.style';
 
 export const InputSearchMedicalRecord = () => {
 
+    const [searchedTerm, setSearchedTerm] = useState();
+
     return (
         <>
             <Styled.InputContainer>
@@ -15,6 +17,7 @@ export const InputSearchMedicalRecord = () => {
                         type='text'
                         placeholder='Digite o código ou nome do paciente'
                         name='infoPatient'
+                        onChange={ e => setSearchedTerm(e.target.value) }
                     />
                     
                     <button 
