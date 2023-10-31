@@ -1,5 +1,5 @@
 import * as Styled from './LoginFormComponent.style';
-import { useContext, useState} from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { Spin } from 'antd';
@@ -17,21 +17,22 @@ export const FormLoginComponent = () => {
         formState: { errors },  
     } = useForm();
 
-    const { setIdUser, setTokenUser, setIdType } = useContext(AuthContext)
+    const { setIdUser, setTokenUser, setIdType } = useContext(AuthContext);
 
-    const submitForm = async (data) => {
+    const submitForm = async (submitData) => {
+        const { email, password } = submitData;
 
-    const { email, password } = data;
+        if(!email || !password) {
+            return alert('Campos e-mail e senha são obrigatórios.');
+        }
 
-    if(!email || !password) {
-        return alert('Campos e-mail e senha são obrigatórios.');
-    }
+        const submitLoginData = { email: email, password: password };
 
-        const response =  await LoginService.Authenticate(login);
-        const dataLogin = await response.json();
+        const response = await LoginService.Authenticate(submitLoginData);
+        const data = await response.json();
 
-        const {id, name, token, id_type} = dataLogin;
-    
+        const { id, name, token, id_type } = data;
+        
         switch (response.status) {
             case 200:
                 localStorage.setItem('name', JSON.stringify(name));
@@ -49,11 +50,11 @@ export const FormLoginComponent = () => {
         }
     }
 
-    const [isLoading, setIsLoading] = useState()
+    const [isLoading, setIsLoading] = useState(false);
 
     return(
         <Styled.Form onSubmit={ handleSubmit(submitForm) }>
-            
+        
             <Styled.Header>
                 <Styled.Title>Login</Styled.Title>
             </Styled.Header>
@@ -62,24 +63,25 @@ export const FormLoginComponent = () => {
                 <InputComponent
                     id='email'
                     type='email' 
-                    placeholder='Digite seu email' 
+                    placeholder='Digite seu e-mail' 
                     label='E-mail'
                     register={{...register('email', {
-                        required: true, 
-                        validate: { matchPath: (v) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) }
+                            required: true, 
+                            validate: { matchPath: (v) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) }
                         })
                     }}
                     error={ errors.email }
                 />
+
                 <InputComponent
                     id='password'
                     type='password'
                     placeholder='Digite sua senha'
                     label='Senha'
                     register={{...register('password', { 
-                        required: true, 
-                        minLength: 8,
-                    })
+                            required: true, 
+                            minLength: 8,
+                        })
                     }}
                     error={ errors.password }
                 />
@@ -91,7 +93,7 @@ export const FormLoginComponent = () => {
                 type='submit' 
                 disabled={ errors.email || errors.password } 
             > 
-                { isLoading ? <Spin/> : 'Entrar' }
+                { isLoading ? <Spin/> : 'Entrar' } 
             </Styled.Button>
 
             <Styled.Action>
