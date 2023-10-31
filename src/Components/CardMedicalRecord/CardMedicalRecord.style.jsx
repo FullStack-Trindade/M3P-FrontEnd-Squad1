@@ -13,3 +13,10 @@ export const RenderCard = styled.div`
     border-radius: 5px;
     box-shadow: 3px 3px 3px gray;
 `
+
+export const PatientData = styled.ul`
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+`
