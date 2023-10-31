@@ -40,3 +40,9 @@ export const SearchInput = styled.div`
     display: flex;
     margin-top: 1vw;
 `;
+
+export const CardsArea = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+`;
