@@ -12,6 +12,14 @@ export const InputSearchMedicalRecord = () => {
             return filterByName(value);
         }
     }
+
+    const filterById = (value) => { 
+        if(String(value.id).includes(searchedTerm)) { return value }
+    }
+
+    const filterByName = (value) => {
+        if(value.user.name.toLowerCase().includes(searchedTerm.toLowerCase())) { return value }
+    }
     
     return (
         <>
