@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from '../../App'
-import { GlobalStyle } from './Global.style.jsx'
-import { HeaderProvider } from '../Context/Header.context'
-import { AuthProvider } from '../Context/auth.context.jsx'
+import App from './App'
+import { GlobalStyle } from './src/Layout/Global.style.jsx'
+import { HeaderProvider } from './src/Context/Header.context'
+import { AuthProvider } from './src/Context/auth.context.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -11,11 +11,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
     <HeaderProvider>
       <AuthProvider>
-         <App/>
+          <App/>
       </AuthProvider>
     </HeaderProvider>
 
-
-   
   </React.StrictMode>,
 )
