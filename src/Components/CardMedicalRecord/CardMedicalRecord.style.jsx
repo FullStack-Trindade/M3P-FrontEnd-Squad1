@@ -27,3 +27,13 @@ export const Data = styled.li`
     justify-content: center;
     font-size: 1rem;
 `
+
+export const Arrow = styled.button`
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    margin: 5px 20px ;
+    font-size: 2rem;
+    border: none;
+    background-color: transparent;
+`
