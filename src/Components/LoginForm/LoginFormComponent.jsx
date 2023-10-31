@@ -8,8 +8,6 @@ import { InputComponent } from '../FormPaciente/InputComponent/InputComponent';
 import { AuthContext } from '../../Context/auth.context';
 import { LoginService } from '../../Service/Login.service';
 
-
-
 export const FormLoginComponent = () => {
     const navigate = useNavigate();
     const {
@@ -53,45 +51,56 @@ export const FormLoginComponent = () => {
 
     const [isLoading, setIsLoading] = useState()
 
-  return(
-    <Styled.Form onSubmit={ handleSubmit(submitForm) }>
-          
-      <Styled.Header>
-        <Styled.Title>Login</Styled.Title>
-      </Styled.Header>
+    return(
+        <Styled.Form onSubmit={ handleSubmit(submitForm) }>
+            
+            <Styled.Header>
+                <Styled.Title>Login</Styled.Title>
+            </Styled.Header>
 
-      <Styled.InputGroup>
-        <InputComponent
-          id='email'
-          type='email' 
-          placeholder='Digite seu email' 
-          label='E-mail'
-          register={{...register('email', {
-              required: true, 
-              validate: { matchPath: (v) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) }
-            })
-          }}
-          error={ errors.email }
-        />
-        <InputComponent
-          id='password'
-          type='password'
-          placeholder='Digite sua senha'
-          label='Senha'
-          register={{...register('password', { 
-            required: true, 
-            minLength: 8,
-           })
-          }}
-          error={ errors.password }
-        />
-      </Styled.InputGroup>
+            <Styled.InputGroup>
+                <InputComponent
+                    id='email'
+                    type='email' 
+                    placeholder='Digite seu email' 
+                    label='E-mail'
+                    register={{...register('email', {
+                        required: true, 
+                        validate: { matchPath: (v) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) }
+                        })
+                    }}
+                    error={ errors.email }
+                />
+                <InputComponent
+                    id='password'
+                    type='password'
+                    placeholder='Digite sua senha'
+                    label='Senha'
+                    register={{...register('password', { 
+                        required: true, 
+                        minLength: 8,
+                    })
+                    }}
+                    error={ errors.password }
+                />
+            </Styled.InputGroup>
 
-      <Styled.Button onClick={() => setIsLoading(true)} $active={ !errors.email && !errors.password } type='submit' disabled={ errors.email || errors.password } > {isLoading ? <Spin/> : 'Entrar'} </Styled.Button>
+            <Styled.Button 
+                onClick={() => setIsLoading(true)} 
+                $active={ !errors.email && !errors.password } 
+                type='submit' 
+                disabled={ errors.email || errors.password } 
+            > 
+                { isLoading ? <Spin/> : 'Entrar' }
+            </Styled.Button>
 
-      <Styled.Action>
-          <Styled.LabelRecuperarSenha onClick={() => alert('Você receberá um e-mail para recuperar a sua senha')}>Esqueceu a senha?</Styled.LabelRecuperarSenha>
-      </Styled.Action>
-    </Styled.Form>
-  )
+            <Styled.Action>
+                <Styled.LabelRecuperarSenha 
+                    onClick={ () => alert('Você receberá um e-mail para recuperar a sua senha') }
+                >
+                    Esqueceu a senha?
+                </Styled.LabelRecuperarSenha>
+            </Styled.Action>
+        </Styled.Form>
+    )
 }
