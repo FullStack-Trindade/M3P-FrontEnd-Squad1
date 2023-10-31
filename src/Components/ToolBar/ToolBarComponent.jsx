@@ -1,13 +1,10 @@
-import * as Styled from './HeaderComponent.style';
-import React, { useContext } from 'react';
+import * as Styled from './ToolBarComponent.style';
+import { useContext } from 'react';
 import { HeaderContext } from '../../Context/Header.context';
-import { AuthContext } from '../../Context/Auth/auth.context';
-
 
 function NavBarHeader() {
-    const { data } = useContext(HeaderContext)
-
-    const { auth } = useContext(AuthContext)
+    const { data } = useContext(HeaderContext);
+    const userName = JSON.parse(localStorage.getItem('name'));
 
   return (
     <Styled.Container>
@@ -17,7 +14,7 @@ function NavBarHeader() {
 
       <Styled.UserHeader>
         <Styled.TxtUser>
-        {  auth.user.email }
+          { userName }
         </Styled.TxtUser>
         <img
           alt="Imagem do usuário"
