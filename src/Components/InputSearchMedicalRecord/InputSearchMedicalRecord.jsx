@@ -1,4 +1,5 @@
 import * as Styled from './InputSearchMedicalRecord.style';
+import { useEffect, useState } from 'react';
 
 import { CardMedicalRecord } from './../CardMedicalRecord/CardMedicalRecord';
 import { MedicalRecordService } from '../../Service/MedicalRecord.service';
