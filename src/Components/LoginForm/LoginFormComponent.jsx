@@ -35,18 +35,22 @@ export const FormLoginComponent = () => {
         const dataLogin = await response.json();
 
         const {id, name, token, id_type} = dataLogin;
-      
-      if(response.status === 200 ){
-        localStorage.setItem('id', JSON.stringify(id))
-        localStorage.setItem('name', JSON.stringify(name))
-        localStorage.setItem('token', JSON.stringify(token))
-        localStorage.setItem('id_type', JSON.stringify(id_type))
-        redirectToHome(name)
-      }else{
-        alert('Ops! Usuário e/ou Senha Invalidos.');
-        reset();
-        return;
-      }
+    
+        switch (response.status) {
+            case 200:
+                localStorage.setItem('name', JSON.stringify(name));
+                localStorage.setItem('token', JSON.stringify(token));
+                setIdUser(id);
+                setTokenUser(token);
+                setIdType(id_type);
+                navigate('/');
+                break;
+            case 400:
+            case 500:
+                setIsLoading(false);
+                reset();
+                return alert('E-mail e/ou senha inválido. Por favor, tente novamente.');
+        }
     }
 
   }
