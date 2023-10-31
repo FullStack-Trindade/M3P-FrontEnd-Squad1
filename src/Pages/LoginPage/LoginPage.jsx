@@ -1,12 +1,11 @@
 import * as Styled from './LoginPage.style';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import { AuthContext } from '../../Context/auth.context';
 import { FormLoginComponent } from "../../Components/LoginForm/LoginFormComponent";
-import imagemLogin from '../../Assets/LogoGenerica.jpg';
-import { useEffect } from 'react';
 import { AuthService } from '../../Service/Auth.service';
+import imagemLogin from '../../Assets/LogoGenerica.jpg';
 
 export const LoginPage = () => {
     const { tokenUser, setTokenUser } = useContext(AuthContext);
@@ -55,7 +54,6 @@ export const LoginPage = () => {
     }
 
     return !!tokenUser && (tokenUser === localToken) ? <Navigate to='/' /> : render();
-
 }
 
 

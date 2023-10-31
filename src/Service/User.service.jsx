@@ -1,8 +1,12 @@
-import { LocalStorageService } from "./LocalStorage.service";
+const API_URL = `http://localhost:${import.meta.env.VITE_SERVER_PORT}/api/usuarios`
 
-const API_URL = 'http://localhost:3000/users'
-
-
+/* const Get = () => {
+    const fetchUser = async() => {
+        const response = await fetch(API_URL);
+        const data = await response.json();
+    return fetchUser();
+    }
+  } */
 
 const Get = async () => {
    /*  return localStorage.getItem('users')  ? JSON.parse(localStorage.getItem('users')) : null */
@@ -52,6 +56,15 @@ const data = await response.json();
 return data;
 }
 
+const ShowByName = async (nome) => {
+
+  const filter = `?nome=${nome}`;
+  const response = await fetch(`${API_URL}/${filter}`);
+  const data = await response.json();
+  
+  return data;
+  }
+
 const ShowByEmail = async (email) => {
     const filter = `?email=${email}`;
     const response = await fetch(`${API_URL}/${filter}`);
@@ -65,9 +78,6 @@ const Delete = (id) => {
     LocalStorageService.set('users', Get().filter( user => user.id !== id));
 }
 
-const DeletePaciente = (id) => {
-    LocalStorageService.set('users', Get().filter( user => user.id !== id));
-}
 
 
 const Update = (id, newUser) => {
@@ -83,6 +93,7 @@ export const UserService = {
     Create,
     CreateUser,
     Show,
+    ShowByName,
     ShowByEmail,
     Delete,
     Update

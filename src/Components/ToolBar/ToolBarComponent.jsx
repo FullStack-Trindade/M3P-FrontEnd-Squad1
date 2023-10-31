@@ -1,6 +1,8 @@
 import * as Styled from './ToolBarComponent.style';
 import { useContext } from 'react';
+
 import { HeaderContext } from '../../Context/Header.context';
+import { AuthContext } from '../../Context/auth.context';
 
 function NavBarHeader() {
     const { data } = useContext(HeaderContext);
