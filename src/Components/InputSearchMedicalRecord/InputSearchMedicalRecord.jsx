@@ -1,6 +1,17 @@
 import * as Styled from './InputSearchMedicalRecord.style';
 
+import { MedicalRecordService } from '../../Service/MedicalRecord.service';
+
 export const InputSearchMedicalRecord = () => {
+
+    useEffect(() => { 
+        fetchMedicalRecordsList();
+    }, [])
+
+    const [medicalRecordList, setMedicalRecordList] = useState([]);
+    const fetchMedicalRecordsList = async() => {
+        MedicalRecordService.Get().then(result => setMedicalRecordList(result));
+    }
 
     const [searchedTerm, setSearchedTerm] = useState();
     const searchTerm = (value) => {
