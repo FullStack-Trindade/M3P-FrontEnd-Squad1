@@ -1,12 +1,12 @@
 import * as Styled from './LoginFormComponent.style';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { Spin } from 'antd';
 
 import { InputComponent } from '../FormPaciente/InputComponent/InputComponent';
-import { AuthContext } from '../../Context/auth.context';
 import { LoginService } from '../../Service/Login.service';
+import { AuthService } from '../../Service/Auth.service';
 
 export const FormLoginComponent = () => {
     const navigate = useNavigate();
@@ -16,8 +16,6 @@ export const FormLoginComponent = () => {
         reset,
         formState: { errors },  
     } = useForm();
-
-    const { setIdUser, setTokenUser, setIdType } = useContext(AuthContext);
 
     const submitForm = async (submitData) => {
         const { email, password } = submitData;
@@ -37,9 +35,11 @@ export const FormLoginComponent = () => {
             case 200:
                 localStorage.setItem('name', JSON.stringify(name));
                 localStorage.setItem('token', JSON.stringify(token));
-                setIdUser(id);
-                setTokenUser(token);
-                setIdType(id_type);
+                AuthService.Create({
+                    id_user: id,
+                    token_user: token,
+                    id_type: id_type
+                })
                 navigate('/');
                 break;
             case 400:
