@@ -1,4 +1,6 @@
 import * as Styled from './CardMedicalRecord.style';
+import { Link } from 'react-router-dom';
+import { ImArrowRight2 } from 'react-icons/im';
 
 export const CardMedicalRecord = ({ patient, user }) => {
 
@@ -11,6 +13,11 @@ export const CardMedicalRecord = ({ patient, user }) => {
                         <Styled.Data>{user.name}</Styled.Data>
                         <Styled.Data>{patient.healthInsurance}</Styled.Data>
                     </Styled.PatientData>
+                    <Styled.Arrow>
+                        <Link to={`/prontuarios/${patient.id}`}>
+                            <ImArrowRight2 /> 
+                        </Link>
+                    </Styled.Arrow>
                 </Styled.RenderCard>
             </Styled.CardContainer>
         </>
