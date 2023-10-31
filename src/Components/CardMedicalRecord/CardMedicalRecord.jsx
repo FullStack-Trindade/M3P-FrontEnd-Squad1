@@ -7,7 +7,9 @@ export const CardMedicalRecord = ({ patient, user }) => {
             <Styled.CardContainer>
                 <Styled.RenderCard>
                     <Styled.PatientData>
-
+                        <Styled.Data>{patient.id}</Styled.Data>
+                        <Styled.Data>{user.name}</Styled.Data>
+                        <Styled.Data>{patient.healthInsurance}</Styled.Data>
                     </Styled.PatientData>
                 </Styled.RenderCard>
             </Styled.CardContainer>
