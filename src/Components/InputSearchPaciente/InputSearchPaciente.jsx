@@ -44,6 +44,7 @@ export const InputSearch = () => {
           <button className="botao" type="submit">
             <span className="material-symbols-outlined">Buscar</span>
           </button>
+
         </Styled.FormInput>
       </Styled.InputContainer>
 
