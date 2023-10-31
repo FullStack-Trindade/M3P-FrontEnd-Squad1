@@ -1,52 +1,40 @@
-import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
+import * as Styled from './LoginFormComponent.style';
 import { useContext, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { Spin } from 'antd';
 
 import { InputComponent } from '../FormPaciente/InputComponent/InputComponent';
-import * as Styled from './LoginFormComponent.style';
 import { AuthContext } from '../../Context/auth.context';
-import { UserService } from '../../../src/Service/User.service';
+import { LoginService } from '../../Service/Login.service';
 
-import { Spin } from 'antd';
 
 
 export const FormLoginComponent = () => {
     const navigate = useNavigate();
     const {
-      register,
-      handleSubmit,
-      reset,
-      formState: { errors },  
+        register,
+        handleSubmit,
+        reset,
+        formState: { errors },  
     } = useForm();
 
-  const { setIdUser, setTokenUser, setIdType } = useContext(AuthContext)
+    const { setIdUser, setTokenUser, setIdType } = useContext(AuthContext)
 
+    const submitForm = async (data) => {
 
-
-  const submitForm = async (data) => {
-    const login = {
-      email: data.email,
-      password: data.password
-    }
-
-    
     const { email, password } = data;
+
     if(email && password){
       const login = {
         email: email,
         password: password
       }
       
-      const response = await fetch("http://localhost:3000/api/usuario/login", {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(login)
-      });
-      const data = await response.json();
-      const {id, name, token, id_type} = data
+        const response =  await LoginService.Authenticate(login);
+        const dataLogin = await response.json();
+
+        const {id, name, token, id_type} = dataLogin;
       
       if(response.status === 200 ){
         localStorage.setItem('id', JSON.stringify(id))
