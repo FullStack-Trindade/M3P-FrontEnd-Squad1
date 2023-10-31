@@ -11,20 +11,17 @@ import { Spin } from 'antd';
 
 
 export const FormLoginComponent = () => {
+    const navigate = useNavigate();
+    const {
+      register,
+      handleSubmit,
+      reset,
+      formState: { errors },  
+    } = useForm();
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },  
-  } = useForm()
-
-  const navigate = useNavigate();
-
-  const { setAuth } = useContext(AuthContext)
+  const { setIdUser, setTokenUser, setIdType } = useContext(AuthContext)
 
 
-/*   const [userLogado, setUserLogado] = useState(null); */
 
   const submitForm = async (data) => {
     const login = {
@@ -34,7 +31,6 @@ export const FormLoginComponent = () => {
 
     
     const { email, password } = data;
-    //verifica se é ==! de vazio, se existir algum dado envia uma requisição para o backend
     if(email && password){
       const login = {
         email: email,
@@ -49,7 +45,6 @@ export const FormLoginComponent = () => {
         },
         body: JSON.stringify(login)
       });
-      // se a resposta for positiva, irá armazenar os dados no localStorage e redirecionar para Home
       const data = await response.json();
       const {id, name, token, id_type} = data
       
@@ -65,19 +60,7 @@ export const FormLoginComponent = () => {
         return;
       }
     }
-/*
-    if(!user) {
-      alert('Usuário não cadastrado');
-      reset();
-      return;
-    }/* else {
-      setUserLogado(user.email)
-    } */
-/*
-    password === user.password
-      ? redirectToHome(user)
-      : alert('Ops! Usuário e/ou Senha Invalidos.');
-      */
+
   }
 
   const redirectToHome = (user) => {
