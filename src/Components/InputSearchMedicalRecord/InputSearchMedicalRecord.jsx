@@ -3,7 +3,16 @@ import * as Styled from './InputSearchMedicalRecord.style';
 export const InputSearchMedicalRecord = () => {
 
     const [searchedTerm, setSearchedTerm] = useState();
-
+    const searchTerm = (value) => {
+        if (!searchedTerm) {
+            return value; 
+        } else if (Number(searchedTerm)) {
+            return filterById(value);
+        } else {
+            return filterByName(value);
+        }
+    }
+    
     return (
         <>
             <Styled.InputContainer>
@@ -23,6 +32,7 @@ export const InputSearchMedicalRecord = () => {
                     <button 
                         className="button" 
                         type='submit'
+                        onClick={ searchTerm }
                     >
                         Buscar
                     </button>
