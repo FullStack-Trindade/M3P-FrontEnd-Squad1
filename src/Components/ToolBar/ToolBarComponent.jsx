@@ -1,4 +1,4 @@
-import * as Styled from './TollBarComponent.style';
+import * as Styled from './ToolBarComponent.style';
 import React, { useContext } from 'react';
 import { HeaderContext } from '../../Context/Header.context';
 import { AuthContext } from '../../Context/auth.context';
