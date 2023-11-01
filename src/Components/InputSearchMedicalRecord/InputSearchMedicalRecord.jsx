@@ -60,15 +60,18 @@ export const InputSearchMedicalRecord = () => {
                 </Styled.SearchInput>
 
                 <Styled.CardsArea>
-                    { medicalRecordList
-                        .filter(searchTerm)
-                        .map(value => {
-                            return <CardMedicalRecord 
-                                patient={ value } 
-                                user={ value.user } 
-                                key={ value.id } 
-                            />
-                    }) }
+                    { medicalRecordList.length > 0
+                        ? medicalRecordList
+                            .filter(searchTerm)
+                            .map(value => {
+                                return <CardMedicalRecord 
+                                        patient={ value } 
+                                        user={ value.user } 
+                                        key={ value.id } 
+                                    />
+                            })
+                        : <p>Não há pacientes com prontuários ativos no momento</p>
+                    }
                 </Styled.CardsArea>
 
             </Styled.InputContainer>
