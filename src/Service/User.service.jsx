@@ -1,5 +1,5 @@
-//const API_URL = `http://localhost:${import.meta.env.VITE_SERVER_PORT}/api/usuarios`
-const API_URL = `http://localhost:3000/api/usuarios`
+const API_URL = `http://localhost:${import.meta.env.VITE_SERVER_PORT}/api/usuarios`
+
 /* const Get = () => {
     const fetchUser = async() => {
         const response = await fetch(API_URL);
