@@ -1,14 +1,12 @@
 import * as Styled from './HomePage.style'
 import { useContext, useEffect } from 'react';
-import { HeaderContext } from '../../Context/Header.context';
-import AreaEstatistica from '../../Components/AreaEstatísticas/AreaEstatisticas';
-import {InputSearch}  from '../../Components/InputSearchPaciente/InputSearchPaciente';
-import { InputSearchUser } from '../../Components/InputSearchUser/InputSearchUser';
-import { AuthContext } from '../../Context/auth.context';
 import { Navigate } from 'react-router-dom';
 
-
-
+import { AuthContext } from '../../Context/auth.context';
+import { HeaderContext } from '../../Context/Header.context';
+import { AreaEstatistica } from '../../Components/AreaEstatísticas/AreaEstatisticas';
+import { InputSearch } from '../../Components/InputSearchPaciente/InputSearchPaciente';
+import { InputSearchUser } from '../../Components/InputSearchUser/InputSearchUser';
 
 export const HomePage = () => {
   
@@ -31,15 +29,12 @@ export const HomePage = () => {
   }
   
   const { setData } = useContext(HeaderContext)
+  
   useEffect(() => {
     setData({       
       titulo: 'ESTATÍSTICAS E INFORMAÇÕES',}) 
-      
     }, []);
-    
-    
-/*     const { auth } = useContext(AuthContext) */
-  
+      
     const render = () => {
         return (
           <>
@@ -53,7 +48,6 @@ export const HomePage = () => {
       )
     }
 
-/*     return auth.isLogged ? render() : <Navigate to={'./login'}/> */
     return !!tokenUser && (tokenUser === localToken) ? render() : <Navigate to='/login'/>;
   }
   
