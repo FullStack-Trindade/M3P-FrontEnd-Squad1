@@ -1,4 +1,5 @@
 import CardEstatistica from '../CardEstatistica/CardEstatistica';
+import CardEstatisticaADM from '../CardEstatisticaADM/CardEstatisticaADM';
 import * as Styled from './AreaEstatisticas.style';
 import React, { useState, useEffect } from "react";
 import { ImUsers, ImDroplet } from 'react-icons/im';
@@ -6,6 +7,7 @@ import { ImUsers, ImDroplet } from 'react-icons/im';
 import { FaLaptopMedical } from 'react-icons/fa';
 
 function EstatisticasSistema() {
+  const [users, setUsers] = useState([]);
   const [pacientes, setPacientes] = useState([]);
   const [consultas, setConsultas] = useState([]);
   const [exames, setExames] = useState([]);
@@ -22,6 +24,11 @@ function EstatisticasSistema() {
   };
 
   useEffect(() => {
+    const GetUsers = async () => {
+      const usersDoDB = await fetchData('users');
+      setUsers(usersDoDB)
+    }
+
     const getPacientes = async () => {
       const pacientesDoDB = await fetchData('pacientes');
       setPacientes(pacientesDoDB);
@@ -37,10 +44,15 @@ function EstatisticasSistema() {
       setExames(examesDoDB);
     };
 
+    GetUsers();
     getPacientes();
     getConsultas();
     getExames();
   }, []);
+
+  const totalUsers = () => {
+    return users.length;
+  }
 
   const totalPacientes = () => {
     return pacientes.length;
@@ -75,8 +87,27 @@ function EstatisticasSistema() {
     },
   ];
 
+  const dataCardADM = [
+    {
+      id: '1',
+      icone: <ImUsers/>,
+      resultado: totalUsers(),
+      legenda: 'Usuários',
+    },
+  ];
+
   return (
     <>
+      <Styled.ContainerEstatisticas>
+        <h2>Estatísticas do Sistema do Administrador</h2>
+        <Styled.ContainerCardEstatisticas>
+          {dataCardADM.map(estatistica => (
+            <CardEstatisticaADM key={estatistica.id} dataCardADM={estatistica}/>
+          ))}
+        </Styled.ContainerCardEstatisticas>
+      </Styled.ContainerEstatisticas>
+
+    
       <Styled.ContainerEstatisticas>
         <h2>Estatísticas do Sistema</h2>
         <Styled.ContainerCardEstatisticas>
@@ -86,6 +117,8 @@ function EstatisticasSistema() {
         </Styled.ContainerCardEstatisticas>
       </Styled.ContainerEstatisticas>
     </>
+
+
   );
 }
 

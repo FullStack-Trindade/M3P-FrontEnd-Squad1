@@ -43,8 +43,9 @@ export const FormExame = ({paciente}) => {
   };
 
   const submitForm = async (exameData) => {
-    const data = {...exameData, pacienteId: paciente.id}
+    const data = {...exameData}
     const exame = await ExameService.CreateExame(data);
+    console.log(data);
 
     if (!exame) {
       alert('Exame Cadastrado');
@@ -83,83 +84,113 @@ export const FormExame = ({paciente}) => {
         <Styled.InputGroup>
 
           <InputComponent $width={'350%'}
-            id='exameNome'
+            id='id_patient'
             type='string'
-            placeholder='Nome do Exame'
-            label='Nome do Exame'
-            name='exameNome'
+            placeholder='Identificador do médico'
+            label='Id do Paciente'
+            name='id_patient'
             register={{
-              ...register('exameNome', {
+              ...register('id_patient', {
                 required: true,
                 minLenght: 5 ,
                 maxLenght: 50 ,
               })
             }}
-            error={errors.exameNome}
+            error={errors.id_patient}
+          />
+          <InputComponent $width={'350%'}
+            id='id_doctor'
+            type='string'
+            placeholder='Identificador do médico'
+            label='Id do médico'
+            name='id_doctor'
+            register={{
+              ...register('id_doctor', {
+                required: true,
+                minLenght: 5 ,
+                maxLenght: 50 ,
+              })
+            }}
+            error={errors.id_doctor}
+          />
+          <InputComponent $width={'350%'}
+            id='nameExam'
+            type='string'
+            placeholder='Nome do Exame'
+            label='Nome do Exame'
+            name='exameNome'
+            register={{
+              ...register('nameExam', {
+                required: true,
+                minLenght: 5 ,
+                maxLenght: 50 ,
+              })
+            }}
+            error={errors.nameExam}
           />
 
 
           <InputComponent $width={'100%'}
-            id='dataExame'
+            id='dateExam'
             type='date'
             placeholder='Digite a data'
             label='Data da Exame'
             name='dataExame'
             register={{
-              ...register('dataExame', {
+              ...register('dateExam', {
                 required: true,
               })
             }}
-            error={errors.dataExame}
+            error={errors.dateExam}
           />
 
           <InputComponent $width={'100%'}
-            id='hora'
+            id='hourExam'
             type='hour'
             placeholder='Digite o hora do exame'
             label='Hora do exame'
             name='hora'
             register={{
-              ...register('hora', {
+              ...register('hourExam', {
                 required: true,
               })
             }}
-            error={errors.nome}
+            error={errors.hourExam}
           />
         </Styled.InputGroup>
 
         <Styled.InputGroup  >
 
           <InputComponent
-            id='tipoExame'
+            id='typeExam'
             type='string'
             placeholder='Tipo de Exame'
             name='tipoExame'
             label='Tipo de Exame'
             register={{
-              ...register('tipoExame', {
+              ...register('typeExam', {
                 required: true,
                 minLenght: 5 ,
                 maxLenght: 30 ,
               })
             }}
-            error={errors.tipoExame}
+            error={errors.typeExam}
           />
 
           <InputComponent 
-            id='labExame'
+            id='labExam'
             type='string'
             placeholder='Laboratório'
             name='labExame'
             label='Laboratório'
             register={{
-              ...register('labExame', {
+              ...register('labExam', {
                 required: true,
                 minLenght: 5 ,
                 maxLenght: 30 ,
               })
             }}
-            error={errors.labExame}
+            error={errors.labExam}
           />
 
         </Styled.InputGroup>
@@ -168,17 +199,17 @@ export const FormExame = ({paciente}) => {
 
 
           <InputComponent 
-            id='urlExame'
+            id='urlExam'
             type='url'
             placeholder='URL do Documento do Exame'
             name='urlExame'
             label='URL do Documento do Exame'
             register={{
-              ...register('urlExame', {
+              ...register('urlExam', {
                 required: false,
               })
             }}
-            error={errors.urlExame}
+            error={errors.urlExam}
           />
 
         </Styled.InputGroup>
@@ -187,19 +218,19 @@ export const FormExame = ({paciente}) => {
 
 
           <InputComponent $height={'220px'}
-            id='resultadoExame'
+            id='resultExam'
             type='textarea'
             placeholder='Resultado do Exame'
-            name='resultadoExame'
+            name='resultExam'
             label='Resultado do Exame'
             register={{
-              ...register('resultadoExame', {
+              ...register('resultExam', {
                 required: true,
                 minLenght: 15 ,
                 maxLenght: 1000 ,
               })
             }}
-            error={errors.resultadoExame}
+            error={errors.resultExam}
           />
 
         </Styled.InputGroup>
