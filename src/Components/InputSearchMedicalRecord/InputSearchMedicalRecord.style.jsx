@@ -45,4 +45,10 @@ export const CardsArea = styled.div`
     display: flex;
     flex-direction: column;
     margin: 0;
+
+    p {
+        font-size: 1rem;
+        text-align: center;
+        margin: 5vw 0 0 0
+    }
 `;
