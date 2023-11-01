@@ -1,31 +1,50 @@
-import { LocalStorageService } from "./LocalStorage.service";
-
-const API_URL = `http://localhost:${import.meta.env.VITE_SERVER_PORT}/api/usuarios`
-
-const Get = () => {
+//const API_URL = `http://localhost:${import.meta.env.VITE_SERVER_PORT}/api/usuarios`
+const API_URL = `http://localhost:3000/api/usuarios`
+/* const Get = () => {
     const fetchUser = async() => {
         const response = await fetch(API_URL);
         const data = await response.json();
-        return data;
-    }
-
     return fetchUser();
-}
+    }
+  } */
 
+const Get = async () => {
+   /*  return localStorage.getItem('users')  ? JSON.parse(localStorage.getItem('users')) : null */
+    const response = await fetch(API_URL);
+    const data = await response.json();
 
+    return data;
+   }
+   
 
-/* const Create = async(data) => {
+const Create = async(data) => {
+  
+  const objeto = {
+    "name": data.name,
+    "gender": data.gender,	
+    "cpf": data.cpf,
+    "phone": data.phone,
+    "email": data.email,
+    "password":data.password,
+    "id_type": data.id_type	
+  }
+      
+      console.log(objeto)
       const response = await fetch(API_URL, {
         method: 'POST',
         headers: {
-            'Accept': 'aplication/json',
-            'Content-Type': 'aplication/json',
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(objeto)
     });
     const res = await response.json();
-    console.log(res && `Usuario ${data.email} criado com sucesso`);
-} */
+    if(res.status === 201){
+      console.log(`Cadastro ${res.name} realizado com sucesso!`);
+    }else{
+      console.log(res.status)
+    }
+    
+}
 
 const CreateUser = async(UserData) => {
     await fetch(API_URL, {
@@ -88,7 +107,7 @@ const Update = (id, newUser) => {
 
 export const UserService = {
     Get,
- /*    Create, */
+    Create,
     CreateUser,
     Show,
     ShowByName,

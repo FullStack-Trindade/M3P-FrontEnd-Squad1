@@ -61,19 +61,19 @@ export const FormUsuario = () => {
   const genders = [
     {
       id: 1,
-      value: "1",
+      value: "MASCULINO",
       label: "MASCULINO",
     },
 
     {
       id: 2,
-      value: "2",
+      value: "FEMININO",
       label: "FEMININO",
     },
 
     {
       id: 3,
-      value: "3",
+      value: "NAO_INFORMADO",
       label: "NAO_INFORMADO",
     },
   ];
@@ -86,24 +86,36 @@ export const FormUsuario = () => {
     },
 
     {
-      id: 2,
-      value: "2",
+      id: 0,
+      value: "0",
       label: "Administrador",
     },
 
     {
-      id: 3,
-      value: "3",
+      id: 2,
+      value: "2",
       label: "Enfermeiro",
     },
   ];
 
+  const onSubmitForm = (data) => {
+    const cpfValue = data.cpf;
+    
+    if (validarCPF(cpfValue)) {
+
+      createUser(data); // CPF válido, continua com o envio do formulário
+    } else {
+      setValue("cpf", "", { shouldValidate: true }); // Limpa e seta um erro no campo CPF
+      alert("CPF inválido. Por favor, insira um CPF válido.");
+    }
+  };
+  
  
 
   const createUser = (UserData) => {
-    UserService.CreateUser(UserData)
-      .then((response) => {
-        console.log("Usuário cadastrado com sucesso:", response);
+    UserService.Create(UserData)
+      .then((response) => {        
+        alert("Usuário cadastrado com sucesso:");
         reset();
       })
       .catch((error) => {
@@ -134,17 +146,7 @@ export const FormUsuario = () => {
   };
 
 
-  const onSubmitForm = (data) => {
-    const cpfValue = data.cpf;
-  
-    if (validarCPF(cpfValue)) {
-      createUser(data); // CPF válido, continua com o envio do formulário
-    } else {
-      setValue("cpf", "", { shouldValidate: true }); // Limpa e seta um erro no campo CPF
-      alert("CPF inválido. Por favor, insira um CPF válido.");
-    }
-  };
-  
+
   const [isLoading, setIsLoading] = useState();
 
   return (
@@ -273,7 +275,7 @@ export const FormUsuario = () => {
             name="password"
             label="Senha"
             register={{
-              ...register("senha", {
+              ...register("password", {
                 required: true,
               }),
             }}
