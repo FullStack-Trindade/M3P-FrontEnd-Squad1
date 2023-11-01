@@ -17,6 +17,7 @@ export const AuthProvider = ({ children }) => {
     const [idUser, setIdUser] = useState();
     const [tokenUser, setTokenUser] = useState();
     const [idType, setIdType] = useState();
+
     
     return (
         <AuthContext.Provider 
@@ -28,7 +29,7 @@ export const AuthProvider = ({ children }) => {
                 tokenUser, 
                 setTokenUser, 
                 idType, 
-                setIdType 
+                setIdType
             }}
         >
             { children }

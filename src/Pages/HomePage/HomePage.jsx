@@ -37,8 +37,8 @@ export const HomePage = () => {
       
     }, []);
     
-/*     
-    const { auth } = useContext(AuthContext) */
+    
+/*     const { auth } = useContext(AuthContext) */
   
     const render = () => {
         return (
@@ -54,7 +54,7 @@ export const HomePage = () => {
     }
 
 /*     return auth.isLogged ? render() : <Navigate to={'./login'}/> */
-    return !!tokenUser && (tokenUser === localToken) ? <Navigate to='./login' /> : render();
+    return !!tokenUser && (tokenUser === localToken) ? render() : <Navigate to='/login'/>;
   }
   
 
