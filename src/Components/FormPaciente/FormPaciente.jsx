@@ -1,6 +1,7 @@
 import * as Styled from "./FormPaciente.style";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 import { InputComponent } from "../Form/InputComponent/InputComponent";
 import { SelectComponent } from "../Form/SelectComponent/SelectComponent";
@@ -77,6 +78,8 @@ export const FormPaciente = ({ id }) => {
     formState: { errors },
   } = useForm();
 
+  const navigate = useNavigate();
+
   const [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [idUser, setIdUser] = useState(false);
@@ -87,7 +90,8 @@ export const FormPaciente = ({ id }) => {
   const [saveButtonDisabled, setSaveButtonDisabled] = useState(false);
   const [deleteButtonDisabled, setDeleteButtonDisabled] = useState(false);
   const [formInputsDisabled, setformInputsDisabled] = useState(false);
-  const [specialFormInputsDisabled, setSpecialFormInputsDisabled] = useState(false);
+  const [specialFormInputsDisabled, setSpecialFormInputsDisabled] =
+    useState(false);
 
   //se vier com ID busca os dados do paciente
 
@@ -101,6 +105,7 @@ export const FormPaciente = ({ id }) => {
   }, []);
 
   useEffect(() => {
+    //mudar para switch (formMode) { case "read": set ....; breack;case... default:return}
     if (formMode === "read") {
       setEditButtonDisabled(false);
       setSaveButtonDisabled(true);
@@ -180,15 +185,6 @@ export const FormPaciente = ({ id }) => {
     });
   };
 
-  ////////////////////////////////
-  const createPaciente = () => {
-    console.log("ainda não será implantada");
-  };
-
-  const deletePaciente = () => {
-    console.log("ainda não será implantada");
-  };
-
   const buscaCEP = async () => {
     CEPService.Get(watch("cep")).then((response) => {
       setValue("city", response.localidade);
@@ -199,139 +195,110 @@ export const FormPaciente = ({ id }) => {
 
   const submitForm = async (data) => {
     setIsLoading(true);
+    formMode == "edit" ? updatePaciente(data) : createPaciente(data);
+    setIsLoading(false);
+  };
 
-    if (formMode == "edit") {
-      alert("lógica de atualizar");
-    } else {
-      alert("lógica de cadsatrar");
-    }
+  const createPaciente = async (pacienteData) => {
+    try {
+      //passo 1 - verificar se já existe usuário cadastrado com esse cpf ou email
+      const searchedUser = {
+        cpf: pacienteData.cpf,
+        email: pacienteData.email,
+      };
+      const userInDb = await UserService.SearchByCpfEmail(searchedUser);
 
-    // let newUser = null;
-    // let newPatient = null;
-    // let newInsuranceVality = null;
+      if (userInDb) {
+        alert("Já existe um usuário com este CPF ou e-mail.");
+      } else {
+        // passo 2 - não existe usuário. Criar Usuário
 
-    // //Gambiarra para arrumar o problema do valitynumber
+        const postUsuarioDb = {
+          name: pacienteData.name,
+          gender: pacienteData.gender,
+          cpf: pacienteData.cpf,
+          email: pacienteData.email,
+          password: pacienteData.cpf,
+          phone: pacienteData.phone,
+          id_type: "3",
+        };
 
-    // if (pacienteData.insuranceVality === "") {
-    //   newInsuranceVality = "9999-12-12";
-    // } else {
-    //   newInsuranceVality = pacienteData.insuranceVality;
-    // }
+        const newUser = UserService.Create(postUsuarioDb);
 
-    // try {
-    //   const searchedUser = {
-    //     cpf: pacienteData.cpf,
-    //     email: pacienteData.email,
-    //   };
-    //   const userExist = await UserService.SearchByCpfEmail(searchedUser);
+        // passo 3 - quando usuário criado com sucesso criar cadastro do paciente (vinculando ao novo ID criado)
 
-    //   console.log(userExist);
+        if (newUser.status === 201) {
+          //Gambiarra para arrumar o problema do valitynumber
 
-    //   if (userExist === null) {
-    //     const postUsuarioDb = {
-    //       name: pacienteData.name,
-    //       gender: pacienteData.gender,
-    //       cpf: pacienteData.cpf,
-    //       email: pacienteData.email,
-    //       password: pacienteData.cpf,
-    //       phone: pacienteData.phone,
-    //       id_type: "3",
-    //     };
+          if (pacienteData.insuranceVality === "") {
+            newInsuranceVality = "9999-12-12";
+          } else {
+            newInsuranceVality = pacienteData.insuranceVality;
+          }
 
-    //     newUser = await UserService.Create(postUsuarioDb);
+          const postPacientDb = {
+            birth: pacienteData.birth,
+            idUser: newUser.id,
+            maritalStatus: pacienteData.maritalStatus,
+            rg: pacienteData.rg,
+            orgaoExpedidor: pacienteData.orgaoExpedidor,
+            birthplace: pacienteData.birthplace,
+            emergencyContact: pacienteData.emergencyContact,
+            alergiesList: pacienteData.alergiesList,
+            specificCares: pacienteData.specificCares,
+            healthInsurance: pacienteData.healthInsurance,
+            insuranceNumber: pacienteData.insuranceNumber,
+            insuranceVality: newInsuranceVality,
+            //gambi
+            adress: {
+              cep: pacienteData.cep,
+              city: pacienteData.city,
+              state: pacienteData.state,
+              street: pacienteData.street,
+              number: pacienteData.number,
+              complement: pacienteData.complement,
+              neighborhood: pacienteData.neighborhood,
+              reference: pacienteData.reference,
+            },
+          };
 
-    //     const postPacientDb = {
-    //       birth: pacienteData.birth,
-    //       idUser: newUser.id,
-    //       maritalStatus: pacienteData.maritalStatus,
-    //       rg: pacienteData.rg,
-    //       orgaoExpedidor: pacienteData.orgaoExpedidor,
-    //       birthplace: pacienteData.birthplace,
-    //       emergencyContact: pacienteData.emergencyContact,
-    //       alergiesList: pacienteData.alergiesList,
-    //       specificCares: pacienteData.specificCares,
-    //       healthInsurance: pacienteData.healthInsurance,
-    //       insuranceNumber: pacienteData.insuranceNumber,
-    //       insuranceVality: newInsuranceVality,
-    //       //gambi
-    //       adress: {
-    //         cep: pacienteData.cep,
-    //         city: pacienteData.city,
-    //         state: pacienteData.state,
-    //         street: pacienteData.street,
-    //         number: pacienteData.number,
-    //         complement: pacienteData.complement,
-    //         neighborhood: pacienteData.neighborhood,
-    //         reference: pacienteData.reference,
-    //       },
-    //     };
+          const newPaciente = await PacienteService.Create(postPacientDb);
+          if (newPaciente.status === 201) {
+            alert("Cadastro bem-sucedido");
+            reset();
+          } else {
+            alert("Erro ao cadastrar paciente");
+          }
+        } else {
+          alert("Erro ao cadastrar usuário");
+        }
+      }
+    } catch (error) {}
+    console.error("Erro geral:", error);
+  };
 
-    //     newPatient = await PacienteService.Create(postPacientDb);
-    //     alert("Usuário/ Paciente cadastrado com sucesso");
-    //     setIsSubmitSuccessful(true);
-    //     reset();
-    //     return;
-    //   }
-    //   if (userExist.id_type !== 3) {
-    //     const patientExist = await PacienteService.SearchByUserId(userExist.id);
-    //     console.log(patientExist);
-    //     if (patientExist === null) {
-    //       const postPacientDb = {
-    //         birth: pacienteData.birth,
-    //         idUser: userExist.id,
-    //         maritalStatus: pacienteData.maritalStatus,
-    //         rg: pacienteData.rg,
-    //         orgaoExpedidor: pacienteData.orgaoExpedidor,
-    //         birthplace: pacienteData.birthplace,
-    //         emergencyContact: pacienteData.emergencyContact,
-    //         alergiesList: pacienteData.alergiesList,
-    //         specificCares: pacienteData.specificCares,
-    //         healthInsurance: pacienteData.healthInsurance,
-    //         insuranceNumber: pacienteData.insuranceNumber,
-    //         insuranceVality: newInsuranceVality,
-    //         //gambi
-    //         adress: {
-    //           cep: pacienteData.cep,
-    //           city: pacienteData.city,
-    //           state: pacienteData.state,
-    //           street: pacienteData.street,
-    //           number: pacienteData.number,
-    //           complement: pacienteData.complement,
-    //           neighborhood: pacienteData.neighborhood,
-    //           reference: pacienteData.reference,
-    //         },
-    //       };
+  const updatePaciente = (pacienteData) => {
+    alert(`Id do paciente: ${id} e Id do Usuário: ${idUser}`);
+    console.log(pacienteData);
+    // redirecionar para a home
+  };
 
-    //       newPatient = await PacienteService.Create(postPacientDb);
-
-    //       setIsSubmitSuccessful(true);
-    //       alert(
-    //         `Cadastro de Paciente para o usuário ${userExist.id} realizado com sucesso.`
-    //       );
-    //       reset();
-    //       return;
-    //     } else {
-    //       console.log(
-    //         "foi encontrado um cadastro de paciente vinculado ao cpf ou email informado, por isso não pode ser cadastrado"
-    //       );
-    //       alert(
-    //         "Esse usuário já possui um cadastro de paciente. Cadastro não realizado."
-    //       );
-    //     }
+  const deletePaciente = () => {
+    alert("Aguardando");
+    // PacienteService.Delete(id).then((response) => {
+    //   if ((response.status = 202)) {
+    //     UserService.Delete(idUser).then((response) => {
+    //       if ((response.status = 202)) {
+    //         alert("Paciente Deletado com Sucesso");
+    //         navigate("/");
+    //       } else {
+    //         alert("Erro ao Deletar o Paciente");
+    //       }
+    //     });
     //   } else {
-    //     console.log(
-    //       "foi encontrado usuario pelo email ou cpf, por isso não pode ser cadastrado"
-    //     );
-    //     alert(
-    //       "Não é possível cadastrar esse usuário/ paciente. Verifique com o administrador"
-    //     );
+    //     alert("Erro ao Deletar o Paciente");
     //   }
-    // } catch (error) {
-    //   setIsLoading(false);
-    //   console.error("Erro ao cadastrar usuário e paciente:", error);
-    //   console.error("Detalhes do erro:", error.message);
-    //   console.error("Stack trace:", error.stack);
-    // }
+    // });
   };
 
   useEffect(() => {
