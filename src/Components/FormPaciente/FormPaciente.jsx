@@ -80,31 +80,56 @@ export const FormPaciente = ({ id }) => {
   const [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [idUser, setIdUser] = useState(false);
- 
- //Estados dos botões
-  const [editButton, setEditButton] = useState(false);
-  const [saveButton, setSaveButton] = useState(false);
-  const [deleteButton, setDeleteButton] = useState(false);
+
+  //Estados dos botões
+  const [formMode, setFormMode] = useState(null);
+  const [editButtonDisabled, setEditButtonDisabled] = useState(false);
+  const [saveButtonDisabled, setSaveButtonDisabled] = useState(false);
+  const [deleteButtonDisabled, setDeleteButtonDisabled] = useState(false);
+  const [formInputsDisabled, setformInputsDisabled] = useState(false);
+  const [specialFormInputsDisabled, setSpecialFormInputsDisabled] = useState(false);
 
   //se vier com ID busca os dados do paciente
- 
+
   useEffect(() => {
     if (id) {
       buscarDadosPacienteCadastrado(id);
-      setEditButton(false);
-      setSaveButton(true);
-      setDeleteButton(true);
+      setFormMode("read");
     } else {
-      setEditButton(true);
-      setSaveButton(false);
-      setDeleteButton(true);
+      setFormMode("register");
     }
   }, []);
+
+  useEffect(() => {
+    if (formMode === "read") {
+      setEditButtonDisabled(false);
+      setSaveButtonDisabled(true);
+      setDeleteButtonDisabled(true);
+      setformInputsDisabled(true);
+      setSpecialFormInputsDisabled(true);
+    }
+    if (formMode === "edit") {
+      setEditButtonDisabled(false);
+      setSaveButtonDisabled(false);
+      setDeleteButtonDisabled(false);
+      setformInputsDisabled(false);
+      setSpecialFormInputsDisabled(true);
+    }
+    if (formMode === "register") {
+      setEditButtonDisabled(true);
+      setSaveButtonDisabled(false);
+      setDeleteButtonDisabled(true);
+      setformInputsDisabled(false);
+      setSpecialFormInputsDisabled(false);
+    } else {
+      return;
+    }
+  }, [formMode]);
 
   const buscarDadosPacienteCadastrado = (id) => {
     PacienteService.Show(id).then((response) => {
       if (response) {
-                setValue("birth", response.birth);
+        setValue("birth", response.birth);
         setValue("idUser", response.idUser);
         setValue("maritalStatus", response.maritalStatus);
         setValue("rg", response.rg);
@@ -155,8 +180,6 @@ export const FormPaciente = ({ id }) => {
     });
   };
 
-
-
   ////////////////////////////////
   const createPaciente = () => {
     console.log("ainda não será implantada");
@@ -174,135 +197,141 @@ export const FormPaciente = ({ id }) => {
     });
   };
 
-  const submitForm = async (pacienteData) => {
+  const submitForm = async (data) => {
     setIsLoading(true);
 
-    let newUser = null;
-    let newPatient = null;
-    let newInsuranceVality = null;
-
-    //Gambiarra para arrumar o problema do valitynumber
-
-    if (pacienteData.insuranceVality === "") {
-      newInsuranceVality = "9999-12-12";
+    if (formMode == "edit") {
+      alert("lógica de atualizar");
     } else {
-      newInsuranceVality = pacienteData.insuranceVality;
+      alert("lógica de cadsatrar");
     }
 
-    try {
-      const searchedUser = {
-        cpf: pacienteData.cpf,
-        email: pacienteData.email,
-      };
-      const userExist = await UserService.SearchByCpfEmail(searchedUser);
+    // let newUser = null;
+    // let newPatient = null;
+    // let newInsuranceVality = null;
 
-      console.log(userExist);
+    // //Gambiarra para arrumar o problema do valitynumber
 
-      if (userExist === null) {
-        const postUsuarioDb = {
-          name: pacienteData.name,
-          gender: pacienteData.gender,
-          cpf: pacienteData.cpf,
-          email: pacienteData.email,
-          password: pacienteData.cpf,
-          phone: pacienteData.phone,
-          id_type: "3",
-        };
+    // if (pacienteData.insuranceVality === "") {
+    //   newInsuranceVality = "9999-12-12";
+    // } else {
+    //   newInsuranceVality = pacienteData.insuranceVality;
+    // }
 
-        newUser = await UserService.Create(postUsuarioDb);
+    // try {
+    //   const searchedUser = {
+    //     cpf: pacienteData.cpf,
+    //     email: pacienteData.email,
+    //   };
+    //   const userExist = await UserService.SearchByCpfEmail(searchedUser);
 
-        const postPacientDb = {
-          birth: pacienteData.birth,
-          idUser: newUser.id,
-          maritalStatus: pacienteData.maritalStatus,
-          rg: pacienteData.rg,
-          orgaoExpedidor: pacienteData.orgaoExpedidor,
-          birthplace: pacienteData.birthplace,
-          emergencyContact: pacienteData.emergencyContact,
-          alergiesList: pacienteData.alergiesList,
-          specificCares: pacienteData.specificCares,
-          healthInsurance: pacienteData.healthInsurance,
-          insuranceNumber: pacienteData.insuranceNumber,
-          insuranceVality: newInsuranceVality,
-          //gambi
-          adress: {
-            cep: pacienteData.cep,
-            city: pacienteData.city,
-            state: pacienteData.state,
-            street: pacienteData.street,
-            number: pacienteData.number,
-            complement: pacienteData.complement,
-            neighborhood: pacienteData.neighborhood,
-            reference: pacienteData.reference,
-          },
-        };
+    //   console.log(userExist);
 
-        newPatient = await PacienteService.Create(postPacientDb);
-        alert("Usuário/ Paciente cadastrado com sucesso");
-        setIsSubmitSuccessful(true);
-        reset();
-        return;
-      }
-      if (userExist.id_type !== 3) {
-        const patientExist = await PacienteService.SearchByUserId(userExist.id);
-        console.log(patientExist);
-        if (patientExist === null) {
-          const postPacientDb = {
-            birth: pacienteData.birth,
-            idUser: userExist.id,
-            maritalStatus: pacienteData.maritalStatus,
-            rg: pacienteData.rg,
-            orgaoExpedidor: pacienteData.orgaoExpedidor,
-            birthplace: pacienteData.birthplace,
-            emergencyContact: pacienteData.emergencyContact,
-            alergiesList: pacienteData.alergiesList,
-            specificCares: pacienteData.specificCares,
-            healthInsurance: pacienteData.healthInsurance,
-            insuranceNumber: pacienteData.insuranceNumber,
-            insuranceVality: newInsuranceVality,
-            //gambi
-            adress: {
-              cep: pacienteData.cep,
-              city: pacienteData.city,
-              state: pacienteData.state,
-              street: pacienteData.street,
-              number: pacienteData.number,
-              complement: pacienteData.complement,
-              neighborhood: pacienteData.neighborhood,
-              reference: pacienteData.reference,
-            },
-          };
+    //   if (userExist === null) {
+    //     const postUsuarioDb = {
+    //       name: pacienteData.name,
+    //       gender: pacienteData.gender,
+    //       cpf: pacienteData.cpf,
+    //       email: pacienteData.email,
+    //       password: pacienteData.cpf,
+    //       phone: pacienteData.phone,
+    //       id_type: "3",
+    //     };
 
-          newPatient = await PacienteService.Create(postPacientDb);
+    //     newUser = await UserService.Create(postUsuarioDb);
 
-          setIsSubmitSuccessful(true);
-          alert(
-            `Cadastro de Paciente para o usuário ${userExist.id} realizado com sucesso.`
-          );
-          reset();
-          return;
-        } else {
-          console.log(
-            "foi encontrado um cadastro de paciente vinculado ao cpf ou email informado, por isso não pode ser cadastrado"
-          );
-          alert(
-            "Esse usuário já possui um cadastro de paciente. Cadastro não realizado."
-          );
-        }
-      } else {
-        console.log(
-          "foi encontrado usuario pelo email ou cpf, por isso não pode ser cadastrado"
-        );
-        alert(
-          "Não é possível cadastrar esse usuário/ paciente. Verifique com o administrador"
-        );
-      }
-    } catch (error) {
-      setIsLoading(false);
-      console.error("Erro ao cadastrar usuário e paciente:", error);
-      console.error("Detalhes do erro:", error.message);
-      console.error("Stack trace:", error.stack);
-    }
+    //     const postPacientDb = {
+    //       birth: pacienteData.birth,
+    //       idUser: newUser.id,
+    //       maritalStatus: pacienteData.maritalStatus,
+    //       rg: pacienteData.rg,
+    //       orgaoExpedidor: pacienteData.orgaoExpedidor,
+    //       birthplace: pacienteData.birthplace,
+    //       emergencyContact: pacienteData.emergencyContact,
+    //       alergiesList: pacienteData.alergiesList,
+    //       specificCares: pacienteData.specificCares,
+    //       healthInsurance: pacienteData.healthInsurance,
+    //       insuranceNumber: pacienteData.insuranceNumber,
+    //       insuranceVality: newInsuranceVality,
+    //       //gambi
+    //       adress: {
+    //         cep: pacienteData.cep,
+    //         city: pacienteData.city,
+    //         state: pacienteData.state,
+    //         street: pacienteData.street,
+    //         number: pacienteData.number,
+    //         complement: pacienteData.complement,
+    //         neighborhood: pacienteData.neighborhood,
+    //         reference: pacienteData.reference,
+    //       },
+    //     };
+
+    //     newPatient = await PacienteService.Create(postPacientDb);
+    //     alert("Usuário/ Paciente cadastrado com sucesso");
+    //     setIsSubmitSuccessful(true);
+    //     reset();
+    //     return;
+    //   }
+    //   if (userExist.id_type !== 3) {
+    //     const patientExist = await PacienteService.SearchByUserId(userExist.id);
+    //     console.log(patientExist);
+    //     if (patientExist === null) {
+    //       const postPacientDb = {
+    //         birth: pacienteData.birth,
+    //         idUser: userExist.id,
+    //         maritalStatus: pacienteData.maritalStatus,
+    //         rg: pacienteData.rg,
+    //         orgaoExpedidor: pacienteData.orgaoExpedidor,
+    //         birthplace: pacienteData.birthplace,
+    //         emergencyContact: pacienteData.emergencyContact,
+    //         alergiesList: pacienteData.alergiesList,
+    //         specificCares: pacienteData.specificCares,
+    //         healthInsurance: pacienteData.healthInsurance,
+    //         insuranceNumber: pacienteData.insuranceNumber,
+    //         insuranceVality: newInsuranceVality,
+    //         //gambi
+    //         adress: {
+    //           cep: pacienteData.cep,
+    //           city: pacienteData.city,
+    //           state: pacienteData.state,
+    //           street: pacienteData.street,
+    //           number: pacienteData.number,
+    //           complement: pacienteData.complement,
+    //           neighborhood: pacienteData.neighborhood,
+    //           reference: pacienteData.reference,
+    //         },
+    //       };
+
+    //       newPatient = await PacienteService.Create(postPacientDb);
+
+    //       setIsSubmitSuccessful(true);
+    //       alert(
+    //         `Cadastro de Paciente para o usuário ${userExist.id} realizado com sucesso.`
+    //       );
+    //       reset();
+    //       return;
+    //     } else {
+    //       console.log(
+    //         "foi encontrado um cadastro de paciente vinculado ao cpf ou email informado, por isso não pode ser cadastrado"
+    //       );
+    //       alert(
+    //         "Esse usuário já possui um cadastro de paciente. Cadastro não realizado."
+    //       );
+    //     }
+    //   } else {
+    //     console.log(
+    //       "foi encontrado usuario pelo email ou cpf, por isso não pode ser cadastrado"
+    //     );
+    //     alert(
+    //       "Não é possível cadastrar esse usuário/ paciente. Verifique com o administrador"
+    //     );
+    //   }
+    // } catch (error) {
+    //   setIsLoading(false);
+    //   console.error("Erro ao cadastrar usuário e paciente:", error);
+    //   console.error("Detalhes do erro:", error.message);
+    //   console.error("Stack trace:", error.stack);
+    // }
   };
 
   useEffect(() => {
@@ -315,12 +344,21 @@ export const FormPaciente = ({ id }) => {
   return (
     <Styled.Form onSubmit={handleSubmit(submitForm)}>
       <Styled.Header>
-        <Styled.Title>Identificação</Styled.Title>
+        <Styled.Title>Identificação {formMode}</Styled.Title>
 
         <Styled.LabelSwitch>Editar</Styled.LabelSwitch>
 
         <Styled.SwitchBtn>
-          <Switch disabled={editButton} />
+          <Switch
+            disabled={editButtonDisabled}
+            onClick={() => {
+              if (formMode === "read") {
+                setFormMode("edit");
+              } else {
+                setFormMode("read");
+              }
+            }}
+          />
         </Styled.SwitchBtn>
 
         <Styled.ButtonDel
@@ -328,7 +366,7 @@ export const FormPaciente = ({ id }) => {
           onClick={deletePaciente}
           $active={!errors.email && !errors.password}
           type="button"
-          disabled={deleteButton}
+          disabled={deleteButtonDisabled}
         >
           Deletar
         </Styled.ButtonDel>
@@ -341,7 +379,7 @@ export const FormPaciente = ({ id }) => {
           onSubmit={createPaciente}
           $active={!errors.email && !errors.password}
           type="submit"
-          disabled={errors.email || errors.password || saveButton}
+          disabled={errors.email || errors.password || saveButtonDisabled}
         >
           {isSubmitSuccessful ? "Salvo!" : isLoading ? <Spin /> : "Salvar"}
         </Styled.Button>
@@ -356,7 +394,7 @@ export const FormPaciente = ({ id }) => {
             placeholder="Digite seu Nome"
             label="Nome Completo"
             name="nome"
-            disabled={true}
+            disabled={formInputsDisabled}
             register={{
               ...register("name", {
                 required: true,
@@ -373,7 +411,7 @@ export const FormPaciente = ({ id }) => {
             name="genero"
             label={"Gênero"}
             options={genders}
-            disabled={true}
+            disabled={formInputsDisabled}
             register={{
               ...register("gender", {
                 required: true,
@@ -389,7 +427,7 @@ export const FormPaciente = ({ id }) => {
             name="birth"
             placeholder="Data Nascimento"
             label="Data Nascimento"
-            disabled={true}
+            disabled={formInputsDisabled}
             register={{
               ...register("birth", {
                 required: true,
@@ -407,7 +445,7 @@ export const FormPaciente = ({ id }) => {
             name="cpf"
             placeholder="Digite seu CPF"
             label="CPF"
-            disabled={true}
+            disabled={specialFormInputsDisabled}
             register={{
               ...register("cpf", {
                 required: true,
@@ -423,7 +461,7 @@ export const FormPaciente = ({ id }) => {
             name="rg"
             placeholder="Digite seu RG"
             label="RG"
-            disabled={true}
+            disabled={specialFormInputsDisabled}
             register={{
               ...register("rg", {
                 required: true,
@@ -440,7 +478,7 @@ export const FormPaciente = ({ id }) => {
             name="orgaoExpedidor"
             placeholder="Órgão Expedidor"
             label="Órgão Expedidor"
-            disabled={true}
+            disabled={specialFormInputsDisabled}
             register={{
               ...register("orgaoExpedidor", {
                 required: true,
@@ -456,7 +494,7 @@ export const FormPaciente = ({ id }) => {
             name="maritalStatus"
             label={"Estado Civil"}
             options={estadoCivil}
-            disabled={true}
+            disabled={formInputsDisabled}
             register={{
               ...register("maritalStatus", {
                 required: true,
@@ -474,7 +512,7 @@ export const FormPaciente = ({ id }) => {
             placeholder="Telefone no formato (99) 9 9999-99999"
             name="phone"
             label="Telefone"
-            disabled={true}
+            disabled={formInputsDisabled}
             register={{
               ...register("phone", {
                 required: true,
@@ -490,7 +528,7 @@ export const FormPaciente = ({ id }) => {
             placeholder="Digite o seu email"
             name="email"
             label="E-mail"
-            disabled={true}
+            disabled={specialFormInputsDisabled}
             register={{
               ...register("email", {
                 required: true,
@@ -506,7 +544,7 @@ export const FormPaciente = ({ id }) => {
             placeholder="Naturalidade"
             name="birthplace"
             label="Naturalidade"
-            disabled={true}
+            disabled={formInputsDisabled}
             register={{
               ...register("birthplace", {
                 required: true,
@@ -525,7 +563,7 @@ export const FormPaciente = ({ id }) => {
             placeholder="Digite o telefone no formato (99) 9 9999-99999"
             name="emergencyContact"
             label="Contato de Emergência"
-            disabled={true}
+            disabled={formInputsDisabled}
             register={{
               ...register("emergencyContact", {
                 required: true,
@@ -541,7 +579,7 @@ export const FormPaciente = ({ id }) => {
             placeholder="Possui alergias? Cite quais."
             name="alergiesList"
             label="Alergias"
-            disabled={true}
+            disabled={formInputsDisabled}
             register={{
               ...register("alergiesList", {
                 required: false,
@@ -557,7 +595,7 @@ export const FormPaciente = ({ id }) => {
             placeholder="Digite os cuidados específicos"
             name="specificCares"
             label="Cuidados Específicos"
-            disabled={true}
+            disabled={formInputsDisabled}
             register={{
               ...register("specificCares", {
                 required: false,
@@ -579,7 +617,7 @@ export const FormPaciente = ({ id }) => {
             placeholder="Informe seu convênio"
             label="Convênio"
             name="healthInsurance"
-            disabled={true}
+            disabled={formInputsDisabled}
             register={{
               ...register("healthInsurance", {
                 required: false,
@@ -595,7 +633,7 @@ export const FormPaciente = ({ id }) => {
             placeholder="Digite o número da carteira"
             name="insuranceNumber"
             label="Número do Convênio"
-            disabled={true}
+            disabled={formInputsDisabled}
             register={{
               ...register("insuranceNumber", {
                 required: false,
@@ -611,7 +649,7 @@ export const FormPaciente = ({ id }) => {
             placeholder="Validade"
             name="insuranceVality"
             label="Validade"
-            disabled={true}
+            disabled={formInputsDisabled}
             register={{
               ...register("insuranceVality", {
                 required: false,
@@ -633,7 +671,7 @@ export const FormPaciente = ({ id }) => {
             placeholder="Informe o CEP"
             name="cep"
             label="CEP"
-            disabled={true}
+            disabled={formInputsDisabled}
             register={{
               ...register("cep", { required: true }),
             }}
@@ -647,7 +685,7 @@ export const FormPaciente = ({ id }) => {
             placeholder="Digite a Cidade"
             name="city"
             label="Cidade"
-            disabled={true}
+            disabled={formInputsDisabled}
             register={{
               ...register("city", {
                 required: true,
@@ -663,7 +701,7 @@ export const FormPaciente = ({ id }) => {
             placeholder="Estado"
             name="state"
             label="Estado"
-            disabled={true}
+            disabled={formInputsDisabled}
             register={{
               ...register("state", {
                 required: true,
@@ -681,7 +719,7 @@ export const FormPaciente = ({ id }) => {
             placeholder="Informe seu endereço"
             name="street"
             label="Endereço"
-            disabled={true}
+            disabled={formInputsDisabled}
             register={{
               ...register("street", {
                 required: true,
@@ -697,7 +735,7 @@ export const FormPaciente = ({ id }) => {
             placeholder="Número"
             label="Número"
             name="number"
-            disabled={true}
+            disabled={formInputsDisabled}
             register={{
               ...register("number", {
                 required: true,
@@ -715,7 +753,7 @@ export const FormPaciente = ({ id }) => {
             placeholder="Complemento"
             name="compl"
             label="Complemento"
-            disabled={true}
+            disabled={formInputsDisabled}
             register={{
               ...register("complement", {
                 required: false,
@@ -731,7 +769,7 @@ export const FormPaciente = ({ id }) => {
             placeholder="Digite o seu bairro"
             name="neighborhood"
             label="Bairro"
-            disabled={true}
+            disabled={formInputsDisabled}
             register={{
               ...register("neighborhood", {
                 required: true,
@@ -747,7 +785,7 @@ export const FormPaciente = ({ id }) => {
             placeholder="Referência"
             name="reference"
             label="Ponto de Referência"
-            disabled={true}
+            disabled={formInputsDisabled}
             register={{
               ...register("reference", {
                 required: false,
