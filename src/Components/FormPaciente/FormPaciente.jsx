@@ -11,7 +11,7 @@ import { CEPService } from "../../Service/User.CEP";
 import { PacienteService } from "../../Service/Paciente.service";
 import { UserService } from "../../Service/User.service";
 
-export const FormPaciente = () => {
+export const FormPaciente = ({ id }) => {
   const genders = [
     {
       id: 1,
@@ -79,7 +79,85 @@ export const FormPaciente = () => {
 
   const [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [idUser, setIdUser] = useState(false);
+ 
+ //Estados dos botões
+  const [editButton, setEditButton] = useState(false);
+  const [saveButton, setSaveButton] = useState(false);
+  const [deleteButton, setDeleteButton] = useState(false);
 
+  //se vier com ID busca os dados do paciente
+ 
+  useEffect(() => {
+    if (id) {
+      buscarDadosPacienteCadastrado(id);
+      setEditButton(false);
+      setSaveButton(true);
+      setDeleteButton(true);
+    } else {
+      setEditButton(true);
+      setSaveButton(false);
+      setDeleteButton(true);
+    }
+  }, []);
+
+  const buscarDadosPacienteCadastrado = (id) => {
+    PacienteService.Show(id).then((response) => {
+      if (response) {
+                setValue("birth", response.birth);
+        setValue("idUser", response.idUser);
+        setValue("maritalStatus", response.maritalStatus);
+        setValue("rg", response.rg);
+        setValue("orgaoExpedidor", response.orgaoExpedidor);
+        setValue("birthplace", response.birthplace);
+        setValue("emergencyContact", response.emergencyContact);
+        setValue("alergiesList", response.alergiesList);
+        setValue("specificCares", response.specificCares);
+        setValue("healthInsurance", response.healthInsurance);
+        setValue("insuranceNumber", response.insuranceNumber);
+        setValue("insuranceVality", response.insuranceVality);
+        setValue("cep", response.adress.cep);
+        setValue("city", response.adress.city);
+        setValue("state", response.adress.state);
+        setValue("street", response.adress.street);
+        setValue("number", response.adress.number);
+        setValue("complement", response.adress.complement);
+        setValue("neighborhood", response.adress.neighborhood);
+        setIdUser(response.idUser);
+      } else {
+        alert(
+          "Dados do paciente não podem ser carregados. Tente novamente mais tarde."
+        );
+      }
+    });
+  };
+
+  //quando os dados do paciene são alterados (idUser), então busca os dados do usuário
+  useEffect(() => {
+    if (idUser) {
+      buscarDadosUsuarioCadastrado(idUser);
+    } else {
+    }
+  }, [idUser]);
+
+  const buscarDadosUsuarioCadastrado = (idUser) => {
+    UserService.Get().then((response) => {
+      if (response) {
+        const filteredUser = response.filter((users) =>
+          String(users.id).includes(idUser)
+        );
+        setValue("name", filteredUser[0].name);
+        setValue("gender", filteredUser[0].gender);
+        setValue("cpf", filteredUser[0].cpf);
+        setValue("email", filteredUser[0].email);
+        setValue("phone", filteredUser[0].phone);
+      }
+    });
+  };
+
+
+
+  ////////////////////////////////
   const createPaciente = () => {
     console.log("ainda não será implantada");
   };
@@ -106,7 +184,7 @@ export const FormPaciente = () => {
     //Gambiarra para arrumar o problema do valitynumber
 
     if (pacienteData.insuranceVality === "") {
-      newInsuranceVality = "12-12-9999";
+      newInsuranceVality = "9999-12-12";
     } else {
       newInsuranceVality = pacienteData.insuranceVality;
     }
@@ -242,7 +320,7 @@ export const FormPaciente = () => {
         <Styled.LabelSwitch>Editar</Styled.LabelSwitch>
 
         <Styled.SwitchBtn>
-          <Switch disabled={true} />
+          <Switch disabled={editButton} />
         </Styled.SwitchBtn>
 
         <Styled.ButtonDel
@@ -250,7 +328,7 @@ export const FormPaciente = () => {
           onClick={deletePaciente}
           $active={!errors.email && !errors.password}
           type="button"
-          disabled={true}
+          disabled={deleteButton}
         >
           Deletar
         </Styled.ButtonDel>
@@ -263,7 +341,7 @@ export const FormPaciente = () => {
           onSubmit={createPaciente}
           $active={!errors.email && !errors.password}
           type="submit"
-          disabled={errors.email || errors.password}
+          disabled={errors.email || errors.password || saveButton}
         >
           {isSubmitSuccessful ? "Salvo!" : isLoading ? <Spin /> : "Salvar"}
         </Styled.Button>
@@ -278,6 +356,7 @@ export const FormPaciente = () => {
             placeholder="Digite seu Nome"
             label="Nome Completo"
             name="nome"
+            disabled={true}
             register={{
               ...register("name", {
                 required: true,
@@ -294,6 +373,7 @@ export const FormPaciente = () => {
             name="genero"
             label={"Gênero"}
             options={genders}
+            disabled={true}
             register={{
               ...register("gender", {
                 required: true,
@@ -309,6 +389,7 @@ export const FormPaciente = () => {
             name="birth"
             placeholder="Data Nascimento"
             label="Data Nascimento"
+            disabled={true}
             register={{
               ...register("birth", {
                 required: true,
@@ -326,6 +407,7 @@ export const FormPaciente = () => {
             name="cpf"
             placeholder="Digite seu CPF"
             label="CPF"
+            disabled={true}
             register={{
               ...register("cpf", {
                 required: true,
@@ -341,6 +423,7 @@ export const FormPaciente = () => {
             name="rg"
             placeholder="Digite seu RG"
             label="RG"
+            disabled={true}
             register={{
               ...register("rg", {
                 required: true,
@@ -357,6 +440,7 @@ export const FormPaciente = () => {
             name="orgaoExpedidor"
             placeholder="Órgão Expedidor"
             label="Órgão Expedidor"
+            disabled={true}
             register={{
               ...register("orgaoExpedidor", {
                 required: true,
@@ -372,6 +456,7 @@ export const FormPaciente = () => {
             name="maritalStatus"
             label={"Estado Civil"}
             options={estadoCivil}
+            disabled={true}
             register={{
               ...register("maritalStatus", {
                 required: true,
@@ -389,6 +474,7 @@ export const FormPaciente = () => {
             placeholder="Telefone no formato (99) 9 9999-99999"
             name="phone"
             label="Telefone"
+            disabled={true}
             register={{
               ...register("phone", {
                 required: true,
@@ -404,6 +490,7 @@ export const FormPaciente = () => {
             placeholder="Digite o seu email"
             name="email"
             label="E-mail"
+            disabled={true}
             register={{
               ...register("email", {
                 required: true,
@@ -419,6 +506,7 @@ export const FormPaciente = () => {
             placeholder="Naturalidade"
             name="birthplace"
             label="Naturalidade"
+            disabled={true}
             register={{
               ...register("birthplace", {
                 required: true,
@@ -437,6 +525,7 @@ export const FormPaciente = () => {
             placeholder="Digite o telefone no formato (99) 9 9999-99999"
             name="emergencyContact"
             label="Contato de Emergência"
+            disabled={true}
             register={{
               ...register("emergencyContact", {
                 required: true,
@@ -452,6 +541,7 @@ export const FormPaciente = () => {
             placeholder="Possui alergias? Cite quais."
             name="alergiesList"
             label="Alergias"
+            disabled={true}
             register={{
               ...register("alergiesList", {
                 required: false,
@@ -467,6 +557,7 @@ export const FormPaciente = () => {
             placeholder="Digite os cuidados específicos"
             name="specificCares"
             label="Cuidados Específicos"
+            disabled={true}
             register={{
               ...register("specificCares", {
                 required: false,
@@ -488,6 +579,7 @@ export const FormPaciente = () => {
             placeholder="Informe seu convênio"
             label="Convênio"
             name="healthInsurance"
+            disabled={true}
             register={{
               ...register("healthInsurance", {
                 required: false,
@@ -503,6 +595,7 @@ export const FormPaciente = () => {
             placeholder="Digite o número da carteira"
             name="insuranceNumber"
             label="Número do Convênio"
+            disabled={true}
             register={{
               ...register("insuranceNumber", {
                 required: false,
@@ -518,6 +611,7 @@ export const FormPaciente = () => {
             placeholder="Validade"
             name="insuranceVality"
             label="Validade"
+            disabled={true}
             register={{
               ...register("insuranceVality", {
                 required: false,
@@ -539,9 +633,9 @@ export const FormPaciente = () => {
             placeholder="Informe o CEP"
             name="cep"
             label="CEP"
+            disabled={true}
             register={{
-              ...register("cep",{required: true,}),
-              
+              ...register("cep", { required: true }),
             }}
             error={errors.cep}
           />
@@ -553,6 +647,7 @@ export const FormPaciente = () => {
             placeholder="Digite a Cidade"
             name="city"
             label="Cidade"
+            disabled={true}
             register={{
               ...register("city", {
                 required: true,
@@ -568,6 +663,7 @@ export const FormPaciente = () => {
             placeholder="Estado"
             name="state"
             label="Estado"
+            disabled={true}
             register={{
               ...register("state", {
                 required: true,
@@ -585,6 +681,7 @@ export const FormPaciente = () => {
             placeholder="Informe seu endereço"
             name="street"
             label="Endereço"
+            disabled={true}
             register={{
               ...register("street", {
                 required: true,
@@ -600,6 +697,7 @@ export const FormPaciente = () => {
             placeholder="Número"
             label="Número"
             name="number"
+            disabled={true}
             register={{
               ...register("number", {
                 required: true,
@@ -617,6 +715,7 @@ export const FormPaciente = () => {
             placeholder="Complemento"
             name="compl"
             label="Complemento"
+            disabled={true}
             register={{
               ...register("complement", {
                 required: false,
@@ -632,6 +731,7 @@ export const FormPaciente = () => {
             placeholder="Digite o seu bairro"
             name="neighborhood"
             label="Bairro"
+            disabled={true}
             register={{
               ...register("neighborhood", {
                 required: true,
@@ -647,6 +747,7 @@ export const FormPaciente = () => {
             placeholder="Referência"
             name="reference"
             label="Ponto de Referência"
+            disabled={true}
             register={{
               ...register("reference", {
                 required: false,

@@ -11,6 +11,9 @@ export const SelectComponent = ({
   options = [],
   $width,
   register,
+  disabled,
+  onClick,
+  onChange
 }) => {
   return (
     <Styled.SelectContainer $width={$width}>
@@ -18,7 +21,7 @@ export const SelectComponent = ({
         {label}
       </Styled.Label>
 
-      <Styled.Select $width={$width} id={name} {...register}>
+      <Styled.Select $width={$width} id={name} {...register} disabled = {disabled} onClick = {onClick} onChange = {onChange}>
         
         {options.map((option) => (
           <option key={option.id} value={option.value}>
@@ -46,4 +49,7 @@ SelectComponent.propTypes = {
   ),
   error: PropTypes.any,
   info: PropTypes.string,
+  disabled: PropTypes.any,
+  onClick: PropTypes.any,
+  onChange: PropTypes.any,
 };

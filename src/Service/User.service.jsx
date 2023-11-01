@@ -1,3 +1,5 @@
+const API_URL = `http://localhost:${import.meta.env.VITE_SERVER_PORT}/api`
+
 const fetchUser = async (url, options) => {
   try {
     const response = await fetch(url, options);
@@ -15,7 +17,7 @@ const fetchUser = async (url, options) => {
 
 export const UserService = {
   Create: (data) => {
-    return fetchUser("http://localhost:3000/api/usuario", {
+    return fetchUser(`${API_URL}/usuario`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,14 +26,11 @@ export const UserService = {
     });
   },
   Get: () => {
-    return fetchUser("http://localhost:3333/api/usuarios");
-  },
-  Show: (id) => {
-    return fetchUser(`http://localhost:3333/api/usuarios/${id}`);
+    return fetchUser(`${API_URL}/usuarios`);
   },
   
   SearchByCpfEmail: (data) => {
-    return fetchUser("http://localhost:3000/api/usuarios/search", {
+    return fetchUser(`${API_URL}/usuarios/search`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -40,14 +39,14 @@ export const UserService = {
     });
   },
   Update: (id, data) => {
-    return fetchUser(`http://localhost:3333/api/usuarios/${id}`, {
+    return fetchUser(`${API_URL}/usuarios/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
   },
   Delete: (id) => {
-    return fetchUser(`http://localhost:3333/api/usuarios/${id}`, {
+    return fetchUser(`${API_URL}/usuarios/${id}`, {
       method: "DELETE",
     });
   },

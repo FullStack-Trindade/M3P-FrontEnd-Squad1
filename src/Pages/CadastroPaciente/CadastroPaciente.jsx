@@ -4,13 +4,18 @@ import { HeaderContext } from "../../Context/Header.context";
 
 import { FormPaciente } from "../../Components/FormPaciente/FormPaciente";
 import { InputSearch } from "../../Components/InputSearchPaciente/InputSearchPaciente";
+import { useParams } from "react-router";
 
 export const PacientePage = () => {
   const { setData } = useContext(HeaderContext);
-  useEffect(() => {
+  const {id}= useParams();
+  
+  useEffect(() => { 
     setData({
       titulo: "CADASTRO DE PACIENTES",
+      
     });
+
   }, []);
 
   const render = () => {
@@ -18,7 +23,7 @@ export const PacientePage = () => {
       <Styled.AreaCadastro>
         <Styled.Title>Preencha os campos abaixo para cadastrar um paciente</Styled.Title>
         <Styled.AreaPaciente>
-          <FormPaciente />
+          <FormPaciente id={id}/>
         </Styled.AreaPaciente>
       </Styled.AreaCadastro>
     );
