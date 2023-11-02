@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 
 import { HeaderContext } from '../../Context/Header.context';
 import { PatientRecordService } from '../../Service/PatientRecord.service';
+// import { AuthService } from '../../Service/Auth.service';
 
 /* import CardConsulta from '../../Components/CardConsulta/CardConsulta';
 import CardExame from '../../Components/CardExame/CardExame'; */
@@ -36,6 +37,24 @@ export const ProntuarioPage = () => {
       const filteredPatient = patientsRecordList.filter(value => value.id.toString().includes(patientId))
       setPatientRecord(filteredPatient);
   }, [patientsRecordList, patientId])
+
+  // const { tokenUser, setTokenUser } = useContext(AuthContext);
+  //   const localToken = JSON.parse(localStorage.getItem('token'));
+
+  //   useEffect(() => { 
+  //       if (localToken !== null) {
+  //           fetchAuth() 
+  //       }
+  //   }, [localToken]);
+
+  //   const fetchAuth = async() => {
+  //       const authToken = await AuthService.Get();
+  //       const tokenExists = authToken.filter(auth => auth.token_user === localToken);
+
+  //       if (tokenExists.length === 0) { return }
+        
+  //       setTokenUser(tokenExists[0]?.token_user);
+  //   }
 
     const render = () => {
         return (
@@ -75,5 +94,6 @@ export const ProntuarioPage = () => {
       )
     }
 
+    // return !!tokenUser && (tokenUser === localToken) ? <Navigate to='/' /> : render();
     return render();
   }
