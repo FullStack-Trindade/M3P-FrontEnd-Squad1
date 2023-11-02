@@ -46,6 +46,29 @@ export const FormDiet = ({ patientId }) => {
 
     useEffect(() => { setValue('idPatient', patientId) }, [patientId])
 
+    useEffect(() => {
+        if (dietId !== null) { filterDiet() }
+    }, [dietsList]);
+
+    const [diet, setDiet] = useState([]);
+    const filterDiet = () => {
+        const filteredDiet = dietsList.filter(diet => String(diet.id).includes(dietId));
+        setDiet(filteredDiet);
+    }
+
+    useEffect(() => {
+        if(diet.length > 0) {
+            setValue('idPatient', diet[0].id_patient);
+            setValue('idDoctor', diet[0].id_doctor);
+            setValue('dietName', diet[0].diet_name);
+            setValue('dietType', diet[0].diet_type);
+            setValue('dietDate', diet[0].diet_date);
+            setValue('dietHour', diet[0].diet_hour);
+            setValue('dietDescription', diet[0].diet_description);
+            setValue('status', diet[0].status);
+        }
+    }, [diet])
+
     const isDietRegistered = (dataForm) => {
         let filteredPatientDiets = dietsList.filter(diet => String(diet.id_patient).includes(dataForm.id_patient))
         let filteredDate = filteredPatientDiets.filter(diet => diet.diet_date.includes(dataForm.diet_date))
