@@ -10,6 +10,21 @@ const Get = () => {
     return fetchDiet();
 }
 
+const Create = (data) => {
+    const fetchDiet = async() => {
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify( data )
+        })
+        
+        return response
+    }
+
+    return fetchDiet();
+}
+
 export const DietService = {
-    Get
+    Get,
+    Create
 }
