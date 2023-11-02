@@ -12,6 +12,7 @@ import { InputComponent } from '../Form/InputComponent/InputComponent';
 
 export const FormDiet = ({ patientId }) => {
     const {
+        handleSubmit,
         register,
         reset,
         formState: { errors },
@@ -39,10 +40,25 @@ export const FormDiet = ({ patientId }) => {
         UserService.Get().then(result => setUsersList(result));
     }
 
+    const onSubmitForm = async(dataForm) => {
+        const data = {
+            id_patient: dataForm.idPatient,
+            id_doctor: dataForm.idDoctor,
+            diet_name: dataForm.dietName,
+            diet_type: dataForm.dietType,
+            diet_date: dataForm.dietDate,
+            diet_hour: dataForm.dietHour,
+            diet_description: dataForm.dietDescription,
+            status: dataForm.status
+        }
+
+        // dietId ? onUpdate(data) : onSave(data);
+    }
+
     return (
         <>
             
-            <Styled.Form>
+            <Styled.Form onSubmit={ handleSubmit(onSubmitForm) }>
 
                 <Styled.Header>
 
