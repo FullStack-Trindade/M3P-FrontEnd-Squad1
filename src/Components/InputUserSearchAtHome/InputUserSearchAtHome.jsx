@@ -3,8 +3,7 @@ import { useEffect, useState } from "react";
 import { UserService } from "../../Service/User.service";
 import CardUser from "../CardUser/CardUser";
 
-
-export const InputSearchAtHome = () => {
+export const InputUserSearchAtHome = () => {
   useEffect(() => {
     fetchUsersList();
   }, []);

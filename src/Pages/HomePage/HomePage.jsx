@@ -8,7 +8,7 @@ import { AuthService } from '../../Service/Auth.service';
 import AreaEstatistica from '../../Components/AreaEstatísticas/AreaEstatisticas';
 import { InputSearch } from '../../Components/InputSearchPaciente/InputSearchPaciente';
 //import { InputSearchUser } from '../../Components/InputSearchUser/InputSearchUser';
-import { InputSearchAtHome } from '../../Components/InputUserSearchAtHome/InputUserSearchAtHome';
+import { InputUserSearchAtHome } from '../../Components/InputUserSearchAtHome/InputUserSearchAtHome';
 
 export const HomePage = () => {
   
@@ -42,7 +42,7 @@ export const HomePage = () => {
           <>
           <Styled.MainHome>
            { <AreaEstatistica/>}
-           { <InputSearchAtHome/>}
+           { <InputUserSearchAtHome/>}
            {/* <InputSearch/>*/}
 
           </Styled.MainHome>
