@@ -17,6 +17,9 @@ export const FormDiet = ({ patientId }) => {
         reset,
         formState: { errors },
     } = useForm()
+
+    let params = new URL(document.location).searchParams;
+    const dietId = params.get('id');
     
     useEffect(() => { 
         // reset();
@@ -52,24 +55,47 @@ export const FormDiet = ({ patientId }) => {
             status: dataForm.status
         }
 
-        // dietId ? onUpdate(data) : onSave(data);
+        dietId ? onUpdate(data) : onSave(data);
     }
+
+    const onUpdate = async(submitData) => {
+        await DietService.Update(dietId, submitData)
+            .then((response) => {
+                switch (response.status) {
+                    case 200:
+                        reset();
+                        window.location.reload(true);
+                        return alert('Sucesso! Dieta editada.');
+                    case 400:
+                        reset();
+                        return alert(`Erro no cadastro! Por favor, tente novamente.`);
+                    case 500:
+                        reset();
+                        return alert(`Erro no cadastro! Por favor, tente novamente.`);
+                }
+            })
+            .catch((error) => {
+                alert('Erro no cadastro. Por favor, tente novamente.')
+                console.error('Erro ao cadastrar dieta:', error);
+                reset();
+            });
+    };
 
     const onSave = async(submitData) => {
     
         await DietService.Create(submitData)
             .then((response) => { 
                 switch (response.status) {
-                case 201:
-                    reset();
-                    window.location.reload(true);
-                    return alert('Sucesso! Dieta cadastrada.');
-                case 400:
-                    reset();
-                    return alert(`Erro no cadastro! Por favor, tente novamente.`);
-                case 500:
-                    reset();
-                    return alert(`Erro no cadastro! Por favor, tente novamente.`);
+                    case 201:
+                        reset();
+                        window.location.reload(true);
+                        return alert('Sucesso! Dieta cadastrada.');
+                    case 400:
+                        reset();
+                        return alert(`Erro no cadastro! Por favor, tente novamente.`);
+                    case 500:
+                        reset();
+                        return alert(`Erro no cadastro! Por favor, tente novamente.`);
                 }
             })
             .catch((error) => {
