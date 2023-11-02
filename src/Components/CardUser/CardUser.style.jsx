@@ -16,6 +16,7 @@ export const RenderCardUser = styled.div`
     border-radius: 5px;
     box-shadow: 3px 3px 3px gray;
     justify-content: space-around;
+
 `
 
 export const IconCardUser = styled.div`

@@ -44,8 +44,8 @@ export const HomePage = () => {
           <>
           <Styled.MainHome>
            { <AreaEstatistica/>}
-           { <InputUserSearchAtHome/>}
-           { <InputPatientSearchAtHome/>}
+      {/*      { <InputUserSearchAtHome/>} */}
+     {/*       { <InputPatientSearchAtHome/>} */}
 
           </Styled.MainHome>
           </>

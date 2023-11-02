@@ -24,7 +24,7 @@ const MenuFechado = () => {
             <Styled.MenuFechado>
 
 
-            <Styled.MenuLogoFechado src={'../../../../public/images/LABMedical_Logo.png'} />
+            <Styled.MenuLogoFechado src={'../../../public/images/LogoGenerica.jpg'} />
 
             <MenuItemFechado Icon={FaHome}  To='/' />
             <MenuItemFechado Icon={FaSignInAlt}  To='/login' />

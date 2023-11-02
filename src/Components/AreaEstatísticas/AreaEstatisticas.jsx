@@ -9,6 +9,9 @@ import { UserService } from "../../Service/User.service";
 import { PacienteService } from "../../Service/Paciente.service";
 import { ExameService } from "../../Service/Exame.service";
 import { AppointmentService } from "../../Service/Appointment.service";
+import { InputUserSearchAtHome } from '../../Components/InputUserSearchAtHome/InputUserSearchAtHome';
+import { InputPatientSearchAtHome } from '../../Components/InputPatientSearchAtHome copy/InputPatientSearchAtHome';
+
 
 function EstatisticasSistema() {
   const [users, setUsers] = useState([]);
@@ -85,42 +88,6 @@ function EstatisticasSistema() {
       legenda: "Exames",
     },
     {
-      id: "1",
-      icone: <ImUsers />,
-      resultado: totalPacientes(),
-      legenda: "Pacientes",
-    },
-    {
-      id: "2",
-      icone: <FaLaptopMedical />,
-      resultado: totalConsultas(),
-      legenda: "Consultas",
-    },
-    {
-      id: "3",
-      icone: <ImDroplet />,
-      resultado: totalExames(),
-      legenda: "Exames",
-    },
-    {
-      id: "1",
-      icone: <ImUsers />,
-      resultado: totalPacientes(),
-      legenda: "Pacientes",
-    },
-    {
-      id: "2",
-      icone: <FaLaptopMedical />,
-      resultado: totalConsultas(),
-      legenda: "Consultas",
-    },
-    {
-      id: "3",
-      icone: <ImDroplet />,
-      resultado: totalExames(),
-      legenda: "Exames",
-    },
-    {
       id: "4",
       icone: <ImUsers />,
       resultado: 10,
@@ -153,17 +120,18 @@ function EstatisticasSistema() {
 
   return (
     <>
-      <Styled.ContainerEstatisticas>
+      <Styled.ContainerEstatisticasADM>
         <h2>Estatísticas do Sistema do Administrador</h2>
         <Styled.ContainerCardEstatisticas>
           {dataCardADM.map((estatistica) => (
             <CardEstatisticaADM
-              key={estatistica.id}
-              dataCardADM={estatistica}
+            key={estatistica.id}
+            dataCardADM={estatistica}
             />
-          ))}
+            ))}
+            <InputUserSearchAtHome/>
         </Styled.ContainerCardEstatisticas>
-      </Styled.ContainerEstatisticas>
+      </Styled.ContainerEstatisticasADM>
 
       <Styled.ContainerEstatisticas>
         <h2>Estatísticas do Sistema</h2>
@@ -171,6 +139,7 @@ function EstatisticasSistema() {
           {dataCard.map((estatistica) => (
             <CardEstatistica key={estatistica.id} dataCard={estatistica} />
           ))}
+          <InputPatientSearchAtHome/> 
         </Styled.ContainerCardEstatisticas>
       </Styled.ContainerEstatisticas>
     </>

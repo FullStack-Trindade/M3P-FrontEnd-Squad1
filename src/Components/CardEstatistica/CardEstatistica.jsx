@@ -12,10 +12,12 @@ function CardEstatistica ({dataCard})  {
     <Styled.ContainerCardEstatisticas>  
 
             <Styled.HeaderCard id='resultado'>
-              <span id='icone'>
+              <Styled.IconCardSpan id='icone'>
                 {dataCard.icone || <img src={LogoTeste}/>}
-              </span>
+              </Styled.IconCardSpan>
+              <Styled.DataCardSpan>
                 {dataCard.resultado || 0}
+                </Styled.DataCardSpan>
             </Styled.HeaderCard>
 
             <Styled.HeaderCard2 id='legenda'>{dataCard.legenda || 'Erro aqui'}</Styled.HeaderCard2>

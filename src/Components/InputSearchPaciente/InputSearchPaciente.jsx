@@ -21,7 +21,7 @@ export const InputSearch = () => {
     console.log(paciente)
     
       if (!paciente) {
-        alert('Usuário não cadastrado');
+        alert('Paciente não cadastrado');
         setPacienteEncontrado(null);
         reset();
       } else {
