@@ -1,81 +1,65 @@
-import * as Styled from "./InputSearchExame.style";
-import { useState, useEffect } from "react";
-import { UserService } from "../../Service/User.service";
-import { FormExam } from "../FormExam/FormExam";
-import { PatientService } from "../../Service/Patient.service";
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import * as Styled from './InputSearchExame.style';
+/* import { PacienteService } from '../../Service/Paciente.service.jsx'; */
+import {UserService} from '../../Service/User.service'
+import  {FormExame}  from '../FormExame/FormExame.jsx'; 
+import {PacienteService} from '../../Service/Paciente.service';
+
 
 export const InputSearchExame = () => {
-  
-  let params = new URL(document.location).searchParams;
-  const examId = params.get("id");
-  
-  useEffect(() => { 
-    fetchPatientsList();
-    fetchUsersList();
-}, [])
 
-  const [patientsList, setPatientsList] = useState([]);
+    const {
+        register,
+        handleSubmit,
+        reset,
+        formState: { error },
+      } = useForm()
+    
 
-  const fetchPatientsList = async () => {
-    PatientService.Get().then((result) => setPatientsList(result));
-  };
+    const [pacienteEncontrado, setPacienteEncontrado] = useState([]);
 
-  const [usersList, setUsersList] = useState([]);
+   
+    const submitInputForm = async (dataInput) => {
+        const {nome} = dataInput;
+        console.log(nome);
 
-  const fetchUsersList = async () => {
-    UserService.Get().then((result) => setUsersList(result));
-  };
+        const paciente = await PacienteService.ShowByEmail(nome);
+        console.log(paciente)
 
-  const [inputName, setInputName] = useState();
-  const [patient, setPatient] = useState([]);
-
-  const searchPatient = () => {
-    const filteredUser = usersList.filter((user) =>
-      user.name.includes(inputName)
-    );
-
-    if (filteredUser.length > 1) {
-      return alert("Digite o nome completo do paciente");
+           if(!paciente) {
+            alert('Usuário não cadastrado');
+            setPacienteEncontrado(null);
+            reset();
+          } else {  
+            setPacienteEncontrado(paciente);
+            reset()
+          }
     }
+  
+    return (
+      <>
+          <Styled.InputContainer>
 
-    const filteredPatient = patientsList.filter((patient) =>
-      String(patient.idUser).includes(String(filteredUser[0]?.id))
-    );
+          <h4>Encontre o paciente</h4>
+              <Styled.FormInput 
+              onSubmit={ handleSubmit(submitInputForm)}>
+              
+              <input className="input2  inputFaq" placeholder="Digite o E-mail do paciente" {...register('nome')}/>
 
-    if (filteredPatient.length === 0) {
-      return alert("Paciente não consta no cadastro");
-    }
+              <button className="botao" type='submit'><span className="material-symbols-outlined">
+                  Buscar</span></button>
+              </Styled.FormInput>
 
-    setPatient(filteredPatient);
-  };
-
-  return (
-    <>
-      <Styled.InputContainer>
-        <h4>Encontre o paciente</h4>
-
-        <Styled.SearchInput
-        /* onSubmit={ handleSubmit(submitInputForm)} */
-        >
-          <input
-            className="input2  inputFaq"
-            id="namePatient"
-            type="text"
-            placeholder="Digite o nome do paciente"
-            onChange={(e) => setInputName(e.target.value)}
-          />
-
-          <button className="button" type="submit" onClick={searchPatient}>
-            Buscar
-          </button>
-        </Styled.SearchInput>
-
-        <Styled.PatientArea>
-          {(patient.length > 0 || examId) && (
-            <FormExam patientId={patient[0]?.id} />
-          )}
-        </Styled.PatientArea>
-      </Styled.InputContainer>
-    </>
-  );
+                <Styled.AreaPaciente>
+                  
+          {pacienteEncontrado && (
+            <FormExame paciente={pacienteEncontrado} />
+            )}
+                </Styled.AreaPaciente>
+            </Styled.InputContainer>
+   
+         
+      </>
+  )
 };

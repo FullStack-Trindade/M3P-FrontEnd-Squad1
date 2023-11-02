@@ -48,12 +48,14 @@ h4 {
 }
 `
 
-export const SearchInput = styled.div`
+export const FormInput = styled.form`
     display: flex;
     margin-top: 1vw;
-`;
 
-export const PatientArea = styled.div`
+
+`
+
+export const AreaPaciente = styled.div`
     display: flex;
     margin: 0;
 
