@@ -24,6 +24,23 @@ export const InputSearchDiet = () => {
     }
 
     const [inputName, setInputName] = useState();
+    const [patient, setPatient] = useState([]);
+
+    const searchPatient = () => {
+        const filteredUser = usersList.filter(user => user.name.includes(inputName));
+
+        if (filteredUser.length > 1) {
+            return alert('Digite o nome completo do paciente');
+        }
+        
+        const filteredPatient = patientsList.filter(patient => String(patient.idUser).includes(String(filteredUser[0]?.id)));
+        
+        if (filteredPatient.length === 0) {
+            return alert('Paciente não consta no cadastro');
+        }
+
+        setPatient(filteredPatient);
+    }
 
     return (
         <>
@@ -44,6 +61,7 @@ export const InputSearchDiet = () => {
                     <button 
                         className="button" 
                         type='submit'
+                        onClick={ searchPatient }
                     >
                         Buscar
                     </button>
