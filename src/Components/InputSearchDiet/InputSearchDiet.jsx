@@ -7,6 +7,23 @@ export const InputSearchDiet = () => {
 
                 <h4>Encontre o paciente</h4>
 
+                <Styled.SearchInput>
+                    <input
+                        className='input2 inputFaq'
+                        id='namePatient'
+                        type='text'
+                        placeholder='Digite o nome do paciente'
+                        name='namePatient'
+                    />
+
+                    <button 
+                        className="button" 
+                        type='submit'
+                    >
+                        Buscar
+                    </button>
+                </Styled.SearchInput>
+
             </Styled.InputContainer>
         </>
     )
