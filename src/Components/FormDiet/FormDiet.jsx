@@ -24,7 +24,7 @@ export const FormDiet = ({ patientId }) => {
     const dietId = params.get('id');
     
     useEffect(() => { 
-        // reset();
+        reset();
         fetchDietsList();
         fetchPatientsList();
         fetchUsersList();
@@ -131,7 +131,7 @@ export const FormDiet = ({ patientId }) => {
         await DietService.Update(dietId, submitData)
             .then((response) => {
                 switch (response.status) {
-                    case 200:
+                    case 201:
                         reset();
                         window.location.reload(true);
                         return alert('Sucesso! Dieta editada.');
@@ -176,7 +176,7 @@ export const FormDiet = ({ patientId }) => {
     };
 
     const onDelete = async() => {
-        const response = await DietService.Delete(patientId);
+        const response = await DietService.Delete(dietId);
     
         switch (response.status) {
             case 202:
@@ -191,6 +191,8 @@ export const FormDiet = ({ patientId }) => {
                 return alert(`Erro na exclusão! Por favor, tente novamente.`);
         }
     };
+
+    const [isEditActive, setIsEditActive] = useState(false);
 
     return (
         <>
@@ -210,12 +212,19 @@ export const FormDiet = ({ patientId }) => {
                     <Styled.LabelSwitch>Editar</Styled.LabelSwitch>
 
                     <Styled.SwitchBtn>
-                        <Switch />
+                        <Switch 
+                            defaultChecked={ isEditActive }
+                            disabled={ !dietId }
+                            onClick={ () => setIsEditActive(!isEditActive) } 
+                            onChange={ () => setIsEditActive(!isEditActive) }
+                        />
                     </Styled.SwitchBtn>
 
                     <Styled.ButtonDel 
                         $width={'10%'} 
+                        $active={ dietId } 
                         type='button'
+                        disabled={ !dietId }
                         onClick={ onDelete }
                     >
                         Deletar
@@ -274,6 +283,7 @@ export const FormDiet = ({ patientId }) => {
                             label='Código do Médico(a) *'
                             name='idDoctor'
                             min={ 1 }
+                            disabled={ dietId && isEditActive === false }
                             register={{
                                 ...register('idDoctor', {
                                     required: true,
@@ -305,6 +315,7 @@ export const FormDiet = ({ patientId }) => {
                             placeholder='Digite o nome da dieta'
                             label='Nome da Dieta *'
                             name='dietName'
+                            disabled={ dietId && isEditActive === false }
                             register={{
                                 ...register('dietName', {
                                     required: true,
@@ -323,6 +334,7 @@ export const FormDiet = ({ patientId }) => {
                                 id='dietType'
                                 name='dietType'
                                 defaultValue={ '' }
+                                disabled={ dietId && isEditActive === false }
                                 { ...register('dietType', { required: true }) }
                                 $color={ errors.dietType && 'danger' }
                             >
@@ -343,6 +355,7 @@ export const FormDiet = ({ patientId }) => {
                             placeholder='Digite a data da dieta'
                             label='Data da Dieta *'
                             name='dietDate'
+                            disabled={ dietId && isEditActive === false }
                             register={{
                                 ...register('dietDate', {
                                     required: true,
@@ -357,6 +370,7 @@ export const FormDiet = ({ patientId }) => {
                             placeholder='Digite o hora da dieta'
                             label='Hora da Dieta *'
                             name='dietHour'
+                            disabled={ dietId && isEditActive === false }
                             register={{
                                 ...register('dietHour', {
                                     required: true,
@@ -372,6 +386,7 @@ export const FormDiet = ({ patientId }) => {
                             type='textarea'
                             placeholder='Descreva a dieta'
                             name='dietDescription'
+                            disabled={ dietId && isEditActive === false }
                             label='Descrição da Dieta'
                             register={{
                                 ...register('dietDescription', {
@@ -390,8 +405,8 @@ export const FormDiet = ({ patientId }) => {
                             <Styled.Select
                                 id='status'
                                 name='status'
-                                form=''
                                 defaultValue={ '' }
+                                disabled={ dietId && isEditActive === false }
                                 { ...register('status', { required: true }) }
                                 $color={ errors.dietType && 'danger' }
                             >
