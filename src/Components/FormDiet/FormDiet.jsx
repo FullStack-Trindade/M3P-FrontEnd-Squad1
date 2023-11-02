@@ -250,18 +250,15 @@ export const FormDiet = ({ patientId }) => {
 
                     <Styled.InputGroup>
                         <Styled.SelectGroup>
-                            <Styled.SelectLabel>Tipo de Dieta *</Styled.SelectLabel>
+                            <Styled.SelectLabel $color={ errors.dietType && 'danger' } htmlFor='dietType'>Tipo de Dieta *</Styled.SelectLabel>
                             <Styled.Select
                                 id='dietType'
                                 name='dietType'
-                                placeholder='Selecione o tipo de dieta'
-                                register={{
-                                    ...register('dietType', {
-                                        required: true
-                                    })
-                                }}
-                                error={ errors.dietType }
+                                defaultValue={ '' }
+                                { ...register('dietType', { required: true }) }
+                                $color={ errors.dietType && 'danger' }
                             >
+                                <option value={ '' } disabled>Selecione o tipo de dieta</option>
                                 <option value={ 'CETOGÊNICA' }>CETOGÊNICA</option>
                                 <option value={ 'DASH' }>DASH</option>
                                 <option value={ 'DUKAN' }>DUKAN</option>
@@ -321,18 +318,16 @@ export const FormDiet = ({ patientId }) => {
 
                     <Styled.InputGroup>
                         <Styled.SelectGroup>
-                            <Styled.SelectLabel>Status do Sistema *</Styled.SelectLabel>
+                            <Styled.SelectLabel $color={ errors.status && 'danger' } htmlFor='status'>Status do Sistema *</Styled.SelectLabel>
                             <Styled.Select
                                 id='status'
                                 name='status'
-                                placeholder='Selecione o status do sistema'
-                                register={{
-                                    ...register('status', {
-                                        required: true
-                                    })
-                                }}
-                                error={ errors.status }
+                                form=''
+                                defaultValue={ '' }
+                                { ...register('status', { required: true }) }
+                                $color={ errors.dietType && 'danger' }
                             >
+                                <option value={ '' } disabled>Selecione o status do sistema</option>
                                 <option value={ true }>ATIVO</option>
                                 <option value={ false }>INATIVO</option>
                             </Styled.Select>
