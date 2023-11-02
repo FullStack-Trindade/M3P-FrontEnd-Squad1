@@ -15,6 +15,7 @@ function EstatisticasSistema() {
   const [pacientes, setPacientes] = useState([]);
   const [consultas, setConsultas] = useState([]);
   const [exames, setExames] = useState([]);
+  // 2 - criar conforme finalizar o backend
   
   useEffect(() => {
     const getUsers = async () => {
@@ -38,6 +39,8 @@ function EstatisticasSistema() {
     const getExames = async () => {
       ExameService.Get().then((response) => {
         setExames(response);
+
+        //3- criar conforme finalizar o backend
       });
     };
 
@@ -45,6 +48,8 @@ function EstatisticasSistema() {
     getPacientes();
     getConsultas();
     getExames();
+
+    // 4- incluir conforme finalizar o backend
   }, []);
   const totalPacientes = () => {
     return pacientes.length ? pacientes.length : 0;
@@ -55,7 +60,9 @@ function EstatisticasSistema() {
   };
 
   const totalExames = () => {
-        return 0;
+    return exames.length ? exames.length : 0;
+
+    // 6- incluir conforme finalizar o backend
   };
 
   const dataCard = [
@@ -77,6 +84,8 @@ function EstatisticasSistema() {
       resultado: totalExames(),
       legenda: "Exames",
     },
+
+    // 1 - Adicionar mais cards conforme foram sendo finalizados o backend
      ];
 
   const dataCardADM = [
