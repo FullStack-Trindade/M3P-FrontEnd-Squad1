@@ -123,3 +123,10 @@ export const SwitchBtn = styled.div`
     background-color: none;
     margin: auto;
 `;
+
+export const MainForm = styled.div`
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: ${({ $width }) => ($width ? $width : '100%')};
+`;
