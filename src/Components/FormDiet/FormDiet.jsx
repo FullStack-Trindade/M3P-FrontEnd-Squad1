@@ -55,6 +55,30 @@ export const FormDiet = ({ patientId }) => {
         // dietId ? onUpdate(data) : onSave(data);
     }
 
+    const onSave = async(submitData) => {
+    
+        await DietService.Create(submitData)
+            .then((response) => { 
+                switch (response.status) {
+                case 201:
+                    reset();
+                    window.location.reload(true);
+                    return alert('Sucesso! Dieta cadastrada.');
+                case 400:
+                    reset();
+                    return alert(`Erro no cadastro! Por favor, tente novamente.`);
+                case 500:
+                    reset();
+                    return alert(`Erro no cadastro! Por favor, tente novamente.`);
+                }
+            })
+            .catch((error) => {
+                alert('Erro no cadastro. Por favor, tente novamente.');
+                console.error('Erro ao cadastrar dieta:', error);
+                reset();
+            });
+    };
+
     return (
         <>
             
