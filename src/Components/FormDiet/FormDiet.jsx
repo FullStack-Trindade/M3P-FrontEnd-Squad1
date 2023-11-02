@@ -105,6 +105,23 @@ export const FormDiet = ({ patientId }) => {
             });
     };
 
+    const onDelete = async() => {
+        const response = await DietService.Delete(patientId);
+    
+        switch (response.status) {
+            case 202:
+                reset();
+                window.location.reload(true);
+                return alert('Sucesso! Dieta excluída.');
+            case 400:
+                reset();
+                return alert(`Erro na exclusão! Dieta não existe.`);
+            case 500:
+                reset();
+                return alert(`Erro na exclusão! Por favor, tente novamente.`);
+        }
+    };
+
     return (
         <>
             
