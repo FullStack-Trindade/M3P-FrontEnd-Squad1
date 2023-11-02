@@ -55,7 +55,7 @@ function EstatisticasSistema() {
   };
 
   const totalExames = () => {
-        return exames.listExams.length ? exames.listExams.length : 0;
+        return 0;
   };
 
   const dataCard = [
