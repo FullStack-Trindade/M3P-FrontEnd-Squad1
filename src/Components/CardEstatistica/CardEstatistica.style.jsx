@@ -6,7 +6,7 @@ export const CardsEstatisticas = styled.div`
     box-shadow: 5px 5px 10px gray;
     border-radius: 5px;
     margin-top: 0vw;
-
+    background-color: #483D8B;
 
 `
 export const ContainerCardEstatisticas = styled.div`
@@ -18,7 +18,7 @@ export const ContainerCardEstatisticas = styled.div`
     box-shadow: 5px 5px 10px gray;
     border-radius: 5px;
     margin-top: 1vw;
-
+    background-color: #483D8B;
 `
 
 
@@ -28,7 +28,7 @@ export const IconCard = styled.img`
     box-shadow: 2px 2px 5px gray;
     border-radius: 5px;
     margin-top: .7vw;
-
+    
 
 `
 
@@ -47,30 +47,31 @@ export const IconCardSpan = styled.span`
     display: flex;
     justify-content: center;
     align-items: center;
-    color: black;
+    color: white;
     size: 110%;
     margin-top: -20%;
     width: 2vw;
     height: 2vw;
-    border: 2px solid black;
     border-radius: 100%;
 
             img {
-                width: 2.2vw;
+                width: 1rem;
                 border-radius: 150%;
+                color: white;
             }
 `
 export const DataCardSpan = styled.div`
-    margin-top: .5vw;
+    margin-top: 0.5vw;
+    color: white;
 `
 export const HeaderCard2 = styled.h3`
         display: flex;
         justify-content: center;
         align-items: top;
         width: 10vw;
-        size: 120%;
-        color: black;
-        margin-top: 2vw;
-        
+        size: 100%;
+        color: white;
+        margin-top: 1vw;  
+        font-size: 90%;
 
 `
