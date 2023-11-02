@@ -16,6 +16,7 @@ export const FormDiet = ({ patientId }) => {
         register,
         reset,
         setValue,
+        watch,
         formState: { errors },
     } = useForm()
 
@@ -68,6 +69,32 @@ export const FormDiet = ({ patientId }) => {
             setValue('status', diet[0].status);
         }
     }, [diet])
+
+    const inputPatientId = watch('idPatient');
+    const patientName = watch('patientName');
+    useEffect(() => { onChangePatient(inputPatientId) }, [inputPatientId]);
+
+    const onChangePatient = (value) => {
+        const idPatient = value;
+
+        if (idPatient > 0) {
+        const dataPatient = patientsList.filter(patient => String(patient.id).includes(idPatient));
+        const dataUser = usersList.filter(user => String(user.id).includes(String(dataPatient[0]?.idUser)));
+        setValue('patientName', dataUser[0]?.name);
+        }
+    }
+
+    const inputDoctorId = watch('idDoctor');
+    useEffect(() => { onChangeDoctor(inputDoctorId) }, [inputDoctorId]);
+    
+    const onChangeDoctor = (value) => {
+        const idDoctor = value;
+
+        if (idDoctor > 0) {
+        const dataDoctor = usersList.filter(user => String(user.id).includes(idDoctor));
+        setValue('doctorName', dataDoctor[0]?.name);
+        }
+    }
 
     const isDietRegistered = (dataForm) => {
         let filteredPatientDiets = dietsList.filter(diet => String(diet.id_patient).includes(dataForm.id_patient))
@@ -173,11 +200,11 @@ export const FormDiet = ({ patientId }) => {
                 <Styled.Header>
 
                     <Styled.Title>
-                        {/* {
+                        {
                             patientName
                             ? `Dieta de ${ patientName }`
                             : 'Formulário de Dieta' 
-                        } */}
+                        }
                     </Styled.Title>
 
                     <Styled.LabelSwitch>Editar</Styled.LabelSwitch>
