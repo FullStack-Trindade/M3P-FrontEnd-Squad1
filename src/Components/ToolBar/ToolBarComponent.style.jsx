@@ -5,7 +5,7 @@ export const Container = styled.div`
   width: 100%;
   height: 3rem;
   justify-content: space-between;
-  background-color: #4682B4; 
+  background-color: #483D8B; 
   box-shadow: 0 0 20px 3px;
   color: white;
 `;
@@ -20,13 +20,13 @@ export const UserHeader = styled.div`
     
 
 img{
-  width: 2.5vw;
-  height: 2.5vw;
+  width: 2.7vw;
+  height: 2.7vw;
   cursor: pointer;
   margin: .25vw auto;
   border-radius: 1.5rem;
-  padding: .3rem;
-  border: .1rem solid white;
+  border: .1rem solid green;
+  background-color: white;
 }
 
 `

@@ -11,7 +11,7 @@ export const HeaderContext = createContext({
 export const HeaderProvider = ({ children }) => {
     const [data, setData] = useState({
         titulo: 'Aguarde...',
-       
+
     });
 
     return(
