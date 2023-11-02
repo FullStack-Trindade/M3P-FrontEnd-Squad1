@@ -50,9 +50,6 @@ export const IconCardSpan = styled.span`
     color: black;
     size: 110%;
     margin-top: -20%;
-/*      margin-right: .5vw; */
-
-
     width: 2vw;
     height: 2vw;
     border: 2px solid black;

@@ -1,31 +1,45 @@
 import styled from 'styled-components';
 
 export const ContainerEstatisticasADM = styled.div`
+    display: flex;
+    flex-wrap: wrap;
     width: 100%;
     height: auto;
     box-shadow: none;
     justify-content: center;
-    margin: 1vw 0;
+    align-items: center;
+    align-content: column;
+    margin: 1vw auto 0 auto;
     color: gray;
 
 
-    h2{
-        margin-left: 6%
+    h2{ 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #483D8B;
     }
 
 `
 
 export const ContainerEstatisticas = styled.div`
+  display: flex;
+    flex-wrap: wrap;
     width: 100%;
-    height: 30vh;
+    height: auto;
     box-shadow: none;
     justify-content: center;
-    margin: 1vw 0;
+    align-items: center;
+    align-content: column;
+    margin: 1vw auto 0 auto;
     color: gray;
 
 
     h2{
-        margin-left: 6%
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #483D8B;
     }
 
 `
