@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { LoginPage } from './src/Pages/LoginPage/LoginPage'
 import { HomePage } from './src/Pages/HomePage/HomePage.jsx'
 import { Layout } from './src/Layout/Layout'
-import { CadastroExamePage } from './src/Pages/CadastroExame/CadastroExamePage.jsx'
+import { CadastroExamPage } from './src/Pages/CadastroExame/CadastroExamPage';
 import { PacientePage } from "./src/Pages/CadastroPaciente/CadastroPaciente.jsx";
 /*
 import { ConsultaPage } from './assets/Pages/CadastroConsulta/CadastroConsulta.jsx'
@@ -18,7 +18,7 @@ function App() {
           <Route path='/login' element={<LoginPage/>}/>
           <Route path='/' element={<Layout/>}>
               <Route path='/' element={<HomePage/>}/>
-              <Route path='/exame' element={<CadastroExamePage/>}/>
+              <Route path='/exame' element={<CadastroExamPage/>}/>
           <Route path="/paciente" element={<PacientePage />} />
             {/*<Route path='/consulta' element={<ConsultaPage/>}/>
               <Route path='/listaProntuarios' element={<ListaProntuarioPage/>}/>

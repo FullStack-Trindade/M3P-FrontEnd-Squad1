@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import * as Styled from './InputSearchExame.style';
+import * as Styled from './InputSearchExam.style';
 /* import { PacienteService } from '../../Service/Paciente.service.jsx'; */
 import {UserService} from '../../Service/User.service'
-import  {FormExame}  from '../FormExame/FormExame.jsx'; 
+import  {FormExam}  from '../FormExam/FormExam.jsx'; 
 import {PacienteService} from '../../Service/Paciente.service';
 
 
-export const InputSearchExame = () => {
+export const InputSearchExam = () => {
 
     const {
         register,
@@ -54,7 +54,7 @@ export const InputSearchExame = () => {
                 <Styled.AreaPaciente>
                   
           {pacienteEncontrado && (
-            <FormExame paciente={pacienteEncontrado} />
+            <FormExam paciente={pacienteEncontrado} />
             )}
                 </Styled.AreaPaciente>
             </Styled.InputContainer>
