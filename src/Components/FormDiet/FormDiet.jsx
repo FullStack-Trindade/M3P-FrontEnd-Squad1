@@ -14,6 +14,12 @@ export const FormDiet = ({ patientId }) => {
                         }
                     </Styled.Title>
 
+                    <Styled.LabelSwitch>Editar</Styled.LabelSwitch>
+                    
+                    <Styled.SwitchBtn>
+                        <Switch />
+                    </Styled.SwitchBtn>
+
                 </Styled.Header>
             </Styled.Form>
 
