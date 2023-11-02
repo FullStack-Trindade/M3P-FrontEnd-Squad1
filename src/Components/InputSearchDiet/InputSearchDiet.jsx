@@ -1,6 +1,7 @@
 import * as Styled from './InputSearchDiet.style';
 import { useEffect, useState } from 'react';
 
+import { FormDiet } from '../FormDiet/FormDiet';
 import { PatientService } from '../../Service/Patient.service';
 import { UserService } from '../../Service/User.service';
 
@@ -66,6 +67,10 @@ export const InputSearchDiet = () => {
                         Buscar
                     </button>
                 </Styled.SearchInput>
+
+                <Styled.PatientArea>
+                    { (patient.length > 0 || dietId) && <FormDiet patientId={ patient[0]?.id } /> }
+                </Styled.PatientArea>
 
             </Styled.InputContainer>
         </>
