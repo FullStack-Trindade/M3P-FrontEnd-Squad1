@@ -4,6 +4,7 @@ import { useContext, useEffect } from 'react';
 
 // import { AuthContext } from '../../Context/auth.context';
 import { HeaderContext } from '../../Context/Header.context';
+import { InputSearchDiet } from '../../Components/InputSearchDiet/InputSearchDiet';
 
 export const DietRegisterPage = () => {
     // const { tokenUser, setTokenUser } = useContext(AuthContext);
@@ -35,7 +36,7 @@ export const DietRegisterPage = () => {
             <>
                 <Styled.RegisterArea>
                     <Styled.Title>
-
+                        <InputSearchDiet />
                     </Styled.Title>
                 </Styled.RegisterArea>
             </>
