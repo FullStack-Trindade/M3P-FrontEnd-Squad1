@@ -9,6 +9,8 @@ import AreaEstatistica from '../../Components/AreaEstatísticas/AreaEstatisticas
 import { InputSearch } from '../../Components/InputSearchPaciente/InputSearchPaciente';
 //import { InputSearchUser } from '../../Components/InputSearchUser/InputSearchUser';
 import { InputUserSearchAtHome } from '../../Components/InputUserSearchAtHome/InputUserSearchAtHome';
+import { InputPatientSearchAtHome } from '../../Components/InputPatientSearchAtHome copy/InputPatientSearchAtHome';
+
 
 export const HomePage = () => {
   
@@ -43,7 +45,7 @@ export const HomePage = () => {
           <Styled.MainHome>
            { <AreaEstatistica/>}
            { <InputUserSearchAtHome/>}
-           {/* <InputSearch/>*/}
+           { <InputPatientSearchAtHome/>}
 
           </Styled.MainHome>
           </>
