@@ -113,6 +113,52 @@ export const FormDiet = ({ patientId }) => {
                         error={ errors.doctorName }
                         />
                     </Styled.InputGroup>
+
+                    <Styled.InputGroup>
+                        <InputComponent $width={'350%'}
+                            id='dietName'
+                            type='string'
+                            placeholder='Digite o nome da dieta'
+                            label='Nome da Dieta *'
+                            name='dietName'
+                            register={{
+                                ...register('dietName', {
+                                required: true,
+                                minLength: 5 ,
+                                maxLength: 100 ,
+                                })
+                            }}
+                            error={ errors.dietName }
+                        />
+
+                        <InputComponent $width={'100%'}
+                            id='dietDate'
+                            type='date'
+                            placeholder='Digite a data da dieta'
+                            label='Data da Consulta *'
+                            name='dietDate'
+                            register={{
+                                ...register('dietDate', {
+                                required: true,
+                                })
+                            }}
+                            error={ errors.dietDate }
+                        />
+
+                        <InputComponent $width={'100%'}
+                            id='dietHour'
+                            type='time'
+                            placeholder='Digite o hora da dieta'
+                            label='Hora da Consulta *'
+                            name='dietHour'
+                            register={{
+                                ...register('dietHour', {
+                                required: true,
+                                })
+                            }}
+                            error={ errors.dietHour }
+                        />
+                    </Styled.InputGroup>
                 </Styled.MainForm>
 
             </Styled.Form>
