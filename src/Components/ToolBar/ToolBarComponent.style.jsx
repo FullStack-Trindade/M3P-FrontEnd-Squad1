@@ -20,13 +20,13 @@ export const UserHeader = styled.div`
     
 
 img{
-  width: 2.5vw;
-  height: 2.5vw;
+  width: 2.7vw;
+  height: 2.7vw;
   cursor: pointer;
   margin: .25vw auto;
   border-radius: 1.5rem;
-  padding: .3rem;
-  border: .1rem solid white;
+  border: .1rem solid green;
+  background-color: white;
 }
 
 `
