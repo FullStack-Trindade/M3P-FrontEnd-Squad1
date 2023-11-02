@@ -222,13 +222,13 @@ export const FormUsuario = () => {
             id="cpf"
             type="text"
             name="cpf"
-            placeholder="Digite seu CPF"
+            placeholder="000.000.000-00"
             label="CPF"
             register={{
               ...register("cpf", {
                 required: true,
                 minLength: 11,
-                maxLength: 11, // CPF tem exatamente 11 dígitos
+                maxLength: 14, // CPF tem exatamente 11 dígitos
               }),
             }}
             error={errors.cpf}
@@ -237,14 +237,14 @@ export const FormUsuario = () => {
           <InputComponent
             $width={"100%"}
             id="phone"
-            type="number"
-            placeholder="Telefone"
+            type="text"
+            placeholder="(99) 9 9999-99999"
             name="phone"
             label="Telefone"
             register={{
               ...register("phone", {
                 required: true,
-                /* required: false, */
+                pattern: /^\(\d{2}\) \d \d{4}-\d{5}$/,
               }),
             }}
             error={errors.phone}
