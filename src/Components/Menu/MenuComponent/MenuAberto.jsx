@@ -27,7 +27,7 @@ const MenuAberto = () => {
           <MenuItem Icon={FaSignInAlt} Text="SAIR" To="/login" />
 
           <Styled.MenuSetor>Pacientes</Styled.MenuSetor>
-          <MenuItem Icon={FaPlus} Text="CADASTRAR" To="/paciente" />
+          <MenuItem Icon={FaPlus} Text="CADASTRAR PACIENTE" To="/paciente" />
           <MenuItem
             Icon={FaTasks}
             Text="LISTAR PRONTUÁRIO"
