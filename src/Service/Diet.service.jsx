@@ -48,9 +48,22 @@ const Update = (id, data) => {
     return fetchDiet()
 }
 
+const Delete = (id) => {
+    const fetchDiet = async() => {
+        const response = await fetch(`${API_URL}/${ id }`, {
+            method: 'DELETE',
+        })
+
+        return response
+    }
+
+    return fetchDiet()
+}
+
 export const DietService = {
     Get,
     Create,
     Show,
-    Update
+    Update,
+    Delete
 }
