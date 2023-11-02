@@ -62,3 +62,18 @@ export const CardRender = styled.div`
     height: 100%;
     flex-wrap: wrap;
 `
+
+export const ButtonCriar = styled.button`
+
+    display: flex;
+    margin: 5vh auto  !important;    
+    padding: 12px 32px;
+    background: transparent ;
+    border-radius: 4px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+    text-transform: uppercase;
+    color: black;
+    border: 1px solid gray;
+    cursor: pointer;
+
+`
