@@ -1,6 +1,9 @@
 import * as Styled from './InputSearchDiet.style';
 
 export const InputSearchDiet = () => {
+    let params = new URL(document.location).searchParams;
+    const dietId = params.get('id');
+
     return (
         <>
             <Styled.InputContainer>
