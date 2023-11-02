@@ -277,9 +277,54 @@ export const FormPaciente = ({ id }) => {
     console.error("Erro geral:", error);
   };
 
-  const updatePaciente = (pacienteData) => {
-    alert(`Id do paciente: ${id} e Id do Usuário: ${idUser}`);
-    console.log(pacienteData);
+  const updatePaciente = async (pacienteData) => {
+    //Gambiarra para arrumar o problema do valitynumber
+
+    if (pacienteData.insuranceVality === "") {
+      newInsuranceVality = "9999-12-12";
+    } else {
+      newInsuranceVality = pacienteData.insuranceVality;
+    }
+
+    const postPacientDb = {
+      birth: pacienteData.birth,
+      idUser: newUser.id,
+      maritalStatus: pacienteData.maritalStatus,
+      rg: pacienteData.rg,
+      orgaoExpedidor: pacienteData.orgaoExpedidor,
+      birthplace: pacienteData.birthplace,
+      emergencyContact: pacienteData.emergencyContact,
+      alergiesList: pacienteData.alergiesList,
+      specificCares: pacienteData.specificCares,
+      healthInsurance: pacienteData.healthInsurance,
+      insuranceNumber: pacienteData.insuranceNumber,
+      insuranceVality: newInsuranceVality,
+      //gambi
+      adress: {
+        cep: pacienteData.cep,
+        city: pacienteData.city,
+        state: pacienteData.state,
+        street: pacienteData.street,
+        number: pacienteData.number,
+        complement: pacienteData.complement,
+        neighborhood: pacienteData.neighborhood,
+        reference: pacienteData.reference,
+      },
+    };
+
+    try {
+      const updatedPaciente = await PacienteService.Update(postPacientDb);
+
+      if (updatedPaciente.status === 201) {
+        alert("Paciente atualizado com sucesso");
+        setFormMode("read");
+      } else {
+        alert("Erro ao atualizar o paciente");
+      }
+    } catch (error) {
+      alert("Não foi possível atualizar o paciente");
+    }
+
     // redirecionar para a home
   };
 
