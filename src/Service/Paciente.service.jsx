@@ -25,7 +25,7 @@ const CadastrarPaciente = async (postPacientDb) => {
 
  const Get = (id) => {
   const fetchPatient = async() => {
-      const response = await fetch(`http://localhost:3333/api/pacientes/${id}`);
+      const response = await fetch(`http://localhost:3000/api/pacientes/${id}`);
       const data = await response.json();
       return data;
   }
@@ -34,7 +34,7 @@ const CadastrarPaciente = async (postPacientDb) => {
 }
  const GetAll = () => {
   const fetchPatient = async() => {
-      const response = await fetch(`http://localhost:3333/api/pacientes`);
+      const response = await fetch(`http://localhost:3000/api/pacientes`);
       const data = await response.json();
       return data;
   }

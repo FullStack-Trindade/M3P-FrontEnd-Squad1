@@ -15,7 +15,7 @@ function CardEstatistica ({dataCard})  {
               <span id='icone'>
                 {dataCard.icone || <img src={LogoTeste}/>}
               </span>
-                {dataCard.resultado || 'Erro'}
+                {dataCard.resultado || 0}
             </Styled.HeaderCard>
 
             <Styled.HeaderCard2 id='legenda'>{dataCard.legenda || 'Erro aqui'}</Styled.HeaderCard2>
