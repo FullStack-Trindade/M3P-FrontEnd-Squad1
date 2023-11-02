@@ -29,3 +29,13 @@ export const Paragraph = styled.p`
     color: #ff5555;
     margin-bottom: 0;
 `;
+
+export const InputGroup = styled.div`
+    display: flex;
+    padding: 0.325rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    width: ${({ $width }) => ($width ? $width : '100%')};
+    height: ${({ $height }) => ($height ? $height : 'auto ')};
+`;
