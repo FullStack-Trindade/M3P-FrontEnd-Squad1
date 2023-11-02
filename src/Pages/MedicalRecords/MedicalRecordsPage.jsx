@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom';
 
 import { AuthContext } from '../../Context/auth.context';
 import { HeaderContext } from '../../Context/Header.context';
+import { AuthService } from '../../Service/Auth.service';
 import { InputSearchMedicalRecord } from '../../Components/InputSearchMedicalRecord/InputSearchMedicalRecord';
 
 export const MedicalRecordsPage = () => {
