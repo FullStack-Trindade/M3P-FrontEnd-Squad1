@@ -150,3 +150,9 @@ export const Select = styled.select`
         color: black
     }
 `;
+
+export const SelectLabel = styled.label`
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: rgb(82, 129, 220);
+`;
