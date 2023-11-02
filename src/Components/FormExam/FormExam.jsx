@@ -1,14 +1,14 @@
-import * as Styled from './FormExame.style';
+import * as Styled from './FormExam.style';
 import { useState } from 'react';
 /* import { ExameService } from '../../../../src/Service/User/Exame.service'; */
-import { ExameService } from '../../Service/Exame.service';
+import { ExamService } from '../../Service/Exam.service';
 import { useForm } from 'react-hook-form';
 /* import { InputComponent } from '../Form/InputComponent/InputComponent'; */
 import { InputComponent } from '../FormPaciente/InputComponent/InputComponent';
 import { Switch, Spin } from 'antd';
 
 
-export const FormExame = ({paciente}) => {
+export const FormExam = ({paciente}) => {
 
   const {
     register,
@@ -19,8 +19,8 @@ export const FormExame = ({paciente}) => {
 
 
 
-  const createExame = (exameData) => {
-    ExameService.CreateExame(exameData)
+  const createExam = (examData) => {
+    ExamService.Create(examData)
       .then(response => {
         console.log('Exame cadastrado com sucesso:', response);
         reset();
@@ -31,8 +31,18 @@ export const FormExame = ({paciente}) => {
   };
 
 
-  const deleteExame = (exameData) => {
-    ExameService.DeleteExame(exameData.id)
+  const deleteExam = (examData) => {
+    ExamService.Delete(examData.id)
+      .then(response => {
+        console.log('Exame deletado com sucesso:', response);
+        reset();
+      })
+      .catch(error => {
+        console.error('Erro ao deletar Exame:', error);
+      });
+  };
+  const updateExam = (examData) => {
+    ExamService.Update(examData.id)
       .then(response => {
         console.log('Exame deletado com sucesso:', response);
         reset();
@@ -42,17 +52,17 @@ export const FormExame = ({paciente}) => {
       });
   };
 
-  const submitForm = async (exameData) => {
-    const data = {...exameData}
-    const exame = await ExameService.CreateExame(data);
+  const submitForm = async (examData) => {
+    const data = {...examData}
+    const exam = await ExamService.Create(data);
     console.log(data);
 
-    if (!exame) {
-      alert('Exame Cadastrado');
-      reset();
-
-    } else {
+    if (!exam) {
       alert('Exame não cadastrado');
+      reset();
+      
+    } else {
+      alert('Exame Cadastrado');
     }
 
   }
@@ -118,7 +128,7 @@ export const FormExame = ({paciente}) => {
             type='string'
             placeholder='Nome do Exame'
             label='Nome do Exame'
-            name='exameNome'
+            name='nameExam'
             register={{
               ...register('nameExam', {
                 required: true,
