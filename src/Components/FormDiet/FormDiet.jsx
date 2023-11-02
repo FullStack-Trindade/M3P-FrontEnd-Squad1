@@ -46,6 +46,22 @@ export const FormDiet = ({ patientId }) => {
 
     useEffect(() => { setValue('idPatient', patientId) }, [patientId])
 
+    const isDietRegistered = (dataForm) => {
+        let filteredPatientDiets = dietsList.filter(diet => String(diet.id_patient).includes(dataForm.id_patient))
+        let filteredDate = filteredPatientDiets.filter(diet => diet.diet_date.includes(dataForm.diet_date))
+        let filteredHour = filteredDate.filter(diet => diet.diet_hour.includes(dataForm.diet_hour))
+    
+        if (filteredHour.length > 0) {
+            alert('Esse paciente já possui consulta cadastrada nesse dia e horário.');
+            filteredPatientDiets = []
+            filteredDate = []
+            filteredHour = []
+            return true
+        }
+    
+        return false
+    }
+
     const onSubmitForm = async(dataForm) => {
         const data = {
             id_patient: dataForm.idPatient,
@@ -85,7 +101,8 @@ export const FormDiet = ({ patientId }) => {
     };
 
     const onSave = async(submitData) => {
-    
+        if (isDietRegistered(submitData)) { return }
+
         await DietService.Create(submitData)
             .then((response) => { 
                 switch (response.status) {
@@ -149,6 +166,7 @@ export const FormDiet = ({ patientId }) => {
                     <Styled.ButtonDel 
                         $width={'10%'} 
                         type='button'
+                        onClick={ onDelete }
                     >
                         Deletar
                     </Styled.ButtonDel>
