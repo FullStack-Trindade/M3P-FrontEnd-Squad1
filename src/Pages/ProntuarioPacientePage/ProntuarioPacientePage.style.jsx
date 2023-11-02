@@ -9,7 +9,6 @@ export const Prontuario = styled.div`
   margin: 0 auto;
 `;
 
-
 export const HeaderProntuario = styled.div`
   justify-content: start;
   align-items: column;
@@ -22,7 +21,7 @@ export const HeaderProntuario = styled.div`
 `;
 
 export const CorpoProntuario = styled.div`
- display: flex;
+  display: flex;
   align-items: column;
   flex-wrap: wrap;
   width: 95%;
@@ -30,7 +29,6 @@ export const CorpoProntuario = styled.div`
   color: white;
   margin: 0 auto ;
   border-radius: 5px;
-
 `;
 
 export const Title = styled.h1`
@@ -39,24 +37,24 @@ export const Title = styled.h1`
   font-size: 2rem;
   width: 100%;
   height: auto;
+  margin-bottom: 1.5rem;
 `;
 
 export const SubTitle = styled.h1`
   display: flex;
   align-items: center;
   color: #4682B4;
-  font-size: 2rem;
+  font-size: 1.75rem;
   width: 100%;
   height: auto;
   margin: 0 0 0 2%;
   
-
   span{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2.25rem;
+    height: 2.25rem;
     border: 4px solid #4682B4;
     border-radius: 5px;
     margin-right: 1%;
@@ -64,18 +62,22 @@ export const SubTitle = styled.h1`
   }
 `;
 
-export const Label = styled.legend`
+export const PatientData = styled.ul`
+  width: 100%;
+  margin: 1.5rem 0;
+`;
+
+export const List = styled.li`
   display: flex;
   color: gray;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   line-height: normal;
   width: 100%;
 `;
 
 export const RenderResultados = styled.div`
- 
   align-items: center;
   width: 95%;
   height: auto;
