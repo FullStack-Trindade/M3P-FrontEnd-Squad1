@@ -1,7 +1,10 @@
+import * as Styled from './FormDiet.style';
+
 import { useForm } from 'react-hook-form';
 import { Switch } from 'antd';
 
 import { InputComponent } from '../Form/InputComponent/InputComponent';
+// import { Select } from '../Form/InputComponent/Input.style';
 
 export const FormDiet = ({ patientId }) => {
     const {
@@ -17,11 +20,11 @@ export const FormDiet = ({ patientId }) => {
                 <Styled.Header>
 
                     <Styled.Title>
-                        {
+                        {/* {
                             patientName
                             ? `Dieta de ${ patientName }`
                             : 'Formulário de Dieta' 
-                        }
+                        } */}
                     </Styled.Title>
 
                     <Styled.LabelSwitch>Editar</Styled.LabelSwitch>
@@ -60,7 +63,7 @@ export const FormDiet = ({ patientId }) => {
                             min={ 1 }
                             register={{
                                 ...register('idPatient', {
-                                required: true,
+                                    required: true,
                                 })
                             }}
                             error={ errors.idPatient }
@@ -75,7 +78,7 @@ export const FormDiet = ({ patientId }) => {
                             disabled={ true }
                             register={{
                                 ...register('patientName', {
-                                required: false
+                                    required: false
                                 })
                             }}
                             error={ errors.patientName }
@@ -84,33 +87,33 @@ export const FormDiet = ({ patientId }) => {
 
                     <Styled.InputGroup>
                         <InputComponent $width={'100%'}
-                        id='idDoctor'
-                        type='number'
-                        placeholder='Digite o código'
-                        label='Código do Médico(a) *'
-                        name='idDoctor'
-                        min={ 1 }
-                        register={{
-                            ...register('idDoctor', {
-                            required: true,
-                            })
-                        }}
-                        error={ errors.idDoctor }
+                            id='idDoctor'
+                            type='number'
+                            placeholder='Digite o código'
+                            label='Código do Médico(a) *'
+                            name='idDoctor'
+                            min={ 1 }
+                            register={{
+                                ...register('idDoctor', {
+                                    required: true,
+                                })
+                            }}
+                            error={ errors.idDoctor }
                         />
                         
                         <InputComponent $width={'350%'}
-                        id='doctorName'
-                        type='string'
-                        placeholder='Nome do médico(a)'
-                        label='Nome do médico(a)'
-                        name='doctorName'
-                        disabled={ true }
-                        register={{
-                            ...register('doctorName', {
-                            required: false
-                            })
-                        }}
-                        error={ errors.doctorName }
+                            id='doctorName'
+                            type='string'
+                            placeholder='Nome do médico(a)'
+                            label='Nome do médico(a)'
+                            name='doctorName'
+                            disabled={ true }
+                            register={{
+                                ...register('doctorName', {
+                                    required: false
+                                })
+                            }}
+                            error={ errors.doctorName }
                         />
                     </Styled.InputGroup>
 
@@ -123,23 +126,48 @@ export const FormDiet = ({ patientId }) => {
                             name='dietName'
                             register={{
                                 ...register('dietName', {
-                                required: true,
-                                minLength: 5 ,
-                                maxLength: 100 ,
+                                    required: true,
+                                    minLength: 5 ,
+                                    maxLength: 100 ,
                                 })
                             }}
                             error={ errors.dietName }
                         />
+                    </Styled.InputGroup>
+
+                    <Styled.InputGroup>
+                        <Styled.SelectGroup>
+                            <Styled.SelectLabel>Tipo de Dieta *</Styled.SelectLabel>
+                            <Styled.Select
+                                id='dietType'
+                                name='dietType'
+                                placeholder='Selecione o tipo de dieta'
+                                register={{
+                                    ...register('dietType', {
+                                        required: true
+                                    })
+                                }}
+                                error={ errors.dietType }
+                            >
+                                <option value={ 'CETOGÊNICA' }>CETOGÊNICA</option>
+                                <option value={ 'DASH' }>DASH</option>
+                                <option value={ 'DUKAN' }>DUKAN</option>
+                                <option value={ 'LOW CARB' }>LOW CARB</option>
+                                <option value={ 'MEDITERRÂNEA' }>MEDITERRÂNEA</option>
+                                <option value={ 'PALEOLÍTICA' }>PALEOLÍTICA</option>
+                                <option value={ 'OUTRA' }>OUTRA</option>
+                            </Styled.Select>
+                        </Styled.SelectGroup>
 
                         <InputComponent $width={'100%'}
                             id='dietDate'
                             type='date'
                             placeholder='Digite a data da dieta'
-                            label='Data da Consulta *'
+                            label='Data da Dieta *'
                             name='dietDate'
                             register={{
                                 ...register('dietDate', {
-                                required: true,
+                                    required: true,
                                 })
                             }}
                             error={ errors.dietDate }
@@ -149,18 +177,55 @@ export const FormDiet = ({ patientId }) => {
                             id='dietHour'
                             type='time'
                             placeholder='Digite o hora da dieta'
-                            label='Hora da Consulta *'
+                            label='Hora da Dieta *'
                             name='dietHour'
                             register={{
                                 ...register('dietHour', {
-                                required: true,
+                                    required: true,
                                 })
                             }}
                             error={ errors.dietHour }
                         />
                     </Styled.InputGroup>
-                </Styled.MainForm>
 
+                    <Styled.InputGroup>
+                        <InputComponent $height={'70px'}
+                            id='dietDescription'
+                            type='textarea'
+                            placeholder='Descreva a dieta'
+                            name='dietDescription'
+                            label='Descrição da Dieta'
+                            register={{
+                                ...register('dietDescription', {
+                                    required: true,
+                                    minLength: 10 ,
+                                    maxLength: 1000 ,
+                                })
+                            }}
+                            error={ errors.dietDescription }
+                        />
+                    </Styled.InputGroup>
+
+                    <Styled.InputGroup>
+                        <Styled.SelectGroup>
+                            <Styled.SelectLabel>Status do Sistema *</Styled.SelectLabel>
+                            <Styled.Select
+                                id='status'
+                                name='status'
+                                placeholder='Selecione o status do sistema'
+                                register={{
+                                    ...register('status', {
+                                        required: true
+                                    })
+                                }}
+                                error={ errors.status }
+                            >
+                                <option value={ true }>ATIVO</option>
+                                <option value={ false }>INATIVO</option>
+                            </Styled.Select>
+                        </Styled.SelectGroup>
+                    </Styled.InputGroup>
+                </Styled.MainForm>
             </Styled.Form>
 
         </>
