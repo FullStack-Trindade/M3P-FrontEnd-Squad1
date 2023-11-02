@@ -50,6 +50,10 @@ export const InputUserSearchAtHome = () => {
           <button className="button" type="submit" onClick={searchUser}>
             Buscar
           </button>
+
+          <button className="botao" type="submit" >
+            <span className="material-symbols-outlined">Cadastrar Usuário</span>
+          </button>
         </Styled.SearchInput>
       </Styled.InputContainer>
 

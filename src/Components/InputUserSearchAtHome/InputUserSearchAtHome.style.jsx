@@ -25,7 +25,7 @@ export const InputContainer = styled.div`
 
     .button {
         display: table-cell;
-        margin: 0 auto 0 2vw !important;  
+        margin: 0 2vw 0 2vw !important;  
         padding: 12px 32px;  
         background: transparent ;
         border-radius: 4px;

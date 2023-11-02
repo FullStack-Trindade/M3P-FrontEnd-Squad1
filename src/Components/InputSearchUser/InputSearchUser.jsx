@@ -44,9 +44,9 @@ export const InputSearchUser = () => {
           <button className="botao" type="submit">
             <span className="material-symbols-outlined">Buscar</span>
           </button>
-{/*           <button className="botao" type="submit" >
+          <button className="botao" type="submit" >
             <span className="material-symbols-outlined">Gerenciar Usuário</span>
-          </button> */}
+          </button>
         </Styled.FormInput>
       </Styled.InputContainer>
 
