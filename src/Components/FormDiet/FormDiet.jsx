@@ -15,6 +15,7 @@ export const FormDiet = ({ patientId }) => {
         handleSubmit,
         register,
         reset,
+        setValue,
         formState: { errors },
     } = useForm()
 
@@ -42,6 +43,8 @@ export const FormDiet = ({ patientId }) => {
     const fetchUsersList = async() => {
         UserService.Get().then(result => setUsersList(result));
     }
+
+    useEffect(() => { setValue('idPatient', patientId) }, [patientId])
 
     const onSubmitForm = async(dataForm) => {
         const data = {
