@@ -7,7 +7,10 @@ import { HeaderContext } from '../../Context/Header.context';
 import { AuthService } from '../../Service/Auth.service';
 import AreaEstatistica from '../../Components/AreaEstatísticas/AreaEstatisticas';
 import { InputSearch } from '../../Components/InputSearchPaciente/InputSearchPaciente';
-import { InputSearchUser } from '../../Components/InputSearchUser/InputSearchUser';
+//import { InputSearchUser } from '../../Components/InputSearchUser/InputSearchUser';
+import { InputUserSearchAtHome } from '../../Components/InputUserSearchAtHome/InputUserSearchAtHome';
+import { InputPatientSearchAtHome } from '../../Components/InputPatientSearchAtHome copy/InputPatientSearchAtHome';
+
 
 export const HomePage = () => {
   
@@ -41,8 +44,8 @@ export const HomePage = () => {
           <>
           <Styled.MainHome>
            { <AreaEstatistica/>}
-           { <InputSearchUser/>}
-           { <InputSearch/>}
+           { <InputUserSearchAtHome/>}
+           { <InputPatientSearchAtHome/>}
 
           </Styled.MainHome>
           </>
