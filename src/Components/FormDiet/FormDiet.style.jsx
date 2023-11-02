@@ -13,3 +13,12 @@ export const Form = styled.form`
     background: #FFF;
     box-shadow: 5px 5px 5px gray;
 `;
+
+export const Header = styled.div`
+    display: flex;
+    width: 100%;
+    justify-content: start;
+    align-items: flex-start;
+    gap: 0.5rem;
+    align-self: stretch;
+`;
