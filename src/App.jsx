@@ -6,6 +6,7 @@ import { HomePage } from "./Pages/HomePage/HomePage";
 import { MedicalRecordsPage } from './Pages/MedicalRecords/MedicalRecordsPage'
 import { CadastroExamePage } from "./Pages/CadastroExame/CadastroExamePage";
 import { AppointmentRegisterPage } from "./Pages/AppointmentRegister/AppointmentRegisterPage";
+import { DietRegisterPage } from "./Pages/DietRegister/DietRegisterPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path='/listaProntuarios' element={ <MedicalRecordsPage/> }/>
           <Route path='/exame' element={ <CadastroExamePage/> }/>
           <Route path="/consulta" element={ <AppointmentRegisterPage /> } />
+          <Route path="/dieta" element={ <DietRegisterPage /> } />
 {/*               <Route path='/paciente' element={<PacientePage/>}/>
           <Route path='/consulta' element={<ConsultaPage/>}/>
           <Route path='/listaProntuarios' element={<ListaProntuarioPage/>}/>
