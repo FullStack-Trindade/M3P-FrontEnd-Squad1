@@ -34,7 +34,7 @@ export const InputSearch = () => {
   return (
     <>
       <Styled.InputContainer>
-        <h2>Informações Rápidas de Pacientes</h2>
+        <h4>Informações Rápidas de Pacientes</h4>
         <Styled.FormInput onSubmit={handleSubmit(submitInputForm)}>
           <input
             className="input2 inputFaq"

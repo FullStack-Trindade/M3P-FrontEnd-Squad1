@@ -10,8 +10,8 @@ import { PacienteService } from "../../Service/Paciente.service";
 import { ExameService } from "../../Service/Exame.service";
 import { AppointmentService } from "../../Service/Appointment.service";
 import { InputUserSearchAtHome } from '../../Components/InputUserSearchAtHome/InputUserSearchAtHome';
-import { InputPatientSearchAtHome } from '../../Components/InputPatientSearchAtHome copy/InputPatientSearchAtHome';
 
+import { InputPatientSearchAtHome } from './../InputPatientSearchAtHome/InputPatientSearchAtHome';
 
 function EstatisticasSistema() {
   const [users, setUsers] = useState([]);

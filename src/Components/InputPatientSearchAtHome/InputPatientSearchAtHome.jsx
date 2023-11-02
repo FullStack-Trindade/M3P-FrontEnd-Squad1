@@ -41,7 +41,7 @@ export const InputPatientSearchAtHome = () => {
   return (
     <>
       <Styled.InputContainer>
-        <h2> Informações Rápidas de Pacientes</h2>
+        <h4> Informações Rápidas de Pacientes</h4>
 
         <Styled.SearchInput>
           <input

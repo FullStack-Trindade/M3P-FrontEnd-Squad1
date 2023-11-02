@@ -1,6 +1,6 @@
 import * as Styled from './CardEstatistica.style';
 
-import  LogoTeste  from '../../../public/images/LogoGenerica.jpg'
+import  LogoTeste  from '../../../public/images/LogoGenerica.png'
 
 function CardEstatistica ({dataCard})  {
 

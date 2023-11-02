@@ -5,7 +5,7 @@ import { Navigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/auth.context';
 import { FormLoginComponent } from "../../Components/LoginForm/LoginFormComponent";
 import { AuthService } from '../../Service/Auth.service';
-import imagemLogin from '../../Assets/LogoGenerica.jpg';
+import imagemLogin from '../../../public/images/LogoGenerica.png';
 
 export const LoginPage = () => {
     const { tokenUser, setTokenUser } = useContext(AuthContext);

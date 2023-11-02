@@ -35,7 +35,7 @@ export const InputUserSearchAtHome = () => {
   return (
     <>
       <Styled.InputContainer>
-        <h2> Informações Rápidas de Usuário</h2>
+        <h4> Informações Rápidas de Usuário</h4>
 
         <Styled.SearchInput>
           <input

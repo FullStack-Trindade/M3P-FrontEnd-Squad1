@@ -14,7 +14,7 @@ export const InputContainer = styled.div`
     margin: 0 auto 2vw !important;
 }
 
-h2 {
+h4 {
     display: flex;
     color: gray;
 }

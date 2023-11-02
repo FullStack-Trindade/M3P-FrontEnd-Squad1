@@ -5,11 +5,12 @@ export const InputContainer = styled.div`
     width: 100%;
     height: 7vw;
     border-radius: 5px;
-    margin: 2% 0 2% 0;
+    margin: 2vh 0 0 0;
 
     h4 {
         display: flex;
-        color: gray;
+        color: black;
+        margin-left: none;
     }
 
     .input2 {

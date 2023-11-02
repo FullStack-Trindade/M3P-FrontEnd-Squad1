@@ -9,7 +9,7 @@ export const InputContainer = styled.div`
 
     h4 {
         display: flex;
-        color: gray;
+        color: black;
     }
 
     .input2 {
