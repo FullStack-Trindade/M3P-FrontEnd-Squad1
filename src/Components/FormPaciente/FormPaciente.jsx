@@ -185,6 +185,7 @@ export const FormPaciente = ({ id }) => {
     });
   };
 
+// BUSCA CEP
   const buscaCEP = async () => {
     CEPService.Get(watch("cep")).then((response) => {
       setValue("city", response.localidade);
@@ -192,6 +193,15 @@ export const FormPaciente = ({ id }) => {
       setValue("neighborhood", response.bairro);
     });
   };
+
+  useEffect(() => {
+    const cepPaciente = watch("cep") || "";
+    if (cepPaciente.length > 7) {
+      buscaCEP(cepPaciente);
+    }
+  }, [watch("cep")]);
+
+  //INICIO CRUD
 
   const submitForm = async (data) => {
     setIsLoading(true);
@@ -329,29 +339,24 @@ export const FormPaciente = ({ id }) => {
   };
 
   const deletePaciente = () => {
-    alert("Aguardando");
-    // PacienteService.Delete(id).then((response) => {
-    //   if ((response.status = 202)) {
-    //     UserService.Delete(idUser).then((response) => {
-    //       if ((response.status = 202)) {
-    //         alert("Paciente Deletado com Sucesso");
-    //         navigate("/");
-    //       } else {
-    //         alert("Erro ao Deletar o Paciente");
-    //       }
-    //     });
-    //   } else {
-    //     alert("Erro ao Deletar o Paciente");
-    //   }
-    // });
+    
+    PacienteService.Delete(id).then((response) => {
+      if ((response.status = 202)) {
+        UserService.Delete(idUser).then((response) => {
+          if ((response.status = 202)) {
+            alert("Paciente Deletado com Sucesso");
+            navigate("/");
+          } else {
+            alert("Erro ao Deletar o Paciente");
+          }
+        });
+      } else {
+        alert("Erro ao Deletar o Paciente");
+      }
+    });
   };
 
-  useEffect(() => {
-    const cepPaciente = watch("cep") || "";
-    if (cepPaciente.length > 7) {
-      buscaCEP(cepPaciente);
-    }
-  }, [watch("cep")]);
+
 
   return (
     <Styled.Form onSubmit={handleSubmit(submitForm)}>
