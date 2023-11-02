@@ -156,3 +156,11 @@ export const SelectLabel = styled.label`
     font-weight: 400;
     color: rgb(82, 129, 220);
 `;
+
+export const SelectGroup = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    width: ${({ $width }) => ($width ? $width : '100%')};
+`;
