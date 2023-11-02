@@ -27,6 +27,13 @@ export const FormDiet = ({ patientId }) => {
                         Deletar
                     </Styled.ButtonDel>
 
+                    <Styled.Button 
+                        $width={'10%'} 
+                        $active={ true }
+                        type='submit' 
+                    >
+                        Salvar
+                    </Styled.Button>
                 </Styled.Header>
             </Styled.Form>
 
