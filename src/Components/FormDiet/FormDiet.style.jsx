@@ -92,3 +92,13 @@ export const ButtonDel = styled.button`
 ButtonDel.propTypes = {
     $outlined: PropTypes.bool
 }
+
+export const Title = styled.legend`
+    display: flex;
+    color: #000;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    justify-content: left;
+    width: 100%;
+`;
