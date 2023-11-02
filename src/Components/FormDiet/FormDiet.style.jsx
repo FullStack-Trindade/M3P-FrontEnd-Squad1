@@ -154,7 +154,7 @@ export const Select = styled.select`
 export const SelectLabel = styled.label`
     font-size: 0.75rem;
     font-weight: 400;
-    color: rgb(82, 129, 220);
+    color: ${({ $color }) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};
 `;
 
 export const SelectGroup = styled.div`
