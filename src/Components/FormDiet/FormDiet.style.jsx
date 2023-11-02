@@ -22,3 +22,10 @@ export const Header = styled.div`
     gap: 0.5rem;
     align-self: stretch;
 `;
+
+export const Paragraph = styled.p`
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #ff5555;
+    margin-bottom: 0;
+`;
