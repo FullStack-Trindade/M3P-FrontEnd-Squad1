@@ -84,6 +84,60 @@ function EstatisticasSistema() {
       resultado: totalExames(),
       legenda: "Exames",
     },
+    {
+      id: "1",
+      icone: <ImUsers />,
+      resultado: totalPacientes(),
+      legenda: "Pacientes",
+    },
+    {
+      id: "2",
+      icone: <FaLaptopMedical />,
+      resultado: totalConsultas(),
+      legenda: "Consultas",
+    },
+    {
+      id: "3",
+      icone: <ImDroplet />,
+      resultado: totalExames(),
+      legenda: "Exames",
+    },
+    {
+      id: "1",
+      icone: <ImUsers />,
+      resultado: totalPacientes(),
+      legenda: "Pacientes",
+    },
+    {
+      id: "2",
+      icone: <FaLaptopMedical />,
+      resultado: totalConsultas(),
+      legenda: "Consultas",
+    },
+    {
+      id: "3",
+      icone: <ImDroplet />,
+      resultado: totalExames(),
+      legenda: "Exames",
+    },
+    {
+      id: "4",
+      icone: <ImUsers />,
+      resultado: 10,
+      legenda: "Medicamentos",
+    },
+    {
+      id: "5",
+      icone: <FaLaptopMedical />,
+      resultado: 20,
+      legenda: "Dietas",
+    },
+    {
+      id: "6",
+      icone: <ImDroplet />,
+      resultado: 30,
+      legenda: "Exercícios",
+    },
 
     // 1 - Adicionar mais cards conforme foram sendo finalizados o backend
      ];
