@@ -1,17 +1,44 @@
 import * as Styled from './FormDiet.style';
 
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Switch } from 'antd';
 
+import { DietService } from '../../Service/Diet.service';
+import { PatientService } from '../../Service/Patient.service';
+import { UserService } from '../../Service/User.service';
+
 import { InputComponent } from '../Form/InputComponent/InputComponent';
-// import { Select } from '../Form/InputComponent/Input.style';
 
 export const FormDiet = ({ patientId }) => {
     const {
         register,
+        reset,
         formState: { errors },
     } = useForm()
     
+    useEffect(() => { 
+        // reset();
+        fetchDietsList();
+        fetchPatientsList();
+        fetchUsersList();
+    }, [])
+
+    const [dietsList, setDietsList] = useState([]);
+    const fetchDietsList = async() => {
+        DietService.Get().then(result => setDietsList(result));
+    }
+
+    const [patientsList, setPatientsList] = useState([]);
+    const fetchPatientsList = async() => {
+        PatientService.Get().then(result => setPatientsList(result));
+    }
+
+    const [usersList, setUsersList] = useState([]);
+    const fetchUsersList = async() => {
+        UserService.Get().then(result => setUsersList(result));
+    }
+
     return (
         <>
             
