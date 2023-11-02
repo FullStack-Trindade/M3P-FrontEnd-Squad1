@@ -23,6 +23,8 @@ export const InputSearchDiet = () => {
         UserService.Get().then(result => setUsersList(result));
     }
 
+    const [inputName, setInputName] = useState();
+
     return (
         <>
             <Styled.InputContainer>
@@ -36,6 +38,7 @@ export const InputSearchDiet = () => {
                         type='text'
                         placeholder='Digite o nome do paciente'
                         name='namePatient'
+                        onChange={ e => setInputName(e.target.value) }
                     />
 
                     <button 
