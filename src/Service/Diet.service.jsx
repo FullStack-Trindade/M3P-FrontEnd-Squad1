@@ -24,7 +24,18 @@ const Create = (data) => {
     return fetchDiet();
 }
 
+const Show = (id) => {
+    const fetchDiet = async() => {
+        const response = await fetch(`${API_URL}?id=${id}`);
+        const data = await response.json();
+        return data;
+    } 
+
+    return fetchDiet();
+}
+
 export const DietService = {
     Get,
-    Create
+    Create,
+    Show
 }
