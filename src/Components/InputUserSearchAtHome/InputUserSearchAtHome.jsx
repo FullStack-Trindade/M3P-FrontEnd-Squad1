@@ -1,8 +1,10 @@
 import * as Styled from "./InputUserSearchAtHome.style";
 import { useEffect, useState } from "react";
-import { UserService } from "../../Service/User.service";
+import { UserService } from "../../Service/User.service.jsx";
 import CardUser from "../CardUser/CardUser";
 
+import UserAddBtn from './../UserAddBtn/UserAddBtn';
+ 
 export const InputUserSearchAtHome = () => {
   useEffect(() => {
     fetchUsersList();
@@ -51,9 +53,8 @@ export const InputUserSearchAtHome = () => {
             Buscar
           </button>
 
-          <button className="botao" type="submit" >
-            <span className="material-symbols-outlined">Cadastrar Usuário</span>
-          </button>
+          <UserAddBtn Text="Novo Usuário" To="/usuario" />
+            
         </Styled.SearchInput>
       </Styled.InputContainer>
 
