@@ -130,3 +130,36 @@ export const MainForm = styled.div`
   flex-wrap: wrap;
   width: ${({ $width }) => ($width ? $width : '100%')};
 `;
+export const Select = styled.select`
+    display: flex;
+    padding: 0.3rem;
+    align-items: flex-start;
+    align-self: stretch;
+    border-radius: 0.2rem;
+    border: 1px solid ${({ $color }) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};
+    width: ${({ $width }) => ($width ? $width : '100%')};
+    height: ${({ $height }) => ($height ? $height : '100%')};
+    color: gray;
+    background-color: #fff;
+    cursor: text;
+    &:disabled {
+        cursor: not-allowed;
+    };
+    option:not(:first-of-type) {
+        color: black
+    }
+`;
+
+export const SelectLabel = styled.label`
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: ${({ $color }) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};
+`;
+
+export const SelectGroup = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    width: ${({ $width }) => ($width ? $width : '100%')};
+`;
