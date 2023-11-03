@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState, useEffect } from 'react';
 import * as Styled from './InputSearchExam.style';
-/* import { PacienteService } from '../../Service/Paciente.service.jsx'; */
 import {UserService} from '../../Service/User.service'
 import  {FormExam}  from '../FormExam/FormExam.jsx'; 
 import {PacienteService} from '../../Service/Paciente.service';
@@ -9,52 +7,60 @@ import {PacienteService} from '../../Service/Paciente.service';
 
 export const InputSearchExam = () => {
 
-    const {
-        register,
-        handleSubmit,
-        reset,
-        formState: { error },
-      } = useForm()
+  let params = new URL(document.location).searchParams;
+  const examId = params.get('id');
+
+        useEffect(() => {
+        fetchPatientsList();
+        fetchUsersList();
+      }, [])
+
+      const [patientsList, setPatientsList] = useState([]);
+
+      const fetchPatientsList = async () => {
+        PacienteService.GetAll().then((result) => setPatientsList(result));
+      };
     
+      const [usersList, setUsersList] = useState([]);
+      const fetchUsersList = async () => {
+        UserService.Get().then((result) => setUsersList(result));
+      };
 
-    const [pacienteEncontrado, setPacienteEncontrado] = useState([]);
+    const [inputName, setInputName] = useState();
+    const [patient, setPatient] = useState([]);
 
-   
-    const submitInputForm = async (dataInput) => {
-        const {nome} = dataInput;
-        console.log(nome);
+    const searchPatient = () => {
+        const filteredUser = usersList.filter(user => user.name.includes(inputName));
 
-        const paciente = await PacienteService.ShowByEmail(nome);
-        console.log(paciente)
+        if (filteredUser.length > 1) {
+            return alert('Digite o nome completo do paciente');
+        }
+        
+        const filteredPatient = patientsList.filter(patient => String(patient.idUser).includes(String(filteredUser[0]?.id)));
+        
+        if (filteredPatient.length === 0) {
+            return alert('Paciente não consta no cadastro');
+        }
 
-           if(!paciente) {
-            alert('Usuário não cadastrado');
-            setPacienteEncontrado(null);
-            reset();
-          } else {  
-            setPacienteEncontrado(paciente);
-            reset()
-          }
+        setPatient(filteredPatient);
     }
-  
     return (
       <>
           <Styled.InputContainer>
 
           <h4>Encontre o paciente</h4>
-              <Styled.FormInput 
-              onSubmit={ handleSubmit(submitInputForm)}>
+              <Styled.SearchInput>
               
-              <input className="input2  inputFaq" placeholder="Digite o E-mail do paciente" {...register('nome')}/>
+              <input className="input2  inputFaq" placeholder="Digite o E-mail do paciente" onChange={e=>setInputName(e.target.value)}/>
 
-              <button className="botao" type='submit'><span className="material-symbols-outlined">
+              <button onClick={searchPatient} className="botao" type='submit'><span className="material-symbols-outlined">
                   Buscar</span></button>
-              </Styled.FormInput>
+              </Styled.SearchInput>
 
                 <Styled.AreaPaciente>
                   
-          {pacienteEncontrado && (
-            <FormExam paciente={pacienteEncontrado} />
+          {(patient.length>0 || examId )&& (
+            <FormExam patientId={patient[0]?.id} />
             )}
                 </Styled.AreaPaciente>
             </Styled.InputContainer>
@@ -62,4 +68,5 @@ export const InputSearchExam = () => {
          
       </>
   )
+ 
 };

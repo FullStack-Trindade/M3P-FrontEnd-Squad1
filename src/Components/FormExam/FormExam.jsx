@@ -317,7 +317,7 @@ export const FormExam = ({ patientId }) => {
               placeholder="Nome do médico(a)"
               label="Nome do médico(a)"
               name="doctorName"
-              
+              disabled={true}
               register={{
                 ...register("doctorName", {
                   required: false,

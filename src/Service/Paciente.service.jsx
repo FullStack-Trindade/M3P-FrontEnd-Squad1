@@ -1,7 +1,8 @@
+const API_URL = `http://localhost:${import.meta.env.VITE_SERVER_PORT}/api/pacientes`
 const CadastrarPaciente = async (postPacientDb) => {
   try {
 
-          const response = await fetch("http://localhost:3333/api/pacientes", {
+          const response = await fetch(API_URL, {
 
       method: "POST",
       headers: {
@@ -28,7 +29,7 @@ const CadastrarPaciente = async (postPacientDb) => {
 
  const Get = (id) => {
   const fetchPatient = async() => {
-      const response = await fetch(`http://localhost:3333/api/pacientes/${id}`);
+      const response = await fetch(`API_URL/${id}`);
       const data = await response.json();
       return data;
   }
@@ -37,7 +38,7 @@ const CadastrarPaciente = async (postPacientDb) => {
 }
  const GetAll = () => {
   const fetchPatient = async() => {
-      const response = await fetch(`http://localhost:3333/api/pacientes`);
+      const response = await fetch(API_URL);
       const data = await response.json();
       return data;
   }
