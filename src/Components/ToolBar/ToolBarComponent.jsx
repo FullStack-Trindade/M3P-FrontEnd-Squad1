@@ -20,7 +20,7 @@ function NavBarHeader() {
         </Styled.TxtUser>
         <img
           alt="Imagem do usuário"
-          src="../../../public/images/LABMedical_Logo.png"
+          src="../../../public/images/LogoGenerica.png"
         />{' '}
       </Styled.UserHeader>
     </Styled.Container>
