@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import { LoginPage } from "./Pages/LoginPage/LoginPage";
-import { Layout } from './Layout/Layout'
-import { HomePage } from "./Pages/HomePage/HomePage";
-import { MedicalRecordsPage } from './Pages/MedicalRecords/MedicalRecordsPage'
-import { CadastroExamePage } from "./Pages/CadastroExame/CadastroExamePage";
-import { AppointmentRegisterPage } from "./Pages/AppointmentRegister/AppointmentRegisterPage";
+import { LoginPage } from "./src/Pages/LoginPage/LoginPage";
+import { Layout } from './src/Layout/Layout'
+import { HomePage } from "./src/Pages/HomePage/HomePage";
+import { MedicalRecordsPage } from './src/Pages/MedicalRecords/MedicalRecordsPage'
+import { CadastroExamePage } from "./src/Pages/CadastroExame/CadastroExamePage";
+import { AppointmentRegisterPage } from "./src/Pages/AppointmentRegister/AppointmentRegisterPage";
 
 function App() {
   return (
