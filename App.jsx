@@ -6,7 +6,7 @@ import { HomePage } from "./src/Pages/HomePage/HomePage";
 import { MedicalRecordsPage } from './src/Pages/MedicalRecords/MedicalRecordsPage'
 import { CadastroExamePage } from "./src/Pages/CadastroExame/CadastroExamePage";
 import { AppointmentRegisterPage } from "./src/Pages/AppointmentRegister/AppointmentRegisterPage";
-
+// comentário teste
 function App() {
   return (
     <Router>
