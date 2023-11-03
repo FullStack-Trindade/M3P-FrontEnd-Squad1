@@ -1,15 +1,17 @@
 const fetchPatient = async (url, options) => {
   try {
     const response = await fetch(url, options);
-
+console.log(response);
     if (!response.ok) {
-      throw new Error(`Erro na requisição: ${response.status}`);
+      throw new Error(
+        `Erro na requisição: ${response.status} - ${errorMessage.message}`
+      );
     }
 
     const data = await response.json();
     return data;
   } catch (error) {
-    console.error("Erro na chamada da API:", error);
+    console.error(`Erro na chamada da API:`, error);
     throw error;
   }
 };
@@ -32,7 +34,7 @@ export const PacienteService = {
   },
   SearchByUserId: (id) => {
     return fetchPatient(`http://localhost:3000/api/pacientes/usuario/${id}`);
-      },
+  },
   Update: (id, data) => {
     return fetchPatient(`http://localhost:3000/api/pacientes/${id}`, {
       method: "PUT",
@@ -46,4 +48,3 @@ export const PacienteService = {
     });
   },
 };
-

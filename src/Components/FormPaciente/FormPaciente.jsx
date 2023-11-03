@@ -16,7 +16,7 @@ export const FormPaciente = ({ id }) => {
   const genders = [
     {
       id: 1,
-      value: "MACULINO",
+      value: "MASCULINO",
       label: "MASCULINO",
     },
 
@@ -185,7 +185,7 @@ export const FormPaciente = ({ id }) => {
     });
   };
 
-// BUSCA CEP
+  // BUSCA CEP
   const buscaCEP = async () => {
     CEPService.Get(watch("cep")).then((response) => {
       setValue("city", response.localidade);
@@ -203,20 +203,53 @@ export const FormPaciente = ({ id }) => {
 
   //INICIO CRUD
 
-  const submitForm = async (data) => {
+  const submitForm = async (pacienteData) => {
     setIsLoading(true);
-    formMode == "edit" ? updatePaciente(data) : createPaciente(data);
+
+    if (id) {
+      const updatedPacientDb = {
+        birth: pacienteData.birth,
+        idUser: idUser,
+        maritalStatus: pacienteData.maritalStatus,
+        rg: pacienteData.rg,
+        orgaoExpedidor: pacienteData.orgaoExpedidor,
+        birthplace: pacienteData.birthplace,
+        emergencyContact: pacienteData.emergencyContact,
+        alergiesList: pacienteData.alergiesList,
+        specificCares: pacienteData.specificCares,
+        healthInsurance: pacienteData.healthInsurance,
+        insuranceNumber: pacienteData.insuranceNumber,
+        insuranceVality: pacienteData.insuranceVality,
+
+        adress: {
+          cep: pacienteData.cep,
+          city: pacienteData.city,
+          state: pacienteData.state,
+          street: pacienteData.street,
+          number: pacienteData.number,
+          complement: pacienteData.complement,
+          neighborhood: pacienteData.neighborhood,
+          reference: pacienteData.reference,
+        },
+      };
+      updatePaciente(updatedPacientDb);
+    } else {
+      createPaciente(pacienteData);
+    }
     setIsLoading(false);
   };
 
   const createPaciente = async (pacienteData) => {
     try {
+      
       //passo 1 - verificar se já existe usuário cadastrado com esse cpf ou email
       const searchedUser = {
         cpf: pacienteData.cpf,
         email: pacienteData.email,
       };
+      
       const userInDb = await UserService.SearchByCpfEmail(searchedUser);
+      
 
       if (userInDb) {
         alert("Já existe um usuário com este CPF ou e-mail.");
@@ -233,18 +266,20 @@ export const FormPaciente = ({ id }) => {
           id_type: "3",
         };
 
-        const newUser = UserService.Create(postUsuarioDb);
+        
 
+        const newUser = await UserService.Create(postUsuarioDb);
+       
         // passo 3 - quando usuário criado com sucesso criar cadastro do paciente (vinculando ao novo ID criado)
 
-        if (newUser.status === 201) {
+        if (newUser.status) {
           //Gambiarra para arrumar o problema do valitynumber
 
-          if (pacienteData.insuranceVality === "") {
-            newInsuranceVality = "9999-12-12";
-          } else {
-            newInsuranceVality = pacienteData.insuranceVality;
-          }
+          // if (pacienteData.insuranceVality === "") {
+          //   newInsuranceVality = "9999-12-12";
+          // } else {
+          //   newInsuranceVality = pacienteData.insuranceVality;
+          // }
 
           const postPacientDb = {
             birth: pacienteData.birth,
@@ -258,7 +293,7 @@ export const FormPaciente = ({ id }) => {
             specificCares: pacienteData.specificCares,
             healthInsurance: pacienteData.healthInsurance,
             insuranceNumber: pacienteData.insuranceNumber,
-            insuranceVality: newInsuranceVality,
+            insuranceVality: pacienteData.insuranceNumber,
             //gambi
             adress: {
               cep: pacienteData.cep,
@@ -272,7 +307,10 @@ export const FormPaciente = ({ id }) => {
             },
           };
 
+      //   
           const newPaciente = await PacienteService.Create(postPacientDb);
+          console.log(newPaciente);
+
           if (newPaciente.status === 201) {
             alert("Cadastro bem-sucedido");
             reset();
@@ -288,58 +326,17 @@ export const FormPaciente = ({ id }) => {
   };
 
   const updatePaciente = async (pacienteData) => {
-    //Gambiarra para arrumar o problema do valitynumber
-
-    if (pacienteData.insuranceVality === "") {
-      newInsuranceVality = "9999-12-12";
-    } else {
-      newInsuranceVality = pacienteData.insuranceVality;
-    }
-
-    const postPacientDb = {
-      birth: pacienteData.birth,
-      idUser: newUser.id,
-      maritalStatus: pacienteData.maritalStatus,
-      rg: pacienteData.rg,
-      orgaoExpedidor: pacienteData.orgaoExpedidor,
-      birthplace: pacienteData.birthplace,
-      emergencyContact: pacienteData.emergencyContact,
-      alergiesList: pacienteData.alergiesList,
-      specificCares: pacienteData.specificCares,
-      healthInsurance: pacienteData.healthInsurance,
-      insuranceNumber: pacienteData.insuranceNumber,
-      insuranceVality: newInsuranceVality,
-      //gambi
-      adress: {
-        cep: pacienteData.cep,
-        city: pacienteData.city,
-        state: pacienteData.state,
-        street: pacienteData.street,
-        number: pacienteData.number,
-        complement: pacienteData.complement,
-        neighborhood: pacienteData.neighborhood,
-        reference: pacienteData.reference,
-      },
-    };
-
     try {
-      const updatedPaciente = await PacienteService.Update(postPacientDb);
-
-      if (updatedPaciente.status === 201) {
+      await PacienteService.Update(id, pacienteData).then((response) => {
         alert("Paciente atualizado com sucesso");
-        setFormMode("read");
-      } else {
-        alert("Erro ao atualizar o paciente");
-      }
+      });
     } catch (error) {
-      alert("Não foi possível atualizar o paciente");
+      alert("Erro no cadastro. Por favor, tente novamente.");
+      console.error("Erro ao cadastrar consulta:", error);
     }
-
-    // redirecionar para a home
   };
 
   const deletePaciente = () => {
-    
     PacienteService.Delete(id).then((response) => {
       if ((response.status = 202)) {
         UserService.Delete(idUser).then((response) => {
@@ -356,12 +353,10 @@ export const FormPaciente = ({ id }) => {
     });
   };
 
-
-
   return (
     <Styled.Form onSubmit={handleSubmit(submitForm)}>
       <Styled.Header>
-        <Styled.Title>Identificação {formMode}</Styled.Title>
+        <Styled.Title>Identificação </Styled.Title>
 
         <Styled.LabelSwitch>Editar</Styled.LabelSwitch>
 
@@ -411,7 +406,7 @@ export const FormPaciente = ({ id }) => {
             placeholder="Digite seu Nome"
             label="Nome Completo"
             name="nome"
-            disabled={formInputsDisabled}
+            disabled={specialFormInputsDisabled}
             register={{
               ...register("name", {
                 required: true,
@@ -428,7 +423,7 @@ export const FormPaciente = ({ id }) => {
             name="genero"
             label={"Gênero"}
             options={genders}
-            disabled={formInputsDisabled}
+            disabled={specialFormInputsDisabled}
             register={{
               ...register("gender", {
                 required: true,
@@ -529,7 +524,7 @@ export const FormPaciente = ({ id }) => {
             placeholder="Telefone no formato (99) 9 9999-99999"
             name="phone"
             label="Telefone"
-            disabled={formInputsDisabled}
+            disabled={specialFormInputsDisabled}
             register={{
               ...register("phone", {
                 required: true,
@@ -810,8 +805,11 @@ export const FormPaciente = ({ id }) => {
             }}
             error={errors.reference}
           />
+          
         </Styled.InputGroup>
-      </Styled.MainForm>
+        {formMode == "edit"? <Styled.Title>Se o campo que você deseja editar estiver bloqueado, entre em contato com o administrador.</Styled.Title> :""}
+              </Styled.MainForm>
+      
     </Styled.Form>
   );
 };

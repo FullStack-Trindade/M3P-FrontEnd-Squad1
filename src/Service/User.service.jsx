@@ -3,8 +3,7 @@ const API_URL = `http://localhost:${import.meta.env.VITE_SERVER_PORT}/api`
 const fetchUser = async (url, options) => {
   try {
     const response = await fetch(url, options);
-    console.log(response);
-    if (!response.ok) {
+       if (!response.ok) {
       throw new Error(`Erro na requisição: ${response.status}`);
     }
 
@@ -18,8 +17,7 @@ const fetchUser = async (url, options) => {
 
 export const UserService = {
   Create: (data) => {
-    console.log(data)
-    return fetchUser(`${API_URL}/usuario`, {
+        return fetchUser(`${API_URL}/usuarios`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
