@@ -247,7 +247,7 @@ export const FormPaciente = ({ id }) => {
 
   const createPaciente = async (pacienteData) => {
     try {
-      //passo 1 - verificar se já existe usuário cadastrado com esse cpf ou email
+     
       const searchedUser = {
         cpf: pacienteData.cpf,
         email: pacienteData.email,
@@ -258,7 +258,7 @@ export const FormPaciente = ({ id }) => {
       if (userInDb) {
         alert("Já existe um usuário com este CPF ou e-mail.");
       } else {
-        // passo 2 - não existe usuário. Criar Usuário
+       
 
         const postUsuarioDb = {
           name: pacienteData.name,
@@ -285,7 +285,7 @@ export const FormPaciente = ({ id }) => {
               healthInsurance: pacienteData.healthInsurance,
               insuranceNumber: pacienteData.insuranceNumber,
               insuranceVality: pacienteData.insuranceVality,
-              //gambi
+             
               adress: {
                 cep: pacienteData.cep,
                 city: pacienteData.city,
@@ -301,6 +301,7 @@ export const FormPaciente = ({ id }) => {
             await PacienteService.Create(postPacientDb).then((response) => {
               if (response) {
                 alert(`Paciente ID ${response.id} criado com sucesso!`);
+                navigate("/");
               }
             });
           }
@@ -318,6 +319,7 @@ export const FormPaciente = ({ id }) => {
       await PacienteService.Update(id, pacienteData).then((response) => {
         setIsSubmitSuccessful;
         alert("Paciente atualizado com sucesso");
+        navigate("/");
       });
     } catch (error) {
       alert("Erro no cadastro. Por favor, tente novamente.");
