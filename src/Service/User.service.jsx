@@ -9,6 +9,7 @@ const Get = () => {
 
     return fetchUser();
 }
+
 const Create = async(data) => {
 
     const objeto = {
