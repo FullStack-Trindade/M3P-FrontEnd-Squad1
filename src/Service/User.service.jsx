@@ -1,20 +1,5 @@
 const API_URL = `http://localhost:${import.meta.env.VITE_SERVER_PORT}/api`
 
-<<<<<<< HEAD
-const Get = () => {
-    const fetchUser = async() => {
-        const response = await fetch(API_URL);
-        const data = await response.json();
-        return data;
-    }
-
-    return fetchUser();
-}
-
-export const UserService = {
-    Get
-}
-=======
 const fetchUser = async (url, options) => {
   try {
     const response = await fetch(url, options);
@@ -69,4 +54,3 @@ export const UserService = {
     });
   },
 };
->>>>>>> aa7f8a02b8f8e8e8cbb10becab93e96afc58133d
