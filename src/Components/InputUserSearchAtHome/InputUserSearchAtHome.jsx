@@ -44,7 +44,7 @@ export const InputUserSearchAtHome = () => {
             className="input2 inputFaq"
             id="namePatient"
             type="text"
-            placeholder="Digite o nome do paciente"
+            placeholder="Digite o nome do(a) usuário(a)"
             name="namePatient"
             onChange={(e) => setInputName(e.target.value)}
           />
