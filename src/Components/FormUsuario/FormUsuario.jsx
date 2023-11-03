@@ -1,5 +1,5 @@
 import * as Styled from "./FormUsuario.style";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { useForm } from "react-hook-form";
 import { InputComponent } from "../FormUsuario/InputComponent/InputComponent";
@@ -13,7 +13,7 @@ export const FormUsuario = () => {
   const { register, handleSubmit, reset, setValue, formState: { errors } } = useForm();
 
   function validarCPF(cpf) {
-    cpf = cpf.replace(/[^\d]+/g, ''); // Remove caracteres não numéricos do CPF
+    cpf = cpf.replace(/[^\d]+/g, ''); 
   
     if (cpf.length !== 11 ||
         cpf === "00000000000" ||
@@ -29,7 +29,6 @@ export const FormUsuario = () => {
       return false;
     }
   
-    // Validação do primeiro dígito verificador
     let soma = 0;
     for (let i = 0; i < 9; i++) {
       soma += parseInt(cpf.charAt(i)) * (10 - i);
@@ -42,7 +41,7 @@ export const FormUsuario = () => {
       return false;
     }
   
-    // Validação do segundo dígito verificador
+
     soma = 0;
     for (let i = 0; i < 10; i++) {
       soma += parseInt(cpf.charAt(i)) * (11 - i);
@@ -55,7 +54,7 @@ export const FormUsuario = () => {
       return false;
     }
   
-    return true; // CPF válido
+    return true; 
   }
   
   const genders = [
