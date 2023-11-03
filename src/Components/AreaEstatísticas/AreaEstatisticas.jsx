@@ -3,7 +3,7 @@ import CardEstatisticaADM from "../CardEstatisticaADM/CardEstatisticaADM";
 import * as Styled from "./AreaEstatisticas.style";
 import React, { useState, useEffect } from "react";
 import { ImUsers, ImDroplet } from "react-icons/im";
-import { FaLaptopMedical } from "react-icons/fa";
+import { FaLaptopMedical, FaSyringe, FaRunning, FaUtensils } from "react-icons/fa";
 
 import { UserService } from "../../Service/User.service";
 import { PacienteService } from "../../Service/Paciente.service";
@@ -89,19 +89,19 @@ function EstatisticasSistema() {
     },
     {
       id: "4",
-      icone: <ImUsers />,
+      icone: <FaSyringe />,
       resultado: 10,
       legenda: "Medicamentos",
     },
     {
       id: "5",
-      icone: <FaLaptopMedical />,
+      icone: <FaUtensils />,
       resultado: 20,
       legenda: "Dietas",
     },
     {
       id: "6",
-      icone: <ImDroplet />,
+      icone: <FaRunning />,
       resultado: 30,
       legenda: "Exercícios",
     },

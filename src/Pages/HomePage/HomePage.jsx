@@ -1,61 +1,60 @@
 import * as Styled from './HomePage.style'
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import { AuthContext } from '../../Context/auth.context';
 import { HeaderContext } from '../../Context/Header.context';
 import { AuthService } from '../../Service/Auth.service';
 import AreaEstatistica from '../../Components/AreaEstatísticas/AreaEstatisticas';
-import { InputSearch } from '../../Components/InputSearchPaciente/InputSearchPaciente';
+/* import { InputSearch } from '../../Components/InputSearchPaciente/InputSearchPaciente'; */
 //import { InputSearchUser } from '../../Components/InputSearchUser/InputSearchUser';
 /* import { InputUserSearchAtHome } from '../../Components/InputUserSearchAtHome/InputUserSearchAtHome';
 import { InputPatientSearchAtHome } from '../../Components/InputPatientSearchAtHome copy/InputPatientSearchAtHome';
  */
 
 export const HomePage = () => {
-  
-  const { tokenUser, setTokenUser } = useContext(AuthContext);
-  const localToken = JSON.parse(localStorage.getItem('token'));
+    const { tokenUser, setTokenUser } = useContext(AuthContext);
+    const localToken = JSON.parse(localStorage.getItem('token'));
 
-  useEffect(() => { 
-      if (localToken !== null) {
-          fetchAuth() 
-      }
-  }, [localToken]);
+    const [loading, setLoading] = useState();
 
-  const fetchAuth = async() => {
-      const authToken = await AuthService.Get();
-      const tokenExists = authToken.filter(auth => auth.token_user === localToken);
+    useEffect(() => { 
+        if (localToken !== null) {
+            setLoading(true);
+            fetchAuth();
+        }
+    }, [localToken]);
 
-      if (tokenExists.length === 0) { return }
-      
-      setTokenUser(tokenExists[0]?.token_user);
-  }
-  
-  const { setData } = useContext(HeaderContext)
-  
-  useEffect(() => {
-    setData({       
-      titulo: 'ESTATÍSTICAS E INFORMAÇÕES',}) 
+    const fetchAuth = async() => {
+        const authToken = await AuthService.Get();
+        const tokenExists = await authToken.filter(auth => auth.token_user === localToken);
+
+        if (tokenExists.length > 0) { 
+            setTokenUser(tokenExists[0]?.token_user);
+            setLoading(false);
+        }
+    }
+
+    const { setData } = useContext(HeaderContext)
+    
+    useEffect(() => {
+        setData({       
+            titulo: 'ESTATÍSTICAS E INFORMAÇÕES',}) 
     }, []);
       
     const render = () => {
         return (
-          <>
-          <Styled.MainHome>
-           { <AreaEstatistica/>}
-      {/*      { <InputUserSearchAtHome/>} */}
-     {/*       { <InputPatientSearchAtHome/>} */}
-
-          </Styled.MainHome>
-          </>
+            <>
+            <Styled.MainHome>
+                { <AreaEstatistica/>}
+            </Styled.MainHome>
+            </>
       )
     }
 
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
     return !!tokenUser && (tokenUser === localToken) ? render() : <Navigate to='/login'/>;
-  }
-  
-
-
-  
-
+}
