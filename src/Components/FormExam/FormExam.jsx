@@ -33,9 +33,10 @@ export const FormExam = ({ patientId }) => {
   }, [])
 
   const [examsList, setExamsList] = useState([]);
-  const fetchExamsList = async() => {
+  const fetchExamsList = async () => {
     ExamService.Get().then(result => setExamsList(result));
   }
+  console.log(examsList);
 
   const [patientsList, setPatientsList] = useState([]);
 
@@ -70,13 +71,15 @@ export const FormExam = ({ patientId }) => {
     if (exam.length > 0) {
       setValue("idPatient", exam[0].id_patient);
       setValue("idDoctor", exam[0].id_doctor);
-      setValue("nameExam", exam[0].name_exam);
-      setValue("examDate", exam[0].date_exam);
-      setValue("examHour", exam[0].hour_exam);
-      setValue("typeExam", exam[0].type_exam);
-      setValue("labExam", exam[0].lab_exam);
-      setValue("urlExam", exam[0].url_exam);
-      setValue("resulExam", exam[0].result_exam);
+      setValue("nameExam", exam[0].nameExam);
+      setValue("dateExam", exam[0].dateExam);
+      setValue("hourExam", exam[0].hourExam);
+      setValue("typeExam", exam[0].typeExam);
+      setValue("labExam", exam[0].labExam);
+      setValue("urlExam", exam[0].urlExam);
+      setValue("resultExam", exam[0].resultExam);
+      setValue("statusExam", exam[0].statusExam);
+      
     }
   }, [exam]);
 
@@ -136,15 +139,16 @@ export const FormExam = ({ patientId }) => {
     const data = {
       id_patient: dataForm.idPatient,
       id_doctor: dataForm.idDoctor,
-      name_exam: dataForm.nameExam,
-      date_exam: dataForm.dateExam,
-      hour_exam: dataForm.hourExam,
-      type_exam: dataForm.typeExam,
-      lab_exam: dataForm.labExam,
-      url_exam: dataForm.urlExam,
-      result_exam: dataForm.resultExam,
-      statusExam: true,
+      nameExam: dataForm.nameExam,
+      dateExam: dataForm.dateExam,
+      hourExam: dataForm.hourExam,
+      typeExam: dataForm.typeExam,
+      labExam: dataForm.labExam,
+      urlExam: dataForm.urlExam,
+      resultExam: dataForm.resultExam,
+      statusExam: dataForm.statusExam,
     };
+    console.log(data);
     examId ? Update(data) : Save(data);
   };
 
@@ -170,14 +174,14 @@ export const FormExam = ({ patientId }) => {
       });
   };
 
-  const onSave = async (submitData) => {
+  const Save = async (submitData) => {
     if (isExamRegistered(submitData)) {
       return;
     }
 
     await ExamService.Create(submitData)
       .then((response) => {
-        console.log(response.status);
+        console.log(response);
         switch (response.status) {
           case 201:
             reset();
@@ -224,10 +228,10 @@ export const FormExam = ({ patientId }) => {
           <Styled.Title>
             {
               patientName
-              ? `Exame de ${patientName}`
-              : 'Formulário de exame'
+                ? `Exame de ${patientName}`
+                : 'Formulário de exame'
             }
-            </Styled.Title>
+          </Styled.Title>
 
           <Styled.LabelSwitch>Editar</Styled.LabelSwitch>
 
@@ -267,7 +271,7 @@ export const FormExam = ({ patientId }) => {
               label="Código do Paciente *"
               name="idPatient"
               min={1}
-              disabled={true}
+              disabled={examId && isEditActive === false}
               register={{
                 ...register("idPatient", {
                   required: true,
@@ -298,6 +302,7 @@ export const FormExam = ({ patientId }) => {
               label="Código do medico *"
               name="idDoctor"
               min={1}
+              disabled={examId && isEditActive === false}
               register={{
                 ...register("idDoctor", {
                   required: true,
@@ -312,7 +317,7 @@ export const FormExam = ({ patientId }) => {
               placeholder="Nome do médico(a)"
               label="Nome do médico(a)"
               name="doctorName"
-              disabled={true}
+              
               register={{
                 ...register("doctorName", {
                   required: false,
@@ -327,6 +332,7 @@ export const FormExam = ({ patientId }) => {
               placeholder="Nome do exame"
               label="Nome do Exame"
               name="nameExam"
+              disabled={examId && isEditActive === false}
               register={{
                 ...register("nameExam", {
                   required: true,
@@ -363,6 +369,7 @@ export const FormExam = ({ patientId }) => {
               placeholder="Nome do laboratorio"
               label="Nome do laboratorio"
               name="labExam"
+              disabled={examId && isEditActive === false}
               register={{
                 ...register("labExam", {
                   required: true,
@@ -441,6 +448,23 @@ export const FormExam = ({ patientId }) => {
               }}
               error={errors.resultExam}
             />
+          </Styled.InputGroup>
+          <Styled.InputGroup>
+            <Styled.SelectGroup>
+              <Styled.SelectLabel $color={errors.status && 'danger'} htmlFor='statusExam'>Status do Sistema *</Styled.SelectLabel>
+              <Styled.Select
+                id='statusExam'
+                name='statusExam'
+                defaultValue={''}
+                disabled={examId && isEditActive === false}
+                {...register('statusExam', { required: true })}
+                $color={errors.dietType && 'danger'}
+              >
+                <option value={''} disabled>Selecione o status do sistema</option>
+                <option value={true}>ATIVO</option>
+                <option value={false}>INATIVO</option>
+              </Styled.Select>
+            </Styled.SelectGroup>
           </Styled.InputGroup>
         </Styled.MainForm>
       </Styled.Form>
