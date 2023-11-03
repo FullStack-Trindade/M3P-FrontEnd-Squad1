@@ -12,7 +12,6 @@ import { UserService } from "../../Service/User.service";
 import { InputComponent } from "../Form/InputComponent/InputComponent";
 
 export const FormExam = ({ patientId }) => {
-  const [examsList, setExamsList] = useState([]);
 
   const {
     register,
@@ -31,7 +30,7 @@ export const FormExam = ({ patientId }) => {
     fetchExamsList();
     fetchPatientsList();
     fetchUsersList();
-  }, []);
+  }, [])
 
   const [examsList, setExamsList] = useState([]);
   const fetchExamsList = async() => {
@@ -146,7 +145,7 @@ export const FormExam = ({ patientId }) => {
       result_exam: dataForm.resultExam,
       statusExam: true,
     };
-    examId ? onUpdate(data) : onSave(data);
+    examId ? Update(data) : Save(data);
   };
 
   const Update = async (submitData) => {
@@ -201,6 +200,7 @@ export const FormExam = ({ patientId }) => {
 
   const Delete = async () => {
     const response = await ExamService.Delete(examId);
+    console.log(response);
 
     switch (response.status) {
       case 202:
@@ -255,7 +255,7 @@ export const FormExam = ({ patientId }) => {
           </Styled.Button>
         </Styled.Header>
 
-        <Styled.Paragraph>Campos obrigatórios</Styled.Paragraph>
+        <Styled.Paragraph>* Campos obrigatórios</Styled.Paragraph>
 
         <Styled.MainForm $width={"100%"}>
           <Styled.InputGroup>
