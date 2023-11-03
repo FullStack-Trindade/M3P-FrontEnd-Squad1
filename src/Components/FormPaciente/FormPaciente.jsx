@@ -249,8 +249,7 @@ export const FormPaciente = ({ id }) => {
       };
       
       const userInDb = await UserService.SearchByCpfEmail(searchedUser);
-      
-
+     
       if (userInDb) {
         alert("Já existe um usuário com este CPF ou e-mail.");
       } else {
@@ -266,10 +265,11 @@ export const FormPaciente = ({ id }) => {
           id_type: "3",
         };
 
-        
+        console.log(postUsuarioDb);
 
         const newUser = await UserService.Create(postUsuarioDb);
        
+        console.log(newUser);
         // passo 3 - quando usuário criado com sucesso criar cadastro do paciente (vinculando ao novo ID criado)
 
         if (newUser.status) {
@@ -293,7 +293,7 @@ export const FormPaciente = ({ id }) => {
             specificCares: pacienteData.specificCares,
             healthInsurance: pacienteData.healthInsurance,
             insuranceNumber: pacienteData.insuranceNumber,
-            insuranceVality: pacienteData.insuranceNumber,
+            insuranceVality: pacienteData.insuranceVality,
             //gambi
             adress: {
               cep: pacienteData.cep,
@@ -307,7 +307,8 @@ export const FormPaciente = ({ id }) => {
             },
           };
 
-      //   
+   console.log(postPacientDb)
+
           const newPaciente = await PacienteService.Create(postPacientDb);
           console.log(newPaciente);
 

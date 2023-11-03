@@ -1,3 +1,5 @@
+const API_URL = `http://localhost:${import.meta.env.VITE_SERVER_PORT}/api`
+
 const fetchPatient = async (url, options) => {
   try {
     const response = await fetch(url, options);
@@ -18,7 +20,7 @@ console.log(response);
 
 export const PacienteService = {
   Create: (data) => {
-    return fetchPatient("http://localhost:3000/api/pacientes", {
+    return fetchPatient(`${API_URL}/pacientes`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -27,23 +29,23 @@ export const PacienteService = {
     });
   },
   Get: () => {
-    return fetchPatient("http://localhost:3000/api/pacientes");
+    return fetchPatient(`${API_URL}/pacientes`);
   },
   Show: (id) => {
-    return fetchPatient(`http://localhost:3000/api/pacientes/${id}`);
+    return fetchPatient(`${API_URL}/pacientes/${id}`);
   },
   SearchByUserId: (id) => {
-    return fetchPatient(`http://localhost:3000/api/pacientes/usuario/${id}`);
+    return fetchPatient(`${API_URL}/pacientes/usuario/${id}`);
   },
   Update: (id, data) => {
-    return fetchPatient(`http://localhost:3000/api/pacientes/${id}`, {
+    return fetchPatient(`${API_URL}/pacientes/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
   },
   Delete: (id) => {
-    return fetchPatient(`http://localhost:3000/api/pacientes/${id}`, {
+    return fetchPatient(`${API_URL}/pacientes/${id}`, {
       method: "DELETE",
     });
   },
