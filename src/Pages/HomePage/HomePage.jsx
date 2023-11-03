@@ -13,47 +13,47 @@ import { InputPatientSearchAtHome } from '../../Components/InputPatientSearchAtH
  */
 
 export const HomePage = () => {
-  const { tokenUser, setTokenUser } = useContext(AuthContext);
-  const localToken = JSON.parse(localStorage.getItem('token'));
+    const { tokenUser, setTokenUser } = useContext(AuthContext);
+    const localToken = JSON.parse(localStorage.getItem('token'));
 
-  const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState();
 
-  useEffect(() => { 
-      if (localToken !== null) {
-          fetchAuth() 
-      }
-  }, [localToken]);
+    useEffect(() => { 
+        if (localToken !== null) {
+            setLoading(true);
+            fetchAuth();
+        }
+    }, [localToken]);
 
-  const fetchAuth = async() => {
-    const authToken = await AuthService.Get();
-    const tokenExists = await authToken.filter(auth => auth.token_user === localToken);
+    const fetchAuth = async() => {
+        const authToken = await AuthService.Get();
+        const tokenExists = await authToken.filter(auth => auth.token_user === localToken);
 
-      if (tokenExists.length > 0) { 
-        setTokenUser(tokenExists[0]?.token_user);
-      }
+        if (tokenExists.length > 0) { 
+            setTokenUser(tokenExists[0]?.token_user);
+            setLoading(false);
+        }
+    }
 
-      setLoading(false);
-  }
-
-  const { setData } = useContext(HeaderContext)
-  
-  useEffect(() => {
-    setData({       
-      titulo: 'ESTATÍSTICAS E INFORMAÇÕES',}) 
+    const { setData } = useContext(HeaderContext)
+    
+    useEffect(() => {
+        setData({       
+            titulo: 'ESTATÍSTICAS E INFORMAÇÕES',}) 
     }, []);
       
     const render = () => {
         return (
-          <>
-          <Styled.MainHome>
-            { <AreaEstatistica/>}
-          </Styled.MainHome>
-          </>
+            <>
+            <Styled.MainHome>
+                { <AreaEstatistica/>}
+            </Styled.MainHome>
+            </>
       )
     }
 
     if (loading) {
-      return <div>Loading...</div>;
+        return <div>Loading...</div>;
     }
 
     return !!tokenUser && (tokenUser === localToken) ? render() : <Navigate to='/login'/>;

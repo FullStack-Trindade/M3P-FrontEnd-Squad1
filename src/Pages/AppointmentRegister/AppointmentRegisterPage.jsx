@@ -11,11 +11,12 @@ export const AppointmentRegisterPage = () => {
   const { tokenUser, setTokenUser } = useContext(AuthContext);
   const localToken = JSON.parse(localStorage.getItem('token'));
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState();
 
   useEffect(() => { 
       if (localToken !== null) {
-          fetchAuth() 
+          setLoading(true);
+          fetchAuth();
       }
   }, [localToken]);
 
@@ -25,9 +26,9 @@ export const AppointmentRegisterPage = () => {
 
       if (tokenExists.length > 0) { 
         setTokenUser(tokenExists[0]?.token_user);
+        setLoading(false);
       }
 
-      setLoading(false);
     }
 
   const { setData } = useContext(HeaderContext)
