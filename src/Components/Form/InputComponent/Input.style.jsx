@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+import PropTypes from 'prop-types'
+
+
 export const InputGroup = styled.div`
   display: flex;
   flex-direction: column;
@@ -44,6 +47,22 @@ export const Input = styled.input`
   }
 `;
 
+ 
+`
+export const Input = styled.input`
+  display: flex;
+  padding: 0.3rem;
+  
+  align-items: flex-start;
+  align-self: stretch;
+  border-radius: 0.2rem;
+  border: 1px solid ${({$color}) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};
+  width: ${({ $width }) => ($width ? $width : '100%')};
+  height: ${({ $height }) => ($height ? $height : '100%')};
+  
+  `;
+
+
 export const TextArea = styled.textarea`
   display: flex;
   padding: 0.5rem;
@@ -58,6 +77,7 @@ export const TextArea = styled.textarea`
   }
 `;
 
+
 export const Icon = styled.button`
   position: absolute;
   cursor: pointer;
@@ -69,3 +89,4 @@ export const Icon = styled.button`
   margin: .5rem 13.3rem;
   color: ${({ $color }) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};;
 `;
+
