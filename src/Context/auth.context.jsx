@@ -6,7 +6,7 @@ export const AuthContext = createContext({
     setIdDatabase: () => {},
     idUser: null,
     setIdUser: () => {},
-    tokenUser: '',
+    tokenUser: null,
     setTokenUser: () => {},
     idType: null,
     setIdType: () => {}
