@@ -20,3 +20,11 @@ export const Header = styled.div`
     gap: 0.5rem;
     align-self: stretch;
 `;
+
+export const Title = styled.legend`
+    color: #5281DC;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+`;
