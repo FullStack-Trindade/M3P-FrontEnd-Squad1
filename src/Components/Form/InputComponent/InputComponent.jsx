@@ -4,7 +4,22 @@ import { MdVisibility, MdVisibilityOff } from 'react-icons/md';
 
 import * as Styled from './Input.style';
 
-export const InputComponent = ({ label, type, id, placeholder, register, error, $width, $height, minLength,value, onChange, disabled }) => {
+export const InputComponent = ({ 
+  $width,
+  $height,
+  error,
+  id,
+  label,
+  type,
+  minLength,
+  placeholder,
+  min,
+  disabled,
+  register,
+  onChange, 
+  value
+}) => {
+
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = () => {
@@ -12,65 +27,73 @@ export const InputComponent = ({ label, type, id, placeholder, register, error, 
   }
 
   return(
-    <Styled.InputGroup $width={$width} $height={$height} >
-      <Styled.Label $color={error && 'danger'} htmlFor={ id }>{ label }</Styled.Label>
+    <Styled.InputGroup $width={ $width } $height={ $height }>
+
+      <Styled.Label $color={ error && 'danger' } htmlFor={ id }>{ label }</Styled.Label>
 
       { type !== 'textarea' && 
         <Styled.InputContainer>
+
           <Styled.Input 
-          disabled ={disabled}
-            $height={$height}
-            $width={$width}
-            $color={error && 'danger'} 
+            $height={ $height }
+            $width={ $width }
+            $color={ error && 'danger' } 
             type={ showPassword ? 'text' : type } 
-            minLength={''}
+            minLength={ minLength }
             id={ id } 
-            value={value}
-            onChange={ onChange } 
             placeholder={ placeholder } 
-            {...register}/>
-          
+            min={ min }
+            value={value}
+            disabled={ disabled }
+            onChange={ onChange }
+            { ...register }
+          />
+
           { type === 'password' && 
-          
-          <Styled.Icon 
-            $color={error && 'danger'} 
-            type='button' 
-            onClick={handleShowPassword}>
-                { !showPassword 
-                    ? <MdVisibility/>
-                    : <MdVisibilityOff/>
+            <Styled.Icon 
+              $color={ error && 'danger' } 
+              type='button' 
+              onClick={ handleShowPassword }
+            >
+              { !showPassword 
+                ? <MdVisibility/>
+                : <MdVisibilityOff/>
               }
             </Styled.Icon>
           }
+
         </Styled.InputContainer>
       }
 
       { type === 'textarea' &&
-            <Styled.TextArea 
-            disabled ={disabled}
-            $height={$height}
-            $color={error && 'danger'} 
-            id={ id } 
-            minLength={''}
-            placeholder={ placeholder } 
-            {...register}/>
-          }
+
+        <Styled.TextArea 
+          $height={ $height }
+          $color={ error && 'danger' } 
+          id={ id } 
+          minLength={''}
+          placeholder={ placeholder } 
+          disabled={ disabled }
+          { ...register }
+        />
+      }
     </Styled.InputGroup>
   )
 }
 
 InputComponent.propTypes = {
+  $width: PropTypes.string,
+  $height: PropTypes.string,
+  $color: PropTypes.string,
+  error: PropTypes.any,
+  id: PropTypes.string.isRequired,
   label: PropTypes.string,
   type: PropTypes.string,
-  id: PropTypes.string.isRequired,
+  minLength: PropTypes.any,
   placeholder: PropTypes.string,
+  min: PropTypes.number,
+  disabled: PropTypes.bool,
   register: PropTypes.any,
-  minLenght: PropTypes.any,
-  error: PropTypes.any,
-  $height: PropTypes.string,
-  $width: PropTypes.string,
-  $color: PropTypes.string,
+  onChange: PropTypes.func,
   value:PropTypes.string,
-  onChange:PropTypes.string,
-  disabled:PropTypes.any,
 }

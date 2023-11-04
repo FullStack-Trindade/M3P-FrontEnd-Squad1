@@ -21,7 +21,7 @@ export const InputSearch = () => {
     console.log(paciente)
     
       if (!paciente) {
-        alert('Usuário não cadastrado');
+        alert('Paciente não cadastrado');
         setPacienteEncontrado(null);
         reset();
       } else {
@@ -34,7 +34,7 @@ export const InputSearch = () => {
   return (
     <>
       <Styled.InputContainer>
-        <h2>Informações Rápidas de Pacientes</h2>
+        <h4>Informações Rápidas de Pacientes</h4>
         <Styled.FormInput onSubmit={handleSubmit(submitInputForm)}>
           <input
             className="input2 inputFaq"
@@ -44,6 +44,7 @@ export const InputSearch = () => {
           <button className="botao" type="submit">
             <span className="material-symbols-outlined">Buscar</span>
           </button>
+
         </Styled.FormInput>
       </Styled.InputContainer>
 

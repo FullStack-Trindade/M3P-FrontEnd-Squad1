@@ -30,7 +30,7 @@ export const ExameService = {
 
 import { LocalStorageService } from "./LocalStorage.service";
 
-const API_URL = 'http://localhost:3000/exames'
+const API_URL = `http://localhost:${import.meta.env.VITE_SERVER_PORT}/api/exames`
 
 
 

@@ -1,7 +1,7 @@
 {
-  "name": "frondend-squad1",
+  "name": "frontend-squad1",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -9,8 +9,8 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "start": "concurrently \"npm run start-backend\" \"npm run start-frontend\"",
-    "start-backend": "cd C:\\Users\\rodri\\OneDrive\\Documentos\\GitHub\\devfullstack_senailab365\\projetosAvaliativos\\m03-squad1\\M3P-BackEnd-Squad1 && npm run start",
-    "start-frontend": "cd C:\\Users\\rodri\\OneDrive\\Documentos\\GitHub\\devfullstack_senailab365\\projetosAvaliativos\\m03-squad1\\M3P-FrontEnd-Squad1 && npm run dev"
+    "start-frontend": "",
+    "start-backend": ""
   },
   "dependencies": {
     "antd": "^5.10.0",
