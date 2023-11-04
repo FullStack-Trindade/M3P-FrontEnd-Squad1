@@ -8,3 +8,11 @@ export const ContainerPassword = styled.div`
     width: 100%;
     height: auto;
 `;
+
+export const ImagePassword = styled.img`
+    display: flex;
+    justify-content: center;
+    width: 30vw;
+    height: auto;
+    margin: 0 10vw;
+`;
