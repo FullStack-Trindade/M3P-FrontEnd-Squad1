@@ -30,3 +30,10 @@ export const ModalTitle = styled.span`
     padding: 10px 0;
     margin: 20px 0;
 `;
+
+export const ModalBody = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 25px;
+`;
