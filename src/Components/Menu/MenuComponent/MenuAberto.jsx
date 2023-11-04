@@ -8,6 +8,7 @@ import {
   FaPlus,
   FaTasks,
   FaLaptopMedical,
+  FaPills,
 } from "react-icons/fa";
 
 import { ImDroplet } from "react-icons/im";
@@ -34,13 +35,20 @@ const MenuAberto = () => {
             To="/listaProntuarios"
           />
 
-          <Styled.MenuSetor>Exames</Styled.MenuSetor>
+          <Styled.MenuSetor>Médico</Styled.MenuSetor>
           <MenuItem
             Icon={FaLaptopMedical}
             Text="CADASTRAR CONSULTA"
             To="/consulta"
           />
           <MenuItem Icon={ImDroplet} Text="CADASTRAR EXAME" To="/exame" />
+
+          <Styled.MenuSetor>Enfermeiro</Styled.MenuSetor>
+          <MenuItem
+            Icon={FaPills}
+            Text="MEDICAMENTO"
+            To="/medicamento"
+          />
         </Styled.MenuArea>
       </Styled.MenuContainer>
     </>

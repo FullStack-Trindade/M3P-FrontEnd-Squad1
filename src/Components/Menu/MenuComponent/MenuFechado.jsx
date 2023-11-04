@@ -7,7 +7,8 @@ import {
     FaSignInAlt,
     FaPlus,
     FaTasks,
-    FaLaptopMedical
+    FaLaptopMedical,
+    FaPills
     
 
   } from 'react-icons/fa';
@@ -34,6 +35,9 @@ const MenuFechado = () => {
 
             <MenuItemFechado Icon={FaLaptopMedical}  To='/consulta' />
             <MenuItemFechado Icon={ ImDroplet }  To='/exame' />
+
+            
+            <MenuItemFechado Icon={ FaPills }  To='/medicamento' />
 
 
              
