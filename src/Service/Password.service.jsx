@@ -14,6 +14,21 @@ const CreateToken = (data) => {
     return fetchPassword()
 }
 
+const Update = (data) => {
+    const fetchPassword = async() => {
+        const response = await fetch(`${API_URL}/resetarSenha`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify( data )
+        })
+
+        return response
+    }
+
+    return fetchPassword()
+}
+
 export const PasswordService = {
-    CreateToken
+    CreateToken,
+    Update
 }
