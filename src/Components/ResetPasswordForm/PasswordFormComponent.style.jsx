@@ -67,3 +67,10 @@ export const Button = styled.button`
 Button.propTypes = {
     $outlined: PropTypes.bool
 }
+
+export const Action = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+`;
