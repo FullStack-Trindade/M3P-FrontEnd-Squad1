@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 export const Modal = styled.div`
     position: fixed;
@@ -54,3 +55,32 @@ export const ModalForm = styled.form`
     background: #FFF;
     width: 100%;
 `;
+
+export const ModalButton = styled.button`
+    display: flex;
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    width: 100%;
+    border-radius: 0.3125rem;
+    background: ${({ $outlined }) => { return $outlined ? 'transparent' : 'rgba(82, 129, 220, 1)'}};
+    border:  ${({ $outlined }) => { return !$outlined ? 0 : '1px solid rgba(82, 129, 220, 1)'}};
+    color: ${({ $outlined }) => { return !$outlined ? '#EFEFEF' : 'rgba(82, 129, 220, 1)'}};
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+
+    opacity: ${({$active}) => { return $active ? 1 : .5 }};
+    cursor: pointer;
+
+    &:disabled {
+        cursor: not-allowed;
+    }
+`;
+
+ModalButton.propTypes = {
+    $outlined: PropTypes.bool
+}
