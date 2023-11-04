@@ -6,12 +6,9 @@ import { HomePage } from "./src/Pages/HomePage/HomePage";
 import { MedicalRecordsPage } from './src/Pages/MedicalRecords/MedicalRecordsPage'
 import { CadastroExamePage } from "./src/Pages/CadastroExame/CadastroExamePage";
 import { AppointmentRegisterPage } from "./src/Pages/AppointmentRegister/AppointmentRegisterPage";
-<<<<<<< HEAD
-=======
 import { PacientePage } from "./src/Pages/CadastroPaciente/CadastroPaciente.jsx";
 import { CadastroUsuarioPage } from './src/Pages/CadastroUsuario/CadastroUsuario';
 
->>>>>>> 7200ce9489ecbf65fd6857e4a8bf870aa9777732
 
 function App() {
   return (
