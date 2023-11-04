@@ -74,3 +74,13 @@ export const Action = styled.div`
     align-items: center;
     align-self: stretch;
 `;
+
+export const LinkLogin = styled.button`
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    color: #4682B4;
+    font-size: .7rem;
+    border: none;
+    background-color: transparent;
+`;
