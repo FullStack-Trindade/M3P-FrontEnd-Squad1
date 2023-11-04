@@ -16,3 +16,12 @@ export const ImagePassword = styled.img`
     height: auto;
     margin: 0 10vw;
 `;
+
+export const CentralDivider = styled.div`
+    display: flex;
+    justify-content: center !important;
+    width: .75vw;
+    height: 100vh;
+    background: #4682B4;
+    margin-left: 10vw;
+`;
