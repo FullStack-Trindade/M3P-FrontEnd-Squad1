@@ -11,3 +11,12 @@ export const Form = styled.form`
     background: #FFF;
     min-width: 320px;
 `;
+
+export const Header = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.5rem;
+    align-self: stretch;
+`;
