@@ -1,5 +1,6 @@
 import * as Styled from './PasswordPage.style';
 
+import { PasswordFormComponent } from "../../Components/ResetPasswordForm/PasswordFormComponent";
 import imagemLogin from '../../../public/images/LogoGenerica.png';
 
 export const PasswordPage = () => {
@@ -13,7 +14,7 @@ export const PasswordPage = () => {
                     <Styled.CentralDivider/>
         
                     <Styled.Form>
-
+                        <PasswordFormComponent/>
                     </Styled.Form>
         
                 </Styled.ContainerPassword>
