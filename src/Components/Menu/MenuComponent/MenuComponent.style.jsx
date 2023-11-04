@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { colors } from '../../../Styles/theme';
+//IMPORTAR ARQUIVO DE TEMAS
 
 export const MenuContainer = styled.div`
   display: flex;
@@ -6,7 +8,7 @@ export const MenuContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 0.5rem;
-  background-color: #483D8B;
+  background-color: ${colors.primary};
 
   span.ant.switch-inner {
 
@@ -22,7 +24,7 @@ export const MenuArea = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 0.2rem;
-  background-color: #483D8B; 
+  background-color: ${colors.primary}; 
 
 `;
 
@@ -47,7 +49,7 @@ export const MenuFechado = styled.div`
   height: 115%;
   flex-direction: column;
   align-items: flex-start;
-  background-color: #483D8B;
+  background-color: ${colors.primary};
 `;
 
 export const MenuLogoFechado = styled.img`
@@ -82,7 +84,7 @@ export const LabelSwitch = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
-  background-color: #483D8B;
+  background-color: ${colors.primary};
   font-size: 0.8rem;
   color: white;
   padding-bottom: 1vh;
@@ -93,7 +95,7 @@ export const SwitchBtn = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
-  background-color: #483D8B;
+  background-color: ${colors.primary};
   padding-bottom: 4vh;
 `
 

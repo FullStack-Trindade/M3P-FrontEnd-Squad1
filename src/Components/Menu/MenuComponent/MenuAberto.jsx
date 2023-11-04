@@ -1,5 +1,6 @@
 import * as Styled from "./MenuComponent.style";
 import MenuItem from "../MenuItem/MenuItem";
+import { localImages } from '../../../Styles/theme';
 
 import React from "react";
 import {
@@ -17,9 +18,9 @@ const MenuAberto = () => {
     <>
       <Styled.MenuContainer>
         <Styled.MenuArea>
-          <Styled.MenuLogo
-            src={"../../../public/images/LogoGenerica.png"}
-            alt="Logo LAB Medical"
+        <Styled.MenuLogo
+            src={localImages.logo}
+            alt="Logo White-Label"
           />
 
           <Styled.MenuSetor>Geral</Styled.MenuSetor>
@@ -41,6 +42,8 @@ const MenuAberto = () => {
             To="/consulta"
           />
           <MenuItem Icon={ImDroplet} Text="CADASTRAR EXAME" To="/exame" />
+        
+        
         </Styled.MenuArea>
       </Styled.MenuContainer>
     </>

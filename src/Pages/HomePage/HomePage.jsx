@@ -5,6 +5,7 @@ import { AuthContext } from '../../Context/auth.context';
 import { HeaderContext } from '../../Context/Header.context';
 import { AuthService } from '../../Service/Auth.service';
 import AreaEstatistica from '../../Components/AreaEstatísticas/AreaEstatisticas';
+import { localName } from '../../Styles/theme';
 
 export const HomePage = () => {
     const { tokenUser, setTokenUser } = useContext(AuthContext);
@@ -33,7 +34,7 @@ export const HomePage = () => {
     
     useEffect(() => {
         setData({       
-            titulo: 'ESTATÍSTICAS E INFORMAÇÕES',}) 
+            titulo: `${localName.name} - ESTATÍSTICAS E INFORMAÇÕES` ,}) 
     }, []);
       
 

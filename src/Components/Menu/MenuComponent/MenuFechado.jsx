@@ -1,5 +1,6 @@
 import * as Styled from './MenuComponent.style';
 import React from 'react'
+import { localImages } from '../../../Styles/theme';
 import MenuItemFechado from '../MenuItemFechado/MenuItemFechado';
 import { 
 
@@ -24,7 +25,7 @@ const MenuFechado = () => {
             <Styled.MenuFechado>
 
 
-            <Styled.MenuLogoFechado src={'../../../public/images/LogoGenerica.png'} />
+            <Styled.MenuLogoFechado src={localImages.logo} />
 
             <MenuItemFechado Icon={FaHome}  To='/' />
             <MenuItemFechado Icon={FaSignInAlt}  To='/login' />

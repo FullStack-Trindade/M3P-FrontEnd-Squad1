@@ -1,11 +1,13 @@
 import styled from 'styled-components';
+import { colors } from '../../Styles/theme';
+//IMPORTAR ARQUIVO DE TEMAS
 
 export const Container = styled.div`
   display: flex;
   width: 100%;
   height: 3rem;
   justify-content: space-between;
-  background-color: #483D8B; 
+  background-color: ${colors.primary}; 
   box-shadow: 0 0 20px 3px;
   color: white;
 `;
