@@ -37,3 +37,8 @@ export const ModalBody = styled.div`
     align-items: center;
     margin: 0 25px;
 `;
+
+export const ModalBodyP = styled.p`
+    text-align: center;
+    width: 90%;
+`;
