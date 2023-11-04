@@ -1,8 +1,10 @@
 import * as Styled from "./InputUserSearchAtHome.style";
 import { useEffect, useState } from "react";
-import { UserService } from "../../Service/User.service";
+import { UserService } from "../../Service/User.service.jsx";
 import CardUser from "../CardUser/CardUser";
 
+import UserAddBtn from './../UserAddBtn/UserAddBtn';
+ 
 export const InputUserSearchAtHome = () => {
   useEffect(() => {
     fetchUsersList();
@@ -31,8 +33,7 @@ export const InputUserSearchAtHome = () => {
       setUser(filteredUser[0]);
     }
   };
-  console.log(user ? user.name : false);
-  return (
+    return (
     <>
       <Styled.InputContainer>
         <h4> Informações Rápidas de Usuário</h4>
@@ -42,7 +43,7 @@ export const InputUserSearchAtHome = () => {
             className="input2 inputFaq"
             id="namePatient"
             type="text"
-            placeholder="Digite o nome do paciente"
+            placeholder="Digite o nome do(a) usuário(a)"
             name="namePatient"
             onChange={(e) => setInputName(e.target.value)}
           />
@@ -51,9 +52,8 @@ export const InputUserSearchAtHome = () => {
             Buscar
           </button>
 
-          <button className="botao" type="submit" >
-            <span className="material-symbols-outlined">Cadastrar Usuário</span>
-          </button>
+          <UserAddBtn Text="Novo Usuário" To="/usuario" />
+            
         </Styled.SearchInput>
       </Styled.InputContainer>
 

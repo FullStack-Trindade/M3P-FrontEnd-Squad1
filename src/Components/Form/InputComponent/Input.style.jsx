@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import PropTypes from 'prop-types'
+
 
 export const InputGroup = styled.div`
   display: flex;
@@ -27,9 +29,9 @@ export const InputContainer = styled.div`
   flex-wrap: wrap;
   gap: 2vw;
   width: 100%;
-`;
-
-export const Input = styled.input`
+  `;
+  
+  export const Input = styled.input`
   display: flex;
   padding: 0.3rem;
   align-items: flex-start;
@@ -57,6 +59,7 @@ export const TextArea = styled.textarea`
     cursor: not-allowed;
   }
 `;
+
 
 export const Icon = styled.button`
   position: absolute;
