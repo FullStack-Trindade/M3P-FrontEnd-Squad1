@@ -29,8 +29,9 @@ export const InputContainer = styled.div`
   flex-wrap: wrap;
   gap: 2vw;
   width: 100%;
+  `;
   
-export const Input = styled.input`
+  export const Input = styled.input`
   display: flex;
   padding: 0.3rem;
   align-items: flex-start;

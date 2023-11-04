@@ -33,8 +33,7 @@ export const InputUserSearchAtHome = () => {
       setUser(filteredUser[0]);
     }
   };
-  console.log(user ? user.name : false);
-  return (
+    return (
     <>
       <Styled.InputContainer>
         <h4> Informações Rápidas de Usuário</h4>
