@@ -11,3 +11,10 @@ export const Modal = styled.div`
     justify-content: center;
     align-items: center;
 `;
+
+export const ModalContainer = styled.div`
+    width: 550px;
+    border-radius: 10px;
+    background-color: #fff;
+    color: var(--color-porcelain);
+`;
