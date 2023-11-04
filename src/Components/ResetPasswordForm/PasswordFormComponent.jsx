@@ -3,7 +3,10 @@ import * as Styled from './PasswordFormComponent.style';
 import { InputComponent } from '../FormPaciente/InputComponent/InputComponent';
 
 export const PasswordFormComponent = () => {
-
+    let params = new URL(document.location).searchParams;
+    const passwordToken = params.get('token');
+    const userId = params.get('id');
+    
     return(
         <Styled.Form >
         
