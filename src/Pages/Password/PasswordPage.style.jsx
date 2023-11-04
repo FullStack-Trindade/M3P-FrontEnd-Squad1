@@ -25,3 +25,11 @@ export const CentralDivider = styled.div`
     background: #4682B4;
     margin-left: 10vw;
 `;
+
+export const Form = styled.div`
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+`;
