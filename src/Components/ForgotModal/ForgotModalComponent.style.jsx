@@ -42,3 +42,15 @@ export const ModalBodyP = styled.p`
     text-align: center;
     width: 90%;
 `;
+
+export const ModalForm = styled.form`
+    display: inline-flex;
+    padding: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1rem;
+    border-radius: 0.625rem;
+    background: #FFF;
+    width: 100%;
+`;
