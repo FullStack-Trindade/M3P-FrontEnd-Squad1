@@ -28,3 +28,13 @@ export const Title = styled.legend`
     font-weight: 700;
     line-height: normal;
 `;
+
+export const InputGroup = styled.div`
+    display: flex;
+    padding: 0.625rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    width: 100%;
+`;
