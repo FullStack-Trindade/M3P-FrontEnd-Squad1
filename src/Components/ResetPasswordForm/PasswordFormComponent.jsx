@@ -1,4 +1,8 @@
 import * as Styled from './PasswordFormComponent.style';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { Spin } from 'antd';
 
 import { InputComponent } from '../FormPaciente/InputComponent/InputComponent';
 import { PasswordService } from '../../Service/Password.service';
@@ -14,6 +18,8 @@ export const PasswordFormComponent = () => {
         reset,
         formState: { errors },  
     } = useForm();
+
+    const navigate = useNavigate();
 
     const submitForm = async (submitData) => {
         const { password, confirmPassword } = submitData;
@@ -41,7 +47,9 @@ export const PasswordFormComponent = () => {
                 return alert('E-mail e/ou senha inválido. Por favor, tente novamente.');
         }
     }
-    
+
+    const [isLoading, setIsLoading] = useState(false);
+
     return(
         <Styled.Form onSubmit={ handleSubmit(submitForm) }>
         
@@ -82,11 +90,12 @@ export const PasswordFormComponent = () => {
                 type='submit'
                 disabled={ errors.confirmPassword || errors.password }
             > 
-                'Enviar' 
+                { isLoading ? <Spin/> : 'Enviar' } 
             </Styled.Button>
 
             <Styled.Action>
                 <Styled.LinkLogin 
+                    onClick={ () => navigate('/login') }
                 >
                     Voltar para Login
                 </Styled.LinkLogin>
