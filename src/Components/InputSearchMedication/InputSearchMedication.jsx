@@ -1,13 +1,13 @@
 import * as Styled from './InputSearchMedication.style';
 import { useEffect, useState } from 'react';
 
-import { FormAppointment } from '../FormAppointment/FormAppointment';
+import { FormMedication } from '../FormMedication/FormMedication';
 import { PatientService } from '../../Service/Patient.service';
 import { UserService } from '../../Service/User.service';
 
 export const InputSearchMedication = ({id}) => {
-    let params = new URL(document.location).searchParams;
-    const appointmentId = params.get('id');
+    
+    const medicationId = id;
 
     useEffect(() => { 
         fetchPatientsList();
@@ -15,6 +15,7 @@ export const InputSearchMedication = ({id}) => {
     }, [])
 
     const [patientsList, setPatientsList] = useState([]);
+   
     const fetchPatientsList = async() => {
         PatientService.Get().then(result => setPatientsList(result));
     }
@@ -69,7 +70,8 @@ export const InputSearchMedication = ({id}) => {
                 </Styled.SearchInput>
 
                 <Styled.PatientArea>
-                    { (patient.length > 0 || appointmentId) && <FormAppointment patientId={ patient[0]?.id } /> }
+                <FormMedication id ={id}/>
+                    {/* (patient.length > 0 || medicationId) && <FormMedication patientId={ patient[0]?.id } />*/ }
                 </Styled.PatientArea>
 
             </Styled.InputContainer>

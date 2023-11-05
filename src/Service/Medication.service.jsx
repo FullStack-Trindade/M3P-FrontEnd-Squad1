@@ -18,7 +18,7 @@ console.log(response);
   }
 };
 
-export const PacienteService = {
+export const MedicationService = {
   Create: (data) => {
     return fetchPatient(`${API_URL}/medicamentos`, {
       method: "POST",

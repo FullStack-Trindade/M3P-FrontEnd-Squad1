@@ -1,17 +1,91 @@
-import * as Styled from './FormMedication.style';
+import * as Styled from "./FormMedication.style";
 
-import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { Switch } from 'antd';
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { Switch } from "antd";
+import { useNavigate } from "react-router-dom";
 
-//import { AppointmentService } from '../../Service/Appointment.service';
-import { PatientService } from '../../Service/Patient.service';
-import { UserService } from '../../Service/User.service';
-
-import { InputComponent } from '../Form/InputComponent/InputComponent';
+import { SelectComponent } from "../Form/SelectComponent/SelectComponent";
+import { PatientService } from "../../Service/Patient.service";
+import { UserService } from "../../Service/User.service";
+import { MedicationService } from "../../Service/Medication.service";
+import { InputComponent } from "../Form/InputComponent/InputComponent";
 
 export const FormMedication = ({ id }) => {
-  
+  const typeMedicationList = [
+    {
+      id: 1,
+      value: "CAPSULA",
+      label: "CÁPSULA",
+    },
+
+    {
+      id: 2,
+      value: "COMPRIMIDO",
+      label: "COMPRIMIDO",
+    },
+
+    {
+      id: 3,
+      value: "LIQUIDO",
+      label: "LÍQUIDO",
+    },
+    {
+      id: 4,
+      value: "CREME",
+      label: "CREME",
+    },
+    {
+      id: 5,
+      value: "GEL",
+      label: "GEL",
+    },
+    {
+      id: 6,
+      value: "INALACAO",
+      label: "INALAÇÃO",
+    },
+    {
+      id: 7,
+      value: "INJECAO",
+      label: "INJEÇÃO",
+    },
+    {
+      id: 8,
+      value: "SPRAY",
+      label: "SPRAY",
+    },
+  ];
+  const unitMedicationList = [
+    {
+      id: 1,
+      value: "MG",
+      label: "mg",
+    },
+
+    {
+      id: 2,
+      value: "MCG",
+      label: "mcg",
+    },
+
+    {
+      id: 3,
+      value: "G",
+      label: "g",
+    },
+    {
+      id: 4,
+      value: "ML",
+      label: "ml",
+    },
+    {
+      id: 5,
+      value: "PERCENT",
+      label: "%",
+    },
+  ];
+
   const {
     handleSubmit,
     register,
@@ -19,409 +93,439 @@ export const FormMedication = ({ id }) => {
     setValue,
     watch,
     formState: { errors },
-  } = useForm()
+  } = useForm();
 
-  const appointmentId = id;
+  const navigate = useNavigate();
 
-  useEffect(() => { 
-    reset();
-    fetchAppointmentsList();
-    fetchPatientsList();
-    fetchUsersList();
-  }, [])
+  buscarDadosMedicamentoCadastradoconst [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [idUser, setIdUser] = useState(false);
 
-  const [appointmentsList, setAppointmentsList] = useState([]);
-  const fetchAppointmentsList = async() => {
-    AppointmentService.Get().then(result => setAppointmentsList(result));
-  }
-
-  const [patientsList, setPatientsList] = useState([]);
-  
-  const fetchPatientsList = async() => {
-    PatientService.Get().then(result => setPatientsList(result));
-  }
-
-  const [usersList, setUsersList] = useState([]);
-  const fetchUsersList = async() => {
-    UserService.Get().then(result => setUsersList(result));
-  }
-  
-  useEffect(() => { setValue('idPatient', patientId) }, [patientId])
+  //Estados dos botões
+  const [formMode, setFormMode] = useState(null);
+  const [editButtonDisabled, setEditButtonDisabled] = useState(false);
+  const [saveButtonDisabled, setSaveButtonDisabled] = useState(false);
+  const [deleteButtonDisabled, setDeleteButtonDisabled] = useState(false);
+  const [formInputsDisabled, setformInputsDisabled] = useState(false);
+  const [specialFormInputsDisabled, setSpecialFormInputsDisabled] =
+    useState(false);
 
   useEffect(() => {
-    if (appointmentId !== null) { filterAppointment() }
-  }, [appointmentsList]);
-
-  const [appointment, setAppointment] = useState([]);
-  const filterAppointment = () => {
-    const filteredAppointment = appointmentsList.filter(appointment => String(appointment.id).includes(appointmentId));
-    setAppointment(filteredAppointment);
-  }
+    if (id) {
+      buscarDadosMedicamentoCadastrado(id);
+      setFormMode("read");
+    } else {
+      setFormMode("register");
+    }
+  }, []);
 
   useEffect(() => {
-    if(appointment.length > 0) {
-      setValue('idPatient', appointment[0].id_patient);
-      setValue('idDoctor', appointment[0].id_doctor);
-      setValue('appointmentDate', appointment[0].appointment_date);
-      setValue('appointmentHour', appointment[0].appointment_hour);
-      setValue('problemDescription', appointment[0].problem_description);
-      setValue('appointmentReason', appointment[0].appointment_reason);
-      setValue('medicationPrescribed', appointment[0].medication_prescribed);
-      setValue('dosagePrecautions', appointment[0].dosage_precautions);
+    //mudar para switch (formMode) { case "read": set ....; breack;case... default:return}
+    if (formMode === "read") {
+      setEditButtonDisabled(false);
+      setSaveButtonDisabled(true);
+      setDeleteButtonDisabled(true);
+      setformInputsDisabled(true);
+      setSpecialFormInputsDisabled(true);
     }
-  }, [appointment])
-  
-  const inputPatientId = watch('idPatient');
-  const patientName = watch('patientName');
-  useEffect(() => { onChangePatient(inputPatientId) }, [inputPatientId]);
-
-  const onChangePatient = (value) => {
-    const idPatient = value;
-
-    if (idPatient > 0) {
-      const dataPatient = patientsList.filter(patient => String(patient.id).includes(idPatient));
-      const dataUser = usersList.filter(user => String(user.id).includes(String(dataPatient[0]?.idUser)));
-      setValue('patientName', dataUser[0]?.name);
+    if (formMode === "edit") {
+      setEditButtonDisabled(false);
+      setSaveButtonDisabled(false);
+      setDeleteButtonDisabled(false);
+      setformInputsDisabled(false);
+      setSpecialFormInputsDisabled(true);
     }
-  }
-
-  const inputDoctorId = watch('idDoctor');
-  useEffect(() => { onChangeDoctor(inputDoctorId) }, [inputDoctorId]);
-  
-  const onChangeDoctor = (value) => {
-    const idDoctor = value;
-
-    if (idDoctor > 0) {
-      const dataDoctor = usersList.filter(user => String(user.id).includes(idDoctor));
-      setValue('doctorName', dataDoctor[0]?.name);
+    if (formMode === "register") {
+      setEditButtonDisabled(true);
+      setSaveButtonDisabled(false);
+      setDeleteButtonDisabled(true);
+      setformInputsDisabled(false);
+      setSpecialFormInputsDisabled(false);
+    } else {
+      return;
     }
-  }
+  }, [formMode]);
 
-  const [isMedication, setIsMedication] = useState(false);
-  const inputMedication = watch('medicationPrescribed');
-  useEffect(() => { 
-    inputMedication === "" ? setIsMedication(true) : setIsMedication(false);
-  }, [inputMedication]);
+  const buscarDadosMedicamentoCadastrado = (id) => {
+    MedicationService.Get()
+      .then((response) => {
+        const medicationList = response;
+        const medicationInDb = medicationList.find(
+          (medication) => medication.id == id
+        );
 
-  const isAppointmentRegistered = (dataForm) => {
-    let filteredPatientAppointments = appointmentsList.filter(appointment => String(appointment.id_patient).includes(dataForm.id_patient))
-    let filteredDate = filteredPatientAppointments.filter(appointment => appointment.appointment_date.includes(dataForm.appointment_date))
-    let filteredHour = filteredDate.filter(appointment => appointment.appointment_hour.includes(dataForm.appointment_hour))
-
-    if (filteredHour.length > 0) {
-        messageApi.open({ type: 'error', content: 'Esse paciente já possui consulta cadastrada nesse dia e horário.' })
-        filteredPatientAppointments = []
-        filteredDate = []
-        filteredHour = []
-        return true
-    }
-
-    return false
-  }
-
-  const onSubmitForm = async(dataForm) => {
-    const data = {
-      id_patient: dataForm.idPatient,
-      id_doctor: dataForm.idDoctor,
-      appointment_date: dataForm.appointmentDate,
-      appointment_hour: dataForm.appointmentHour,
-      problem_description: dataForm.problemDescription,
-      appointment_reason: dataForm.appointmentReason,
-      medication_prescribed: dataForm.medicationPrescribed,
-      dosage_precautions: dataForm.dosagePrecautions,
-      status: true
-    }
-
-    appointmentId ? onUpdate(data) : onSave(data);
-  }
-
-  const onUpdate = async(submitData) => {
-    await AppointmentService.Update(appointmentId, submitData)
-        .then((response) => {
-          switch (response.status) {
-            case 200:
-              reset();
-              window.location.reload(true);
-              return alert('Sucesso! Consulta editada.');
-            case 400:
-              reset();
-              return alert(`Erro no cadastro! Por favor, tente novamente.`);
-            case 500:
-              reset();
-              return alert(`Erro no cadastro! Por favor, tente novamente.`);
-          }
-        })
-        .catch((error) => {
-            alert('Erro no cadastro. Por favor, tente novamente.')
-            console.error('Erro ao cadastrar consulta:', error);
-            reset();
-        });
-  };
-
-  const onSave = async(submitData) => {
-    if (isAppointmentRegistered(submitData)) { return }
-
-    await AppointmentService.Create(submitData)
-      .then((response) => { 
-        switch (response.status) {
-          case 201:
-            reset();
-            window.location.reload(true);
-            return alert('Sucesso! Consulta cadastrada.');
-          case 400:
-            reset();
-            return alert(`Erro no cadastro! Por favor, tente novamente.`);
-          case 500:
-            reset();
-            return alert(`Erro no cadastro! Por favor, tente novamente.`);
+        if (medicationInDb) {
+          setValue("id_patient", medicationInDb.id_patient);
+          setValue("id_nurse", medicationInDb.id_nurse);
+          setValue("nameMedication", medicationInDb.nameMedication);
+          setValue("dateMedication", medicationInDb.dateMedication);
+          setValue("hourMedication", medicationInDb.hourMedication);
+          setValue("typeMedication", medicationInDb.typeMedication);
+          setValue("amountMedication", medicationInDb.amountMedication);
+          setValue("unitMedication", medicationInDb.unitMedication);
+          setValue(
+            "observationMedication",
+            medicationInDb.observationMedication
+          );
+          setValue("status", medicationInDb.status);
+        } else {
+          alert(
+            "Dados do medicamento não podem ser carregados. Tente novamente mais tarde."
+          );
         }
       })
       .catch((error) => {
-        alert('Erro no cadastro. Por favor, tente novamente.');
-        console.error('Erro ao cadastrar consulta:', error);
-        reset();
+        console.error(
+          "Ocorreu um erro ao buscar os dados do medicamento:",
+          error
+        );
+        alert(
+          "Ocorreu um erro ao buscar os dados do medicamento. Tente novamente mais tarde."
+        );
       });
   };
+  const submitForm = async (medicationData) => {
+    console.log(medicationData);
+    setIsLoading(true);
+    if (id) {
+      const updatedMedicationDb = {
+        id_patient: medicationData.id_patient,
+        id_nurse: medicationData.id_nurse,
+        nameMedication: medicationData.nameMedication,
+        dateMedication: medicationData.dateMedication,
+        hourMedication: medicationData.hourMedication,
+        typeMedication: medicationData.typeMedication,
+        amountMedication: medicationData.amountMedication,
+        unitMedication: medicationData.unitMedication,
+        observationMedication: medicationData.observationMedication,
+        status: medicationData.status,
+      };
+      updateMedication(updatedMedicationDb);
+    } else {
+      alert("criar medicamento")
+    }
+    setIsLoading(false);
+  };
 
-  const onDelete = async() => {
-    const response = await AppointmentService.Delete(appointmentId);
-
-    switch (response.status) {
-      case 202:
-        reset();
-        window.location.reload(true);
-        return alert('Sucesso! Consulta excluída.');
-      case 400:
-        reset();
-        return alert(`Erro na exclusão! Consulta não existe.`);
-      case 500:
-        reset();
-        return alert(`Erro na exclusão! Por favor, tente novamente.`);
+  const createPaciente = async (medicationData) => {
+    try {
+      await MedicationService.Update(id, medicationData).then((response) => {
+        setIsSubmitSuccessful;
+        alert("Medicação atualizada com sucesso");
+        navigate("/");
+      });
+    } catch (error) {
+      alert("Erro no cadastro. Por favor, tente novamente.");
+      console.error("Erro ao cadastrar consulta:", error);
     }
   };
 
-  const [isEditActive, setIsEditActive] = useState(false);
+  const updateMedication = async (medicationData) => {
+    try {
+      await MedicationService.Update({id}, medicationData).then((response) => {
+        console.log(response);
+        setIsSubmitSuccessful;
+        alert("Medicação atualizada com sucesso");
+        navigate("/");
+      });
+    } catch (error) {
+      alert("Erro no cadastro. Por favor, tente novamente.");
+      console.error("Erro ao cadastrar consulta:", error);
+    }
+  };
 
+  const deleteMedication = () => {
+    MedicationService.Delete(id).then((response) => {
+      if ((response.status = 202)) {
+        alert("Medicamento Deletado com Sucesso");
+        navigate("/");
+      } else {
+        alert("Erro ao Deletar o Medicamento");
+      }
+    });
+  };
+
+  // CARREGAR LISTA DE USUÁRIOS, PACIENTES E FAZER ALTERAÇÃO DINÂMICA NA TELA
+  useEffect(() => {
+    fetchPatientsList();
+    fetchUsersList();
+  }, []);
+
+  const [patientsList, setPatientsList] = useState([]);
+
+  const fetchPatientsList = async () => {
+    PatientService.Get().then((result) => setPatientsList(result));
+  };
+
+  const [usersList, setUsersList] = useState([]);
+  const fetchUsersList = async () => {
+    UserService.Get().then((result) => setUsersList(result));
+  };
+
+  const inputPatientId = watch("id_patient");
+
+  const patientName = watch("patientName");
+  useEffect(() => {
+    onChangePatient(inputPatientId);
+  }, [inputPatientId]);
+
+  const onChangePatient = (value) => {
+    const id_patient = value;
+
+    if (id_patient > 0) {
+      const dataPatient = patientsList.filter((patient) =>
+        String(patient.id).includes(id_patient)
+      );
+      const dataUser = usersList.filter((user) =>
+        String(user.id).includes(String(dataPatient[0]?.idUser))
+      );
+      setValue("patientName", dataUser[0]?.name);
+    }
+  };
+
+  const inputNurseId = watch("id_nurse");
+  useEffect(() => {
+    onChangeNurse(inputNurseId);
+  }, [inputNurseId]);
+
+  const onChangeNurse = (value) => {
+    const id_nurse = value;
+
+    if (id_nurse > 0) {
+      const dataNurse = usersList.filter((user) =>
+        String(user.id).includes(id_nurse)
+      );
+      setValue("nurseName", dataNurse[0]?.name);
+    }
+  };
+
+  // Lógica para preencher o paciente
   return (
     <>
-<h1>Medication</h1>
-      <Styled.Form onSubmit={ handleSubmit(onSubmitForm) }>
-
+      <Styled.Form
+        onSubmit={handleSubmit(submitForm)}>
         <Styled.Header>
-
-          <Styled.Title>
-            {
-              patientName
-              ? `Consulta de ${ patientName }`
-              : 'Formulário de Consulta' 
-            }
-          </Styled.Title>
+          <Styled.Title>Identificação </Styled.Title>
 
           <Styled.LabelSwitch>Editar</Styled.LabelSwitch>
 
           <Styled.SwitchBtn>
-            <Switch 
-              defaultChecked={ isEditActive }
-              disabled={ !appointmentId }
-              onClick={ () => setIsEditActive(!isEditActive) } 
-              onChange={ () => setIsEditActive(!isEditActive) }
+            <Switch
+              disabled={editButtonDisabled}
+              onClick={() => {
+                if (formMode === "read") {
+                  setFormMode("edit");
+                } else {
+                  setFormMode("read");
+                }
+              }}
             />
           </Styled.SwitchBtn>
 
-          <Styled.ButtonDel 
-            $width={'10%'} 
-            $active={ appointmentId } 
-            type='button' 
-            disabled={ !appointmentId } 
-            onClick={ onDelete }
+          <Styled.ButtonDel
+            $width={"10%"}
+            onClick={deleteMedication}
+            $active={!errors.email && !errors.password}
+            type="button"
+            disabled={deleteButtonDisabled}
           >
             Deletar
           </Styled.ButtonDel>
 
-          <Styled.Button 
-            $width={'10%'} 
-            $active={ true }
-            type='submit' 
+          <Styled.Button
+            $width={"10%"}
+            $active={!errors.email && !errors.password}
+            type="submit"
+            disabled={errors.email || errors.password || saveButtonDisabled}
           >
-            Salvar
+            {isSubmitSuccessful ? "Salvo!" : isLoading ? <Spin /> : "Salvar"}
           </Styled.Button>
         </Styled.Header>
 
         <Styled.Paragraph>* Campos obrigatórios</Styled.Paragraph>
 
-        <Styled.MainForm $width={'100%'}>
-
+        <Styled.MainForm $width={"100%"}>
           <Styled.InputGroup>
-            <InputComponent $width={'100%'}
-              id='idPatient'
-              type='number'
-              placeholder='Digite o código'
-              label='Código do Paciente *'
-              name='idPatient'
-              min={ 1 }
-              disabled={ appointmentId && isEditActive === false }
+            <InputComponent
+              $width={"100%"}
+              id="id_patient"
+              type="number"
+              placeholder="Digite o código"
+              label="Código do Paciente *"
+              name="id_patient"
+              min={1}
+              disabled={specialFormInputsDisabled}
               register={{
-                ...register('idPatient', {
+                ...register("id_patient", {
                   required: true,
-                })
+                }),
               }}
-              error={ errors.idPatient }
+              error={errors.id_patient}
             />
 
-            <InputComponent $width={'350%'}
-              id='patientName'
-              type='string'
-              placeholder='Nome do paciente'
-              label='Nome do Paciente'
-              name='patientName'
-              disabled={ true }
+            <InputComponent
+              $width={"350%"}
+              id="patientName"
+              type="string"
+              placeholder="Nome do paciente"
+              label="Nome do Paciente"
+              name="patientName"
+              disabled={specialFormInputsDisabled}
               register={{
-                ...register('patientName', {
-                  required: false
-                })
-              }}
-              error={ errors.patientName }
-            />
-          </Styled.InputGroup>
-          
-          <Styled.InputGroup>
-            <InputComponent $width={'100%'}
-              id='idDoctor'
-              type='number'
-              placeholder='Digite o código'
-              label='Código do Médico(a) *'
-              name='idDoctor'
-              min={ 1 }
-              disabled={ appointmentId && isEditActive === false }
-              register={{
-                ...register('idDoctor', {
-                  required: true,
-                })
-              }}
-              error={ errors.idDoctor }
-            />
-            
-            <InputComponent $width={'350%'}
-              id='doctorName'
-              type='string'
-              placeholder='Nome do médico(a)'
-              label='Nome do médico(a)'
-              name='doctorName'
-              disabled={ true }
-              register={{
-                ...register('doctorName', {
-                  required: false
-                })
-              }}
-              error={ errors.doctorName }
-            />
-          </Styled.InputGroup>
-
-          <Styled.InputGroup>
-            <InputComponent $width={'350%'}
-              id='appointmentReason'
-              type='string'
-              placeholder='Digite o motivo da consulta'
-              label='Motivo da Consulta *'
-              name='appointmentReason'
-              disabled={ appointmentId && isEditActive === false }
-              register={{
-                ...register('appointmentReason', {
-                  required: true,
-                  minLength: 8 ,
-                  maxLength: 64 ,
-                })
-              }}
-              error={ errors.appointmentReason }
-            />
-
-            <InputComponent $width={'100%'}
-              id='appointmentDate'
-              type='date'
-              placeholder='Digite a data da consulta'
-              label='Data da Consulta *'
-              name='appointmentDate'
-              disabled={ appointmentId && isEditActive === false }
-              register={{
-                ...register('appointmentDate', {
-                  required: true,
-                })
-              }}
-              error={ errors.appointmentDate }
-            />
-
-            <InputComponent $width={'100%'}
-              id='appointmentHour'
-              type='time'
-              placeholder='Digite o hora da consulta'
-              label='Hora da Consulta *'
-              name='appointmentHour'
-              disabled={ appointmentId && isEditActive === false }
-              register={{
-                ...register('appointmentHour', {
-                  required: true,
-                })
-              }}
-              error={ errors.appointmentHour }
-            />
-          </Styled.InputGroup>
-
-          <Styled.InputGroup>
-            <InputComponent $height={'100px'}
-              id='problemDescription'
-              type='textarea'
-              placeholder='Descreva o problema'
-              name='problemDescription'
-              label='Descrição do Problema  *'
-              disabled={ appointmentId && isEditActive === false }
-              register={{
-                ...register('problemDescription', {
-                  required: true,
-                  minLength: 16 ,
-                  maxLength: 1024 ,
-                })
-              }}
-              error={ errors.problemDescription }
-            />
-          </Styled.InputGroup>
-
-          <Styled.InputGroup>
-            <InputComponent $height={'70px'}
-              id='medicationPrescribed'
-              type='textarea'
-              placeholder='Medicação Receitada'
-              name='medicationPrescribed'
-              label='Medicação Receitada'
-              disabled={ appointmentId && isEditActive === false }
-              register={{
-                ...register('medicationPrescribed', {
+                ...register("patientName", {
                   required: false,
-                })
+                }),
               }}
-              error={ errors.medicationPrescribed }
+              error={errors.patientName}
+            />
+            <InputComponent
+              $width={"100%"}
+              id="id_nurse"
+              type="number"
+              placeholder="Digite o código"
+              label="Código do Enfermeiro(a) *"
+              name="id_nurse"
+              min={1}
+              disabled={specialFormInputsDisabled}
+              register={{
+                ...register("id_nurse", {
+                  required: true,
+                }),
+              }}
+              error={errors.id_nurse}
+            />
+
+            <InputComponent
+              $width={"350%"}
+              id="nurseName"
+              type="string"
+              placeholder="Nome do enfermeiro(a)"
+              label="Nome do enfermeiro(a)"
+              name="nurseName"
+              disabled={specialFormInputsDisabled}
+              register={{
+                ...register("nurseName", {
+                  required: false,
+                }),
+              }}
+              error={errors.nurseName}
             />
           </Styled.InputGroup>
 
           <Styled.InputGroup>
-            <InputComponent $height={'70px'}
-              id='dosagePrecautions'
-              type='textarea'
-              placeholder='Dosagem e Precauções'
-              name='dosagePrecautions'
-              label='Dosagem e Precauções *'
-              disabled={ isMedication || (appointmentId && isEditActive === false)  }
+            <InputComponent
+              $width={"350%"}
+              id="nameMedication"
+              type="string"
+              placeholder="Digite o nome do medicamento"
+              label="Nome do Medicamento *"
+              name="nameMedication"
+              disabled={formInputsDisabled}
               register={{
-                ...register('dosagePrecautions', {
+                ...register("nameMedication", {
                   required: true,
-                  minLength: 16 ,
-                  maxLength: 256 ,
-                })
+                  minLength: 5,
+                  maxLength: 100,
+                }),
               }}
-              error={ errors.dosagePrecautions }
+              error={errors.nameMedication}
+            />
+
+            <InputComponent
+              $width={"75%"}
+              id="dateMedication"
+              type="date"
+              placeholder="Digite a data do medicamento"
+              label="Data do Medicamento*"
+              name="dateMedication"
+              disabled={formInputsDisabled}
+              register={{
+                ...register("dateMedication", {
+                  required: true,
+                }),
+              }}
+              error={errors.dateMedication}
+            />
+
+            <InputComponent
+              $width={"75%"}
+              id="hourMedication"
+              type="time"
+              placeholder="Digite o hora do medicamento"
+              label="Hora do Medicamento *"
+              name="hourMedication"
+              disabled={formInputsDisabled}
+              register={{
+                ...register("hourMedication", {
+                  required: true,
+                }),
+              }}
+              error={errors.hourMedication}
+            />
+            <SelectComponent
+              $width={"50%"}
+              id="typeMedication"
+              name="typeMedication"
+              label={"Tipo de Medicação*"}
+              options={typeMedicationList}
+              disabled={formInputsDisabled}
+              register={{
+                ...register("typeMedication", {
+                  required: true,
+                }),
+              }}
+              error={errors.typeMedication}
+            />
+          </Styled.InputGroup>
+
+          <Styled.InputGroup>
+            <InputComponent
+              $width={"30%"}
+              id="amountMedication"
+              type="number"
+              placeholder="Quantidade"
+              name="amountMedication"
+              label="Quantidade de medicamento*"
+              disabled={formInputsDisabled}
+              register={{
+                ...register("amountMedication", {
+                  required: true,
+                }),
+              }}
+              error={errors.amountMedication}
+            />
+            <SelectComponent
+              $width={"30%"}
+              id="unitMedication"
+              name="unitMedication"
+              label={"Unidade *"}
+              options={unitMedicationList}
+              disabled={formInputsDisabled}
+              register={{
+                ...register("unitMedication", {
+                  required: true,
+                }),
+              }}
+              error={errors.unitMedication}
+            />
+            <InputComponent
+              $height={"70px"}
+              id="observationMedication"
+              type="textarea"
+              placeholder="Observações *"
+              name="observationMedication"
+              label="Medicação Receitada"
+              disabled={formInputsDisabled}
+              register={{
+                ...register("observationMedication", {
+                  required: false,
+                }),
+              }}
+              error={errors.observationMedication}
             />
           </Styled.InputGroup>
         </Styled.MainForm>
       </Styled.Form>
     </>
-  )
-}
+  );
+};
