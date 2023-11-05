@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import * as Styled from './InputSearchExam.style.jsx';
+import * as Styled from './InputSearchExercise.style.jsx';
 import {UserService} from '../../Service/User.service.jsx'
 import  {FormExam}  from '../FormExam/FormExam.jsx'; 
 import {PatientService} from '../../Service/Patient.service.jsx';

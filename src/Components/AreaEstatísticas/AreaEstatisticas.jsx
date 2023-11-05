@@ -6,8 +6,8 @@ import { ImUsers, ImDroplet } from "react-icons/im";
 import { FaLaptopMedical, FaSyringe, FaRunning, FaUtensils } from "react-icons/fa";
 
 import { UserService } from "../../Service/User.service";
-import { PacienteService } from "../../Service/Paciente.service";
-import { ExameService } from "../../Service/Exame.service";
+import { PatientService } from "../../Service/Patient.service";
+import { ExamService } from "../../Service/Exam.service";
 import { AppointmentService } from "../../Service/Appointment.service";
 import { InputUserSearchAtHome } from '../../Components/InputUserSearchAtHome/InputUserSearchAtHome';
 import { InputPatientSearchAtHome } from './../InputPatientSearchAtHome/InputPatientSearchAtHome';
@@ -30,7 +30,7 @@ function EstatisticasSistema() {
     };
 
     const getPacientes = async () => {
-      PacienteService.GetAll().then((response) => {
+      PatientService.Get().then((response) => {
         setPacientes(response);
       });
     };
@@ -42,7 +42,7 @@ function EstatisticasSistema() {
     };
 
     const getExames = async () => {
-      ExameService.Get().then((response) => {
+      ExamService.Get().then((response) => {
         setExames(response);
 
         //3- criar conforme finalizar o backend

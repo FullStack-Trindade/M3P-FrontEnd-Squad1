@@ -1,7 +1,7 @@
 import * as Styled from './CadastroExam.style';
 import { useContext, useEffect } from 'react';
 import { HeaderContext } from '../../Context/Header.context';
-import { InputSearchExam } from '../../Components/InputSearchExame/InputSearchExam';
+import { InputSearchExam } from '../../Components/InputSearchExam/InputSearchExam';
 
 
 
