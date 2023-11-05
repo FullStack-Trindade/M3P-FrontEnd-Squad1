@@ -1,10 +1,9 @@
-const API_URL = `http://localhost:${import.meta.env.VITE_SERVER_PORT}/api`
+const API_URL = `http://localhost:${import.meta.env.VITE_SERVER_PORT}/api`;
 
 const fetchUser = async (url, options) => {
   try {
     const response = await fetch(url, options);
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error("Erro na chamada da API:", error);
@@ -12,10 +11,10 @@ const fetchUser = async (url, options) => {
   }
 };
 
-export const UserService = {
+const UserService = {
   Create: (data) => {
-    console.log(data)
-    return fetchUser(`${API_URL}/usuarios`, {
+    const url = `${API_URL}/usuarios`;
+    return fetchUser(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,11 +23,12 @@ export const UserService = {
     });
   },
   Get: () => {
-    return fetchUser(`${API_URL}/usuarios`);
+    const url = `${API_URL}/usuarios`;
+    return fetchUser(url);
   },
-  
   SearchByCpfEmail: (data) => {
-    return fetchUser(`${API_URL}/usuarios/search`, {
+    const url = `${API_URL}/usuarios/search`;
+    return fetchUser(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -37,101 +37,33 @@ export const UserService = {
     });
   },
   Update: (id, data) => {
-    return fetchUser(`${API_URL}/usuarios/${id}`, {
+    const url = `${API_URL}/usuarios/${id}`;
+    return fetchUser(url, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
   },
   Delete: (id) => {
-    return fetchUser(`${API_URL}/usuarios/${id}`, {
+    const url = `${API_URL}/usuarios/${id}`;
+    return fetchUser(url, {
       method: "DELETE",
     });
   },
+  Show: async (id) => {
+    const url = `${API_URL}/usuarios/${id}`;
+    return fetchUser(url);
+  },
+  ShowByName: async (nome) => {
+    const filter = `?nome=${nome}`;
+    const url = `${API_URL}/${filter}`;
+    return fetchUser(url);
+  },
+  ShowByEmail: async (email) => {
+    const filter = `?email=${email}`;
+    const url = `${API_URL}/${filter}`;
+    return fetchUser(url);
+  },
 };
 
-
-const Create = async(data) => {
-
-    const objeto = {
-      "name": data.name,
-      "gender": data.gender,
-      "cpf": data.cpf,
-      "phone": data.phone,
-      "email": data.email,
-      "password":data.password,
-      "id_type": data.id_type
-    }
-  
-        console.log(objeto)
-        const response = await fetch(API_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(objeto)
-      });
-      const res = await response.json();
-      if(res.status === 201){
-        console.log(`Cadastro ${res.name} realizado com sucesso!`);
-      }else{
-        console.log(res.status)
-      }
-  
-  }
-  
-  const CreateUser = async(UserData) => {
-      await fetch(API_URL, {
-          method: "POST",
-          body: JSON.stringify(UserData),
-          headers: {
-            "Content-type": "application/json",
-          },
-        })
-          .then(async (data) => {
-           const res = await data.json();
-            console.log(res);
-            console.log("cadastrado com sucesso");
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-  
-  }
-  
-  const Show = async (id) => {
-  
-  const response = await fetch(`${API_URL}/${id}`);
-  const data = await response.json();
-   
-  return data;
-  }
-  
-  const ShowByName = async (nome) => {
-  
-    const filter = `?nome=${nome}`;
-    const response = await fetch(`${API_URL}/${filter}`);
-    const data = await response.json();
-  
-    return data;
-    }
-  
-  const ShowByEmail = async (email) => {
-      const filter = `?email=${email}`;
-      const response = await fetch(`${API_URL}/${filter}`);
-      const data = await response.json();
-  
-      return data[0];
-  }
-
-  export const UserService = {
-      Get,
-      Create,
-      CreateUser,
-      Show,
-      ShowByName,
-      ShowByEmail,
-      Delete,
-      Update
-  }
-
+export { UserService };
