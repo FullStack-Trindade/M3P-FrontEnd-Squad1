@@ -1,4 +1,4 @@
-<h1 align="center">System Care</h1>
+# MEDI TECH PRO
 
 <div align="center">
 
@@ -15,8 +15,6 @@
 
 </div>
 <br>
----------------------------------------------------
-# MEDI TECH PRO
 
 Este é um projeto Express para uma aplicação do sistema hospitalar MEDI TECH PRO, que gerencia o cadastro de pacientes, médicos, enfermeiros e o registro de consultas, exames, dietas, exercícios e medicamentos.
 
@@ -54,8 +52,6 @@ Abaixo algumas imagens do sistema:
 
 <img src="./public/images/login_printscreen.jpg" alt="Login">
 <img src="./public/images/home_printscreen.jpg" alt="HomePage">
-
-Links para as principais seções:
 
 ## 🛠️ Tecnologias Utilizadas
 
