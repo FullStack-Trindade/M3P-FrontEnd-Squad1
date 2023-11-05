@@ -1,5 +1,5 @@
 <div align="center">
-# MEDI TECH PRO
+<h1> MEDI TECH PRO</h1>
 </div>
 
 <div align="center">
