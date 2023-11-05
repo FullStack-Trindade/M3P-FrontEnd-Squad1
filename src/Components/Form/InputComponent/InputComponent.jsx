@@ -70,10 +70,5 @@ InputComponent.propTypes = {
   placeholder: PropTypes.string,
   min: PropTypes.number,
   disabled: PropTypes.bool,
-  register: PropTypes.any,
-  minLenght: PropTypes.any,
-  error: PropTypes.any,
-  $height: PropTypes.string,
-  $width: PropTypes.string,
-  $color: PropTypes.string,
+  register: PropTypes.any
 }

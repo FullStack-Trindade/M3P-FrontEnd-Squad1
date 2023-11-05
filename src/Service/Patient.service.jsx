@@ -12,7 +12,7 @@ const fetchUser = async (url, options) => {
   }
 };
 
-export const UserService = {
+export const PatientService = {
   Create: (data) => {
     console.log(data)
     return fetchUser(`${API_URL}/usuarios`, {
