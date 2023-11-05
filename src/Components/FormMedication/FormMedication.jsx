@@ -11,7 +11,7 @@ import { UserService } from "../../Service/User.service";
 import { MedicationService } from "../../Service/Medication.service";
 import { InputComponent } from "../Form/InputComponent/InputComponent";
 
-export const FormMedication = ({ id }) => {
+export const FormMedication = ({ id, idPatient }) => {
   const typeMedicationList = [
     {
       id: 1,
@@ -115,9 +115,10 @@ export const FormMedication = ({ id }) => {
       buscarDadosMedicamentoCadastrado(id);
       setFormMode("read");
     } else {
+      setValue("id_patient", idPatient);
       setFormMode("register");
     }
-  }, []);
+  }, [id , idPatient]);
 
   useEffect(() => {
     //mudar para switch (formMode) { case "read": set ....; breack;case... default:return}
@@ -259,7 +260,7 @@ export const FormMedication = ({ id }) => {
   const patientName = watch("patientName");
   useEffect(() => {
     onChangePatient(inputPatientId);
-  }, [inputPatientId]);
+  }, [inputPatientId, idPatient]);
 
   const onChangePatient = (value) => {
     const id_patient = value;
@@ -291,7 +292,7 @@ export const FormMedication = ({ id }) => {
     }
   };
 
-  // Lógica para preencher o paciente
+  
   return (
     <>
       <Styled.Form
@@ -346,7 +347,7 @@ export const FormMedication = ({ id }) => {
               label="Código do Paciente *"
               name="id_patient"
               min={1}
-              disabled={specialFormInputsDisabled}
+              disabled={true}
               register={{
                 ...register("id_patient", {
                   required: true,
