@@ -8,7 +8,7 @@ import { InputComponent } from '../FormPaciente/InputComponent/InputComponent';
 import { LoginService } from '../../Service/Login.service';
 import { AuthService } from '../../Service/Auth.service';
 
-export const FormLoginComponent = () => {
+export const FormLoginComponent = ({ showLoader }) => {
     const navigate = useNavigate();
     const {
         register,
@@ -88,7 +88,7 @@ export const FormLoginComponent = () => {
             </Styled.InputGroup>
 
             <Styled.Button 
-                onClick={() => setIsLoading(true)} 
+                onClick={showLoader} 
                 $active={ !errors.email && !errors.password } 
                 type='submit' 
                 disabled={ errors.email || errors.password } 
