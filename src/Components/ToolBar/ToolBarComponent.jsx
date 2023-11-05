@@ -14,7 +14,7 @@ function NavBarHeader() {
 
   return (
     <Styled.Container colors={theme.cores}>
-      <Styled.TxtHeader id='titulo'>
+      <Styled.TxtHeader colors={theme.cores} id='titulo'>
         {data.titulo}
       </Styled.TxtHeader>
 

@@ -8,6 +8,7 @@ export const ThemeContext = createContext ({
             second: "#541216",  
         }, 
 
+
     }, setTheme: () => {},
 });
 
