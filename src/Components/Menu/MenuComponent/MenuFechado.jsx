@@ -12,6 +12,9 @@ import {
 } from 'react-icons/fa';
 
   import { ImDroplet } from 'react-icons/im';
+  import { MdSoupKitchen } from 'react-icons/md';
+  import { CiPill } from 'react-icons/ci';
+  import { CgGym } from 'react-icons/cg';
 
 
 
@@ -33,10 +36,11 @@ const MenuFechado = () => {
             <MenuItemFechado Icon={FaTasks}  To='/listaProntuarios'  />
 
             <MenuItemFechado Icon={FaLaptopMedical}  To='/consulta' />
+            <MenuItemFechado Icon={ MdSoupKitchen }  To='/dieta' />
             <MenuItemFechado Icon={ ImDroplet }  To='/exame' />
+            <MenuItemFechado Icon={ CgGym }  To='/exercicio' />
+            <MenuItemFechado Icon={ CiPill }  To='/medicamento' />
 
-
-             
             </Styled.MenuFechado>
 
             

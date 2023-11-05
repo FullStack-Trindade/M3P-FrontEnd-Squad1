@@ -11,6 +11,9 @@ import {
 } from "react-icons/fa";
 
 import { ImDroplet } from "react-icons/im";
+import { MdSoupKitchen } from 'react-icons/md';
+import { CiPill } from 'react-icons/ci';
+import { CgGym } from 'react-icons/cg';
 
 const MenuAberto = () => {
 
@@ -37,13 +40,32 @@ const MenuAberto = () => {
             To="/listaProntuarios"
           />
 
-          <Styled.MenuSetor>Exames</Styled.MenuSetor>
-          <MenuItem
-            Icon={FaLaptopMedical}
-            Text="CADASTRAR CONSULTA"
-            To="/consulta"
-          />
-          <MenuItem Icon={ImDroplet} Text="CADASTRAR EXAME" To="/exame" />
+          <Styled.MenuSetor>Cadastros</Styled.MenuSetor>
+            <MenuItem
+              Icon={FaLaptopMedical}
+              Text="CADASTRAR CONSULTA"
+              To="/consulta"
+            />
+            <MenuItem 
+              Icon={MdSoupKitchen} 
+              Text="CADASTRAR DIETA" 
+              To="/dieta" 
+            />
+            <MenuItem 
+              Icon={ImDroplet} 
+              Text="CADASTRAR EXAME" 
+              To="/exame" 
+            />
+            <MenuItem 
+              Icon={CgGym} 
+              Text="CADASTRAR EXERCÍCIO" 
+              To="/exercicio" 
+            />
+            <MenuItem 
+              Icon={CiPill} 
+              Text="CADASTRAR MEDICAMENTO" 
+              To="/medicamento" 
+            />
         </Styled.MenuArea>
       </Styled.MenuContainer>
       

@@ -49,7 +49,7 @@ export const AppointmentRegisterPage = () => {
       )
   }
   
-  if (loading) {
+  if (loading === true) {
     return <div>Loading...</div>;
   }
 
