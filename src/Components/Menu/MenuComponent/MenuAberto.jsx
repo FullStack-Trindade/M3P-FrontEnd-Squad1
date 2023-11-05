@@ -1,7 +1,7 @@
 import * as Styled from "./MenuComponent.style";
 import MenuItem from "../MenuItem/MenuItem";
-
-import React from "react";
+import { ThemeContext } from '../../../Context/Theme.context.jsx'
+import { useContext} from 'react';
 import {
   FaHome,
   FaSignInAlt,
@@ -13,10 +13,13 @@ import {
 import { ImDroplet } from "react-icons/im";
 
 const MenuAberto = () => {
+
+  const { theme } = useContext(ThemeContext);
+
   return (
-    <>
-      <Styled.MenuContainer>
-        <Styled.MenuArea>
+
+      <Styled.MenuContainer colors={theme.cores}>
+        <Styled.MenuArea colors={theme.cores}>
           <Styled.MenuLogo
             src={"../../../public/images/LogoGenerica.png"}
             alt="Logo LAB Medical"
@@ -43,7 +46,7 @@ const MenuAberto = () => {
           <MenuItem Icon={ImDroplet} Text="CADASTRAR EXAME" To="/exame" />
         </Styled.MenuArea>
       </Styled.MenuContainer>
-    </>
+      
   );
 };
 
