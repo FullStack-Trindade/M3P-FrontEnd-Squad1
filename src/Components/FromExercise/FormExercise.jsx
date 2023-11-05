@@ -14,6 +14,15 @@ import {SelectComponent} from "../SelectComponent/SelectComponent";
 
 export const FormExercise = ({ patientId }) => {
 
+  const {
+    register,
+    handleSubmit,
+    reset,
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm();
+
   const typeExercise = [
     {
       id: 1,
@@ -48,15 +57,6 @@ export const FormExercise = ({ patientId }) => {
       label: "OUTROS",
     },
   ];
-
-  const {
-    register,
-    handleSubmit,
-    reset,
-    setValue,
-    watch,
-    formState: { errors },
-  } = useForm();
 
   let params = new URL(document.location).searchParams;
   const exerciseId = params.get("id");
@@ -137,19 +137,19 @@ export const FormExercise = ({ patientId }) => {
     }
   };
 
-  const inputDoctorId = watch("idDoctor");
+  const inputNurseId = watch("idNurse");
   useEffect(() => {
-    onChangeDoctor(inputDoctorId);
-  }, [inputDoctorId]);
+    onChangeNurse(inputNurseId);
+  }, [inputNurseId]);
 
-  const onChangeDoctor = (value) => {
+  const onChangeNurse = (value) => {
     const idDoctor = value;
 
-    if (idDoctor > 0) {
-      const dataDoctor = usersList.filter((user) =>
-        String(user.id).includes(idDoctor)
+    if (idNurse > 0) {
+      const dataNurse = usersList.filter((user) =>
+        String(user.id).includes(idNurse)
       );
-      setValue("doctorName", dataDoctor[0]?.name);
+      setValue("nurseName", dataNurse[0]?.name);
     }
   };
 
@@ -164,7 +164,6 @@ export const FormExercise = ({ patientId }) => {
       amountWeek: dataForm.amountWeek,
       descritionExercise: dataForm.descritionExercise,
       statusExercise: dataForm.statusExercise,
-
     };
     console.log(data);
     exerciseId ? Update(data) : Save(data);
@@ -193,7 +192,7 @@ export const FormExercise = ({ patientId }) => {
   };
 
   const Save = async (submitData) => {
-
+console.log(submitData);
     await ExerciseService.Create(submitData)
       .then((response) => {
         switch (response.status) {
@@ -217,7 +216,6 @@ export const FormExercise = ({ patientId }) => {
 
   const Delete = async () => {
     const response = await ExerciseService.Delete(exerciseId);
-    console.log(response);
 
     switch (response.status) {
       case 202:
@@ -272,7 +270,7 @@ export const FormExercise = ({ patientId }) => {
           </Styled.Button>
         </Styled.Header>
 
-        <Styled.Paragraph>* Campos obrigatórios</Styled.Paragraph>
+        <Styled.Paragraph> Campos obrigatórios</Styled.Paragraph>
 
         <Styled.MainForm $width={"100%"}>
           <Styled.InputGroup>
@@ -349,8 +347,8 @@ export const FormExercise = ({ patientId }) => {
               register={{
                 ...register("seriesName", {
                   required: true,
-                  minLength: 8,
-                  maxLength: 64,
+                  minLength: 5,
+                  maxLength: 100,
                 }),
               }}
               error={errors.seriesName}
@@ -358,13 +356,12 @@ export const FormExercise = ({ patientId }) => {
           </Styled.InputGroup>
 
           <Styled.InputGroup>
-
           <SelectComponent
             $width={"20%"}
             id="typeExercise"
-            type="select"
             name="typeExercise"
             label={"Tipo de série de exercicios"}
+            disabled={exerciseId && isEditActive === false}
             options={typeExercise}
             register={{
               ...register("typeExercise", {
