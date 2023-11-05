@@ -6,12 +6,12 @@ export const Container = styled(Link)`
   display: flex;
   align-items: center;
   background-color: #1A202C; 
-  font-size: .9rem;
+  font-size: 1rem;
   color: white;
-  padding: 10px;
+  padding: 5px;
   cursor: pointer;
   border-radius: 10px;
-  margin: 15% auto 1rem;
+  margin: 0 auto .8rem;
   border: 1px solid white;
   background-color: transparent;
   width: 5vw;
