@@ -1,5 +1,6 @@
 import * as Styled from './CardMedicamento.style';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { UserService } from '../../Service/User.service';
 
@@ -18,6 +19,7 @@ export function CardMedicamento ({ medication })  {
     
     return (
         <>
+            <Link to={`/medicamento?id=${medication.id}`}>
             <Styled.CardContainer>
 
                 <p>Médico: { filteredUser[0]?.name } </p>
@@ -30,6 +32,7 @@ export function CardMedicamento ({ medication })  {
                 <p>Observações: {medication?.observationMedication} </p>
 
             </Styled.CardContainer>
+            </Link>
         </>
     );
 }
