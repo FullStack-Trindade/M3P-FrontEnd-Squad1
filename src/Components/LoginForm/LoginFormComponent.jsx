@@ -9,7 +9,7 @@ import { ForgotModalComponent } from '../ForgotModal/ForgotModalComponent';
 import { LoginService } from '../../Service/Login.service';
 import { AuthService } from '../../Service/Auth.service';
 
-export const FormLoginComponent = ({ showLoader }) => {
+export const FormLoginComponent = () => {
     const navigate = useNavigate();
     const {
         register,
@@ -92,7 +92,7 @@ export const FormLoginComponent = ({ showLoader }) => {
             </Styled.InputGroup>
 
             <Styled.Button 
-                onClick={showLoader} 
+                onClick={() => setIsLoading(true)} 
                 $active={ !errors.email && !errors.password } 
                 type='submit' 
                 disabled={ errors.email || errors.password } 
