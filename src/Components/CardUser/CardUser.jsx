@@ -2,6 +2,7 @@ import * as Styled from "./CardUser.style";
 import { ImUser } from "react-icons/im";
 
 const CardUser = ({ user }) => {
+
   return (
     <>
       <Styled.CardUserContainer>
@@ -15,7 +16,7 @@ const CardUser = ({ user }) => {
             <Styled.Dados>{user.cpf}</Styled.Dados>
             <Styled.Dados>{user.phone}</Styled.Dados>
 
-    
+        
           </Styled.DadosUsuario>
         </Styled.RenderCardUser>
       </Styled.CardUserContainer>

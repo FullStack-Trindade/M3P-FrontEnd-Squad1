@@ -40,7 +40,12 @@ export const DadosUsuario= styled.div`
 
 `
 
-
+export const DadosBtn= styled.button`
+    display: flex;
+    justify-content: center;
+    margin: 1.2vh auto 0 auto;
+    font-size: .7rem;
+`
 
 
 export const Dados = styled.p`
