@@ -15,9 +15,12 @@ export const ContainerEstatisticasADM = styled.div`
 
     h2{ 
         display: flex;
+        width: 100%;
+        margin-bottom: 2vh;
         justify-content: center;
         align-items: center;
         color: #483D8B;
+        
     }
 
 `
@@ -79,6 +82,7 @@ export const InputContainer = styled.div`
         display: table-cell;
         margin: 0 auto 0 2vw !important;  
         padding: 12px 32px;  
+
         background: transparent ;
         border-radius: 4px;
         box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);

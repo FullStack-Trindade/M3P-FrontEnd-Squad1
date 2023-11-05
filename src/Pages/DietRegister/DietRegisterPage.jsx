@@ -1,13 +1,13 @@
-import * as Styled from './MedicalRecordsPage.style'
+import * as Styled from './DietRegisterPage.style';
 import { useContext, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
+import { AuthService } from '../../Service/Auth.service';
 import { AuthContext } from '../../Context/auth.context';
 import { HeaderContext } from '../../Context/Header.context';
-import { AuthService } from '../../Service/Auth.service';
-import { InputSearchMedicalRecord } from '../../Components/InputSearchMedicalRecord/InputSearchMedicalRecord';
+import { InputSearchDiet } from '../../Components/InputSearchDiet/InputSearchDiet';
 
-export const MedicalRecordsPage = () => {
+export const DietRegisterPage = () => {
     const { tokenUser, setTokenUser } = useContext(AuthContext);
     const localToken = JSON.parse(localStorage.getItem('token'));
 
@@ -16,14 +16,14 @@ export const MedicalRecordsPage = () => {
     useEffect(() => { 
         if (localToken !== null) {
             setLoading(true);
-            fetchAuth();
+            fetchAuth() 
         }
     }, [localToken]);
 
     const fetchAuth = async() => {
         const authToken = await AuthService.Get();
-        const tokenExists = await authToken.filter(auth => auth.token_user === localToken);
-
+        const tokenExists = authToken.filter(auth => auth.token_user === localToken);
+        
         if (tokenExists.length > 0) { 
             setTokenUser(tokenExists[0]?.token_user);
             setLoading(false);
@@ -32,26 +32,25 @@ export const MedicalRecordsPage = () => {
 
     const { setData } = useContext(HeaderContext)
 
-    useEffect(() => { 
-        setData({ titulo: 'LISTAGEM DE PRONTUÁRIOS' })
+    useEffect(() => {
+        setData({ titulo: 'CADASTRO DE DIETA' })
     }, []);
-
+    
     const render = () => {
         return (
             <>
-                <Styled.ContainerArea>
+                <Styled.RegisterArea>
                     <Styled.Title>
-                        <InputSearchMedicalRecord/>
+                        <InputSearchDiet />
                     </Styled.Title>
-                </Styled.ContainerArea>
+                </Styled.RegisterArea>
             </>
         )
     }
 
-    
     if (loading === true) {
         return <div>Loading...</div>;
     }
-
-    return tokenUser && (tokenUser === localToken) ? render() : <Navigate to='/login'/>;
+    
+    return !!tokenUser && (tokenUser === localToken) ? render() : <Navigate to='/login'/>;
 }

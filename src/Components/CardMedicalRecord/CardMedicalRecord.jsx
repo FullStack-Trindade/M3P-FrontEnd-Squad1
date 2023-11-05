@@ -14,7 +14,7 @@ export const CardMedicalRecord = ({ patient, user }) => {
                         <Styled.Data>{patient.healthInsurance}</Styled.Data>
                     </Styled.PatientData>
                     <Styled.Arrow>
-                        <Link to={`/prontuarios/${patient.id}`}>
+                        <Link to={`/prontuarios?id=${patient.id}`}>
                             <ImArrowRight2 /> 
                         </Link>
                     </Styled.Arrow>

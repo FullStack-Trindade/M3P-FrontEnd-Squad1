@@ -10,8 +10,10 @@ import { PacienteService } from "../../Service/Paciente.service";
 import { ExameService } from "../../Service/Exame.service";
 import { AppointmentService } from "../../Service/Appointment.service";
 import { InputUserSearchAtHome } from '../../Components/InputUserSearchAtHome/InputUserSearchAtHome';
-
 import { InputPatientSearchAtHome } from './../InputPatientSearchAtHome/InputPatientSearchAtHome';
+
+import UserAddBtn from './../UserAddBtn/UserAddBtn';
+
 
 function EstatisticasSistema() {
   const [users, setUsers] = useState([]);
@@ -122,6 +124,7 @@ function EstatisticasSistema() {
     <>
       <Styled.ContainerEstatisticasADM>
         <h2>Estatísticas do Sistema do Administrador</h2>
+        <UserAddBtn Text="Configurações" To="./config"/>
         <Styled.ContainerCardEstatisticas>
           {dataCardADM.map((estatistica) => (
             <CardEstatisticaADM
