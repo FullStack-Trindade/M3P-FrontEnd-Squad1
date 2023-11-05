@@ -1,11 +1,11 @@
-import * as Styled from './CadastroExam.style';
+import * as Styled from './CadastroExercise.style';
 import { useContext, useEffect } from 'react';
 import { HeaderContext } from '../../Context/Header.context';
 import { InputSearchExercise } from '../../Components/InputSearchExercise/InputSearchExercise';
 
 
 
-export const CadastroExamPage = () => {
+export const CadastroExercisePage = () => {
 
 
   const { setData } = useContext(HeaderContext);
