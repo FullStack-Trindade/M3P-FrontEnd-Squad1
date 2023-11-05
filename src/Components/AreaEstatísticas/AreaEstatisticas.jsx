@@ -6,8 +6,8 @@ import { ImUsers, ImDroplet } from "react-icons/im";
 import { FaLaptopMedical, FaSyringe, FaRunning, FaUtensils } from "react-icons/fa";
 
 import { UserService } from "../../Service/User.service";
-import { PacienteService } from "../../Service/Paciente.service";
-import { ExameService } from "../../Service/Exame.service";
+import { PatientService } from "../../Service/Patient.service";
+import { ExamService } from "../../Service/Exam.service";
 import { AppointmentService } from "../../Service/Appointment.service";
 import { InputUserSearchAtHome } from '../../Components/InputUserSearchAtHome/InputUserSearchAtHome';
 import { InputPatientSearchAtHome } from './../InputPatientSearchAtHome/InputPatientSearchAtHome';
@@ -21,7 +21,7 @@ function EstatisticasSistema() {
   const [consultas, setConsultas] = useState([]);
   const [exames, setExames] = useState([]);
   // 2 - criar conforme finalizar o backend
-  
+
   useEffect(() => {
     const getUsers = async () => {
       UserService.Get().then((response) => {
@@ -30,7 +30,7 @@ function EstatisticasSistema() {
     };
 
     const getPacientes = async () => {
-      PacienteService.GetAll().then((response) => {
+      PatientService.Get().then((response) => {
         setPacientes(response);
       });
     };
@@ -42,7 +42,7 @@ function EstatisticasSistema() {
     };
 
     const getExames = async () => {
-      ExameService.Get().then((response) => {
+      ExamService.Get().then((response) => {
         setExames(response);
 
         //3- criar conforme finalizar o backend
@@ -109,7 +109,7 @@ function EstatisticasSistema() {
     },
 
     // 1 - Adicionar mais cards conforme foram sendo finalizados o backend
-     ];
+  ];
 
   const dataCardADM = [
     {
@@ -124,15 +124,15 @@ function EstatisticasSistema() {
     <>
       <Styled.ContainerEstatisticasADM>
         <h2>Estatísticas do Sistema do Administrador</h2>
-        <UserAddBtn Text="Configurações" To="./config"/>
+        <UserAddBtn Text="Configurações" To="./config" />
         <Styled.ContainerCardEstatisticas>
           {dataCardADM.map((estatistica) => (
             <CardEstatisticaADM
-            key={estatistica.id}
-            dataCardADM={estatistica}
+              key={estatistica.id}
+              dataCardADM={estatistica}
             />
-            ))}
-            <InputUserSearchAtHome/>
+          ))}
+          <InputUserSearchAtHome />
         </Styled.ContainerCardEstatisticas>
       </Styled.ContainerEstatisticasADM>
 
@@ -142,7 +142,7 @@ function EstatisticasSistema() {
           {dataCard.map((estatistica) => (
             <CardEstatistica key={estatistica.id} dataCard={estatistica} />
           ))}
-          <InputPatientSearchAtHome/> 
+          <InputPatientSearchAtHome />
         </Styled.ContainerCardEstatisticas>
       </Styled.ContainerEstatisticas>
     </>
