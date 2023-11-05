@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as Styled from './InputSearchExercise.style.jsx';
 import {UserService} from '../../Service/User.service.jsx'
-import  {FormExam}  from '../FormExam/FormExam.jsx'; 
+import  {FormExercise}  from '../FromExercise/FormExercise.jsx'; 
 import {PatientService} from '../../Service/Patient.service.jsx';
 
 
@@ -18,7 +18,7 @@ export const InputSearchExercise = () => {
       const [patientsList, setPatientsList] = useState([]);
 
       const fetchPatientsList = async () => {
-        PatientService.GetAll().then((result) => setPatientsList(result));
+        PatientService.Get().then((result) => setPatientsList(result));
       };
     
       const [usersList, setUsersList] = useState([]);
@@ -60,7 +60,7 @@ export const InputSearchExercise = () => {
                 <Styled.AreaPaciente>
                   
           {(patient.length>0 || exerciseId )&& (
-            <FormExam patientId={patient[0]?.id} />
+            <FormExercise patientId={patient[0]?.id} />
             )}
                 </Styled.AreaPaciente>
             </Styled.InputContainer>
