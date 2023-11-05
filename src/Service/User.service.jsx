@@ -1,4 +1,4 @@
-const API_URL = `http://localhost:${import.meta.env.VITE_SERVER_PORT}/api`
+const API_URL = `http://localhost:${import.meta.env.VITE_SERVER_PORT}/api/usuarios`
 
 const fetchUser = async (url, options) => {
   try {
@@ -15,7 +15,7 @@ const fetchUser = async (url, options) => {
 export const UserService = {
   Create: (data) => {
     console.log(data)
-    return fetchUser(`${API_URL}/usuarios`, {
+    return fetchUser(`${API_URL}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,7 +24,7 @@ export const UserService = {
     });
   },
   Get: () => {
-    return fetchUser(`${API_URL}/usuarios`);
+    return fetchUser(`${API_URL}`);
   },
   
   SearchByCpfEmail: (data) => {
@@ -37,14 +37,14 @@ export const UserService = {
     });
   },
   Update: (id, data) => {
-    return fetchUser(`${API_URL}/usuarios/${id}`, {
+    return fetchUser(`${API_URL}${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
   },
   Delete: (id) => {
-    return fetchUser(`${API_URL}/usuarios/${id}`, {
+    return fetchUser(`${API_URL}${id}`, {
       method: "DELETE",
     });
   },
