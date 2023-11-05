@@ -158,6 +158,7 @@ export const FormPaciente = ({ id }) => {
         alert(
           "Dados do paciente não podem ser carregados. Tente novamente mais tarde."
         );
+        navigate("/");
       }
     });
   };
