@@ -25,14 +25,14 @@ export const PatientService = {
   },
 
   Get: () => {
-    return fetchUser(`${API_URL}`),{
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      };
-    },
+    const fetchPatient = async() => {
+        const response = await fetch(API_URL);
+        const data = await response.json();
+        return data;
+    }
+
+    return fetchPatient();
+},
   
   SearchByCpfEmail: (data) => {
     return fetchUser(`${API_URL}/usuarios/search`, {
