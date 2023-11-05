@@ -11,6 +11,9 @@ import {
 } from "react-icons/fa";
 
 import { ImDroplet } from "react-icons/im";
+import { MdSoupKitchen } from 'react-icons/md';
+import { CiPill } from 'react-icons/ci';
+import { CgGym } from 'react-icons/cg';
 
 const MenuAberto = () => {
 
@@ -44,7 +47,7 @@ const MenuAberto = () => {
               To="/consulta"
             />
             <MenuItem 
-              Icon={ImDroplet} 
+              Icon={MdSoupKitchen} 
               Text="CADASTRAR DIETA" 
               To="/dieta" 
             />
@@ -54,12 +57,12 @@ const MenuAberto = () => {
               To="/exame" 
             />
             <MenuItem 
-              Icon={ImDroplet} 
+              Icon={CgGym} 
               Text="CADASTRAR EXERCÍCIO" 
               To="/exercicio" 
             />
             <MenuItem 
-              Icon={ImDroplet} 
+              Icon={CiPill} 
               Text="CADASTRAR MEDICAMENTO" 
               To="/medicamento" 
             />
