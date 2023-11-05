@@ -19,7 +19,7 @@ export function CardMedicamento ({ medication })  {
     
     return (
         <>
-            <Link to={`/medicamento?id=${medication.id}`}>
+            <Link to={`/medicamento/${medication.id}`}>
             <Styled.CardContainer>
 
                 <p>Médico: { filteredUser[0]?.name } </p>
