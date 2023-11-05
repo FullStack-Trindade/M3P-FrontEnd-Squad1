@@ -1,7 +1,7 @@
 import * as Styled from "./MenuComponent.style";
 import MenuItem from "../MenuItem/MenuItem";
-
-import React from "react";
+import { ThemeContext } from '../../../Context/Theme.context.jsx'
+import { useContext} from 'react';
 import {
   FaHome,
   FaSignInAlt,
@@ -11,12 +11,18 @@ import {
 } from "react-icons/fa";
 
 import { ImDroplet } from "react-icons/im";
+import { MdSoupKitchen } from 'react-icons/md';
+import { CiPill } from 'react-icons/ci';
+import { CgGym } from 'react-icons/cg';
 
 const MenuAberto = () => {
+
+  const { theme } = useContext(ThemeContext);
+
   return (
-    <>
-      <Styled.MenuContainer>
-        <Styled.MenuArea>
+
+      <Styled.MenuContainer colors={theme.cores}>
+        <Styled.MenuArea colors={theme.cores}>
           <Styled.MenuLogo
             src={"../../../public/images/LogoGenerica.png"}
             alt="Logo LAB Medical"
@@ -34,16 +40,35 @@ const MenuAberto = () => {
             To="/listaProntuarios"
           />
 
-          <Styled.MenuSetor>Exames</Styled.MenuSetor>
-          <MenuItem
-            Icon={FaLaptopMedical}
-            Text="CADASTRAR CONSULTA"
-            To="/consulta"
-          />
-          <MenuItem Icon={ImDroplet} Text="CADASTRAR EXAME" To="/exame" />
+          <Styled.MenuSetor>Cadastros</Styled.MenuSetor>
+            <MenuItem
+              Icon={FaLaptopMedical}
+              Text="CADASTRAR CONSULTA"
+              To="/consulta"
+            />
+            <MenuItem 
+              Icon={MdSoupKitchen} 
+              Text="CADASTRAR DIETA" 
+              To="/dieta" 
+            />
+            <MenuItem 
+              Icon={ImDroplet} 
+              Text="CADASTRAR EXAME" 
+              To="/exame" 
+            />
+            <MenuItem 
+              Icon={CgGym} 
+              Text="CADASTRAR EXERCÍCIO" 
+              To="/exercicio" 
+            />
+            <MenuItem 
+              Icon={CiPill} 
+              Text="CADASTRAR MEDICAMENTO" 
+              To="/medicamento" 
+            />
         </Styled.MenuArea>
       </Styled.MenuContainer>
-    </>
+      
   );
 };
 

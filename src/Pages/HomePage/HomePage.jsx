@@ -1,16 +1,10 @@
 import * as Styled from './HomePage.style'
 import { useContext, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
-
 import { AuthContext } from '../../Context/auth.context';
 import { HeaderContext } from '../../Context/Header.context';
 import { AuthService } from '../../Service/Auth.service';
 import AreaEstatistica from '../../Components/AreaEstatísticas/AreaEstatisticas';
-/* import { InputSearch } from '../../Components/InputSearchPaciente/InputSearchPaciente'; */
-//import { InputSearchUser } from '../../Components/InputSearchUser/InputSearchUser';
-/* import { InputUserSearchAtHome } from '../../Components/InputUserSearchAtHome/InputUserSearchAtHome';
-import { InputPatientSearchAtHome } from '../../Components/InputPatientSearchAtHome copy/InputPatientSearchAtHome';
- */
 
 export const HomePage = () => {
     const { tokenUser, setTokenUser } = useContext(AuthContext);
@@ -42,6 +36,7 @@ export const HomePage = () => {
             titulo: 'ESTATÍSTICAS E INFORMAÇÕES',}) 
     }, []);
       
+
     const render = () => {
         return (
             <>

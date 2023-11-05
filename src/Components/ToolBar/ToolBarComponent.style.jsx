@@ -5,7 +5,7 @@ export const Container = styled.div`
   width: 100%;
   height: 3rem;
   justify-content: space-between;
-  background-color: #483D8B; 
+  background-color: ${({colors}) => colors.primary}; 
   box-shadow: 0 0 20px 3px;
   color: white;
 `;
@@ -38,7 +38,7 @@ export const TxtHeader = styled.h3`
     margin: .5vw 0 0 2vw;
     padding-left: 2vw;
     align-items: center;
-
+    color: ${({colors}) => colors.second};
 `
 
 export const TxtUser = styled.h6`
