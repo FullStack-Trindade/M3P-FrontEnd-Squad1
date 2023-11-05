@@ -4,7 +4,7 @@ import { useState } from 'react';
 export const ThemeContext = createContext ({
     theme: {
         cores: {
-            primary: "#852354",    
+            primary: "#483D8B",    
             second: "#ffff",  
         }, 
 
@@ -15,7 +15,7 @@ export const ThemeContext = createContext ({
 export const ThemeProvider = ({ children }) => {
     const [theme, setTheme] = useState({
         cores: {
-            primary: "#852354",
+            primary: "#483D8B",
             second: "#ffff",            
         }, 
 
