@@ -36,10 +36,8 @@ export const FormExam = ({ patientId }) => {
   const fetchExamsList = async () => {
     ExamService.Get().then(result => setExamsList(result));
   }
-  console.log(examsList);
 
   const [patientsList, setPatientsList] = useState([]);
-
   const fetchPatientsList = async () => {
     PatientService.Get().then((result) => setPatientsList(result));
   };
@@ -148,7 +146,6 @@ export const FormExam = ({ patientId }) => {
       resultExam: dataForm.resultExam,
       statusExam: dataForm.statusExam,
     };
-    console.log(data);
     examId ? Update(data) : Save(data);
   };
 
@@ -181,14 +178,12 @@ export const FormExam = ({ patientId }) => {
 
     await ExamService.Create(submitData)
       .then((response) => {
-        console.log(response);
         switch (response.status) {
           case 201:
             reset();
             window.location.reload(true);
             return alert("Sucesso! Exame cadastrada.");
           case 400:
-            console.log(response);
             return alert(`Erro no cadastro! Por favor, tente novamente.`);
           case 500:
             reset();
@@ -259,7 +254,7 @@ export const FormExam = ({ patientId }) => {
           </Styled.Button>
         </Styled.Header>
 
-        <Styled.Paragraph>* Campos obrigatórios</Styled.Paragraph>
+        <Styled.Paragraph> Campos obrigatórios</Styled.Paragraph>
 
         <Styled.MainForm $width={"100%"}>
           <Styled.InputGroup>
