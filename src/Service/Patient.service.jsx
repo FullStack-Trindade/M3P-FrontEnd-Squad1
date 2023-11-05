@@ -1,4 +1,4 @@
-const API_URL = `http://localhost:${import.meta.env.VITE_SERVER_PORT}/api/pacientes`
+const API_URL = `http://localhost:3000/api/pacientes`
 
 const Get = () => {
     const fetchPatient = async() => {

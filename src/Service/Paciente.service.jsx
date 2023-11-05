@@ -1,6 +1,5 @@
-const API_URL = `http://localhost:${import.meta.env.VITE_SERVER_PORT}/api`
-
-const fetchPatient = async (url, options) => {
+const API_URL = `http://localhost:${import.meta.env.VITE_SERVER_PORT}/api/pacientes`
+const CadastrarPaciente = async (postPacientDb) => {
   try {
     const response = await fetch(url, options);
 console.log(response);
@@ -10,13 +9,7 @@ console.log(response);
       );
     }
 
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error(`Erro na chamada da API:`, error);
-    throw error;
-  }
-};
+          const response = await fetch(API_URL, {
 
 export const PacienteService = {
   Create: (data) => {
@@ -50,3 +43,30 @@ export const PacienteService = {
     });
   },
 };
+
+
+ const Get = (id) => {
+  const fetchPatient = async() => {
+      const response = await fetch(`API_URL/${id}`);
+      const data = await response.json();
+      return data;
+  }
+
+  return fetchPatient();
+}
+ const GetAll = () => {
+  const fetchPatient = async() => {
+      const response = await fetch(API_URL);
+      const data = await response.json();
+      return data;
+  }
+
+  return fetchPatient();
+}
+
+export const PacienteService = {
+  CadastrarPaciente,
+  Get,
+  GetAll
+};
+

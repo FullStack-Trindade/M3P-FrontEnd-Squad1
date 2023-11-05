@@ -2,10 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { LoginPage } from "./src/Pages/LoginPage/LoginPage";
 import { Layout } from './src/Layout/Layout'
-import { HomePage } from "./src/Pages/HomePage/HomePage";
-import { MedicalRecordsPage } from './src/Pages/MedicalRecords/MedicalRecordsPage'
-import { CadastroExamePage } from "./src/Pages/CadastroExame/CadastroExamePage";
-import { AppointmentRegisterPage } from "./src/Pages/AppointmentRegister/AppointmentRegisterPage";
+import { CadastroExamPage } from './src/Pages/CadastroExame/CadastroExamPage';
 import { PacientePage } from "./src/Pages/CadastroPaciente/CadastroPaciente.jsx";
 import { CadastroUsuarioPage } from './src/Pages/CadastroUsuario/CadastroUsuario';
 
@@ -14,11 +11,10 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path="/usuario" element={<CadastroUsuarioPage />} />
-          <Route path="/exame" element={<CadastroExamePage />} />
+          <Route path='/login' element={<LoginPage/>}/>
+          <Route path='/' element={<Layout/>}>
+              <Route path='/' element={<HomePage/>}/>
+              <Route path='/exame' element={<CadastroExamPage/>}/>
           <Route path="/paciente" element={<PacientePage />} />
           <Route path="/paciente/:id" element={<PacientePage />} />
           <Route path="/listaProntuarios" element={<MedicalRecordsPage />} />

@@ -28,50 +28,34 @@ export const ExameService = {
     CadastrarExame,
 }; */
 
-import { LocalStorageService } from "./LocalStorage.service";
+/* import { LocalStorageService } from "./LocalStorage.service"; */
 
 const API_URL = `http://localhost:${import.meta.env.VITE_SERVER_PORT}/api/exames`
 
 
 
-const Get = async () => {
-   /*  return localStorage.getItem('users')  ? JSON.parse(localStorage.getItem('users')) : null */
-    const response = await fetch(API_URL);
-    const data = await response.json();
+const Get = () => {
+  const fetchExam = async() => {
+      const response = await fetch(API_URL);
+      const data = await response.json();
+      return data;
+  }
 
-    return data;
-   }
-
-const Create = async(data) => {
-    const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: {
-            'Accept': 'aplication/json',
-            'Content-Type': 'aplication/json',
-        },
-        body: JSON.stringify(data),
-    });
-    const res = await response.json();
-    console.log(res && `Paciente ${data.nome} criado com sucesso`);
+  return fetchExam();
 }
 
-const CreateExame = async(ExameData) => {
-    await fetch(API_URL, {
-        method: "POST",
-        body: JSON.stringify(ExameData),
-        headers: {
-          "Content-type": "application/json",
-        },
+const Create = (examData) => {
+  const fetchExam = async() => {
+      const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify( examData )
       })
-        .then(async (data) => {
-         const res = await data.json();
-          console.log(res);
-          console.log("Consulta cadastrado com sucesso");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-  
+      
+      return response
+  }
+
+  return fetchExam();
 }
 
 const Show = async (id) => {
@@ -99,30 +83,38 @@ const ShowByNome = async (nome) => {
 }
 
 const Delete = (id) => {
-    LocalStorageService.set('consultas', Get().filter( consultas => consultas.id !== id));
-}
+  const fetchExam = async() => {
+      const response = await fetch(`${API_URL}/${ id }`, {
+          method: 'DELETE',
+      })
 
-const DeleteExame = (id) => {
-    LocalStorageService.set('exames', Get().filter( exames => exames.id !== id));
-}
+      return response
+  }
 
-
-const Update = (id, newUser) => {
-    const users = Get();
-    users[users.find(user => user.ide === id).indexOf] = newUser;
-    LocalStorageService.set('users', users)
+  return fetchExam()
 }
 
 
+const Update = (id, data) => {
+  const fetchExam = async() => {
+      const response = await fetch(`${API_URL}/${ id }`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify( data )
+      })
 
-export const ExameService = {
+      return response
+  }
+
+  return fetchExam()
+}
+
+
+
+export const ExamService = {
     Get,
     Create,
-    CreateExame,
     Show,
-    ShowByEmail,
-    ShowByNome,
     Delete,
-    DeleteExame,
     Update
 }
