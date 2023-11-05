@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import * as Styled from './InputSearchExam.style';
-import {UserService} from '../../Service/User.service'
+import * as Styled from './InputSearchExam.style.jsx';
+import {UserService} from '../../Service/User.service.jsx'
 import  {FormExam}  from '../FormExam/FormExam.jsx'; 
-import {PacienteService} from '../../Service/Paciente.service';
+import {PatientService} from '../../Service/Patient.service.jsx';
 
 
 export const InputSearchExam = () => {
@@ -18,7 +18,7 @@ export const InputSearchExam = () => {
       const [patientsList, setPatientsList] = useState([]);
 
       const fetchPatientsList = async () => {
-        PacienteService.GetAll().then((result) => setPatientsList(result));
+        PatientService.GetAll().then((result) => setPatientsList(result));
       };
     
       const [usersList, setUsersList] = useState([]);
