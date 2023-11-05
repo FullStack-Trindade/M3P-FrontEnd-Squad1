@@ -41,6 +41,7 @@ export const FormExercise = ({ patientId }) => {
       value: "FLEXIBILIDADE",
       label: "FLEXIBILIDADE",
     },
+
     {
       id: 4,
       value: "FORÇA",
@@ -53,8 +54,8 @@ export const FormExercise = ({ patientId }) => {
     },
     {
       id: 6,
-      value: "OUTRO",
-      label: "OUTRO",
+      value: "OUTROS",
+      label: "OUTROS",
     },
   ];
 
