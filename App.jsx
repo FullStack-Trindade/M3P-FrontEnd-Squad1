@@ -8,8 +8,8 @@ import { CadastroExamePage } from "./src/Pages/CadastroExame/CadastroExamePage";
 import { AppointmentRegisterPage } from "./src/Pages/AppointmentRegister/AppointmentRegisterPage";
 import { PacientePage } from "./src/Pages/CadastroPaciente/CadastroPaciente.jsx";
 import { CadastroUsuarioPage } from './src/Pages/CadastroUsuario/CadastroUsuario';
+import { DietRegisterPage } from './src/Pages/DietRegister/DietRegisterPage.jsx';
 import { ConfigPage } from "./src/Pages/ConfigPage/ConfigPage";
-
 
 function App() {
   return (
@@ -26,6 +26,7 @@ function App() {
           <Route path="/paciente/:id" element={<PacientePage />} />
           <Route path="/listaProntuarios" element={<MedicalRecordsPage />} />
           <Route path="/consulta" element={<AppointmentRegisterPage />} />
+          <Route path="/dieta" element={<DietRegisterPage />} />
           <Route path="*" element={<><p>Essa página não existe</p></>} />
         </Route>
       </Routes>
