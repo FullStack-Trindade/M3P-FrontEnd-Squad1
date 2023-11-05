@@ -10,7 +10,7 @@ import { ProntuarioPage } from "./src/Pages/ProntuarioPacientePage/ProntuarioPac
 import { AppointmentRegisterPage } from "./src/Pages/AppointmentRegister/AppointmentRegisterPage";
 import { MedicationPage } from "./src/Pages/MedicationPage/MedicationPage";
 import { DietRegisterPage } from "./src/Pages/DietRegister/DietRegisterPage";
-import { CadastroExamPage } from './src/Pages/CadastroExame/CadastroExamPage';
+import { CadastroExamPage } from './src/Pages/CadastroExam/CadastroExamPage.jsx';
 import { CadastroExercisePage } from './src/Pages/CadastroExercise/CadastroExercisePage.jsx';
 
 
