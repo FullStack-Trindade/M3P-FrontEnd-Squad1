@@ -1,15 +1,19 @@
 import * as Styled from './ToolBarComponent.style';
 import { useContext } from 'react';
 
-import { HeaderContext } from '../../Context/Header.context';
-import { AuthContext } from '../../Context/auth.context';
+import { ThemeContext } from '../../Context/Theme.context.jsx'
 
+
+import { HeaderContext } from '../../Context/Header.context';
+/* import { AuthContext } from '../../Context/auth.context';
+ */
 function NavBarHeader() {
     const { data } = useContext(HeaderContext);
     const userName = JSON.parse(localStorage.getItem('name'));
+    const { theme } = useContext(ThemeContext);
 
   return (
-    <Styled.Container>
+    <Styled.Container colors={theme.cores}>
       <Styled.TxtHeader id='titulo'>
         {data.titulo}
       </Styled.TxtHeader>
