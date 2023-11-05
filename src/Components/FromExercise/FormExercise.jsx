@@ -1,4 +1,4 @@
-import * as Styled from "./FormExam.style";
+import * as Styled from "./FormExercise.style";
 
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -96,26 +96,24 @@ export const FormExercise = ({ patientId }) => {
   }, [exercisesList]);
 
   const [exercise, setExercise] = useState([]);
-  const filterExam = () => {
+  const filterExercise = () => {
     const filtereExercise = exercisesList?.filter((exercise) =>
       String(exercise.id).includes(exerciseId)
     );
-    setExam(filtereExercise);
+    setExercise(filtereExercise);
   };
 
   useEffect(() => {
     if (exercise.length > 0) {
-      setValue("idPatient", exam[0].id_patient);
-      setValue("idDoctor", exam[0].id_doctor);
-      setValue("nameExam", exam[0].nameExam);
-      setValue("dateExam", exam[0].dateExam);
-      setValue("hourExam", exam[0].hourExam);
-      setValue("typeExam", exam[0].typeExam);
-      setValue("labExam", exam[0].labExam);
-      setValue("urlExam", exam[0].urlExam);
-      setValue("resultExam", exam[0].resultExam);
-      setValue("statusExam", exam[0].statusExam);
-      
+      setValue("idPatient", exercise[0].id_patient);
+      setValue("idNurse", exercise[0].id_nurse);
+      setValue("seriesName", exercise[0].seriesName);
+      setValue("dateExercise", exercise[0].dateExercise);
+      setValue("hourExercise", exercise[0].hourExercise);
+      setValue("typeExercise", exercise[0].typeExercise);
+      setValue("amountWeek", exercise[0].amountWeek);
+      setValue("descritionExercise", exercise[0].descritionExercise);
+      setValue("statusExercise",exercise[0].statusExercise);
     }
   }, [exercise]);
 
@@ -155,37 +153,21 @@ export const FormExercise = ({ patientId }) => {
     }
   };
 
-  const isExerciseRegistered = (dataForm) => {
-    // let filteredPatientExams = examsList?.filter(exam => String(exam.id_patient).includes(dataForm.id_patient))
-    // let filteredDate = filteredPatientExams.filter(exam => exam.exam_date.includes(dataForm.exam_date))
-    // let filteredHour = filteredDate.filter(exam => exam.exam_hour.includes(dataForm.exam_hour))
-
-    // if (filteredHour.length > 0) {
-    //     messageApi.open({ type: 'error', content: 'Esse paciente já possui exame cadastrado nesse dia e horário.' })
-    //     filteredPatientExams = []
-    //     filteredDate = []
-    //     filteredHour = []
-    //     return true
-    // }
-
-    return false;
-  };
-
   const onSubmitForm = async (dataForm) => {
     const data = {
       id_patient: dataForm.idPatient,
-      id_doctor: dataForm.idDoctor,
-      nameExam: dataForm.nameExam,
-      dateExam: dataForm.dateExam,
-      hourExam: dataForm.hourExam,
-      typeExam: dataForm.typeExam,
-      labExam: dataForm.labExam,
-      urlExam: dataForm.urlExam,
-      resultExam: dataForm.resultExam,
-      statusExam: dataForm.statusExam,
+      id_nurse: dataForm.idNurse,
+      seriesName: dataForm.seriesName,
+      dateExercise: dataForm.dateExercise,
+      hourExercise: dataForm.hourExercise,
+      typeExercise: dataForm.typeExercise,
+      amountWeek: dataForm.amountWeek,
+      descritionExercise: dataForm.descritionExercise,
+      statusExercise: dataForm.statusExercise,
+
     };
     console.log(data);
-    examId ? Update(data) : Save(data);
+    exerciseId ? Update(data) : Save(data);
   };
 
   const Update = async (submitData) => {
@@ -211,20 +193,15 @@ export const FormExercise = ({ patientId }) => {
   };
 
   const Save = async (submitData) => {
-    if (isExerciseRegistered(submitData)) {
-      return;
-    }
 
     await ExerciseService.Create(submitData)
       .then((response) => {
-        console.log(response);
         switch (response.status) {
           case 201:
             reset();
             window.location.reload(true);
-            return alert("Sucesso! Exame cadastrada.");
+            return alert("Sucesso! Série de exercicio cadastrada.");
           case 400:
-            console.log(response);
             return alert(`Erro no cadastro! Por favor, tente novamente.`);
           case 500:
             reset();
@@ -233,7 +210,7 @@ export const FormExercise = ({ patientId }) => {
       })
       .catch((error) => {
         alert("Erro no cadastro. Por favor, tente novamente.");
-        console.error("Erro ao cadastrar exame:", error);
+        console.error("Erro ao cadastrar série de exercicio :", error);
         reset();
       });
   };
@@ -282,9 +259,9 @@ export const FormExercise = ({ patientId }) => {
 
           <Styled.ButtonDel
             $width={"10%"}
-            $active={examId}
+            $active={exerciseId}
             type="button"
-            disabled={!examId}
+            disabled={!exerciseId}
             onClick={Delete}
           >
             Deletar
@@ -307,7 +284,7 @@ export const FormExercise = ({ patientId }) => {
               label="Código do Paciente *"
               name="idPatient"
               min={1}
-              disabled={examId && isEditActive === false}
+              disabled={exerciseId && isEditActive === false}
               register={{
                 ...register("idPatient", {
                   required: true,
@@ -332,34 +309,34 @@ export const FormExercise = ({ patientId }) => {
             />
             <InputComponent
               $width={"100%"}
-              id="idDoctor"
+              id="idNurse"
               type="number"
               placeholder="Digite o código"
-              label="Código do medico *"
-              name="idDoctor"
+              label="Código do enfermeiro *"
+              name="idNurse"
               min={1}
-              disabled={examId && isEditActive === false}
+              disabled={exerciseId && isEditActive === false}
               register={{
-                ...register("idDoctor", {
+                ...register("idNurse", {
                   required: true,
                 }),
               }}
-              error={errors.idDoctor}
+              error={errors.idNurse}
             />
             <InputComponent
               $width={"350%"}
-              id="doctorName"
+              id="nurseName"
               type="string"
-              placeholder="Nome do médico(a)"
-              label="Nome do médico(a)"
-              name="doctorName"
+              placeholder="Nome do enfermeiro(a)"
+              label="Nome do enfermeiro(a)"
+              name="nurseName"
               disabled={true}
               register={{
-                ...register("doctorName", {
+                ...register("nurseName", {
                   required: false,
                 }),
               }}
-              error={errors.doctorName}
+              error={errors.nurseName}
             />
             <InputComponent
               $width={"350%"}
@@ -368,7 +345,7 @@ export const FormExercise = ({ patientId }) => {
               placeholder="Série de exercicios"
               label="Série de exercicios"
               name="seriesName"
-              disabled={examId && isEditActive === false}
+              disabled={exerciseId && isEditActive === false}
               register={{
                 ...register("seriesName", {
                   required: true,
@@ -385,9 +362,10 @@ export const FormExercise = ({ patientId }) => {
           <SelectComponent
             $width={"20%"}
             id="typeExercise"
+            type="select"
             name="typeExercise"
             label={"Tipo de série de exercicios"}
-            options={genders}
+            options={typeExercise}
             register={{
               ...register("typeExercise", {
                 required: true,
@@ -403,7 +381,7 @@ export const FormExercise = ({ patientId }) => {
               placeholder="Digite a data do exercicio"
               label="Data do exercicio *"
               name="dateExercise"
-              disabled={examId && isEditActive === false}
+              disabled={exerciseId && isEditActive === false}
               register={{
                 ...register("dateExercise", {
                   required: true,
@@ -419,13 +397,13 @@ export const FormExercise = ({ patientId }) => {
               placeholder="Digite o hora do exercicio"
               label="Hora do exercicio *"
               name="hourExercise"
-              disabled={examId && isEditActive === false}
+              disabled={exerciseId && isEditActive === false}
               register={{
                 ...register("hourExercise", {
                   required: true,
                 }),
               }}
-              error={errors.hourhourExerciseExam}
+              error={errors.hourExercise}
             />
           </Styled.InputGroup>
 
@@ -437,7 +415,7 @@ export const FormExercise = ({ patientId }) => {
               placeholder="Descreva a série de exercicio a ser feita."
               name="descritionExercise"
               label="Série de exercicio  *"
-              disabled={examId && isEditActive === false}
+              disabled={exerciseId && isEditActive === false}
               register={{
                 ...register("descritionExercise", {
                   required: true,
@@ -450,12 +428,12 @@ export const FormExercise = ({ patientId }) => {
           </Styled.InputGroup>
           <Styled.InputGroup>
             <Styled.SelectGroup>
-              <Styled.SelectLabel $color={errors.status && 'danger'} htmlFor='statusExam'>Status do Sistema *</Styled.SelectLabel>
+              <Styled.SelectLabel $color={errors.status && 'danger'} htmlFor='statusExercise'>Status do Sistema *</Styled.SelectLabel>
               <Styled.Select
                 id='statusExercise'
                 name='statusExercise'
                 defaultValue={''}
-                disabled={examId && isEditActive === false}
+                disabled={exerciseId && isEditActive === false}
                 {...register('statusExercise', { required: true })}
                 $color={errors.dietType && 'danger'}
               >
