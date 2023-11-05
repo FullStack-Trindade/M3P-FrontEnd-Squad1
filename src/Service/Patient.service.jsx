@@ -15,7 +15,7 @@ const fetchUser = async (url, options) => {
 export const PatientService = {
   Create: (data) => {
     console.log(data)
-    return fetchUser(`${API_URL}/usuarios`, {
+    return fetchUser(`${API_URL}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,14 +24,14 @@ export const PatientService = {
     });
   },
 
-  Get: (data) => {
-    return fetchUser(`${API_URL}/usuarios`, {
+  Get: () => {
+    return fetchUser(`${API_URL}`),{
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
-      });
+      };
     },
   
   SearchByCpfEmail: (data) => {
@@ -43,16 +43,18 @@ export const PatientService = {
       body: JSON.stringify(data),
     });
   },
+
   Update: (id, data) => {
-    return fetchUser(`${API_URL}/usuarios/${id}`, {
+    return fetchUser(`${API_URL}/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
   },
+  
   Delete: (id) => {
-    return fetchUser(`${API_URL}/usuarios/${id}`, {
+    return fetchUser(`${API_URL}/${id}`, {
       method: "DELETE",
-    });
-  },
+  });
+  },
 };
