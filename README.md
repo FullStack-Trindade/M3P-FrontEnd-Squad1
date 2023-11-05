@@ -15,37 +15,88 @@
 
 </div>
 <br>
+---------------------------------------------------
+# MEDI TECH PRO
 
+Este é um projeto Express para uma aplicação do sistema hospitalar MEDI TECH PRO, que gerencia o cadastro de pacientes, médicos, enfermeiros e o registro de consultas, exames, dietas, exercícios e medicamentos.
 
+## 🎯 Contexto
 
-![SYSTEMCARE](public/FIGURA_MOCKUP.png) Inserir imagem do mockup
+A MEDI TECH, líder no setor de tecnologia para gestão hospitalar, recebeu um aporte financeiro para aprimorar seu principal produto, tornando-o disponível em postos de saúde e clínicas particulares em todo o país.
 
-<p align="justify">
-<b>System Care</b> é um <i>software</i> para gestão de inventário médico no formato <i>white label</i> da empresa fictícia LABMedicine LTDA, líder no segmento tecnológico para gestão hospitalar. Essa aplicação foi criada como projeto de conclusão do Curso de Capacitação FullStack oferecido pelo Lab365 / Senai - SC.
-</p>
-<br>
+O objetivo desta aplicação é criação do frontend para:
+- Registrar e gerenciar médicos, enfermeiros e pacientes.
+- Registrar atendimentos médicos, incluindo consultas e exames.
+- Registrar atendimentos de enfermeiros, incluindo dietas, exercícios e medicamentos.
+- White-label para adequar-se a identidade visual de cada cliente.
+
+Este projeto também possui um repositório [Backend](https://github.com/FullStack-Trindade/M3P-BackEnd-Squad1), criando um sistema completo.
+
+A aplicação foi desenvolvida como projeto de conclusão do Módulo 3 do Curso de Capacitação Dev FullStack oferecido pelo Lab365 / Senai - SC.
+
+## ⚙️ Funcionalidades
+
+A interface WEB disponibilizada, compreende as funcionalidade relativa a:
+
+- Login e autenticação.
+- Estatísticas e cartões informativos
+- Usuário: Leitura edição e cadastros via formulário.
+- Pacientes: Leitura edição e cadastros via formulário.
+- Consultas: Leitura edição e cadastros via formulário.
+- Exames: Leitura edição e cadastros via formulário.
+- Prontuários: Leitura edição e cadastros via formulário.
+- Exercícios: Leitura edição e cadastros via formulário.
+- Dietas: Leitura edição e cadastros via formulário.
+- Medicamentos: Leitura edição e cadastros via formulário.
+- Personalização do ambiente
+
+Abaixo algumas imagens do sistema:
+
+<img src="./public/login_printscreen.jpg" alt="Login">
+<img src="./public/home_printscreen.jpg" alt="HomePage">
+
+Links para as principais seções:
 
 ## 🛠️ Tecnologias Utilizadas
 
-Este projeto foi desenvolvido utilizando [React v18.x](https://react.dev/) e as seguintes ferramentas foram usadas durante a sua construção:
+Principais tecnologias
 
-- [Ant Design](https://ant.design/) - biblioteca UI para React que fornece um conjunto de componentes para construção de interfaces interativas ;
-- [Day.js](https://day.js.org/) - biblioteca JavaScript que interpreta, valida, manipula e mostra datas e horas com API compatível com Moment.js ;
-- [Font Awesome](https://fontawesome.com/) - biblioteca e *toolkit* de ícones ;
-- [prop-types](https://www.npmjs.com/package/prop-types) - pacote que permite documentar os tipos de propriedades repassadas para os componentes ;
-- [react-dom](https://www.npmjs.com/package/react-dom) - pacote que serve como ponto de entrada para a DOM e re-renderizadores de servidor para React ;
-- [react-hook-form](https://react-hook-form.com/) - biblioteca que permite administrar e validar formulários em React ;
-- [react-icons](https://www.npmjs.com/package/react-icons) - pacote que contém grande coletânea de ícones ;
-- [react-router-dom](https://reactrouter.com/en/main) - pacote que contém pontos de ligação para utilização de React Router em aplicações *web* ;
-- [styled-components](https://styled-components.com/) - biblioteca que permite escrever CSS em JavaScript para estilizar os componentes ;
-- [ViaCEP API](https://viacep.com.br/) - REST API que permite obter um determinado endereço a partir do Código de Endereçamento Postal (CEP) ;
-- [Vite](https://vitejs.dev/) - servidor de desenvolvimento local para modelos de projeto React e Vue ;
-- [VSCode](https://code.visualstudio.com/) - editor de código-fonte para construção e *debugging* de aplicações *web* e *cloud*.
-- [Yup](https://www.npmjs.com/package/yup) - contrutor de *schema* JavaScript para análise e validação de valor.
+- [Ecma Script/ Java Script](https://www.ecma-international.org)
+- [React v18.x](https://react.dev/)
+- [Vite](https://vitejs.dev/)
 
-<br>
+Bibliotecas de React.js:
 
-## 💻 Instalação
+### Dependências:
+
+- [Ant Design](https://ant.design/): Biblioteca de componentes de interface de usuário para React.
+- [node-fetch](https://www.npmjs.com/package/node-fetch): Uma implementação do navegador da API Fetch para Node.js.
+- [prop-types](https://www.npmjs.com/package/prop-types): Pacote para documentar e validar tipos de propriedades em componentes React.
+- [React](https://react.dev/): Biblioteca principal do React.
+- [React DOM](https://react.dev/docs/react-dom): Biblioteca para manipulação do DOM em aplicações React.
+- [React Hook Form](https://react-hook-form.com/): Biblioteca para gerenciamento e validação de formulários em React.
+- [React Icons](https://www.npmjs.com/package/react-icons): Biblioteca com uma coleção de ícones para uso em aplicações React.
+- [React Router DOM](https://reactrouter.com/en/main): Pacote para gerenciamento de rotas em aplicações React.
+- [Styled Components](https://styled-components.com/): Biblioteca para estilização de componentes React com CSS-in-JS.
+- [Yup](https://www.npmjs.com/package/yup): Biblioteca para criação de esquemas de validação em JavaScript.
+
+### Dependências de Desenvolvimento:
+
+- [@types/react](https://www.npmjs.com/package/@types/react): Tipos TypeScript para o React.
+- [@types/react-dom](https://www.npmjs.com/package/@types/react-dom): Tipos TypeScript para o React DOM.
+- [@vitejs/plugin-react](https://www.npmjs.com/package/@vitejs/plugin-react): Plugin Vite para suporte ao React.
+- [Concurrently](https://www.npmjs.com/package/concurrently): Ferramenta para executar comandos em paralelo.
+- [ESLint](https://eslint.org/): Linter de código JavaScript.
+- [ESLint Plugin React](https://www.npmjs.com/package/eslint-plugin-react): Plugin do ESLint para regras relacionadas ao React.
+- [ESLint Plugin React Hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks): Plugin do ESLint para regras de hooks do React.
+- [ESLint Plugin React Refresh](https://www.npmjs.com/package/eslint-plugin-react-refresh): Plugin do ESLint para suporte ao React Refresh.
+- [Vite](https://vitejs.dev/): Servidor de desenvolvimento Vite.
+
+**Variáveis de Ambiente:**
+
+Para executar o projeto, renomeie o arquivo `.env.local.example` para `.env.local` e configure as variáveis conforme necessário.
+
+## 💻 Rodando localmente
 
 <p align="justify">
 É interessante que tenha <a href="https://git-scm.com/">Git</a> ou outro <i>software</i> de controle de versionamento instalado em seu equipamento, assim como um editor de código como o <a href="https://code.visualstudio.com/">VSCode</a>.
@@ -56,47 +107,41 @@ Antes de iniciar a aplicação, execute a parte do projeto correspondente ao <a 
 
 Siga os passos abaixo para iniciar o projeto em modo de desenvolvimento:
 
-1. Clone o repositório no terminal / cmd ;
+Clone o projeto
 
-```
-    $ git clone https://github.com/FullStack-Trindade/M3P-FrontEnd-Squad1.git
-```
-
-2. Navegue até o diretório do projeto ;
-
-```
-    $ cd M3P-FrontEnd-Squad1
+```bash
+  git clone https://github.com/FullStack-Trindade/M3P-FrontEnd-Squad1.git
 ```
 
-3. Instale os pacotes e dependências do projeto ;
+Entre no diretório do projeto
 
-```
-    $ npm install
-```
-
-4. Execute a aplicação em modo de desenvolvimento ;
-
-```
-    $ npm run dev
+```bash
+  cd my-project
 ```
 
-5. As mensagens seguintes devem aparecer após ``npm run dev`` :
+Instale as dependências
+
+```bash
+  npm i
+```
+
+Inicie o servidor
+
+```bash
+  npm run dev
+```
+As mensagens seguintes devem aparecer após ``npm run dev`` :
 
 ```
     VITE v4.4.3
 
     Local:   http://localhost:5173/
 ```
-
-Pronto! Faça bom proveito!
-
-<br>
-
-## 🗂️ Estrutura
+## 🌲 Estrutura
 
 ```
-
-├───public 
+├───public
+│   └───images
 └───src
     ├───Assets
     ├───Components
@@ -111,22 +156,27 @@ Pronto! Faça bom proveito!
     │   ├───CardMedicamento
     │   ├───CardPaciente
     │   ├───CardUser
+    │   ├───ForgotModal
     │   ├───Form
     │   │   ├───InputComponent
     │   │   └───SelectComponent
     │   ├───FormAppointment
     │   ├───FormDiet
-    │   ├───FormExame
+    │   ├───FormExam
+    │   ├───FormMedication
     │   ├───FormPaciente
     │   │   └───InputComponent
     │   ├───FormUsuario
     │   │   └───InputComponent
+    │   ├───FromExercise
     │   ├───InputPatientSearchAtHome
     │   ├───InputSearch
     │   ├───InputSearchAppointment
     │   ├───InputSearchDiet
-    │   ├───InputSearchExame
+    │   ├───InputSearchExam
+    │   ├───InputSearchExercise
     │   ├───InputSearchMedicalRecord
+    │   ├───InputSearchMedication
     │   ├───InputSearchPaciente
     │   ├───InputSearchProntuario
     │   ├───InputSearchUser
@@ -136,6 +186,7 @@ Pronto! Faça bom proveito!
     │   │   ├───MenuComponent
     │   │   ├───MenuItem
     │   │   └───MenuItemFechado
+    │   ├───ResetPasswordForm
     │   ├───SelectComponent
     │   ├───ToolBar
     │   └───UserAddBtn
@@ -144,6 +195,7 @@ Pronto! Faça bom proveito!
     ├───Pages
     │   ├───AppointmentRegister
     │   ├───CadastroExame
+    │   ├───CadastroExercise
     │   ├───CadastroPaciente
     │   ├───CadastroUsuario
     │   ├───ConfigPage
@@ -152,59 +204,38 @@ Pronto! Faça bom proveito!
     │   ├───ListaProntuarioPage
     │   ├───LoginPage
     │   ├───MedicalRecords
+    │   ├───MedicationPage
+    │   ├───Password
     │   └───ProntuarioPacientePage
     ├───Server
     └───Service
 ```
 
-<br>
+# ✏️ Aprendizados da Equipe
 
-## ⚙️ Funcionalidades
+- Criação de Aplicação utilizando RactJs/ Vite;
+- Validação de formulários e integração a endpoints (backend);
+- Lidar com reras de negócios complexas;
+- Trabalho em equipe e gitflow;
 
-- Usuários previamente cadastrados podem acessar o sistema que permite:
+## 🚀 Melhorias Futuras
 
-  - acesso a estatísticas e cartões informativos ;
-  - acesso ao formulário para cadastro de usuários (restrito ao administrador) ;
-  - acesso ao formulário para cadastro de pacientes ;
-  - acesso ao formulário para cadastro de consultas ;
-  - acesso ao formulário para cadastro de dietas ;
-  - acesso ao formulário para cadastro de exames ;
-  - acesso ao formulário para cadastro de exercícios, e ;
-  - acesso ao formulário para cadastro de medicamentos ;
+1- Página para recuperação de senha.
 
-<br>
+2- Página "Erro 404- Página não encontrada" personalizada.
 
-## ✏️ ToDo
+3- Página de listagem de atendimentos por Médico/ Enfermeiro
 
-- [X] Página para entrada do usuário no sistema
-- [X] Barra de ferramentas com título da página e informações do usuário
-- [X] Menu lateral para navegação entre páginas
-- [X] Página de início com dados estatísticos e cartões informativos
-- [X] Página de cadastro do usuários
-- [X] Página de cadastro do pacientes
-- [X] Página de cadastro da consultas
-- [X] Página de cadastro do dietas
-- [X] Página de cadastro do exames
-- [X] Página de cadastro do exercícios
-- [X] Página de cadastro do medicamentos
-- [X] Página de listagem dos prontuários dos pacientes
-- [X] Página de prontuário do paciente
-- [X] Página de personalização de layout
-- [ ] Página para recuperação de senha esquecida
-- [ ] Página de configurações
-- [ ] Calendário com as consultas e exames agendados na página de início
-- [ ] Página de listagem das consultas
-- [ ] Página de listagem dos exames
-- [ ] Página não encontrada personalizada
+4- Pronutário Online
 
-<br>
-
-## ✍🏻 Autor
+## ✍🏻 Autores
 
 Feito por 🔥Furious Five🔥 (Squad 1), composto por [Beatriz Christie](https://github.com/biachristie),  [Daniel Simoni](https://github.com/DaniSimoni), [Gabriel Pacheco](https://github.com/gabrieldelpacheco), [Reinaldo Porto](https://github.com/portexrp) e [Rodrigo Pieritz](https://github.com/rodrigopieritz) (P.O)🖐🏻
 
-<br>
+## 🛠️ Feedback e Suporte
+
+Se você tiver algum feedback ou algo não estiver funcionando, por favor nos deixe saber por meio de rodrigo_o_pieritz@estudante.sesisenai.org.br
 
 ## 📌 Licença
 
-Este código está sob a Licença MIT, cujo texto pode ser lido em [MIT License](https://github.com/FullStack-Trindade/M3P-FrontEnd-Squad1/blob/main/LICENSE.md).
+Este código está sob a Licença MIT, cujo texto pode ser lido em [MIT License](https://github.com/FullStack-Trindade/M3P-BackEnd-Squad1/blob/main/LICENSE.md).
