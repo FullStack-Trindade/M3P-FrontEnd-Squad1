@@ -26,8 +26,8 @@ export const FormExercise = ({ patientId }) => {
   const typeExercise = [
     {
       id: 1,
-      value: "RESISTÊNCIA AREÓBICA",
-      label: "RESISTÊNCIA AREÓBICA",
+      value: "RESISTÊNCIA AERÓBICA",
+      label: "RESISTÊNCIA AERÓBICA",
     },
 
     {
@@ -53,8 +53,8 @@ export const FormExercise = ({ patientId }) => {
     },
     {
       id: 6,
-      value: "OUTROS",
-      label: "OUTROS",
+      value: "OUTRO",
+      label: "OUTRO",
     },
   ];
 
