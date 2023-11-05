@@ -1,8 +1,9 @@
 import * as Styled from './ProntuarioPacientePage.style'
 import { useContext, useEffect, useState } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 
+import { AuthContext } from '../../Context/auth.context';
 import { HeaderContext } from '../../Context/Header.context';
 import { PatientRecordService } from '../../Service/PatientRecord.service';
 import { CardConsulta } from '../../Components/CardConsulta/CardConsulta';
@@ -10,12 +11,11 @@ import { CardDieta } from '../../Components/CardDieta/CardDieta';
 import { CardExame } from '../../Components/CardExame/CardExame';
 import { CardExercicio } from '../../Components/CardExercicio/CardExercicio';
 import { CardMedicamento } from '../../Components/CardMedicamento/CardMedicamento';
-// import { AuthService } from '../../Service/Auth.service';
+import { AuthService } from '../../Service/Auth.service';
 
 export const ProntuarioPage = () => {
-  const { pathname } = useLocation();
-  const location = pathname.split('/');
-  const patientId = location[location.length - 1];
+  let params = new URL(document.location).searchParams;
+  const patientId = params.get('id');
 
   const { setData } = useContext(HeaderContext);
 
@@ -29,34 +29,39 @@ export const ProntuarioPage = () => {
     }
   }, []);
     
-    const fetchPatientsRecord = async() => {
-      await PatientRecordService.Show().then(result  => setPatientsRecordList(result));
-    }
+  const fetchPatientsRecord = async() => {
+    await PatientRecordService.Show().then(result  => setPatientsRecordList(result));
+  }
 
-    const [patientRecord, setPatientRecord] = useState([]);
+  const [patientRecord, setPatientRecord] = useState([]);
 
-    useEffect(() => {
-      const filteredPatient = patientsRecordList.filter(value => value.id.toString().includes(patientId))
-      setPatientRecord(filteredPatient);
+  useEffect(() => {
+    const filteredPatient = patientsRecordList.filter(value => value.id.toString().includes(patientId))
+    setPatientRecord(filteredPatient);
   }, [patientsRecordList, patientId])
 
-  // const { tokenUser, setTokenUser } = useContext(AuthContext);
-  //   const localToken = JSON.parse(localStorage.getItem('token'));
+  const { tokenUser, setTokenUser } = useContext(AuthContext);
+  const localToken = JSON.parse(localStorage.getItem('token'));
 
-  //   useEffect(() => { 
-  //       if (localToken !== null) {
-  //           fetchAuth() 
-  //       }
-  //   }, [localToken]);
+  const [loading, setLoading] = useState();
 
-  //   const fetchAuth = async() => {
-  //       const authToken = await AuthService.Get();
-  //       const tokenExists = authToken.filter(auth => auth.token_user === localToken);
+  useEffect(() => { 
+      if (localToken !== null) {
+          setLoading(true);
+          fetchAuth();
+      }
+  }, [localToken]);
 
-  //       if (tokenExists.length === 0) { return }
-        
-  //       setTokenUser(tokenExists[0]?.token_user);
-  //   }
+  const fetchAuth = async() => {
+    const authToken = await AuthService.Get();
+    const tokenExists = await authToken.filter(auth => auth.token_user === localToken);
+
+      if (tokenExists.length > 0) { 
+        setTokenUser(tokenExists[0]?.token_user);
+        setLoading(false);
+      }
+
+    }
 
     const render = () => {
         return (
@@ -101,11 +106,11 @@ export const ProntuarioPage = () => {
                           { patientRecord[0]?.exams.map(exam => <CardExame exam={exam} key={exam.id} />) }
                       </Styled.RenderResultados>
                       
-                      {/* <Styled.SubTitle><span>4</span>Exercício</Styled.SubTitle> 
+                      <Styled.SubTitle><span>4</span>Exercício</Styled.SubTitle> 
 
                       <Styled.RenderResultados>
                           { patientRecord[0]?.exercises.map(exercise => <CardExercicio exercise={exercise} key={exercise.id} />) }
-                      </Styled.RenderResultados> */}
+                      </Styled.RenderResultados>
                       
                       <Styled.SubTitle><span>5</span>Medicação</Styled.SubTitle>
 
@@ -121,6 +126,9 @@ export const ProntuarioPage = () => {
       )
     }
 
-    // return !!tokenUser && (tokenUser === localToken) ? <Navigate to='/' /> : render();
-    return render();
+    if (loading === true) {
+      return <div>Loading...</div>;
+    }
+  
+    return tokenUser && (tokenUser === localToken) ? render() : <Navigate to='/login'/>;
   }
