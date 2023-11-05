@@ -1,5 +1,6 @@
 import * as Styled from './CardConsulta.style';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { UserService } from '../../Service/User.service';
 
@@ -18,6 +19,7 @@ export function CardConsulta ({ appointment })  {
     
     return (
         <>
+            <Link to={`/consulta?id=${appointment.id}`}>
             <Styled.CardContainer>
 
                 <p>Médico: { filteredUser[0]?.name } </p>
@@ -29,6 +31,7 @@ export function CardConsulta ({ appointment })  {
                 <p>Dosagem e Precauções: {appointment?.dosage_precautions} </p>
 
             </Styled.CardContainer>
+            </Link>
         </>
     );
 }
