@@ -9,7 +9,7 @@ import { AppointmentRegisterPage } from "./src/Pages/AppointmentRegister/Appoint
 import { PacientePage } from "./src/Pages/CadastroPaciente/CadastroPaciente.jsx";
 import { CadastroUsuarioPage } from './src/Pages/CadastroUsuario/CadastroUsuario';
 import { DietRegisterPage } from './src/Pages/DietRegister/DietRegisterPage.jsx';
-
+import { ConfigPage } from "./src/Pages/ConfigPage/ConfigPage";
 
 function App() {
   return (
@@ -18,6 +18,8 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
+          <Route path="/config" element={<ConfigPage />} />
+
           <Route path="/usuario" element={<CadastroUsuarioPage />} />
           <Route path="/exame" element={<CadastroExamePage />} />
           <Route path="/paciente" element={<PacientePage />} />
