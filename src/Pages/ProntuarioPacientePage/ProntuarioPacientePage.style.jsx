@@ -27,7 +27,7 @@ export const CorpoProntuario = styled.div`
   width: 95%;
   height: auto;
   color: white;
-  margin: 0 auto ;
+  margin: 0 auto 20px;
   border-radius: 5px;
 `;
 
