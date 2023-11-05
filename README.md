@@ -52,8 +52,8 @@ A interface WEB disponibilizada, compreende as funcionalidade relativa a:
 
 Abaixo algumas imagens do sistema:
 
-<img src="./public/login_printscreen.jpg" alt="Login">
-<img src="./public/home_printscreen.jpg" alt="HomePage">
+<img src="./public/images/login_printscreen.jpg" alt="Login">
+<img src="./public/images/home_printscreen.jpg" alt="HomePage">
 
 Links para as principais seções:
 
