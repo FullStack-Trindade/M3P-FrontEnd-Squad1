@@ -37,13 +37,32 @@ const MenuAberto = () => {
             To="/listaProntuarios"
           />
 
-          <Styled.MenuSetor>Exames</Styled.MenuSetor>
-          <MenuItem
-            Icon={FaLaptopMedical}
-            Text="CADASTRAR CONSULTA"
-            To="/consulta"
-          />
-          <MenuItem Icon={ImDroplet} Text="CADASTRAR EXAME" To="/exame" />
+          <Styled.MenuSetor>Cadastros</Styled.MenuSetor>
+            <MenuItem
+              Icon={FaLaptopMedical}
+              Text="CADASTRAR CONSULTA"
+              To="/consulta"
+            />
+            <MenuItem 
+              Icon={ImDroplet} 
+              Text="CADASTRAR DIETA" 
+              To="/dieta" 
+            />
+            <MenuItem 
+              Icon={ImDroplet} 
+              Text="CADASTRAR EXAME" 
+              To="/exame" 
+            />
+            <MenuItem 
+              Icon={ImDroplet} 
+              Text="CADASTRAR EXERCÍCIO" 
+              To="/exercicio" 
+            />
+            <MenuItem 
+              Icon={ImDroplet} 
+              Text="CADASTRAR MEDICAMENTO" 
+              To="/medicamento" 
+            />
         </Styled.MenuArea>
       </Styled.MenuContainer>
       
