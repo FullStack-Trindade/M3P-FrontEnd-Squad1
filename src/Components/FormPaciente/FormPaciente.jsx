@@ -9,7 +9,7 @@ import { SelectComponent } from "../Form/SelectComponent/SelectComponent";
 import { Switch, Spin } from "antd";
 
 import { CEPService } from "../../Service/User.CEP";
-import { PacienteService } from "../../Service/Paciente.service";
+import { PatientService } from "../../Service/Patient.service";
 import { UserService } from "../../Service/User.service";
 
 export const FormPaciente = ({ id }) => {
@@ -132,7 +132,7 @@ export const FormPaciente = ({ id }) => {
   }, [formMode]);
 
   const buscarDadosPacienteCadastrado = (id) => {
-    PacienteService.Show(id).then((response) => {
+    PatientService.Show(id).then((response) => {
       if (response) {
         setValue("birth", response.birth);
         setValue("idUser", response.idUser);
@@ -298,7 +298,7 @@ export const FormPaciente = ({ id }) => {
               },
             };
 
-            await PacienteService.Create(postPacientDb).then((response) => {
+            await PatientService.Create(postPacientDb).then((response) => {
               if (response) {
                 alert(`Paciente ID ${response.id} criado com sucesso!`);
                 navigate("/");
@@ -316,7 +316,7 @@ export const FormPaciente = ({ id }) => {
 
   const updatePaciente = async (pacienteData) => {
     try {
-      await PacienteService.Update(id, pacienteData).then((response) => {
+      await PatientService.Update(id, pacienteData).then((response) => {
         setIsSubmitSuccessful;
         alert("Paciente atualizado com sucesso");
         navigate("/");
@@ -328,7 +328,7 @@ export const FormPaciente = ({ id }) => {
   };
 
   const deletePaciente = () => {
-    PacienteService.Delete(id).then((response) => {
+    PatientService.Delete(id).then((response) => {
       if ((response.status = 202)) {
         UserService.Delete(idUser).then((response) => {
           if ((response.status = 202)) {
