@@ -1,4 +1,6 @@
+<div align="center">
 # MEDI TECH PRO
+</div>
 
 <div align="center">
 
