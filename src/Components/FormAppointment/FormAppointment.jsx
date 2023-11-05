@@ -260,7 +260,7 @@ export const FormAppointment = ({ patientId }) => {
               label='Código do Paciente *'
               name='idPatient'
               min={ 1 }
-              disabled={ true }
+              disabled={ appointmentId && isEditActive === false }
               register={{
                 ...register('idPatient', {
                   required: true,

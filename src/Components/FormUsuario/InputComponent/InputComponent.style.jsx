@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import PropTypes from 'prop-types'
 
-
 export const InputGroup = styled.div`
   display: flex;
   flex-direction: column;
@@ -14,12 +13,13 @@ export const Label = styled.label`
   align-items: flex-start;
   gap: 0.625rem;
   align-self: stretch;
-  color: ${({ $color }) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};
+  color: ${({$color}) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};
   font-size: 0.75rem;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
   width: 80%;
+
 `;
 
 export const InputContainer = styled.div`
@@ -29,22 +29,20 @@ export const InputContainer = styled.div`
   flex-wrap: wrap;
   gap: 2vw;
   width: 100%;
-  `;
-  
-  export const Input = styled.input`
+ 
+`
+export const Input = styled.input`
   display: flex;
   padding: 0.3rem;
+  
   align-items: flex-start;
   align-self: stretch;
   border-radius: 0.2rem;
-  border: 1px solid ${({ $color }) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};
+  border: 1px solid ${({$color}) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};
   width: ${({ $width }) => ($width ? $width : '100%')};
   height: ${({ $height }) => ($height ? $height : '100%')};
-  cursor: text;
-  &:disabled {
-    cursor: not-allowed;
-  }
-`;
+  
+  `;
 
 export const TextArea = styled.textarea`
   display: flex;
@@ -52,12 +50,9 @@ export const TextArea = styled.textarea`
   align-items: flex-start;
   align-self: stretch;
   border-radius: 0.3125rem;
-  border: 1px solid ${({ $color }) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};;
+  border: 1px solid ${({$color}) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};;
   height: ${({ $height }) => ($height ? $height : '100%')};
-  cursor: text;
-  &:disabled {
-    cursor: not-allowed;
-  }
+
 `;
 
 
@@ -69,6 +64,6 @@ export const Icon = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: .5rem 13.3rem;
-  color: ${({ $color }) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};;
-`;
+  margin: .5rem 0 .5rem 23rem;
+  color: ${({$color}) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};;
+`

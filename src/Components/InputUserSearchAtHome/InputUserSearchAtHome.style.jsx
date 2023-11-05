@@ -5,11 +5,12 @@ export const InputContainer = styled.div`
     width: 100%;
     height: 7vw;
     border-radius: 5px;
-    margin: 2% 0 2% 0;
+    margin: 2vh 0 0 0;
 
     h4 {
         display: flex;
-        color: gray;
+        color: black;
+        margin-left: none;
     }
 
     .input2 {
@@ -24,7 +25,7 @@ export const InputContainer = styled.div`
 
     .button {
         display: table-cell;
-        margin: 0 auto 0 2vw !important;  
+        margin: 0 2vw 0 2vw !important;  
         padding: 12px 32px;  
         background: transparent ;
         border-radius: 4px;

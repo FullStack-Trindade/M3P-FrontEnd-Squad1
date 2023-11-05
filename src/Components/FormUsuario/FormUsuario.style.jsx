@@ -134,6 +134,7 @@ export const LabelSwitch = styled.div`
   justify-content: right;
   margin: auto;
   align-items: center;
+  
 `
 
 export const SwitchBtn = styled.div`
@@ -145,9 +146,6 @@ export const SwitchBtn = styled.div`
   background-color: none;
   margin: auto;
 `
-SwitchBtn.propTypes = {
-   $cursor: PropTypes.any,
-}
 
 
 

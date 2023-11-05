@@ -7,7 +7,6 @@ export const InputContainer = styled.div`
     border-radius: 5px;
     margin: 0 auto;
 
-
     .container-faq {
     display: flex !important;
     justify-content: center !important;

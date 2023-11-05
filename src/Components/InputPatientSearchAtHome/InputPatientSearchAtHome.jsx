@@ -37,11 +37,10 @@ export const InputPatientSearchAtHome = () => {
       setUser(filteredUser[0]);
     }
   };
-  console.log(user ? user.name : false);
-  return (
+    return (
     <>
       <Styled.InputContainer>
-        <h2> Informações Rápidas de Pacientes</h2>
+        <h4> Informações Rápidas de Pacientes</h4>
 
         <Styled.SearchInput>
           <input
