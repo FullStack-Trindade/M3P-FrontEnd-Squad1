@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as Styled from './InputSearchPaciente.style';
-import { PacienteService } from '../../Service/Paciente.service';
+import { PatientService } from '../../Service/Patient.service';
 import CardPaciente from '../CardPaciente/CardPaciente';
 
 export const InputSearch = () => {
@@ -17,7 +17,7 @@ export const InputSearch = () => {
   const submitInputForm = async (dataInput) => {
     const { nome } = dataInput;
     
-    const paciente = await PacienteService.ShowByNome(nome);
+    const paciente = await PatientService.ShowByNome(nome);
     console.log(paciente)
     
       if (!paciente) {
