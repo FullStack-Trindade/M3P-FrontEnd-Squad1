@@ -18,26 +18,27 @@ export const Form = styled.form`
 export const Header = styled.div`
   display: flex;
   width: 100%;
-  justify-content: space-around;
-
-
+  justify-content: start;
   align-items: flex-start;
   gap: 0.5rem;
   align-self: stretch;
+`;
 
+export const Paragraph = styled.p`
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #ff5555;
+  margin-bottom: 0;
 `;
 
 export const InputGroup = styled.div`
   display: flex;
   padding: 0.325rem;
-/*   flex-direction: column; */
   justify-content: center;
   align-items: center;
   gap: 0.625rem;
   width: ${({ $width }) => ($width ? $width : '100%')};
-
   height: ${({ $height }) => ($height ? $height : 'auto ')};
-
 `;
 
 export const Button = styled.button`
@@ -55,15 +56,12 @@ export const Button = styled.button`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-
   opacity: ${({$active}) => { return $active ? 1 : .5 }};
   cursor: pointer;
-
   &:disabled {
     cursor: not-allowed;
   }
 `;
-
 
 Button.propTypes = {
   $outlined: PropTypes.bool
@@ -84,10 +82,8 @@ export const ButtonDel = styled.button`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-
   opacity: ${({$active}) => { return $active ? 1 : .5 }};
   cursor: pointer;
-
   &:disabled {
     cursor: not-allowed;
   }
@@ -96,13 +92,6 @@ export const ButtonDel = styled.button`
 ButtonDel.propTypes = {
   $outlined: PropTypes.bool
 }
-
-export const Action = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  align-self: stretch;
-`;
 
 export const Title = styled.legend`
   display: flex;
@@ -114,17 +103,6 @@ export const Title = styled.legend`
   width: 100%;
 `;
 
-
-export const LabelRecuperarSenha = styled.label`
-  display: flex;
-    justify-content: center;
-    width: 100%;
-    color: #4682B4;
-    font-size: .7rem;
-  
-`;
-
-
 export const LabelSwitch = styled.div`
   display: flex;
   width: 100%;
@@ -134,7 +112,7 @@ export const LabelSwitch = styled.div`
   justify-content: right;
   margin: auto;
   align-items: center;
-`
+`;
 
 export const SwitchBtn = styled.div`
   display: flex;
@@ -144,15 +122,44 @@ export const SwitchBtn = styled.div`
   justify-content: center;
   background-color: none;
   margin: auto;
-`
-
-
+`;
 
 export const MainForm = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: ${({ $width }) => ($width ? $width : '100%')};
+`;
+export const Select = styled.select`
     display: flex;
-
-    justify-content: center;
-    flex-wrap: wrap;
+    padding: 0.3rem;
+    align-items: flex-start;
+    align-self: stretch;
+    border-radius: 0.2rem;
+    border: 1px solid ${({ $color }) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};
     width: ${({ $width }) => ($width ? $width : '100%')};
+    height: ${({ $height }) => ($height ? $height : '100%')};
+    color: gray;
+    background-color: #fff;
+    cursor: text;
+    &:disabled {
+        cursor: not-allowed;
+    };
+    option:not(:first-of-type) {
+        color: black
+    }
+`;
 
-`
+export const SelectLabel = styled.label`
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: ${({ $color }) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};
+`;
+
+export const SelectGroup = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    width: ${({ $width }) => ($width ? $width : '100%')};
+`;

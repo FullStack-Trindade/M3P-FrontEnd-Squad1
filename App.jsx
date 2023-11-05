@@ -10,7 +10,9 @@ import { ProntuarioPage } from "./src/Pages/ProntuarioPacientePage/ProntuarioPac
 import { AppointmentRegisterPage } from "./src/Pages/AppointmentRegister/AppointmentRegisterPage";
 import { MedicationPage } from "./src/Pages/MedicationPage/MedicationPage";
 import { DietRegisterPage } from "./src/Pages/DietRegister/DietRegisterPage";
-import { CadastroExamePage } from "./src/Pages/CadastroExame/CadastroExamePage";
+import { CadastroExamPage } from './src/Pages/CadastroExame/CadastroExamPage';
+import { CadastroExercisePage } from './src/Pages/CadastroExercise/CadastroExercisePage.jsx';
+
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
           <Route index element={<HomePage />} />
           <Route path="/config" element={<ConfigPage />} />
           <Route path="/usuario" element={<CadastroUsuarioPage />} />
+              <Route path='/exame' element={<CadastroExamPage/>}/>
+              <Route path='/exercise' element={<CadastroExercisePage/>}/>
           <Route path="/paciente" element={<PacientePage />} />
           <Route path="/paciente/:id" element={<PacientePage />} />
           <Route path="/listaProntuarios" element={<MedicalRecordsPage />} />
@@ -29,7 +33,6 @@ function App() {
           <Route path="/medicamento" element={<MedicationPage />} />
           <Route path="/medicamento/:id" element={<MedicationPage />} />
           <Route path="/dieta" element={<DietRegisterPage />} />
-          <Route path="/exame" element={<CadastroExamePage />} />
           <Route path="*" element={<p>Essa página não existe</p>} />
         </Route>
       </Routes>
