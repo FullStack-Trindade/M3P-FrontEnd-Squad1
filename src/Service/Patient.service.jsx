@@ -24,14 +24,14 @@ export const PatientService = {
     });
   },
 
-  Get: () => {
-    return fetchUser(`${API_URL}/usuarios`),{
+  Get: (data) => {
+    return fetchUser(`${API_URL}/usuarios`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
-      };
+      });
     },
   
   SearchByCpfEmail: (data) => {
