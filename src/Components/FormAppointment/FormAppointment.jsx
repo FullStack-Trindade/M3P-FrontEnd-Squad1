@@ -73,6 +73,7 @@ export const FormAppointment = ({ patientId }) => {
   }, [appointment])
   
   const inputPatientId = watch('idPatient');
+  
   const patientName = watch('patientName');
   useEffect(() => { onChangePatient(inputPatientId) }, [inputPatientId]);
 
@@ -110,7 +111,7 @@ export const FormAppointment = ({ patientId }) => {
     let filteredHour = filteredDate.filter(appointment => appointment.appointment_hour.includes(dataForm.appointment_hour))
 
     if (filteredHour.length > 0) {
-        messageApi.open({ type: 'error', content: 'Esse paciente já possui consulta cadastrada nesse dia e horário.' })
+        alert('Esse paciente já possui consulta cadastrada nesse dia e horário.');
         filteredPatientAppointments = []
         filteredDate = []
         filteredHour = []
@@ -130,7 +131,7 @@ export const FormAppointment = ({ patientId }) => {
       appointment_reason: dataForm.appointmentReason,
       medication_prescribed: dataForm.medicationPrescribed,
       dosage_precautions: dataForm.dosagePrecautions,
-      status: true
+      status: dataForm.status
     }
 
     appointmentId ? onUpdate(data) : onSave(data);
@@ -142,7 +143,7 @@ export const FormAppointment = ({ patientId }) => {
           switch (response.status) {
             case 200:
               reset();
-              window.location.reload(true);
+              // window.location.reload(true);
               return alert('Sucesso! Consulta editada.');
             case 400:
               reset();
@@ -167,7 +168,7 @@ export const FormAppointment = ({ patientId }) => {
         switch (response.status) {
           case 201:
             reset();
-            window.location.reload(true);
+            // window.location.reload(true);
             return alert('Sucesso! Consulta cadastrada.');
           case 400:
             reset();
@@ -420,6 +421,24 @@ export const FormAppointment = ({ patientId }) => {
               }}
               error={ errors.dosagePrecautions }
             />
+          </Styled.InputGroup>
+
+          <Styled.InputGroup>
+            <Styled.SelectGroup>
+              <Styled.SelectLabel $color={ errors.status && 'danger' } htmlFor='status'>Status do Sistema *</Styled.SelectLabel>
+              <Styled.Select
+                id='status'
+                name='status'
+                form=''
+                defaultValue={ '' }
+                { ...register('status', { required: true }) }
+                $color={ errors.dietType && 'danger' }
+              >
+                <option value={ '' } disabled>Selecione o status do sistema</option>
+                <option value={ true }>ATIVO</option>
+                <option value={ false }>INATIVO</option>
+              </Styled.Select>
+            </Styled.SelectGroup>
           </Styled.InputGroup>
         </Styled.MainForm>
       </Styled.Form>

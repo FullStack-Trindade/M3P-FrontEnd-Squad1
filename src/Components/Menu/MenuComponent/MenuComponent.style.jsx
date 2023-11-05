@@ -2,11 +2,12 @@ import styled from 'styled-components';
 
 export const MenuContainer = styled.div`
   display: flex;
-  height: 130%;
+  height: 140%;
   flex-direction: column;
   align-items: flex-start;
   gap: 0.5rem;
-  background-color: #483D8B;
+  background-color: ${({colors}) => colors.primary};
+  
 
   span.ant.switch-inner {
 
@@ -22,13 +23,13 @@ export const MenuArea = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 0.2rem;
-  background-color: #483D8B; 
-
+  background-color: ${({colors}) => colors.primary}; 
+  margin-top: -2vw;
 `;
 
 export const MenuLogo = styled.img`
   width: 20vw;
-  margin: 0rem auto;
+  margin: 0 auto 0 auto;
 `
 
 
@@ -36,7 +37,7 @@ export const MenuFooter = styled.legend`
   display: flex;
   justify-content: space-around;
   color: white;
-  margin: -15vh auto;
+  margin: 0vh auto;
   width: 13vw;
   
 `
@@ -47,7 +48,7 @@ export const MenuFechado = styled.div`
   height: 115%;
   flex-direction: column;
   align-items: flex-start;
-  background-color: #483D8B;
+  background-color: ${({colors}) => colors.primary};
 `;
 
 export const MenuLogoFechado = styled.img`
@@ -82,18 +83,18 @@ export const LabelSwitch = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
-  background-color: #483D8B;
+  background-color: ${({colors}) => colors.primary};
   font-size: 0.8rem;
   color: white;
   padding-bottom: 1vh;
-  margin-top: -25vh;
+  margin-top: -35vh;
 `
 
 export const SwitchBtn = styled.div`
   display: flex;
   width: 100%;
   justify-content: center;
-  background-color: #483D8B;
+  background-color: ${({colors}) => colors.primary};
   padding-bottom: 4vh;
 `
 
