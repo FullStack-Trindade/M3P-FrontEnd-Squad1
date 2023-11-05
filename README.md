@@ -1,3 +1,5 @@
+<h1 align="center">System Care</h1>
+
 <div align="center">
 
 ![code](https://img.shields.io/badge/Code-JavaScript-F7DF1E.svg)
@@ -99,14 +101,21 @@ Pronto! Faça bom proveito!
     ├───Assets
     ├───Components
     │   ├───AreaEstatísticas
+    │   ├───CardConsulta
+    │   ├───CardDieta
     │   ├───CardEstatistica
     │   ├───CardEstatisticaADM
+    │   ├───CardExame
+    │   ├───CardExercicio
     │   ├───CardMedicalRecord
+    │   ├───CardMedicamento
     │   ├───CardPaciente
     │   ├───CardUser
     │   ├───Form
-    │   │   └───InputComponent
+    │   │   ├───InputComponent
+    │   │   └───SelectComponent
     │   ├───FormAppointment
+    │   ├───FormDiet
     │   ├───FormExame
     │   ├───FormPaciente
     │   │   └───InputComponent
@@ -115,9 +124,11 @@ Pronto! Faça bom proveito!
     │   ├───InputPatientSearchAtHome
     │   ├───InputSearch
     │   ├───InputSearchAppointment
+    │   ├───InputSearchDiet
     │   ├───InputSearchExame
     │   ├───InputSearchMedicalRecord
     │   ├───InputSearchPaciente
+    │   ├───InputSearchProntuario
     │   ├───InputSearchUser
     │   ├───InputUserSearchAtHome
     │   ├───LoginForm
@@ -126,7 +137,8 @@ Pronto! Faça bom proveito!
     │   │   ├───MenuItem
     │   │   └───MenuItemFechado
     │   ├───SelectComponent
-    │   └───ToolBar
+    │   ├───ToolBar
+    │   └───UserAddBtn
     ├───Context
     ├───Layout
     ├───Pages
@@ -134,9 +146,14 @@ Pronto! Faça bom proveito!
     │   ├───CadastroExame
     │   ├───CadastroPaciente
     │   ├───CadastroUsuario
+    │   ├───ConfigPage
+    │   ├───DietRegister
     │   ├───HomePage
+    │   ├───ListaProntuarioPage
     │   ├───LoginPage
-    │   └───MedicalRecords
+    │   ├───MedicalRecords
+    │   └───ProntuarioPacientePage
+    ├───Server
     └───Service
 ```
 
