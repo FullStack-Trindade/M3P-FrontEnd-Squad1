@@ -5,10 +5,12 @@ import dayjs from 'dayjs';
 
 import { HeaderContext } from '../../Context/Header.context';
 import { PatientRecordService } from '../../Service/PatientRecord.service';
+import { CardConsulta } from '../../Components/CardConsulta/CardConsulta';
+import { CardDieta } from '../../Components/CardDieta/CardDieta';
+import { CardExame } from '../../Components/CardExame/CardExame';
+import { CardExercicio } from '../../Components/CardExercicio/CardExercicio';
+import { CardMedicamento } from '../../Components/CardMedicamento/CardMedicamento';
 // import { AuthService } from '../../Service/Auth.service';
-
-/* import CardConsulta from '../../Components/CardConsulta/CardConsulta';
-import CardExame from '../../Components/CardExame/CardExame'; */
 
 export const ProntuarioPage = () => {
   const { pathname } = useLocation();
@@ -78,17 +80,42 @@ export const ProntuarioPage = () => {
                       </Styled.PatientData>
                   </Styled.HeaderProntuario>
 
+              {   patientRecord[0] &&
+
                   <Styled.CorpoProntuario>
                       <Styled.SubTitle><span>1</span>Consulta</Styled.SubTitle>
+
                       <Styled.RenderResultados>
-                          {/* { patientRecord[0]?.appointments.map(appointment => <CardConsulta consulta={appointment} key={appointment.id} />) } */}
+                          { patientRecord[0]?.appointments.map(appointment => <CardConsulta appointment={appointment} key={appointment.id} />) }
                       </Styled.RenderResultados>
 
-                      <Styled.SubTitle><span>2</span>Exame</Styled.SubTitle>
+                      <Styled.SubTitle><span>2</span>Dieta</Styled.SubTitle>
+                      
                       <Styled.RenderResultados>
-                          {/* { patientRecord[0].exams.map(exam => <CardExame exame={exam} key={exam.id} />) } */}
+                          { patientRecord[0]?.diets.map(diet => <CardDieta diet={diet} key={diet.id} />) }
                       </Styled.RenderResultados>
+
+                      <Styled.SubTitle><span>3</span>Exame</Styled.SubTitle>
+
+                      <Styled.RenderResultados>
+                          { patientRecord[0]?.exams.map(exam => <CardExame exam={exam} key={exam.id} />) }
+                      </Styled.RenderResultados>
+                      
+                      {/* <Styled.SubTitle><span>4</span>Exercício</Styled.SubTitle> 
+
+                      <Styled.RenderResultados>
+                          { patientRecord[0]?.exercises.map(exercise => <CardExercicio exercise={exercise} key={exercise.id} />) }
+                      </Styled.RenderResultados> */}
+                      
+                      <Styled.SubTitle><span>5</span>Medicação</Styled.SubTitle>
+
+                      <Styled.RenderResultados>
+                          { patientRecord[0]?.medications.map(medication => <CardMedicamento medication={medication} key={medication.id} />) }
+                      </Styled.RenderResultados>
+
                   </Styled.CorpoProntuario>
+
+              }
               </Styled.Prontuario>
           </>
       )
