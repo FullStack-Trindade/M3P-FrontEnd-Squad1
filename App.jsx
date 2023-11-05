@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import { LoginPage } from "./src/Pages/LoginPage/LoginPage";
+import { PasswordPage } from "./src/Pages/Password/PasswordPage.jsx";
 import { Layout } from "./src/Layout/Layout";
 import { HomePage } from "./src/Pages/HomePage/HomePage";
 import { ConfigPage } from "./src/Pages/ConfigPage/ConfigPage";
@@ -19,6 +21,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/resetarSenha" element={<PasswordPage />} />
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />} />
           <Route path="/config" element={<ConfigPage />} />
