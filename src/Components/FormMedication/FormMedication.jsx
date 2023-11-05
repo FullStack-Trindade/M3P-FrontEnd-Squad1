@@ -97,7 +97,7 @@ export const FormMedication = ({ id }) => {
 
   const navigate = useNavigate();
 
-  buscarDadosMedicamentoCadastradoconst [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
+  const [isSubmitSuccessful, setIsSubmitSuccessful] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [idUser, setIdUser] = useState(false);
 
@@ -172,6 +172,7 @@ export const FormMedication = ({ id }) => {
           alert(
             "Dados do medicamento não podem ser carregados. Tente novamente mais tarde."
           );
+          navigate("/");
         }
       })
       .catch((error) => {
@@ -188,21 +189,9 @@ export const FormMedication = ({ id }) => {
     console.log(medicationData);
     setIsLoading(true);
     if (id) {
-      const updatedMedicationDb = {
-        id_patient: medicationData.id_patient,
-        id_nurse: medicationData.id_nurse,
-        nameMedication: medicationData.nameMedication,
-        dateMedication: medicationData.dateMedication,
-        hourMedication: medicationData.hourMedication,
-        typeMedication: medicationData.typeMedication,
-        amountMedication: medicationData.amountMedication,
-        unitMedication: medicationData.unitMedication,
-        observationMedication: medicationData.observationMedication,
-        status: medicationData.status,
-      };
-      updateMedication(updatedMedicationDb);
+       updateMedication(medicationData);
     } else {
-      alert("criar medicamento")
+      createPaciente(medicationData);
     }
     setIsLoading(false);
   };
@@ -221,8 +210,10 @@ export const FormMedication = ({ id }) => {
   };
 
   const updateMedication = async (medicationData) => {
+    console.log(medicationData);
+    console.log(id);
     try {
-      await MedicationService.Update({id}, medicationData).then((response) => {
+      await MedicationService.Update(id, medicationData).then((response) => {
         console.log(response);
         setIsSubmitSuccessful;
         alert("Medicação atualizada com sucesso");
