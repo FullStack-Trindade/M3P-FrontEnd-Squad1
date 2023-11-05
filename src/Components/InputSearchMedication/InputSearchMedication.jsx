@@ -70,7 +70,7 @@ export const InputSearchMedication = ({id}) => {
                 </Styled.SearchInput>
 
                 <Styled.PatientArea>
-                <FormMedication id ={id}/>
+                {id}<FormMedication id ={id}/>
                     {/* (patient.length > 0 || medicationId) && <FormMedication patientId={ patient[0]?.id } />*/ }
                 </Styled.PatientArea>
 

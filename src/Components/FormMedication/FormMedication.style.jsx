@@ -23,7 +23,10 @@ export const Header = styled.div`
   gap: 0.5rem;
   align-self: stretch;
 `;
-
+export const SearchInput = styled.div`
+    display: flex;
+    margin-top: 1vw;
+`;
 export const Paragraph = styled.p`
   font-size: 0.75rem;
   font-weight: 500;
