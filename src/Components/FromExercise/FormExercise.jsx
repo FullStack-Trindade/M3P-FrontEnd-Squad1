@@ -165,7 +165,6 @@ export const FormExercise = ({ patientId }) => {
       descritionExercise: dataForm.descritionExercise,
       statusExercise: dataForm.statusExercise,
     };
-    console.log(data);
     exerciseId ? Update(data) : Save(data);
   };
 
@@ -192,9 +191,10 @@ export const FormExercise = ({ patientId }) => {
   };
 
   const Save = async (submitData) => {
-console.log(submitData);
+    
     await ExerciseService.Create(submitData)
       .then((response) => {
+        console.log(response.json())
         switch (response.status) {
           case 201:
             reset();
@@ -336,6 +336,9 @@ console.log(submitData);
               }}
               error={errors.nurseName}
             />
+          </Styled.InputGroup>
+
+          <Styled.InputGroup>
             <InputComponent
               $width={"350%"}
               id="seriesName"
@@ -352,6 +355,22 @@ console.log(submitData);
                 }),
               }}
               error={errors.seriesName}
+            />
+
+            <InputComponent
+              $width={"350%"}
+              id="amountWeek"
+              type="number"
+              placeholder="Quantidade por semana"
+              label="Quantidade por semana"
+              name="amountWeek"
+              disabled={exerciseId && isEditActive === false}
+              register={{
+                ...register("amountWeek", {
+                  required: true
+                }),
+              }}
+              error={errors.amountWeek}
             />
           </Styled.InputGroup>
 
