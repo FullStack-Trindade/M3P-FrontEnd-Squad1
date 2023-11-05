@@ -73,6 +73,7 @@ export const FormAppointment = ({ patientId }) => {
   }, [appointment])
   
   const inputPatientId = watch('idPatient');
+  
   const patientName = watch('patientName');
   useEffect(() => { onChangePatient(inputPatientId) }, [inputPatientId]);
 
@@ -142,7 +143,7 @@ export const FormAppointment = ({ patientId }) => {
           switch (response.status) {
             case 200:
               reset();
-              window.location.reload(true);
+              // window.location.reload(true);
               return alert('Sucesso! Consulta editada.');
             case 400:
               reset();
@@ -167,7 +168,7 @@ export const FormAppointment = ({ patientId }) => {
         switch (response.status) {
           case 201:
             reset();
-            window.location.reload(true);
+            // window.location.reload(true);
             return alert('Sucesso! Consulta cadastrada.');
           case 400:
             reset();

@@ -8,6 +8,7 @@ import {
   FaPlus,
   FaTasks,
   FaLaptopMedical,
+  FaPills,
 } from "react-icons/fa";
 import { ImDroplet } from "react-icons/im";
 import { MdSoupKitchen } from 'react-icons/md';

@@ -1,6 +1,7 @@
 import * as Styled from './LoginPage.style';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import { Spin } from 'antd';
 
 import { AuthContext } from '../../Context/auth.context';
 import { FormLoginComponent } from "../../Components/LoginForm/LoginFormComponent";
@@ -26,9 +27,25 @@ export const LoginPage = () => {
         setTokenUser(tokenExists[0]?.token_user);
     }
 
+    const [spinning, setSpinning] = useState(false);
+    const showLoader = () => {
+        setSpinning(true);
+
+        setTimeout(() => {
+            setSpinning(false);
+        }, 5000);
+    };
+
     const render = () => {
         return (
             <>
+                <Spin 
+                    tip='Carregando...' 
+                    size='large' 
+                    spinning={ spinning } 
+                    fullscreen='true' 
+                    style={{ maxHeight: '100%' }}
+                >
                 <Styled.ContainerLogin>
         
                     <Styled.ImageLogin src={ imagemLogin } />
@@ -45,10 +62,11 @@ export const LoginPage = () => {
                     </Styled.DivCriarConta>
         
                     <Styled.Login>
-                        <FormLoginComponent/>
+                        <FormLoginComponent showLoader={ showLoader } />
                     </Styled.Login>
         
                 </Styled.ContainerLogin>
+                </Spin>
             </>
         )
     }
