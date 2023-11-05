@@ -191,6 +191,7 @@ export const FormMedication = ({ id }) => {
     if (id) {
        updateMedication(medicationData);
     } else {
+      medicationData.status = "true";
       createPaciente(medicationData);
     }
     setIsLoading(false);
@@ -200,7 +201,7 @@ export const FormMedication = ({ id }) => {
     try {
       await MedicationService.Update(id, medicationData).then((response) => {
         setIsSubmitSuccessful;
-        alert("Medicação atualizada com sucesso");
+        alert("Medicação salva com sucesso");
         navigate("/");
       });
     } catch (error) {
@@ -361,7 +362,7 @@ export const FormMedication = ({ id }) => {
               placeholder="Nome do paciente"
               label="Nome do Paciente"
               name="patientName"
-              disabled={specialFormInputsDisabled}
+              disabled={true}
               register={{
                 ...register("patientName", {
                   required: false,
@@ -393,7 +394,7 @@ export const FormMedication = ({ id }) => {
               placeholder="Nome do enfermeiro(a)"
               label="Nome do enfermeiro(a)"
               name="nurseName"
-              disabled={specialFormInputsDisabled}
+              disabled={true}
               register={{
                 ...register("nurseName", {
                   required: false,
