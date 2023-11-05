@@ -17,6 +17,7 @@ const CardPaciente = ({ paciente }) => {
             <Styled.Dados>{paciente.convenio}</Styled.Dados>
           </Styled.DadosPaciente>
           
+          <Styled.DadosBtn To='./pacientes:id'>Dados</Styled.DadosBtn>
         </Styled.RenderCardPaciente>
       </Styled.CardPacienteContainer>
     </>

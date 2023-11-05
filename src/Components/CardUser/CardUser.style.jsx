@@ -12,7 +12,7 @@ export const CardUserContainer = styled.div`
 
 export const RenderCardUser = styled.div`
     width: 12vw;
-    height: 12vw;
+    height: 14vw;
     background-image: linear-gradient(to top, #fff 37%, #fff 37%, #fff 82.5%, #92a8d1 70%, #92a8d1 20%, #92a8d1 20%, #92a8d1 );
     border-radius: 5px;
     box-shadow: 3px 3px 3px gray;
@@ -39,6 +39,8 @@ export const IconCardUser = styled.div`
 export const DadosUsuario= styled.div`
 
 `
+
+
 
 
 export const Dados = styled.p`

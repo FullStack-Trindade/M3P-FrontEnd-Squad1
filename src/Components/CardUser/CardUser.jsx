@@ -14,6 +14,8 @@ const CardUser = ({ user }) => {
             <Styled.Dados>{user.gender}</Styled.Dados>
             <Styled.Dados>{user.cpf}</Styled.Dados>
             <Styled.Dados>{user.phone}</Styled.Dados>
+
+    
           </Styled.DadosUsuario>
         </Styled.RenderCardUser>
       </Styled.CardUserContainer>
