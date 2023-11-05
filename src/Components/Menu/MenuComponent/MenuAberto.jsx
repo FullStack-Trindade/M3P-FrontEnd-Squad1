@@ -1,48 +1,53 @@
-import * as Styled from './MenuComponent.style';
-import MenuItem from '../MenuItem/MenuItem';
-
-import React from 'react'
-import { 
-  FaHome, 
+import * as Styled from "./MenuComponent.style";
+import MenuItem from "../MenuItem/MenuItem";
+import { ThemeContext } from '../../../Context/Theme.context.jsx'
+import { useContext} from 'react';
+import {
+  FaHome,
   FaSignInAlt,
   FaPlus,
   FaTasks,
-  FaLaptopMedical
+  FaLaptopMedical,
+} from "react-icons/fa";
 
-} from 'react-icons/fa';
-
-import { ImDroplet } from 'react-icons/im';
+import { ImDroplet } from "react-icons/im";
 
 const MenuAberto = () => {
 
-    return (
-        <>
+  const { theme } = useContext(ThemeContext);
 
-        
-        <Styled.MenuContainer >
-              <Styled.MenuArea>
-            <Styled.MenuLogo src={'../../../../public/LogoGenerica.jpg'} alt='Logo LAB Medical'/>
-          
-            <Styled.MenuSetor>Geral</Styled.MenuSetor>
-            <MenuItem Icon={FaHome} Text="INICIO" To='/' />
-            <MenuItem Icon={FaSignInAlt} Text="SAIR" To='/login' />
+  return (
 
-            <Styled.MenuSetor>Pacientes</Styled.MenuSetor>
-            <MenuItem Icon={FaPlus} Text="CADASTRAR" To='/paciente' />
-            <MenuItem Icon={FaTasks} Text="LISTAR PRONTUÁRIO" To='/listaProntuarios'  />
+      <Styled.MenuContainer colors={theme.cores}>
+        <Styled.MenuArea colors={theme.cores}>
+          <Styled.MenuLogo
+            src={"../../../public/images/LogoGenerica.png"}
+            alt="Logo LAB Medical"
+          />
 
-            <Styled.MenuSetor>Exames</Styled.MenuSetor>
-            <MenuItem Icon={FaLaptopMedical} Text="CADASTRAR CONSULTA" To='/consulta' />
-            <MenuItem Icon={ImDroplet} Text="CADASTRAR EXAME" To='/exame' />
+          <Styled.MenuSetor>Geral</Styled.MenuSetor>
+          <MenuItem Icon={FaHome} Text="INICIO" To="/" />
+          <MenuItem Icon={FaSignInAlt} Text="SAIR" To="/login" />
+
+          <Styled.MenuSetor>Pacientes</Styled.MenuSetor>
+          <MenuItem Icon={FaPlus} Text="CADASTRAR PACIENTE" To="/paciente" />
+          <MenuItem
+            Icon={FaTasks}
+            Text="LISTAR PRONTUÁRIO"
+            To="/listaProntuarios"
+          />
+
+          <Styled.MenuSetor>Exames</Styled.MenuSetor>
+          <MenuItem
+            Icon={FaLaptopMedical}
+            Text="CADASTRAR CONSULTA"
+            To="/consulta"
+          />
+          <MenuItem Icon={ImDroplet} Text="CADASTRAR EXAME" To="/exame" />
         </Styled.MenuArea>
+      </Styled.MenuContainer>
+      
+  );
+};
 
-
-                                      
-              
-            
-         </Styled.MenuContainer>
-        </>
-    )
-  }
-  
-  export default MenuAberto
+export default MenuAberto;

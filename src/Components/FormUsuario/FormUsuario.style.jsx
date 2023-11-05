@@ -134,6 +134,7 @@ export const LabelSwitch = styled.div`
   justify-content: right;
   margin: auto;
   align-items: center;
+  
 `
 
 export const SwitchBtn = styled.div`

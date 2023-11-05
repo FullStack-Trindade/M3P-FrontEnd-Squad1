@@ -1,20 +1,11 @@
 import styled from 'styled-components';
 
-export const CardsEstatisticas = styled.div`
-    width: 70vw;
-    height: 30vw;
-    box-shadow: 5px 5px 10px gray;
-    border-radius: 5px;
-    margin-top: 1vw;
-
-
-`
 export const ContainerCardEstatisticas = styled.div`
     display: flex;
-    justify-content: center;
-    flex-direction: column;
-    width: 20vw;
-    height: 10vw;
+    justify-content: space-around;
+    flex-direction: row;
+    width: 30vw;
+    height: 5vw;
     box-shadow: 5px 5px 10px gray;
     border-radius: 5px;
     margin-top: 1vw;
@@ -27,17 +18,14 @@ export const IconCard = styled.img`
     height: 2vw;
     box-shadow: 5px 5px 10px gray;
     border-radius: 5px;
-    margin-top: 1vw;
-
-
 `
 
 export const HeaderCard = styled.h1`
         display: flex;
         justify-content: center;
-        align-items: top;
-        width: 20vw;
-        font-size: 250%;
+        align-items: center;
+        width: 10vw;
+        font-size: 150%;
         color: black;
 
         
@@ -66,11 +54,10 @@ export const HeaderCard = styled.h1`
 export const HeaderCard2 = styled.h3`
         display: flex;
         justify-content: center;
-        align-items: top;
-        width: 20vw;
-        size: 150%;
+        align-items: center;
+        width: 10vw;
+        height: auto;
+        font-size: 80%;
         color: black;
-        margin-top: 2vw;
-        
 
 `

@@ -1,6 +1,6 @@
 import * as Styled from './CardEstatisticaADM.style';
 
-import  LogoTeste  from '../../../public/images/LogoGenerica.jpg'
+import  LogoTeste  from '../../../public/images/LogoGenerica.png'
 
 function CardEstatisticaADM ({dataCardADM})  {
 

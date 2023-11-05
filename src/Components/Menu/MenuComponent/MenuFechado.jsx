@@ -1,5 +1,6 @@
 import * as Styled from './MenuComponent.style';
-import React from 'react'
+import { ThemeContext } from '../../../Context/Theme.context.jsx'
+import { useContext} from 'react';
 import MenuItemFechado from '../MenuItemFechado/MenuItemFechado';
 import { 
 
@@ -8,9 +9,7 @@ import {
     FaPlus,
     FaTasks,
     FaLaptopMedical
-    
-
-  } from 'react-icons/fa';
+} from 'react-icons/fa';
 
   import { ImDroplet } from 'react-icons/im';
 
@@ -18,13 +17,14 @@ import {
 
 const MenuFechado = () => {
    
+    const { theme } = useContext(ThemeContext);
 
     return (
-        <>
-            <Styled.MenuFechado>
+        
+            <Styled.MenuFechado colors={theme.cores}>
 
 
-            <Styled.MenuLogoFechado src={'../../../../public/images/LABMedical_Logo.png'} />
+            <Styled.MenuLogoFechado src={'../../../public/images/LogoGenerica.png'} />
 
             <MenuItemFechado Icon={FaHome}  To='/' />
             <MenuItemFechado Icon={FaSignInAlt}  To='/login' />
@@ -40,7 +40,7 @@ const MenuFechado = () => {
             </Styled.MenuFechado>
 
             
-        </>
+        
     )
 }
 

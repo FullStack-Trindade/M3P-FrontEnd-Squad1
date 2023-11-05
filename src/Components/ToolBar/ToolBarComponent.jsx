@@ -1,27 +1,30 @@
-import * as Styled from './TollBarComponent.style';
-import React, { useContext } from 'react';
+import * as Styled from './ToolBarComponent.style';
+import { useContext } from 'react';
+
+import { ThemeContext } from '../../Context/Theme.context.jsx'
+
+
 import { HeaderContext } from '../../Context/Header.context';
-import { AuthContext } from '../../Context/auth.context';
-
-
+/* import { AuthContext } from '../../Context/auth.context';
+ */
 function NavBarHeader() {
-    const { data } = useContext(HeaderContext)
-
-    const { auth } = useContext(AuthContext)
+    const { data } = useContext(HeaderContext);
+    const userName = JSON.parse(localStorage.getItem('name'));
+    const { theme } = useContext(ThemeContext);
 
   return (
-    <Styled.Container>
-      <Styled.TxtHeader id='titulo'>
+    <Styled.Container colors={theme.cores}>
+      <Styled.TxtHeader colors={theme.cores} id='titulo'>
         {data.titulo}
       </Styled.TxtHeader>
 
       <Styled.UserHeader>
         <Styled.TxtUser>
-        {  auth.user.email }
+          { userName }
         </Styled.TxtUser>
         <img
           alt="Imagem do usuário"
-          src="../../../public/images/LABMedical_Logo.png"
+          src="../../../public/images/LogoGenerica.png"
         />{' '}
       </Styled.UserHeader>
     </Styled.Container>

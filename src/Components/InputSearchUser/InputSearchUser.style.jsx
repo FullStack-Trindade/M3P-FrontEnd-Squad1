@@ -6,6 +6,7 @@ export const InputContainer = styled.div`
     height: 7vw;
     border-radius: 5px;
     margin: 0 auto;
+    
 
 
     .container-faq {
@@ -14,7 +15,7 @@ export const InputContainer = styled.div`
     margin: 0 auto 2vw !important;
 }
 
-h2 {
+h4 {
     display: flex;
     color: gray;
 }
