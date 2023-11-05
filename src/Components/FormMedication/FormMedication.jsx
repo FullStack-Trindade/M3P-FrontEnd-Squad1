@@ -115,9 +115,10 @@ export const FormMedication = ({ id, idPatient }) => {
       buscarDadosMedicamentoCadastrado(id);
       setFormMode("read");
     } else {
-      setValue("id_patient", idPatient);
       setFormMode("register");
-    }
+      setValue("id_patient", idPatient);
+      onChangePatient (idPatient);
+                }
   }, [id , idPatient]);
 
   useEffect(() => {
@@ -258,23 +259,27 @@ export const FormMedication = ({ id, idPatient }) => {
   const inputPatientId = watch("id_patient");
 
   const patientName = watch("patientName");
-  useEffect(() => {
+  
+   useEffect(() => {
     onChangePatient(inputPatientId);
-  }, [inputPatientId, idPatient]);
-
+  }, [inputPatientId, idPatient, formMode]);
+  
   const onChangePatient = (value) => {
     const id_patient = value;
-
+  
     if (id_patient > 0) {
-      const dataPatient = patientsList.filter((patient) =>
+      const dataPatient = patientsList.find((patient) =>
         String(patient.id).includes(id_patient)
       );
-      const dataUser = usersList.filter((user) =>
-        String(user.id).includes(String(dataPatient[0]?.idUser))
-      );
-      setValue("patientName", dataUser[0]?.name);
+      if (dataPatient) {
+        const dataUser = usersList.find((user) =>
+          String(user.id).includes(String(dataPatient.idUser))
+        );
+        setValue("patientName", dataUser.name);
+      }
     }
   };
+  
 
   const inputNurseId = watch("id_nurse");
   useEffect(() => {
@@ -298,7 +303,7 @@ export const FormMedication = ({ id, idPatient }) => {
       <Styled.Form
         onSubmit={handleSubmit(submitForm)}>
         <Styled.Header>
-          <Styled.Title>Identificação </Styled.Title>
+          <Styled.Title>Identificação {patientName} </Styled.Title>
 
           <Styled.LabelSwitch>Editar</Styled.LabelSwitch>
 
