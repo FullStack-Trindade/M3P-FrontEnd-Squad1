@@ -1,5 +1,6 @@
+import * as Styled from "./MenuComponent.style";
 import { ThemeContext } from '../../../Context/Theme.context.jsx';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import MenuItemFechado from '../MenuItemFechado/MenuItemFechado';
 import { FaHome, FaSignInAlt, FaPlus, FaTasks, FaLaptopMedical } from 'react-icons/fa';
 import { ImDroplet } from 'react-icons/im';
