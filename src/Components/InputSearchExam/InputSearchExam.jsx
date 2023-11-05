@@ -18,7 +18,7 @@ export const InputSearchExam = () => {
       const [patientsList, setPatientsList] = useState([]);
 
       const fetchPatientsList = async () => {
-        PatientService.GetAll().then((result) => setPatientsList(result));
+        PatientService.Get().then((result) => setPatientsList(result));
       };
     
       const [usersList, setUsersList] = useState([]);
