@@ -33,15 +33,22 @@ export const PatientService = {
 
     return fetchPatient();
 },
-  
-  SearchByCpfEmail: (data) => {
-    return fetchUser(`${API_URL}/usuarios/search`, {
-      method: "POST",
+Show: (id) => {
+  return fetchUser(`${API_URL}/${id}`, {
+method: "GET",
+headers: {
+  "Content-Type": "application/json",
+},
+    });
+},
+
+  SearchByUserId: (id) => {
+        return fetchUser(`${API_URL}/usuario/${id}`, {
+      method: "GET",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
-    });
+          });
   },
 
   Update: (id, data) => {

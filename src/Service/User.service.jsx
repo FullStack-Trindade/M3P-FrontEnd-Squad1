@@ -36,6 +36,8 @@ export const UserService = {
       body: JSON.stringify(data),
     });
   },
+
+  
   Update: (id, data) => {
     return fetchUser(`${API_URL}${id}`, {
       method: "PUT",
