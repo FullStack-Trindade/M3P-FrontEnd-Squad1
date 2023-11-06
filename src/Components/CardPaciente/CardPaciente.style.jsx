@@ -17,6 +17,12 @@ export const RenderCardPaciente = styled.div`
     box-shadow: 3px 3px 3px gray;
     justify-content: space-around;
 `
+export const DadosBtn= styled.button`
+    display: flex;
+    justify-content: center;
+    margin: 1.2vh auto 0 auto;
+    font-size: .7rem;
+`
 
 export const IconCardPaciente = styled.div`
     display: flex;
@@ -37,13 +43,6 @@ export const IconCardPaciente = styled.div`
 export const DadosPaciente = styled.div`
 
 `
-export const DadosBtn= styled.button`
-    display: flex;
-    justify-content: center;
-    margin: 1.2vh auto 0 auto;
-    font-size: .7rem;
-`
-
 export const Dados = styled.p`
     display: flex;
     margin: .5vw;

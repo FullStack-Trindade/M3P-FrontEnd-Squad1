@@ -68,7 +68,7 @@ export const FormPaciente = ({ id }) => {
       label: "UNIÃO ESTÁVEL)",
     },
   ];
-
+console.log(id)
   const {
     register,
     handleSubmit,

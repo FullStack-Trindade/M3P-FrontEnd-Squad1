@@ -9,7 +9,7 @@ import { useParams } from "react-router";
 export const PacientePage = () => {
   const { setData } = useContext(HeaderContext);
   const {id}= useParams();
-  
+  console.log(id)
   useEffect(() => { 
     setData({
       titulo: "CADASTRO DE PACIENTES",
