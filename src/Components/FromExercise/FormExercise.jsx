@@ -194,7 +194,7 @@ export const FormExercise = ({ patientId }) => {
     
     await ExerciseService.Create(submitData)
       .then((response) => {
-        console.log(response.json())
+       
         switch (response.status) {
           case 201:
             reset();

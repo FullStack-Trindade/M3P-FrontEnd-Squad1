@@ -199,8 +199,7 @@ export const FormExam = ({ patientId }) => {
 
   const Delete = async () => {
     const response = await ExamService.Delete(examId);
-    console.log(response);
-
+  
     switch (response.status) {
       case 202:
         reset();

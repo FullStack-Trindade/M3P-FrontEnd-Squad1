@@ -17,11 +17,9 @@ const navigate = useNavigate();
   
   const setPatient = async () =>{
     PatientService.SearchByUserId(user.id).then((response)=>{
-      console.log(response)
-      setPatientRender (response);
+           setPatientRender (response);
     })
   }
-console.log(patientRender)
  
   return (
     <>

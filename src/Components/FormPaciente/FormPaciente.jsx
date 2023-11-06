@@ -68,7 +68,7 @@ export const FormPaciente = ({ id }) => {
       label: "UNIÃO ESTÁVEL)",
     },
   ];
-console.log(id)
+
   const {
     register,
     handleSubmit,
@@ -208,9 +208,7 @@ console.log(id)
     setIsLoading(true);
 
     if (id) {
-      //Gambiarra para arrumar o problema do valitynumber
-      console.log(pacienteData.insuranceVality);
-
+      
          const updatedPacientDb = {
         birth: pacienteData.birth,
         idUser: idUser,
@@ -303,7 +301,7 @@ console.log(id)
               }
             });
           }
-          console.log(response);
+          
         });
         return;
       }

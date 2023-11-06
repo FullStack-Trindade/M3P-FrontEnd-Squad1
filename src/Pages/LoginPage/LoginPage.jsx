@@ -19,8 +19,7 @@ export const LoginPage = () => {
 
     const fetchAuth = async() => {
         const authToken = await AuthService.Get();
-        console.log(authToken)
-        const tokenExists = authToken.filter(auth => auth.token_user === localToken);
+               const tokenExists = authToken.filter(auth => auth.token_user === localToken);
 
         if (tokenExists.length === 0) { return }
         

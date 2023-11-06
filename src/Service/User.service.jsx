@@ -4,8 +4,7 @@ const fetchUser = async (url, options) => {
   try {
     const response = await fetch(url, options);
     const data = await response.json();
-    console.log(data);
-    return data;
+        return data;
   } catch (error) {
     console.error("Erro na chamada da API:", error);
     throw error;
@@ -14,8 +13,7 @@ const fetchUser = async (url, options) => {
 
 export const UserService = {
   Create: (data) => {
-    console.log(data)
-    return fetchUser(`${API_URL}`, {
+        return fetchUser(`${API_URL}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

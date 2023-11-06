@@ -188,7 +188,7 @@ export const FormMedication = ({ id, idPatient }) => {
       });
   };
   const submitForm = async (medicationData) => {
-    console.log(medicationData);
+    
     setIsLoading(true);
     if (id) {
        updateMedication(medicationData);
@@ -213,12 +213,10 @@ export const FormMedication = ({ id, idPatient }) => {
   };
 
   const updateMedication = async (medicationData) => {
-    console.log(medicationData);
-    console.log(id);
+    
     try {
       await MedicationService.Update(id, medicationData).then((response) => {
-        console.log(response);
-        setIsSubmitSuccessful;
+               setIsSubmitSuccessful;
         alert("Medicação atualizada com sucesso");
         navigate("/");
       });
