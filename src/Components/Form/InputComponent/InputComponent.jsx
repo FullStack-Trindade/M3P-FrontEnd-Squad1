@@ -4,22 +4,7 @@ import { MdVisibility, MdVisibilityOff } from 'react-icons/md';
 
 import * as Styled from './Input.style';
 
-export const InputComponent = ({ 
-  $width,
-  $height,
-  error,
-  id,
-  label,
-  type,
-  minLength,
-  placeholder,
-  min,
-  disabled,
-  register,
-  onChange, 
-  value
-}) => {
-
+export const InputComponent = ({ label, type, id, placeholder, register, error, $width, $height, minLength }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleShowPassword = () => {
@@ -42,13 +27,8 @@ export const InputComponent = ({
             minLength={ minLength }
             id={ id } 
             placeholder={ placeholder } 
-            min={ min }
-            value={value}
-            disabled={ disabled }
-            onChange={ onChange }
-            { ...register }
-          />
-
+            {...register}/>
+          
           { type === 'password' && 
             <Styled.Icon 
               $color={ error && 'danger' } 
@@ -66,17 +46,14 @@ export const InputComponent = ({
       }
 
       { type === 'textarea' &&
-
-        <Styled.TextArea 
-          $height={ $height }
-          $color={ error && 'danger' } 
-          id={ id } 
-          minLength={''}
-          placeholder={ placeholder } 
-          disabled={ disabled }
-          { ...register }
-        />
-      }
+            <Styled.TextArea 
+            $height={$height}
+            $color={error && 'danger'} 
+            id={ id } 
+            minLength={''}
+            placeholder={ placeholder } 
+            {...register}/>
+          }
     </Styled.InputGroup>
   )
 }
@@ -93,7 +70,5 @@ InputComponent.propTypes = {
   placeholder: PropTypes.string,
   min: PropTypes.number,
   disabled: PropTypes.bool,
-  register: PropTypes.any,
-  onChange: PropTypes.func,
-  value:PropTypes.string,
+  register: PropTypes.any
 }

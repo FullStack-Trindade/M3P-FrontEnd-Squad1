@@ -1,5 +1,5 @@
 import * as Styled from './LoginPage.style';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import { AuthContext } from '../../Context/auth.context';
@@ -19,7 +19,7 @@ export const LoginPage = () => {
 
     const fetchAuth = async() => {
         const authToken = await AuthService.Get();
-        const tokenExists = authToken.filter(auth => auth.token_user === localToken);
+               const tokenExists = authToken.filter(auth => auth.token_user === localToken);
 
         if (tokenExists.length === 0) { return }
         
@@ -45,7 +45,7 @@ export const LoginPage = () => {
                     </Styled.DivCriarConta>
         
                     <Styled.Login>
-                        <FormLoginComponent/>
+                        <FormLoginComponent />
                     </Styled.Login>
         
                 </Styled.ContainerLogin>

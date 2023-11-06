@@ -1,17 +1,17 @@
-import * as Styled from './CadastroExame.style';
+import * as Styled from './CadastroExercise.style';
 import { useContext, useEffect } from 'react';
 import { HeaderContext } from '../../Context/Header.context';
-import { InputSearchExame } from '../../Components/InputSearchExame/InputSearchExame';
+import { InputSearchExercise } from '../../Components/InputSearchExercise/InputSearchExercise';
 
 
 
-export const CadastroExamePage = () => {
+export const CadastroExercisePage = () => {
 
 
   const { setData } = useContext(HeaderContext);
   useEffect(() => {
     setData({
-      titulo: 'CADASTRO DE EXAME',
+      titulo: 'CADASTRO DE EXERCICIO',
     });
 
   }, []);
@@ -22,7 +22,7 @@ export const CadastroExamePage = () => {
       <>
         <Styled.AreaCadastro>
           <Styled.Title>
-            <InputSearchExame />
+            <InputSearchExercise />
           </Styled.Title>
         </Styled.AreaCadastro>
       </>

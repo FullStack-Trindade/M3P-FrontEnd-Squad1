@@ -3,24 +3,19 @@ const API_URL = `http://localhost:${import.meta.env.VITE_SERVER_PORT}/api`
 const fetchPatient = async (url, options) => {
   try {
     const response = await fetch(url, options);
-console.log(response);
-    if (!response.ok) {
-      throw new Error(
-        `Erro na requisição: ${response.status} - ${errorMessage.message}`
-      );
-    }
-
     const data = await response.json();
+    
     return data;
   } catch (error) {
+    console.log(response.json());
     console.error(`Erro na chamada da API:`, error);
     throw error;
   }
 };
 
-export const PacienteService = {
+export const MedicationService = {
   Create: (data) => {
-    return fetchPatient(`${API_URL}/pacientes`, {
+    return fetchPatient(`${API_URL}/medicamentos`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -29,23 +24,17 @@ export const PacienteService = {
     });
   },
   Get: () => {
-    return fetchPatient(`${API_URL}/pacientes`);
+    return fetchPatient(`${API_URL}/medicamentos`);
   },
-  Show: (id) => {
-    return fetchPatient(`${API_URL}/pacientes/${id}`);
-  },
-  SearchByUserId: (id) => {
-    return fetchPatient(`${API_URL}/pacientes/usuario/${id}`);
-  },
-  Update: (id, data) => {
-    return fetchPatient(`${API_URL}/pacientes/${id}`, {
+   Update: (id, data) => {
+    return fetchPatient(`${API_URL}/medicamentos/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
     });
   },
   Delete: (id) => {
-    return fetchPatient(`${API_URL}/pacientes/${id}`, {
+    return fetchPatient(`${API_URL}/medicamentos/${id}`, {
       method: "DELETE",
     });
   },

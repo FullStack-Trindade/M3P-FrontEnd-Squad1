@@ -1,108 +1,44 @@
 import styled from 'styled-components';
-import PropTypes from 'prop-types'
-
-/* export const InputGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: ${({ $width }) => ($width ? $width : '100%')};
-`; */
-
-export const Label = styled.label`
-  display: flex;
-  align-items: flex-start;
-  gap: 0.625rem;
-  align-self: stretch;
-  color: ${({$color}) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};
-  font-size: 0.75rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  width: 80%;
-
-`;
-
-export const InputContainer = styled.div`
-  display: flex;
-  justify-content: baseline;
-  justify-items: baseline;
-  flex-wrap: wrap;
-  gap: 2vw;
-  width: 100%;
- 
-`
-export const Input = styled.input`
-  display: flex;
-  padding: 0.3rem;
-  
-  align-items: flex-start;
-  align-self: stretch;
-  border-radius: 0.2rem;
-  border: 1px solid ${({$color}) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};
-  width: ${({ $width }) => ($width ? $width : '100%')};
-  height: ${({ $height }) => ($height ? $height : '100%')};
-  
-  `;
-
-export const TextArea = styled.textarea`
-  display: flex;
-  padding: 0.5rem;
-  align-items: flex-start;
-  align-self: stretch;
-  border-radius: 0.3125rem;
-  border: 1px solid ${({$color}) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};;
-  height: ${({ $height }) => ($height ? $height : '100%')};
-
-`;
-
-
-export const Icon = styled.button`
-  position: absolute;
-  cursor: pointer;
-  background: transparent;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: .5rem 13.3rem;
-  color: ${({$color}) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};
-`
+import PropTypes from 'prop-types';
 
 export const Form = styled.form`
   display: inline-flex;
   padding: 2rem;
   width: 100%;
-  height: 100%;
+  height: auto;
   flex-direction: column;
   justify-content: center;
-
+  margin-top: 5%;
   gap: 1rem;
   border-radius: 0.625rem;
   background: #FFF;
+  box-shadow: 5px 5px 5px gray;
 `;
 
 export const Header = styled.div`
   display: flex;
   width: 100%;
-  justify-content: space-around;
-
-
+  justify-content: start;
   align-items: flex-start;
   gap: 0.5rem;
   align-self: stretch;
+`;
 
+export const Paragraph = styled.p`
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #ff5555;
+  margin-bottom: 0;
 `;
 
 export const InputGroup = styled.div`
   display: flex;
   padding: 0.325rem;
-/*   flex-direction: column; */
   justify-content: center;
   align-items: center;
   gap: 0.625rem;
   width: ${({ $width }) => ($width ? $width : '100%')};
-
-  
+  height: ${({ $height }) => ($height ? $height : 'auto ')};
 `;
 
 export const Button = styled.button`
@@ -120,19 +56,15 @@ export const Button = styled.button`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-
   opacity: ${({$active}) => { return $active ? 1 : .5 }};
   cursor: pointer;
-
   &:disabled {
     cursor: not-allowed;
   }
 `;
 
 Button.propTypes = {
-  $outlined: PropTypes.bool,
-  $width: PropTypes.any,
-  $active: PropTypes.any,
+  $outlined: PropTypes.bool
 }
 
 export const ButtonDel = styled.button`
@@ -150,26 +82,16 @@ export const ButtonDel = styled.button`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-
   opacity: ${({$active}) => { return $active ? 1 : .5 }};
   cursor: pointer;
-
   &:disabled {
     cursor: not-allowed;
   }
 `;
 
 ButtonDel.propTypes = {
-  $outlined: PropTypes.bool,
-  $width: PropTypes.any
+  $outlined: PropTypes.bool
 }
-
-export const Action = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  align-self: stretch;
-`;
 
 export const Title = styled.legend`
   display: flex;
@@ -181,17 +103,6 @@ export const Title = styled.legend`
   width: 100%;
 `;
 
-
-export const LabelRecuperarSenha = styled.label`
-  display: flex;
-    justify-content: center;
-    width: 100%;
-    color: #4682B4;
-    font-size: .7rem;
-  
-`;
-
-
 export const LabelSwitch = styled.div`
   display: flex;
   width: 100%;
@@ -201,7 +112,7 @@ export const LabelSwitch = styled.div`
   justify-content: right;
   margin: auto;
   align-items: center;
-`
+`;
 
 export const SwitchBtn = styled.div`
   display: flex;
@@ -211,18 +122,44 @@ export const SwitchBtn = styled.div`
   justify-content: center;
   background-color: none;
   margin: auto;
-`
-SwitchBtn.propTypes = {
-   $cursor: PropTypes.any,
-}
-
-
+`;
 
 export const MainForm = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: ${({ $width }) => ($width ? $width : '100%')};
+`;
+export const Select = styled.select`
     display: flex;
-
-    justify-content: center;
-    flex-wrap: wrap;
+    padding: 0.3rem;
+    align-items: flex-start;
+    align-self: stretch;
+    border-radius: 0.2rem;
+    border: 1px solid ${({ $color }) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};
     width: ${({ $width }) => ($width ? $width : '100%')};
+    height: ${({ $height }) => ($height ? $height : '100%')};
+    color: gray;
+    background-color: #fff;
+    cursor: text;
+    &:disabled {
+        cursor: not-allowed;
+    };
+    option:not(:first-of-type) {
+        color: black
+    }
+`;
 
-`
+export const SelectLabel = styled.label`
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: ${({ $color }) => { return $color === 'danger' ? '#BE2E2E' : '#5281DC'}};
+`;
+
+export const SelectGroup = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    width: ${({ $width }) => ($width ? $width : '100%')};
+`;

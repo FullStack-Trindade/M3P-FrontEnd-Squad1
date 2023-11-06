@@ -23,8 +23,7 @@ export const InputSearchProntuario = () => {
         const {nome} = dataInput;
 
         const paciente = await PacienteService.ShowByNome(nome);
-        console.log(paciente)
-        
+              
           if (!paciente) {
             alert('Usuário não cadastrado');
             setPacienteEncontrado(null);

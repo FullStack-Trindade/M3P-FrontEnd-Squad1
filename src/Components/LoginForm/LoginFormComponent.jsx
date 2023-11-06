@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { Spin } from 'antd';
 
 import { InputComponent } from '../FormPaciente/InputComponent/InputComponent';
+import { ForgotModalComponent } from '../ForgotModal/ForgotModalComponent';
 import { LoginService } from '../../Service/Login.service';
 import { AuthService } from '../../Service/Auth.service';
 
@@ -50,9 +51,12 @@ export const FormLoginComponent = () => {
         }
     }
 
+    const [show, setShow] = useState(false);
+
     const [isLoading, setIsLoading] = useState(false);
 
     return(
+        <>
         <Styled.Form onSubmit={ handleSubmit(submitForm) }>
         
             <Styled.Header>
@@ -98,11 +102,13 @@ export const FormLoginComponent = () => {
 
             <Styled.Action>
                 <Styled.LabelRecuperarSenha 
-                    onClick={ () => alert('Você receberá um e-mail para recuperar a sua senha') }
+                    onClick={ () => setShow(true) }
                 >
                     Esqueceu a senha?
                 </Styled.LabelRecuperarSenha>
             </Styled.Action>
         </Styled.Form>
+        {show && <ForgotModalComponent setShow={ setShow } />}
+        </>
     )
 }
