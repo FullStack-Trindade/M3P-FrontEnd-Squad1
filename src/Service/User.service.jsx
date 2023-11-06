@@ -28,7 +28,7 @@ export const UserService = {
   },
   
   SearchByCpfEmail: (data) => {
-    return fetchUser(`${API_URL}/usuarios/search`, {
+    return fetchUser(`${API_URL}/search`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -37,7 +37,7 @@ export const UserService = {
     });
   },
 
-  
+
   Update: (id, data) => {
     return fetchUser(`${API_URL}${id}`, {
       method: "PUT",

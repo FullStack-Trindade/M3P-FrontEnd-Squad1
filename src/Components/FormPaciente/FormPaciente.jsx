@@ -209,12 +209,9 @@ console.log(id)
 
     if (id) {
       //Gambiarra para arrumar o problema do valitynumber
-      if (pacienteData.insuranceVality === "") {
-        newInsuranceVality = "9999-12-12";
-      } else {
-        newInsuranceVality = pacienteData.insuranceVality;
-      }
-      const updatedPacientDb = {
+      console.log(pacienteData.insuranceVality);
+
+         const updatedPacientDb = {
         birth: pacienteData.birth,
         idUser: idUser,
         maritalStatus: pacienteData.maritalStatus,
@@ -226,7 +223,7 @@ console.log(id)
         specificCares: pacienteData.specificCares,
         healthInsurance: pacienteData.healthInsurance,
         insuranceNumber: pacienteData.insuranceNumber,
-        insuranceVality: newInsuranceVality,
+        insuranceVality: pacienteData.InsuranceVality,
 
         adress: {
           cep: pacienteData.cep,
