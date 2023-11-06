@@ -211,20 +211,20 @@ As mensagens seguintes devem aparecer após ``npm run dev`` :
 
 # ✏️ Aprendizados da Equipe
 
-- Criação de Aplicação utilizando RactJs/ Vite;
-- Validação de formulários e integração a endpoints (backend);
-- Lidar com reras de negócios complexas;
-- Trabalho em equipe e gitflow;
+- Criação de Aplicação utilizando RactJs/ Vite
+- Validação de formulários e integração a endpoints (backend)
+- Lidar com regras de negócios complexas
+- Trabalho em equipe
+- Gitflow
+- Metodologia Ágil de Desenvolvimento na prática!
 
 ## 🚀 Melhorias Futuras
 
-1- Página para recuperação de senha.
+1- Página "Erro 404- Página não encontrada" personalizada.
 
-2- Página "Erro 404- Página não encontrada" personalizada.
+2- Página de listagem de atendimentos por Médico/ Enfermeiro
 
-3- Página de listagem de atendimentos por Médico/ Enfermeiro
-
-4- Pronutário Online
+3- Pronutário Online
 
 ## ✍🏻 Autores
 
